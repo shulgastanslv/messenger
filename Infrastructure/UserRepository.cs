@@ -1,5 +1,24 @@
-﻿namespace Infrastructure;
+﻿using Domain.Entities;
+using System.Data;
+using Domain.Shared;
+using Application.Common.Interfaces;
+using Infrastructure.Persistence;
 
-public class UserRepository
+namespace Infrastructure;
+
+public class UserRepository : IUserRepository
 {
+    private readonly ApplicationDbContext _context;
+
+    public UserRepository(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+    public async Task<Result>? CreateUserAsync(User user)
+    {
+        await _context.Users.AddAsync(user);
+        await _context.SaveChangesAsync();
+
+        return Result.Success();
+    }
 }

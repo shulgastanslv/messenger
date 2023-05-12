@@ -12,6 +12,8 @@ namespace Client
     {
         private void ApplicationStart(object sender, StartupEventArgs e)
         {
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
         }
     }
 }

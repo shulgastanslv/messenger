@@ -1,6 +1,18 @@
-﻿namespace Server.Controllers;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
-public class ApiControllerBase
+namespace Server.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public abstract class ApiControllerBase : ControllerBase
 {
-    
+    private ISender? _mediator;
+
+    public ApiControllerBase(ISender mediator)
+    {
+        _mediator = mediator;
+    }
+
+    protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
 }

@@ -1,0 +1,32 @@
+﻿<Page x:Class="Client.Views.Pages.SignInPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Client.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1080"
+      Title="SignInPage">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="250">
+            <TextBox Height="25" Margin="0, 0, 0, 15"></TextBox>
+            <TextBox Height="25" Margin="0, 0, 0, 15"></TextBox>
+            <Button Height="40" Margin="0, 0, 0, 15"></Button>
+            <TextBlock
+                Foreground="#8BFFFFFF"
+                FontWeight="Medium"
+                FontSize="14"
+                HorizontalAlignment="Center">
+                <Run Text="Don`t have an account?"/>
+                <Hyperlink Foreground="White"
+                           FontWeight="Normal"
+                           TextDecorations="Underline"
+                           >
+                    Sign Up
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+
+    </Grid>
+</Page>

@@ -1,0 +1,19 @@
+﻿<Page x:Class="Client.Views.Pages.SignUpPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Client.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1080"
+      Title="SignUpPage">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="250">
+            <TextBox Name="UserNameTextBox" Height="25" Margin="0, 0, 0, 15"></TextBox>
+            <TextBox  Name="EmailTextBox" Height="25" Margin="0, 0, 0, 15"></TextBox>
+            <TextBox  Name="PasswordTextBox" Height="25" Margin="0, 0, 0, 15"></TextBox>
+            <Button  Name="SignUpButton" Height="40" Margin="0, 0, 0, 15" Click="SignUp_Click"></Button>
+        </StackPanel>
+    </Grid>
+</Page>
