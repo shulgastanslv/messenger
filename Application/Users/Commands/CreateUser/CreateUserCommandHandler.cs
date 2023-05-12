@@ -20,6 +20,7 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand>
     {
         var user = new User
         { 
+            Id = request.id,
             UserName = request.UserName,
             Email = request.Email,
             Password = request.Password,
