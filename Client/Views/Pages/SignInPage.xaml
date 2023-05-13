@@ -8,6 +8,7 @@
       d:DesignHeight="600" d:DesignWidth="1080"
       Title="SignInPage">
 
+
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="250">
             <TextBox Height="25" Margin="0, 0, 0, 15"></TextBox>
@@ -22,6 +23,7 @@
                 <Hyperlink Foreground="White"
                            FontWeight="Normal"
                            TextDecorations="Underline"
+                           Command="{Binding NavigateToSignUpCommand}"
                            >
                     Sign Up
                 </Hyperlink>

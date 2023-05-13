@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
-        Title="MainWindow" 
         Height="600" 
-        Width="1080">
+        Width="1080"
+        Background="#171717"
+        Style="{x:Null}" WindowStartupLocation="CenterScreen">
 
     <Grid>
-        <Frame Source="Views/Pages/SignUpPage.xaml" NavigationUIVisibility="Hidden"></Frame>
+        <Frame Content="{Binding NavigationService.CurrentView}" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
 
 </Window>
