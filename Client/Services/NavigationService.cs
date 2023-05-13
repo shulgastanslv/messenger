@@ -8,7 +8,6 @@ public class NavigationService : ViewModelBase, INavigationService
 {
     private readonly Func<Type, ViewModel> _viewFactory;
     private ViewModel _currentView;
-
     public ViewModel CurrentView
     {
         get => _currentView;
@@ -24,7 +23,6 @@ public class NavigationService : ViewModelBase, INavigationService
     {
         _viewFactory = viewFactory;
     }
-
 
     public void NavigateTo<TViewModel>() where TViewModel : ViewModel
     {

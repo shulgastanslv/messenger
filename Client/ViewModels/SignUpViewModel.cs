@@ -64,7 +64,7 @@ public class SignUpViewModel : ViewModel
     private bool CanExecuteSignUpCommand(object obj)
     {
         if (string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Email)  || string.IsNullOrWhiteSpace(Password) ||
-            UserName.Length == 1 || Password.Length < 16 || !Email.Contains("@") || !Email.Contains(".com") || Email.Length == 1)
+            UserName.Length == 1 || Password.Length < 16 || !Email.Contains("@") || !Email.Contains(".") || Email.Length == 1)
             return false;
 
         return true;
@@ -84,7 +84,7 @@ public class SignUpViewModel : ViewModel
             }), Encoding.UTF8, "application/json");
 
 
-            var response = await httpClient.PostAsync("https://localhost:7289/api/User", content);
+            var response = await httpClient.PostAsync("https://localhost:7289/api/User/CreateUser", content);
 
             await response.Content.ReadAsStringAsync();
         }

@@ -7,8 +7,134 @@
         mc:Ignorable="d"
         Height="600" 
         Width="1080"
-        Background="#171717"
-        Style="{x:Null}" WindowStartupLocation="CenterScreen">
+        Style="{DynamicResource {x:Type Window}}" 
+        WindowStyle="None"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+
+        <Style TargetType="Button" x:Key="ControlPanelButtonBase">
+            <Setter Property="Background" Value="{StaticResource DefaultContronPanelButtonColorBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="0, 0, 0, 0" BorderBrush="{TemplateBinding BorderBrush}" 
+                                Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource HoverControlPanelButtonColorBrush}"/>
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="{StaticResource PressedControlPanelButtonColorBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Button" x:Key="ControlPanelCloseButton">
+            <!-- Стиль кнопки закрытия панели управления -->
+            <Setter Property="Background" Value="{StaticResource DefaultContronPanelButtonColorBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="ControlPanelCloseButtonBorder" CornerRadius="0, 5, 0, 0" BorderBrush="{TemplateBinding BorderBrush}" 
+                                Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource HoverCloseButtonColorBrush}"/>
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="{StaticResource PressedCloseButtonColorBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <ControlTemplate x:Key="WindowTemplate" TargetType="{x:Type Window}">
+            <Border Background="{StaticResource WindowBackground}" CornerRadius="10">
+                <Grid Width="Auto" Height="Auto">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Background="{StaticResource WindowBackground}" CornerRadius="5,5,0,0" MouseDown="Window_MouseDown"/>
+
+                    <StackPanel 
+                        x:Name="ControlPanel" 
+                        Grid.Row="0" 
+                        Orientation="Horizontal" 
+                        Height="Auto" 
+                        Width="150" 
+                        HorizontalAlignment="Right">
+
+                        <Button 
+                            x:Name="MinimizeButton" 
+                            Width="50" 
+                            Content="—"
+                            FontSize="9"
+                            Foreground="White"
+                            Style="{StaticResource ControlPanelButtonBase}" 
+                            Click="MinimizeButton_OnClick"/>
+
+                        <Button 
+                            x:Name="MaximizeButton" 
+                            Width="50" 
+                            FontFamily="Segoe MDL2 Assets" 
+                            Content="&#xE739;"
+                            Foreground="White"
+                            FontSize="9"
+                            Style="{StaticResource ControlPanelButtonBase}" 
+                            Click="MaximizeRestoreButton_OnClick"/>
+
+                        <Button 
+                            x:Name="CloseButton" 
+                            Width="50" 
+                            FontFamily="Segoe MDL2 Assets" 
+                            Content="&#xE711;"
+                            Foreground="White"
+                            Style="{StaticResource ControlPanelCloseButton}" 
+                            Click="CloseButton_OnClick"/>
+
+                    </StackPanel>
+
+                    <AdornerDecorator Grid.Row="1">
+                        <ContentPresenter/>
+                    </AdornerDecorator>
+
+                </Grid>
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="WindowState" Value="Maximized">
+                    <Setter TargetName="ControlPanel" Property="Margin" Value="0,6,6,0"></Setter>
+                </Trigger>
+
+                <Trigger Property="WindowState" Value="Normal">
+                    <Setter TargetName="ControlPanel" Property="Margin" Value="0,0,0,0"></Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="Template" Value="{StaticResource WindowTemplate}"></Setter>
+        </Style>
+
+    </Window.Resources>
 
     <Grid>
         <Frame Content="{Binding NavigationService.CurrentView}" NavigationUIVisibility="Hidden"></Frame>

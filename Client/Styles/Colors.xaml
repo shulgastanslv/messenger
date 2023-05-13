@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <Color x:Key="Background">#1E1E1E</Color>
+    <SolidColorBrush x:Key="WindowBackground" Color="{StaticResource Background}"></SolidColorBrush>
+
+    <Color x:Key="DefaultContronPanelButtonColor">#FFF</Color>
+    <SolidColorBrush x:Key="DefaultContronPanelButtonColorBrush" Color="{StaticResource Background}" />
+
+    <Color x:Key="HoverControlPanelButtonColor">#252525</Color>
+    <SolidColorBrush x:Key="HoverControlPanelButtonColorBrush" Color="{StaticResource HoverControlPanelButtonColor}" />
+
+    <Color x:Key="PressedControlPanelButtonColor">#151515</Color>
+    <SolidColorBrush x:Key="PressedControlPanelButtonColorBrush" Color="{StaticResource PressedControlPanelButtonColor}" />
+
+    <Color x:Key="HoverCloseButtonColor">#E81123</Color>
+    <SolidColorBrush x:Key="HoverCloseButtonColorBrush" Color="{StaticResource HoverCloseButtonColor}" />
+
+    <Color x:Key="PressedCloseButtonColor">#CC1123</Color>
+    <SolidColorBrush x:Key="PressedCloseButtonColorBrush" Color="{StaticResource PressedCloseButtonColor}" />
+
+
+</ResourceDictionary>

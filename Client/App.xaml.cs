@@ -9,7 +9,6 @@ namespace Client;
 public partial class App
 {
     private readonly ServiceProvider _serviceProvider;
-
     public App()
     {
         IServiceCollection services = new ServiceCollection();
@@ -33,10 +32,6 @@ public partial class App
     protected override void OnStartup(StartupEventArgs e)
     {
         var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-        var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
-
-        mainViewModel.NavigationService.NavigateTo<SignInViewModel>();
-
         mainWindow.Show();
 
         base.OnStartup(e);

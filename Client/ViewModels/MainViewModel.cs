@@ -21,5 +21,6 @@ public class MainViewModel : ViewModel
     public MainViewModel(INavigationService navigationService)
     {
         _navigationService = navigationService;
+        NavigationService.NavigateTo<SignInViewModel>();
     }
 }

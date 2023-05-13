@@ -9,16 +9,27 @@
       d:DesignHeight="600" d:DesignWidth="1080"
       Title="SignUpPage">
 
-
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="250">
-            <TextBox Text="{Binding UserName}" Name="UserNameTextBox" Height="25" Margin="0, 0, 0, 15"></TextBox>
-            <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"  Name="EmailTextBox" Height="25" Margin="0, 0, 0, 15"></TextBox>
-            <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Name="PasswordTextBox" Height="25" Margin="0, 0, 0, 15"></TextBox>
 
+            <TextBox  Style="{StaticResource TextBoxStyle}"
+                      Text="{Binding UserName}"
+                      Name="UserNameTextBox" 
+                      Margin="0, 0, 0, 15">
+            </TextBox>
+            <TextBox  Style="{StaticResource TextBoxStyle}"
+                      Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" 
+                      Name="EmailTextBox" 
+                      Margin="0, 0, 0, 15"/>
+            <TextBox Style="{StaticResource TextBoxStyle}" 
+                     Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
+                     Name="PasswordTextBox" 
+                     Margin="0, 0, 0, 30"/>
 
+            <Button Style="{StaticResource MyButtonStyle}" Command="{Binding SignUpCommand}" 
+                    Content="Sign Up" 
+                    Name="SignUpButton"/>
 
-            <Button Command="{Binding SignUpCommand}"  Name="SignUpButton" Height="40" Margin="0, 0, 0, 15"></Button>
         </StackPanel>
     </Grid>
 </Page>
