@@ -9,44 +9,56 @@
       Title="SignInPage">
 
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="250">
 
-            <TextBox Style="{StaticResource  TextBoxStyle}" 
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="250">
+
+
+                <TextBox Style="{StaticResource  TextBoxStyle}" 
                          Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
                          Margin="0, 0, 0, 15"></TextBox>
 
-            <TextBox Style="{StaticResource  TextBoxStyle}" 
+                <TextBox Style="{StaticResource  TextBoxStyle}" 
                          Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          Margin="0, 0, 0, 30"></TextBox>
 
-            <Button Command="{Binding SignInCommand}"
+                <Button Command="{Binding SignInCommand}"
                         Style="{StaticResource MyButtonStyle}"
                         Content="Sign In"
                         Margin="0, 0, 0, 15"/>
 
-            <TextBlock
+                <TextBlock
                     Foreground="#8BFFFFFF"
                     FontWeight="Medium"
                     FontSize="14"
                     HorizontalAlignment="Center">
 
-                <Hyperlink Foreground="White"
-                           FontWeight="Normal"
-                           TextDecorations="None"
-                           Command="{Binding NavigateToSignUpCommand}">
+                    <Hyperlink Foreground="White"
+                               FontWeight="Normal"
+                               TextDecorations="None"
+                               Command="{Binding NavigateToSignUpCommand}">
                         Sign Up
                     </Hyperlink>
 
                     <Run Text="or"></Run>
 
-                        <Hyperlink Foreground="White"
-                                   FontWeight="Normal"
-                                   TextDecorations="None"
-                                   Command="{Binding NavigateToSignUpCommand}">
-                            Recover
-                        </Hyperlink>
-            </TextBlock>
+                    <Hyperlink Foreground="White"
+                               FontWeight="Normal"
+                               TextDecorations="None"
+                               Command="{Binding NavigateToAccountRecoveryCommand}">
+                        Recover
+                    </Hyperlink>
+                </TextBlock>
+
+            </StackPanel>
+
+
 
         </StackPanel>
+
+       
     </Grid>
 </Page>

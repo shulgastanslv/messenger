@@ -21,6 +21,7 @@ public partial class App
         services.AddSingleton<SignInViewModel>();
         services.AddSingleton<MainViewModel>();
         services.AddSingleton<SignUpViewModel>();
+        services.AddSingleton<AccountRecoveryViewModel>();
         services.AddSingleton<INavigationService, NavigationService>();
 
         services.AddSingleton<Func<Type, ViewModel>>(serviceProvider => viewModelType => 

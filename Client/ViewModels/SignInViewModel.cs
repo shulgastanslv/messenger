@@ -41,13 +41,20 @@ public class SignInViewModel : ViewModel
         }
     }
     public ICommand NavigateToSignUpCommand { get; set; }
+    public ICommand NavigateToAccountRecoveryCommand { get; set; }
     public ICommand SignInCommand { get; set; }
 
     public SignInViewModel(INavigationService navigationService)
     {
         _navigationService = navigationService;
         NavigateToSignUpCommand = new ViewModelCommand(ExecuteNavigationToSignUpCommand);
+        NavigateToAccountRecoveryCommand = new ViewModelCommand(ExecuteNavigationToAccountRecoveryCommand);
         SignInCommand = new ViewModelCommand(ExecuteSignInCommand, CanExecuteSignInCommand);
+    }
+
+    private void ExecuteNavigationToAccountRecoveryCommand(object obj)
+    {
+        NavigationService.NavigateTo<AccountRecoveryViewModel>();
     }
 
     private async void ExecuteSignInCommand(object obj)
