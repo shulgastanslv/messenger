@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Client.Interfaces;
 using Client.Models;
@@ -52,26 +53,20 @@ public class SignInViewModel : ViewModel
         SignInCommand = new ViewModelCommand(ExecuteSignInCommand, CanExecuteSignInCommand);
     }
 
-    private void ExecuteNavigationToAccountRecoveryCommand(object obj)
-    {
-        NavigationService.NavigateTo<AccountRecoveryViewModel>();
-    }
-
     private async void ExecuteSignInCommand(object obj)
     {
-      
+        await new ValueTask();
     }
     private bool CanExecuteSignInCommand(object obj)
     {
-        if (string.IsNullOrWhiteSpace(Email) ||
-            string.IsNullOrWhiteSpace(Password) || Password.Length < 16 || !Email.Contains("@") || !Email.Contains(".") ||
-            Email.Length == 1)
-            return false;
-
         return true;
     }
     private void ExecuteNavigationToSignUpCommand(object obj)
     {
         NavigationService.NavigateTo<SignUpViewModel>();
+    }
+    private void ExecuteNavigationToAccountRecoveryCommand(object obj)
+    {
+        NavigationService.NavigateTo<AccountRecoveryViewModel>();
     }
 }

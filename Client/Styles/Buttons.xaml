@@ -39,10 +39,8 @@
                             <Setter Property="Width" Value="89"/>
                         </Trigger>
 
-
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="border" Property="Background" Value="#A0A8DA"/>
-                            <Setter Property="Width" Value="89"/>
                         </Trigger>
 
                     </ControlTemplate.Triggers>

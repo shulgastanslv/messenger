@@ -10,26 +10,71 @@
       Title="SignUpPage">
 
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="250">
 
-            <TextBox  Style="{StaticResource TextBoxStyle}"
-                      Text="{Binding UserName}"
-                      Name="UserNameTextBox" 
-                      Margin="0, 0, 0, 15">
-            </TextBox>
-            <TextBox  Style="{StaticResource TextBoxStyle}"
-                      Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" 
-                      Name="EmailTextBox" 
-                      Margin="0, 0, 0, 15"/>
-            <TextBox Style="{StaticResource TextBoxStyle}" 
-                     Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
-                     Name="PasswordTextBox" 
-                     Margin="0, 0, 0, 30"/>
+        <Grid Width="455" Background="#212121">
 
-            <Button Style="{StaticResource MyButtonStyle}" Command="{Binding SignUpCommand}" 
-                    Content="Sign Up" 
-                    Name="SignUpButton"/>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="250">
 
-        </StackPanel>
+                <TextBlock Text="Sign Up" FontSize="20" FontWeight="SemiBold" Foreground="White"
+                           Margin="0, 0, 0, 10"></TextBlock>
+
+
+                <TextBlock Text="You will use this data every time you log in to your account." 
+                           FontSize="13" FontWeight="Normal" 
+                           Foreground="White"
+                           TextWrapping="Wrap"
+                           Margin="0, 0, 0, 10"
+                           ></TextBlock>
+
+                <Border Background="#5E6175" CornerRadius="4" Height="50" Margin="0, 0, 0, 10"></Border>
+
+                <Separator Margin="0, 0, 0, 10"/>
+
+
+                <TextBlock Text="Enter UserName" Foreground="White" Opacity="0.5" Margin="0, 0, 0, 10"></TextBlock>
+
+
+                <TextBox  Style="{StaticResource TextBoxStyle}"
+                          Text="{Binding UserName}"
+                          Name="UserNameTextBox" 
+                          Margin="0, 0, 0, 15">
+                </TextBox>
+
+                <TextBlock Text="Enter Email" Foreground="White" Opacity="0.5" Margin="0, 0, 0, 10"></TextBlock>
+
+                <TextBox  Style="{StaticResource TextBoxStyle}"
+                          Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" 
+                          Name="EmailTextBox" 
+                          Margin="0, 0, 0, 15"/>
+
+
+                <TextBlock Text="Enter Password" Foreground="White" Opacity="0.5" Margin="0, 0, 0, 10"></TextBlock>
+
+                <TextBox Style="{StaticResource TextBoxStyle}" 
+                         Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
+                         Name="PasswordTextBox" 
+                         Margin="0, 0, 0,10"/>
+
+                <Grid  Margin="0, 0, 0, 10">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ProgressBar Height="8" Width="200" Grid.Column="0"/>
+                    <TextBlock Foreground="White" FontSize="12" FontFamily="Poppins" FontWeight="SemiBold" Text="Status" Grid.Column="1"/>
+
+                </Grid>
+
+                <CheckBox Margin="0, 0, 0, 10"/>
+
+                <Button Style="{StaticResource MyButtonStyle}" Command="{Binding SignUpCommand}" 
+                        Content="Sign Up" 
+                        Name="SignUpButton"
+                        />
+
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

@@ -8,11 +8,11 @@
       d:DesignHeight="600" d:DesignWidth="1080"
       Title="AccountRecoveryPage">
 
-    <Grid>
+    <Grid Width="455" Background="#212121" >
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="515">
+            <StackPanel Width="375" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <TextBlock Text="Restoring an account" 
+                <TextBlock Text="Restoring an account" 
                        Foreground="White"
                        FontFamily="Poppins"
                        FontSize="20"
@@ -20,26 +20,21 @@
                        Margin="0, 0, 0, 15"
                        ></TextBlock>
 
-            <TextBlock Text="Enter your email address to regain access to your account." 
+                <TextBlock Text="Enter your email address to regain access to your account. You will be emailed a special code to confirm your email account." 
                        Foreground="White"
                        FontFamily="Poppins"
                        FontSize="14"
                        FontWeight="Regular"
-            ></TextBlock>
-            <TextBlock Text="You will be emailed a special code to confirm your email account." 
-                       Foreground="White"
-                       FontFamily="Poppins"
-                       FontSize="14"
-                       FontWeight="Regular"
+                       TextWrapping="Wrap"
                        Margin="0, 0, 0, 20"
             ></TextBlock>
 
-            <TextBox Style="{StaticResource TextBoxStyle}"
+                <TextBox Style="{StaticResource TextBoxStyle}"
                      HorizontalAlignment="Left"
                      Margin="0, 0, 0, 25"
                      ></TextBox>
 
-            <TextBlock Text="New password" 
+                <TextBlock Text="New password" 
                        Foreground="White"
                        FontFamily="Poppins"
                        FontSize="20"
@@ -47,38 +42,31 @@
                        Margin="0, 0, 0, 15"
             ></TextBlock>
 
-            <TextBlock Text="Enter a new password that contains numbers, upper and lower case letters." 
+                <TextBlock Text="Enter a new password that contains numbers, upper and lower case letters. The password must be at least 16 characters long." 
                        Foreground="White"
                        FontFamily="Poppins"
                        FontSize="14"
                        FontWeight="Regular"
-            ></TextBlock>
-            <TextBlock Text="The password must be at least 16 characters long." 
-                       Foreground="White"
-                       FontFamily="Poppins"
-                       FontSize="14"
-                       FontWeight="Regular"
+                       TextWrapping="Wrap"
                        Margin="0, 0, 0, 20"
             ></TextBlock>
 
-
-            <TextBox Style="{StaticResource TextBoxStyle}"
+                <TextBox Style="{StaticResource TextBoxStyle}"
                      HorizontalAlignment="Left"
                      Margin="0, 0, 0, 25"
             ></TextBox>
 
 
-            <TextBox Style="{StaticResource TextBoxStyle}"
+                <TextBox Style="{StaticResource TextBoxStyle}"
                      HorizontalAlignment="Left"
                      Margin="0, 0, 0, 25"
             ></TextBox>
 
-            <Button Style="{StaticResource MyButtonStyle}"
+                <Button Style="{StaticResource MyButtonStyle}"
                     HorizontalAlignment="Left"
                     Content="Recover"></Button>
 
 
-        </StackPanel>
-        
+            </StackPanel>
     </Grid>
 </Page>
