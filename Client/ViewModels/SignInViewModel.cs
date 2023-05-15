@@ -42,31 +42,39 @@ public class SignInViewModel : ViewModel
         }
     }
     public ICommand NavigateToSignUpCommand { get; set; }
-    public ICommand NavigateToAccountRecoveryCommand { get; set; }
     public ICommand SignInCommand { get; set; }
-
     public SignInViewModel(INavigationService navigationService)
     {
         _navigationService = navigationService;
-        NavigateToSignUpCommand = new ViewModelCommand(ExecuteNavigationToSignUpCommand);
-        NavigateToAccountRecoveryCommand = new ViewModelCommand(ExecuteNavigationToAccountRecoveryCommand);
         SignInCommand = new ViewModelCommand(ExecuteSignInCommand, CanExecuteSignInCommand);
+        NavigateToSignUpCommand = new ViewModelCommand(i => 
+            NavigationService.NavigateTo<SignUpViewModel>());
+    }
+
+    private bool CanExecuteSignInCommand(object obj)
+    {
+        if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password) || 
+            Password.Length < 16 || !Email.Contains("@") || !Email.Contains(".") || Email.Length == 1)
+            return false;
+
+        return true;
     }
 
     private async void ExecuteSignInCommand(object obj)
     {
-        await new ValueTask();
-    }
-    private bool CanExecuteSignInCommand(object obj)
-    {
-        return true;
-    }
-    private void ExecuteNavigationToSignUpCommand(object obj)
-    {
-        NavigationService.NavigateTo<SignUpViewModel>();
-    }
-    private void ExecuteNavigationToAccountRecoveryCommand(object obj)
-    {
-        NavigationService.NavigateTo<AccountRecoveryViewModel>();
+        using (var httpClient = new HttpClient())
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(new UserModel()
+            {
+                Email = Email,
+                Password = Password,
+            }), Encoding.UTF8, "application/json");
+
+            var response = await httpClient.PostAsync("https://localhost:7289/api/User/FindUser", content);
+
+            await response.Content.ReadAsStringAsync();
+        }
+
+
     }
 }

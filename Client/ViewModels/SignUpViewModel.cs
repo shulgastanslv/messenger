@@ -11,9 +11,23 @@ namespace Client.ViewModels;
 public class SignUpViewModel : ViewModel
 {
     private string _userName;
+
     private string _email;
+
     private string _password;
+
+    private bool _isChecked;
+
     private INavigationService _navigationService;
+    public bool IsChecked
+    {
+        get => _isChecked;
+        set
+        {
+            _isChecked = value;
+            OnPropertyChanged(nameof(IsChecked));
+        }
+    }
 
     public string UserName
     {
@@ -54,17 +68,21 @@ public class SignUpViewModel : ViewModel
     }
 
     public ICommand SignUpCommand { get; set; }
-    
+
+    public ICommand BackToSignInCommand { get; set; }
+
     public SignUpViewModel(INavigationService navigationService)
     {
         _navigationService = navigationService;
         SignUpCommand = new ViewModelCommand(ExecuteSignUpCommand, CanExecuteSignUpCommand);
+        BackToSignInCommand = new ViewModelCommand(i =>
+            NavigationService.NavigateTo<SignInViewModel>());
     }
 
     private bool CanExecuteSignUpCommand(object obj)
     {
         if (string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Email)  || string.IsNullOrWhiteSpace(Password) ||
-            UserName.Length == 1 || Password.Length < 16 || !Email.Contains("@") || !Email.Contains(".") || Email.Length == 1)
+            UserName.Length == 1 || Password.Length < 16 || !Email.Contains("@") || !Email.Contains(".") || Email.Length == 1 || IsChecked == false)
             return false;
 
         return true;

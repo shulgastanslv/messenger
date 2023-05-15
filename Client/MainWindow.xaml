@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Height="600" 
         Width="1080"
@@ -12,10 +13,23 @@
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen">
 
+
     <Window.Resources>
 
+        <Color x:Key="HoverPanelButtonColor">#252525</Color>
+        <SolidColorBrush x:Key="HoverControlPanelButtonColorBrush" Color="{StaticResource HoverPanelButtonColor}" />
+
+        <Color x:Key="PressedPanelButtonColor">#151515</Color>
+        <SolidColorBrush x:Key="PressedControlPanelButtonColorBrush" Color="{StaticResource PressedPanelButtonColor}" />
+
+        <Color x:Key="HoverCloseButtonColor">#E81123</Color>
+        <SolidColorBrush x:Key="HoverCloseButtonColorBrush" Color="{StaticResource HoverCloseButtonColor}" />
+
+        <Color x:Key="PressedCloseButtonColor">#CC1123</Color>
+        <SolidColorBrush x:Key="PressedCloseButtonColorBrush" Color="{StaticResource PressedCloseButtonColor}" />
+
         <Style TargetType="Button" x:Key="ControlPanelButtonBase">
-            <Setter Property="Background" Value="{StaticResource DefaultContronPanelButtonColorBrush}"/>
+            <Setter Property="Background" Value="{StaticResource WindowBackgroundColorBrush}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -37,9 +51,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
         <Style TargetType="Button" x:Key="ControlPanelCloseButton">
-            <!-- Стиль кнопки закрытия панели управления -->
-            <Setter Property="Background" Value="{StaticResource DefaultContronPanelButtonColorBrush}"/>
+            <Setter Property="Background" Value="{StaticResource WindowBackgroundColorBrush}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -64,7 +78,8 @@
 
 
         <ControlTemplate x:Key="WindowTemplate" TargetType="{x:Type Window}">
-            <Border Background="{StaticResource WindowBackground}" CornerRadius="10">
+            <Border x:Name="border" Background="{StaticResource WindowBackgroundColorBrush}" CornerRadius="10">
+
                 <Grid Width="Auto" Height="Auto">
 
                     <Grid.RowDefinitions>
@@ -72,7 +87,9 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Border Background="{StaticResource WindowBackground}" CornerRadius="5,5,0,0" MouseDown="Window_MouseDown"/>
+                    <Border Background="{StaticResource WindowBackgroundColorBrush}" 
+                            CornerRadius="5,5,0,0" 
+                            MouseDown="Window_MouseDown"/>
 
                     <StackPanel 
                         x:Name="ControlPanel" 
@@ -115,7 +132,6 @@
                     <AdornerDecorator Grid.Row="1">
                         <ContentPresenter/>
                     </AdornerDecorator>
-
                 </Grid>
             </Border>
 

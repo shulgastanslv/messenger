@@ -2,23 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
-    <Color x:Key="Background">#1E1E1E</Color>
-    <SolidColorBrush x:Key="WindowBackground" Color="{StaticResource Background}"></SolidColorBrush>
+    <Color x:Key="WindowBackgroundColor">#1E1E1E</Color>
+    <SolidColorBrush x:Key="WindowBackgroundColorBrush" Color="{StaticResource WindowBackgroundColor}"></SolidColorBrush>
 
-    <Color x:Key="DefaultContronPanelButtonColor">#FFF</Color>
-    <SolidColorBrush x:Key="DefaultContronPanelButtonColorBrush" Color="{StaticResource Background}" />
+    <Color x:Key="ButtonColor">#A0A5EB</Color>
+    <SolidColorBrush x:Key="ButtonColorBrush" Color="{StaticResource ButtonColor}"></SolidColorBrush>
 
-    <Color x:Key="HoverControlPanelButtonColor">#252525</Color>
-    <SolidColorBrush x:Key="HoverControlPanelButtonColorBrush" Color="{StaticResource HoverControlPanelButtonColor}" />
+    <Color x:Key="WrapperColor">#202020</Color>
+    <SolidColorBrush x:Key="WrapperColorBrush" Color="{StaticResource WrapperColor}"></SolidColorBrush>
 
-    <Color x:Key="PressedControlPanelButtonColor">#151515</Color>
-    <SolidColorBrush x:Key="PressedControlPanelButtonColorBrush" Color="{StaticResource PressedControlPanelButtonColor}" />
-
-    <Color x:Key="HoverCloseButtonColor">#E81123</Color>
-    <SolidColorBrush x:Key="HoverCloseButtonColorBrush" Color="{StaticResource HoverCloseButtonColor}" />
-
-    <Color x:Key="PressedCloseButtonColor">#CC1123</Color>
-    <SolidColorBrush x:Key="PressedCloseButtonColorBrush" Color="{StaticResource PressedCloseButtonColor}" />
+    <Color x:Key="BorderColor">#5E6175</Color>
+    <SolidColorBrush x:Key="BorderBrushColor" Color="{StaticResource BorderColor}"></SolidColorBrush>
 
 
 </ResourceDictionary>

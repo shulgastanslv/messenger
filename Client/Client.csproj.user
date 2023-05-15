@@ -5,9 +5,6 @@
     <Compile Update="MainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Pages\AccountRecoveryPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\Pages\SignInPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -22,13 +19,13 @@
     <Page Update="Styles\Buttons.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Styles\CheckBoxes.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Styles\Colors.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Styles\TextBoxes.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Pages\AccountRecoveryPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Pages\SignInPage.xaml">

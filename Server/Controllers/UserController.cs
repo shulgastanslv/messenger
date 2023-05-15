@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Application.Users.Commands.CreateUser;
+using Application.Users.Queries.FindUser;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Server.Controllers
@@ -14,6 +15,14 @@ namespace Server.Controllers
 
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand request, CancellationToken cancellationToken)
+        {
+            var result = await Mediator.Send(request, cancellationToken);
+
+            return result.Succeeded ? Ok() : BadRequest(result.Errors);
+        }
+
+        [HttpGet("{email}")]
+        public async Task<IActionResult> CreateUser([FromBody] FindUserQuery request, CancellationToken cancellationToken)
         {
             var result = await Mediator.Send(request, cancellationToken);
 

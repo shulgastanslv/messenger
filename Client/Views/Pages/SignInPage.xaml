@@ -5,46 +5,67 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client.Views.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="1080"
-      Title="SignInPage">
+      d:DesignHeight="600" d:DesignWidth="1080">
 
     <Grid>
-        <Grid Width="455" Background="#212121">
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                <TextBox Style="{StaticResource  TextBoxStyle}"
-                         Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
-                         Margin="0, 0, 0, 15"></TextBox>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-                <TextBox Style="{StaticResource  TextBoxStyle}" 
-                         Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         Margin="0, 0, 0, 30"></TextBox>
+        <Grid Background="{StaticResource WrapperColorBrush}" Grid.Column="1" Width="455">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="250">
+
+                <TextBlock Text="Sign In" FontSize="20" 
+                           FontWeight="SemiBold" 
+                           Foreground="White"
+                           Margin="0, 0, 0, 10"/>
+
+
+                <TextBlock Text="Enter your credentials to log in to your account." 
+                           FontSize="13" FontWeight="Normal" 
+                           Foreground="White"
+                           TextWrapping="Wrap"
+                           Margin="0, 0, 0, 10"
+                />
+
+
+                <TextBlock Text="Enter your email" 
+                           Foreground="White" 
+                           FontSize="13"
+                           Opacity="0.5"
+                           Margin="0, 0, 0, 10"/>
+
+                <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                         Tag="Enter email"
+                         Margin="0, 0, 0, 15"/>
+
+                <TextBlock Text="Enter your password"
+                           Foreground="White"
+                           FontSize="13" 
+                           Opacity="0.5" 
+                           Margin="0, 0, 0, 10"/>
+
+                <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Tag="Enter password"
+                         Margin="0, 0, 0, 30"/>
 
                 <Button Command="{Binding SignInCommand}"
-                        Style="{StaticResource MyButtonStyle}"
                         Content="Sign In"
                         Margin="0, 0, 0, 15"/>
 
                 <TextBlock
-                    Foreground="#8BFFFFFF"
                     FontWeight="Medium"
-                    FontSize="14"
+                    FontSize="13"
                     HorizontalAlignment="Center">
 
                     <Hyperlink Foreground="White"
-                               FontWeight="Normal"
+                               FontWeight="SemiBold"
                                TextDecorations="None"
                                Command="{Binding NavigateToSignUpCommand}">
                         Sign Up
-                    </Hyperlink>
-
-                    <Run Text="or"></Run>
-
-                    <Hyperlink Foreground="White"
-                               FontWeight="Normal"
-                               TextDecorations="None"
-                               Command="{Binding NavigateToAccountRecoveryCommand}">
-                        Recover
                     </Hyperlink>
                 </TextBlock>
 

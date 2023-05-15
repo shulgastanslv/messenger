@@ -21,4 +21,10 @@ public class UserRepository : IUserRepository
 
         return Result.Success();
     }
+
+    public async Task<Result>? FindUserAsync(string requestEmail, string requestPassword)
+    {
+        await _context.Users.FindAsync(requestEmail, requestPassword);
+        return Result.Success();
+    }
 }

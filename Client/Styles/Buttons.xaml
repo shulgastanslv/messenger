@@ -2,13 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
-    <Style x:Key="MyButtonStyle" TargetType="Button">
-        <Setter Property="FontFamily" Value="Poppins" />
+    <Style TargetType="Button">
+        <Setter Property="FontFamily" Value="Poppins"/>
+        <Setter Property="Background" Value="{StaticResource ButtonColorBrush}"/>
         <Setter Property="FontWeight" Value= "SemiBold" />
-        <Setter Property="Background" Value="#343a40" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="BorderThickness" Value="0"></Setter>
+        <Setter Property="Height" Value="42"/>
         <Setter Property="Width" Value="90"/>
-        <Setter Property="Height" Value="40"/>
         <Setter Property="Foreground" Value="White"/>
 
         <Setter Property="Template">
@@ -16,27 +17,27 @@
                 <ControlTemplate TargetType="Button">
 
                     <Grid>
-                        <Border x:Name="border" BorderThickness="0" Background="{TemplateBinding Background}" 
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="20"/>
+
                         <ContentPresenter x:Name="contentPresenter"
                                       Content="{TemplateBinding Content}"
                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                       Margin="{TemplateBinding Padding}"/>
                     </Grid>
-
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="border" Property="Background" Value="#b1b1b1"/>
-                        </Trigger>
-
-                        <Trigger Property="IsEnabled" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#A0A5EB"/>
-                        </Trigger>
 
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="border" Property="Background" Value="#A0A2DA"/>
-                            <Setter Property="Width" Value="89"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="#606060"/>
+                            <Setter Property="Opacity" Value="0.5"/>
                         </Trigger>
 
                         <Trigger Property="IsPressed" Value="True">
