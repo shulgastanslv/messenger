@@ -24,9 +24,15 @@
                 <view:SignInPage/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type TypeName=viewModel:HomeViewModel}">
+                <view:HomePage/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type TypeName=viewModel:MainViewModel}">
                 <local:MainWindow/>
             </DataTemplate>
+
+
 
         </ResourceDictionary>
 

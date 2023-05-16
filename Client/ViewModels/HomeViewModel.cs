@@ -1,10 +1,8 @@
-﻿using System;
-using System.Windows.Input;
-using Client.Interfaces;
+﻿using Client.Interfaces;
 
 namespace Client.ViewModels;
 
-public class MainViewModel : ViewModel
+public class HomeViewModel : ViewModel
 {
     private INavigationService _navigationService;
 
@@ -18,9 +16,8 @@ public class MainViewModel : ViewModel
         }
     }
 
-    public MainViewModel(INavigationService navigationService)
+    public HomeViewModel(INavigationService navigationService)
     {
         NavigationService = navigationService;
-        NavigationService.NavigateTo<SignInViewModel>();
     }
 }

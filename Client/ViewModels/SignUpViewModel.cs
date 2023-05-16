@@ -94,7 +94,7 @@ public class SignUpViewModel : ViewModel
         {
             var content = new StringContent(JsonConvert.SerializeObject(new UserModel()
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.NewGuid().ToString(),
                 UserName = UserName,
                 Email = Email,
                 Password = Password,
@@ -102,9 +102,14 @@ public class SignUpViewModel : ViewModel
             }), Encoding.UTF8, "application/json");
 
 
-            var response = await httpClient.PostAsync("https://localhost:7289/api/User/CreateUser", content);
+            var response = await httpClient.PostAsync("https://localhost:7289/api/Registration", content);
 
             await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                NavigationService.NavigateTo<HomeViewModel>();
+            }
         }
 
     }

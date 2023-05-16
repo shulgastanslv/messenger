@@ -2,9 +2,13 @@
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Client.Interfaces;
 using Client.Models;
+using Client.Services;
+using Domain.Entities;
+using Microsoft.Identity.Client;
 using Newtonsoft.Json;
 
 namespace Client.ViewModels;
@@ -47,13 +51,13 @@ public class SignInViewModel : ViewModel
     {
         _navigationService = navigationService;
         SignInCommand = new ViewModelCommand(ExecuteSignInCommand, CanExecuteSignInCommand);
-        NavigateToSignUpCommand = new ViewModelCommand(i => 
+        NavigateToSignUpCommand = new ViewModelCommand(i =>
             NavigationService.NavigateTo<SignUpViewModel>());
     }
 
     private bool CanExecuteSignInCommand(object obj)
     {
-        if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password) || 
+        if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password) ||
             Password.Length < 16 || !Email.Contains("@") || !Email.Contains(".") || Email.Length == 1)
             return false;
 
@@ -70,9 +74,14 @@ public class SignInViewModel : ViewModel
                 Password = Password,
             }), Encoding.UTF8, "application/json");
 
-            var response = await httpClient.PostAsync("https://localhost:7289/api/User/FindUser", content);
+            var response = await httpClient.PostAsync("https://localhost:7289/api/Authenticate", content);
 
             await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                NavigationService.NavigateTo<HomeViewModel>();
+            }
         }
 
 

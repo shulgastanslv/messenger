@@ -3,7 +3,7 @@
 namespace Application.Users.Commands.CreateUser;
 
 public sealed record CreateUserCommand(
-    Guid id,
+    string id,
     string UserName, 
     string Email, 
     string Password, 

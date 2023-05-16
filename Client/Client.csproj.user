@@ -5,6 +5,9 @@
     <Compile Update="MainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Pages\HomePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Pages\SignInPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -26,6 +29,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Styles\TextBoxes.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Pages\HomePage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Pages\SignInPage.xaml">

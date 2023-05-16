@@ -8,11 +8,9 @@ namespace Server.Controllers;
 public abstract class ApiControllerBase : ControllerBase
 {
     private ISender? _mediator;
-
-    public ApiControllerBase(ISender mediator)
+    protected ApiControllerBase(ISender mediator)
     {
         _mediator = mediator;
     }
-
     protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
 }
