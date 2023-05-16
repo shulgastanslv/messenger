@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using System.Windows.Input;
 using Client.Interfaces;
 
@@ -21,6 +22,7 @@ public class MainViewModel : ViewModel
     public MainViewModel(INavigationService navigationService)
     {
         NavigationService = navigationService;
+
         NavigationService.NavigateTo<SignInViewModel>();
     }
 }

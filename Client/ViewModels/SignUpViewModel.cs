@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Windows.Input;
@@ -90,6 +91,7 @@ public class SignUpViewModel : ViewModel
 
     private async void ExecuteSignUpCommand(object obj)
     {
+
         using (var httpClient = new HttpClient())
         {
             var content = new StringContent(JsonConvert.SerializeObject(new UserModel()
