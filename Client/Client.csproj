@@ -11,6 +11,7 @@
       <Folder Include="Models\" />
       <Folder Include="Interfaces\" />
       <Folder Include="Services\" />
+      <Folder Include="Styles\Images\" />
       <Folder Include="ViewModels\" />
     </ItemGroup>
 

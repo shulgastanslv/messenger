@@ -15,7 +15,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Grid Background="{StaticResource WrapperColorBrush}" Grid.Column="1" Width="455">
+        <Border CornerRadius="6" Background="{StaticResource WrapperColorBrush}" Grid.Column="1" Height="Auto" Width="455">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="250">
 
                 <TextBlock Text="Sign In" FontSize="20" 
@@ -70,6 +70,6 @@
                 </TextBlock>
 
             </StackPanel>
-        </Grid>
+        </Border>
     </Grid>
 </Page>

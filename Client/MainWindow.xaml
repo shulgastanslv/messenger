@@ -29,7 +29,7 @@
         <SolidColorBrush x:Key="PressedCloseButtonColorBrush" Color="{StaticResource PressedCloseButtonColor}" />
 
         <Style TargetType="Button" x:Key="ControlPanelButtonBase">
-            <Setter Property="Background" Value="{StaticResource WindowBackgroundColorBrush}"/>
+            <Setter Property="Background" Value="#323232"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -53,11 +53,11 @@
         </Style>
 
         <Style TargetType="Button" x:Key="ControlPanelCloseButton">
-            <Setter Property="Background" Value="{StaticResource WindowBackgroundColorBrush}"/>
+            <Setter Property="Background" Value="#323232"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="ControlPanelCloseButtonBorder" CornerRadius="0, 5, 0, 0" BorderBrush="{TemplateBinding BorderBrush}" 
+                        <Border x:Name="ControlPanelCloseButtonBorder" CornerRadius="0, 0, 0, 0" BorderBrush="{TemplateBinding BorderBrush}" 
                                 Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
                         </Border>
@@ -78,28 +78,28 @@
 
 
         <ControlTemplate x:Key="WindowTemplate" TargetType="{x:Type Window}">
-            <Border x:Name="border" Background="{StaticResource WindowBackgroundColorBrush}" CornerRadius="10">
 
-                <Grid Width="Auto" Height="Auto">
+            <Grid x:Name="MyGrid" Width="Auto" Margin="5" Height="Auto" Background="{StaticResource WindowBackgroundColorBrush}">
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-                    <Border Background="{StaticResource WindowBackgroundColorBrush}" 
-                            CornerRadius="5,5,0,0" 
+                <Border
+                            Background="#323232" 
                             MouseDown="Window_MouseDown"/>
 
-                    <StackPanel 
+                <StackPanel
                         x:Name="ControlPanel" 
                         Grid.Row="0" 
-                        Orientation="Horizontal" 
-                        Height="Auto" 
-                        Width="150" 
+                        Width="Auto"
+                        Height="30"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center"
                         HorizontalAlignment="Right">
 
-                        <Button 
+                    <Button
                             x:Name="MinimizeButton" 
                             Width="50" 
                             Content="—"
@@ -108,7 +108,7 @@
                             Style="{StaticResource ControlPanelButtonBase}" 
                             Click="MinimizeButton_OnClick"/>
 
-                        <Button 
+                    <Button 
                             x:Name="MaximizeButton" 
                             Width="50" 
                             FontFamily="Segoe MDL2 Assets" 
@@ -118,7 +118,7 @@
                             Style="{StaticResource ControlPanelButtonBase}" 
                             Click="MaximizeRestoreButton_OnClick"/>
 
-                        <Button 
+                    <Button 
                             x:Name="CloseButton" 
                             Width="50" 
                             FontFamily="Segoe MDL2 Assets" 
@@ -127,13 +127,22 @@
                             Style="{StaticResource ControlPanelCloseButton}" 
                             Click="CloseButton_OnClick"/>
 
-                    </StackPanel>
+                </StackPanel>
 
-                    <AdornerDecorator Grid.Row="1">
-                        <ContentPresenter/>
-                    </AdornerDecorator>
-                </Grid>
-            </Border>
+                <AdornerDecorator Grid.Row="1">
+                    <ContentPresenter/>
+                </AdornerDecorator>
+
+                <!--<Grid.Triggers>
+                        <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" Value="Normal">
+                            <Setter TargetName="MyGrid" Property="Margin" Value="0" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" Value="Maximized">
+                            <Setter TargetName="MyGrid" Property="Margin" Value="5" />
+                        </DataTrigger>
+                    </Grid.Triggers>-->
+
+            </Grid>
 
             <ControlTemplate.Triggers>
                 <Trigger Property="WindowState" Value="Maximized">
@@ -147,13 +156,12 @@
         </ControlTemplate>
 
         <Style TargetType="{x:Type Window}">
+            <Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
             <Setter Property="Template" Value="{StaticResource WindowTemplate}"></Setter>
         </Style>
 
     </Window.Resources>
 
-    <Grid>
-        <Frame Content="{Binding NavigationService.CurrentView}" NavigationUIVisibility="Hidden"></Frame>
-    </Grid>
+    <Frame Content="{Binding NavigationService.CurrentView}" NavigationUIVisibility="Hidden"></Frame>
 
 </Window>

@@ -8,8 +8,11 @@
     <Color x:Key="ButtonColor">#A0A5EB</Color>
     <SolidColorBrush x:Key="ButtonColorBrush" Color="{StaticResource ButtonColor}"></SolidColorBrush>
 
-    <Color x:Key="WrapperColor">#202020</Color>
+    <Color x:Key="WrapperColor">#212121</Color>
     <SolidColorBrush x:Key="WrapperColorBrush" Color="{StaticResource WrapperColor}"></SolidColorBrush>
+
+    <Color x:Key="ContactListBackgroundColor">#252525</Color>
+    <SolidColorBrush x:Key="ContactListBackgroundColorBrush" Color="{StaticResource ContactListBackgroundColor}"></SolidColorBrush>
 
     <Color x:Key="BorderColor">#5E6175</Color>
     <SolidColorBrush x:Key="BorderBrushColor" Color="{StaticResource BorderColor}"></SolidColorBrush>
