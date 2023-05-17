@@ -9,10 +9,10 @@
         Height="600" 
         Width="1080"
         Style="{DynamicResource {x:Type Window}}" 
-        WindowStyle="None"
-        AllowsTransparency="True"
-        WindowStartupLocation="CenterScreen">
-
+        MinHeight="500"
+        MinWidth="600"
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None">
 
     <Window.Resources>
 
@@ -29,6 +29,9 @@
         <SolidColorBrush x:Key="PressedCloseButtonColorBrush" Color="{StaticResource PressedCloseButtonColor}" />
 
         <Style TargetType="Button" x:Key="ControlPanelButtonBase">
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
             <Setter Property="Background" Value="#323232"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -53,6 +56,9 @@
         </Style>
 
         <Style TargetType="Button" x:Key="ControlPanelCloseButton">
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
             <Setter Property="Background" Value="#323232"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -79,18 +85,20 @@
 
         <ControlTemplate x:Key="WindowTemplate" TargetType="{x:Type Window}">
 
-            <Grid x:Name="MyGrid" Width="Auto" Margin="5" Height="Auto" Background="{StaticResource WindowBackgroundColorBrush}">
+            <Grid>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+                <Grid Name="MyGrid" Width="Auto" Height="Auto" Background="{StaticResource WindowBackgroundColorBrush}">
 
-                <Border
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border
                             Background="#323232" 
                             MouseDown="Window_MouseDown"/>
 
-                <StackPanel
+                    <StackPanel
                         x:Name="ControlPanel" 
                         Grid.Row="0" 
                         Width="Auto"
@@ -99,7 +107,7 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Right">
 
-                    <Button
+                        <Button
                             x:Name="MinimizeButton" 
                             Width="50" 
                             Content="—"
@@ -108,7 +116,7 @@
                             Style="{StaticResource ControlPanelButtonBase}" 
                             Click="MinimizeButton_OnClick"/>
 
-                    <Button 
+                        <Button 
                             x:Name="MaximizeButton" 
                             Width="50" 
                             FontFamily="Segoe MDL2 Assets" 
@@ -118,7 +126,7 @@
                             Style="{StaticResource ControlPanelButtonBase}" 
                             Click="MaximizeRestoreButton_OnClick"/>
 
-                    <Button 
+                        <Button 
                             x:Name="CloseButton" 
                             Width="50" 
                             FontFamily="Segoe MDL2 Assets" 
@@ -127,41 +135,43 @@
                             Style="{StaticResource ControlPanelCloseButton}" 
                             Click="CloseButton_OnClick"/>
 
-                </StackPanel>
+                    </StackPanel>
 
-                <AdornerDecorator Grid.Row="1">
-                    <ContentPresenter/>
-                </AdornerDecorator>
 
-                <!--<Grid.Triggers>
-                        <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" Value="Normal">
-                            <Setter TargetName="MyGrid" Property="Margin" Value="0" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" Value="Maximized">
-                            <Setter TargetName="MyGrid" Property="Margin" Value="5" />
-                        </DataTrigger>
-                    </Grid.Triggers>-->
 
+                    <Grid Grid.Row="1">
+                        <AdornerDecorator>
+                            <ContentPresenter/>
+                        </AdornerDecorator>
+                    </Grid>
+                </Grid>
             </Grid>
 
-            <ControlTemplate.Triggers>
-                <Trigger Property="WindowState" Value="Maximized">
-                    <Setter TargetName="ControlPanel" Property="Margin" Value="0,6,6,0"></Setter>
-                </Trigger>
-
-                <Trigger Property="WindowState" Value="Normal">
-                    <Setter TargetName="ControlPanel" Property="Margin" Value="0,0,0,0"></Setter>
-                </Trigger>
-            </ControlTemplate.Triggers>
         </ControlTemplate>
 
+
         <Style TargetType="{x:Type Window}">
+
+            <Setter Property="UseLayoutRounding" Value="True"/>
+            <Setter Property="TextOptions.TextFormattingMode" Value="Ideal"/>
+            <Setter Property="TextOptions.TextRenderingMode" Value="ClearType"/>
             <Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
+            <Setter Property="WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <WindowChrome
+                        CaptionHeight="38"
+                    CornerRadius="6"
+                    GlassFrameThickness="0"
+                    NonClientFrameEdges="None"
+                    ResizeBorderThickness="10"
+                    UseAeroCaptionButtons="False"/>
+                </Setter.Value>
+            </Setter>
             <Setter Property="Template" Value="{StaticResource WindowTemplate}"></Setter>
         </Style>
 
     </Window.Resources>
 
-    <Frame Content="{Binding NavigationService.CurrentView}" NavigationUIVisibility="Hidden"></Frame>
+    <Frame Content="{Binding NavigationService.CurrentView}" NavigationUIVisibility="Hidden"/>
 
 </Window>

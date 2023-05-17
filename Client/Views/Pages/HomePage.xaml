@@ -4,11 +4,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client.Views.Pages"
+      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="1080">
+      d:DesignHeight="600" 
+      d:DesignWidth="1080">
 
     <Grid Width="Auto" Height="Auto">
-
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
@@ -27,7 +28,14 @@
 
 
             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                <Button Width="30" Height="30" Style="{x:Null}" Margin="6, 0, 0 ,0"></Button>
+                <iconPacks:PackIconMaterialDesign     Kind="Menu"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"
+                                                      Width="20"
+                                                      Opacity="0.8"
+                                                      Margin="15, 0, 0, 0"
+                                                      Height="20"
+                                                      Foreground="White" />
                 <TextBox Width="190" Tag="Search" Margin="6, 0, 0 ,0"/>
             </StackPanel>
 
@@ -46,6 +54,7 @@
                  Background="#303030">
 
                 <Border CornerRadius="25" Width="40" Height="40" Background="White" Margin="10, 0, 0, 0"/>
+
                 <StackPanel VerticalAlignment="Center" Margin="5">
                     <Label Content="UserName"
                            Foreground="White"
@@ -95,26 +104,65 @@
                                Opacity="0.5"
                                FontWeight="Normal"/>
                     </StackPanel>
+
+                    <Button Grid.Column="2" Width="30" Height="30" Style="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"/>
+                    <Button Grid.Column="3" Width="30" Height="30" Style="{x:Null}"></Button>
+                    <Button Grid.Column="4" Width="30" Height="30" Style="{x:Null}"></Button>
+                    <Button Grid.Column="5" Width="30" Height="30" Style="{x:Null}"></Button>
+
+
                 </Grid>
+
+
             </Border>
 
 
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="2"  Background="#272727">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="40"/>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Width="30" Height="30" Style="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"/>
-                <Button Grid.Column="2" Width="30" Height="30" Style="{x:Null}"></Button>
-                <Button Grid.Column="3" Width="30" Height="30" Style="{x:Null}"></Button>
+
+                <iconPacks:PackIconMaterialDesign     Kind="Attachment"
+                                                      VerticalAlignment="Center"
+                                                      RotationAngle="120"
+                                                      HorizontalAlignment="Center"
+                                                      Width="20"
+                                                      Opacity="0.8"
+                                                      Grid.Column="0"
+                                                      Height="20"
+                                                      Foreground="White" />
+
+                <iconPacks:PackIconMaterialDesign     Kind="InsertEmoticon"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"
+                                                      Width="20"
+                                                      Opacity="0.8"
+                                                      Grid.Column="2"
+                                                      Height="20"
+                                                      Foreground="White" />
+
+
+                <iconPacks:PackIconMaterialDesign     Kind="Send"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"
+                                                      Width="20"
+                                                      Opacity="0.8"
+                                                      Grid.Column="3"
+                                                      Height="20"
+                                                      Foreground="White" />
+
+
+
 
                 <TextBox Grid.Column="1" Tag="Write a message..."
                          BorderThickness="0"
                          FontSize="14"
+                         Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}"
                          Width="Auto"
                          Height="Auto"/>
 

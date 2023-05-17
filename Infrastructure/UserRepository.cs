@@ -26,6 +26,6 @@ public class UserRepository : IUserRepository
     {
         var user = _context.Users.FirstOrDefault(u => u.Email == requestEmail && u.Password == requestPassword);
 
-        return user != null;
+        return user is not null;
     }
 }

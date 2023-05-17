@@ -26,7 +26,7 @@ public partial class App
         services.AddSingleton<INavigationService, NavigationService>();
 
         services.AddSingleton<Func<Type, ViewModel>>(serviceProvider => viewModelType => 
-            (ViewModel)serviceProvider.GetRequiredService(viewModelType));
+            (ViewModel)serviceProvider.GetRequiredService(viewModelType)); 
 
         _serviceProvider = services.BuildServiceProvider();
     }
