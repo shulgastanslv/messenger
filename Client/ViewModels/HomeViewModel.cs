@@ -29,8 +29,6 @@ public class HomeViewModel : ViewModel
         }
     }
 
-
-
     public HomeViewModel(INavigationService navigationService)
     {
         NavigationService = navigationService;

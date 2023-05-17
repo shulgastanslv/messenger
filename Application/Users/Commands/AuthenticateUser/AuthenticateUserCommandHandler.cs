@@ -20,6 +20,7 @@ public class AuthenticateUserCommandHandler : ICommandHandler<AuthenticateUserCo
             request.Email, nameof(request.Email)), 
             Guard.Against.NullOrWhiteSpace(request.Password, nameof(request.Password)));
 
-        return user ? Result.Success() : Result.Failure();
+        return user ? Result.Success() : Result.Failure(
+            new []{"User not found!"});
     }
 }

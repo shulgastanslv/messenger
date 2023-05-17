@@ -18,13 +18,5 @@ namespace Server.Controllers
 
             return result.Succeeded ? Ok() : BadRequest(result.Errors);
         }
-
-        //[HttpPost]
-        //public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand request, CancellationToken cancellationToken)
-        //{
-        //    var result = await Mediator.Send(request, cancellationToken);
-
-        //    return result.Succeeded ? Ok() : BadRequest(result.Errors);
-        //}
     }
 }

@@ -20,7 +20,8 @@
     <ItemGroup>
       <Folder Include="Common\Exceptions\" />
       <Folder Include="Users\Commands\AuthenticateUser\" />
-      <Folder Include="Users\Queries\" />
+      <Folder Include="Users\Queries\GetAllUsers\" />
+      <Folder Include="Users\Queries\GetUserById\" />
     </ItemGroup>
 
 </Project>

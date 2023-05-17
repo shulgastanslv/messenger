@@ -5,6 +5,8 @@ namespace Application.Common.Interfaces;
 
 public interface IUserRepository
 {
-    Task<Result>? CreateUserAsync(User user);
+    Task<Result<User>>? CreateUserAsync(User user);
     bool AuthenticateUserAsync(string requestEmail, string requestPassword);
+    Task<IEnumerable<User>> GetAllUsersAsync();
+    Task<User> GetUserByIdAsync(string Id);
 }

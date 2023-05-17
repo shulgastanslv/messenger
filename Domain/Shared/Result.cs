@@ -21,36 +21,30 @@ public class Result
     {
         return new Result(false, errors);
     }
-
-    public static Result Failure()
-    {
-        return new Result(false, Array.Empty<string>());
-    }
 }
 
 public class Result<T>
 {
-    public Result(bool succeeded, IEnumerable<T> errors)
+    public Result(bool succeeded, IEnumerable<string> errors, T data)
     {
         Succeeded = succeeded;
         Errors = errors.ToArray();
+        Data = data;
     }
 
     public bool Succeeded { get; init; }
-    public T[] Errors { get; init; }
 
-    public static Result<T> Success()
+    public string[] Errors { get; init; }
+
+    public T Data { get; init; }
+
+    public static Result<T> Success(T data)
     {
-        return new Result<T>(true, Array.Empty<T>());
+        return new Result<T>(true, Array.Empty<string>(), data);
     }
 
-    public static Result<T> Failure(IEnumerable<T> errors)
+    public static Result<T> Failure(IEnumerable<string> errors)
     {
-        return new Result<T>(false, errors);
-    }
-
-    public static Result<T> Failure()
-    {
-        return new Result<T>(false, Array.Empty<T>());
+        return new Result<T>(false, errors, default(T)!);
     }
 }
