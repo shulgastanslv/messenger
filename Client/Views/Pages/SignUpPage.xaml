@@ -45,18 +45,18 @@
                           Margin="0, 0, 0, 15"/>
 
 
-                <TextBlock Text="Enter email" 
+                <TextBlock Text="Enter Email" 
                            Foreground="White"
                            FontSize="13"
                            Opacity="0.5" 
                            Margin="0, 0, 0, 10"/>
 
 
-                <TextBox  Tag="Enter email"
+                <TextBox  Tag="Enter Email"
                           Text="{Binding Email}"
                           Margin="0, 0, 0, 15"/>
 
-                <TextBlock Text="Enter your password" 
+                <TextBlock Text="Enter your Password" 
                            Foreground="White" 
                            Opacity="0.5" 
                            FontSize="13"
@@ -64,7 +64,7 @@
 
                 <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
                          Margin="0, 0, 0,15"
-                         Tag="Enter password"/>
+                         Tag="Enter Password"/>
 
                 <CheckBox
                     Command="{Binding }"

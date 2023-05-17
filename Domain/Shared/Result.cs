@@ -21,6 +21,11 @@ public class Result
     {
         return new Result(false, errors);
     }
+
+    public static Result Failure()
+    {
+        return new Result(false, Array.Empty<string>());
+    }
 }
 
 public class Result<T>
@@ -42,5 +47,10 @@ public class Result<T>
     public static Result<T> Failure(IEnumerable<T> errors)
     {
         return new Result<T>(false, errors);
+    }
+
+    public static Result<T> Failure()
+    {
+        return new Result<T>(false, Array.Empty<T>());
     }
 }

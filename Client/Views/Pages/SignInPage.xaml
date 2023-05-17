@@ -32,24 +32,24 @@
                 />
 
 
-                <TextBlock Text="Enter your email" 
+                <TextBlock Text="Enter your Email" 
                            Foreground="White" 
                            FontSize="13"
                            Opacity="0.5"
                            Margin="0, 0, 0, 10"/>
 
                 <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
-                         Tag="Enter email"
+                         Tag="Enter Email"
                          Margin="0, 0, 0, 15"/>
 
-                <TextBlock Text="Enter your password"
+                <TextBlock Text="Enter your Password"
                            Foreground="White"
                            FontSize="13" 
                            Opacity="0.5" 
                            Margin="0, 0, 0, 10"/>
 
                 <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         Tag="Enter password"
+                         Tag="Enter Password"
                          Margin="0, 0, 0, 30"/>
 
                 <Button Command="{Binding SignInCommand}"

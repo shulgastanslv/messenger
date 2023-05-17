@@ -1,4 +1,5 @@
 ﻿using Application.Common.Interfaces;
+using Ardalis.GuardClauses;
 using Domain.Shared;
 
 namespace Application.Users.Commands.AuthenticateUser;
@@ -15,8 +16,10 @@ public class AuthenticateUserCommandHandler : ICommandHandler<AuthenticateUserCo
     }
     public async Task<Result> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
     {
-        var user = _userRepository.AuthenticateUserAsync(request.email, request.password);
+        var user = _userRepository.AuthenticateUserAsync(Guard.Against.NullOrWhiteSpace(
+            request.Email, nameof(request.Email)), 
+            Guard.Against.NullOrWhiteSpace(request.Password, nameof(request.Password)));
 
-        return user ? Result.Success() : Result.Failure(new []{"User not found!"});
+        return user ? Result.Success() : Result.Failure();
     }
 }

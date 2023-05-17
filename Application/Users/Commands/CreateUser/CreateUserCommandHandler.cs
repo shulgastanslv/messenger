@@ -1,4 +1,5 @@
 ﻿using Application.Common.Interfaces;
+using Ardalis.GuardClauses;
 using Domain.Entities;
 using Domain.Shared;
 
@@ -20,7 +21,7 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand>
     {
         var user = new User
         { 
-            Id = request.id,
+            Id = request.Id,
             UserName = request.UserName,
             Email = request.Email,
             Password = request.Password,

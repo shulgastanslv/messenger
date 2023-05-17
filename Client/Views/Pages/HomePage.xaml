@@ -105,16 +105,53 @@
                                FontWeight="Normal"/>
                     </StackPanel>
 
-                    <Button Grid.Column="2" Width="30" Height="30" Style="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"/>
-                    <Button Grid.Column="3" Width="30" Height="30" Style="{x:Null}"></Button>
-                    <Button Grid.Column="4" Width="30" Height="30" Style="{x:Null}"></Button>
-                    <Button Grid.Column="5" Width="30" Height="30" Style="{x:Null}"></Button>
+                    <iconPacks:PackIconMaterialDesign     Kind="Search"
+                                                          VerticalAlignment="Center"
+                                                          HorizontalAlignment="Center"
+                                                          Width="19"
+                                                          Opacity="0.8"
+                                                          Grid.Column="2"
+                                                          Height="19"
+                                                          SnapsToDevicePixels="True"
+                                                          Foreground="White" />
 
+                    <iconPacks:PackIconMaterialDesign     Kind="Phone"
+                                                          VerticalAlignment="Center"
+                                                          HorizontalAlignment="Center"
+                                                          Width="19"
+                                                          Opacity="0.8"
+                                                          Grid.Column="3"
+                                                          Height="19"
+                                                          SnapsToDevicePixels="True"
+                                                          Foreground="White" />
+
+                    <iconPacks:PackIconMaterialDesign     Kind="AccountCircle"
+                                                          VerticalAlignment="Center"
+                                                          HorizontalAlignment="Center"
+                                                          Width="19"
+                                                          Opacity="0.8"
+                                                          Grid.Column="4"
+                                                          Height="19"
+                                                          SnapsToDevicePixels="True"
+                                                          Foreground="White" />
+
+                    <iconPacks:PackIconMaterialDesign     Kind="MoreVert"
+                                                          VerticalAlignment="Center"
+                                                          HorizontalAlignment="Center"
+                                                          Width="19"
+                                                          Opacity="0.8"
+                                                          Grid.Column="5"
+                                                          Height="19"
+                                                          Foreground="White" />
 
                 </Grid>
 
 
             </Border>
+
+
+            <ListView Grid.Row="1" Background="Transparent"
+                      BorderThickness="0"></ListView>
 
 
             <Grid Grid.Row="2"  Background="#272727">
@@ -127,14 +164,14 @@
                 </Grid.ColumnDefinitions>
 
 
-                <iconPacks:PackIconMaterialDesign     Kind="Attachment"
+                <iconPacks:PackIconMaterialDesign     Kind="AttachFile"
                                                       VerticalAlignment="Center"
-                                                      RotationAngle="120"
                                                       HorizontalAlignment="Center"
-                                                      Width="20"
+                                                      Width="23"
+                                                      RotationAngle="220"
                                                       Opacity="0.8"
                                                       Grid.Column="0"
-                                                      Height="20"
+                                                      Height="23"
                                                       Foreground="White" />
 
                 <iconPacks:PackIconMaterialDesign     Kind="InsertEmoticon"
@@ -161,7 +198,7 @@
 
                 <TextBox Grid.Column="1" Tag="Write a message..."
                          BorderThickness="0"
-                         FontSize="14"
+                         FontSize="15"
                          Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}"
                          Width="Auto"
                          Height="Auto"/>

@@ -1,4 +1,6 @@
-﻿namespace Domain.Entities;
+﻿using Domain.Enums;
+
+namespace Domain.Entities;
 
 public class Message
 {
@@ -7,4 +9,5 @@ public class Message
     public User Recipient { get; set; }
     public string Text { get; set; }
     public DateTime SentTime { get; set; }
+    public MessageState MessageState { get; set; }
 }

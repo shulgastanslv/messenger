@@ -85,20 +85,18 @@
 
         <ControlTemplate x:Key="WindowTemplate" TargetType="{x:Type Window}">
 
-            <Grid>
+            <Grid Name="MyGrid" Width="Auto" Height="Auto" Background="{StaticResource WindowBackgroundColorBrush}">
 
-                <Grid Name="MyGrid" Width="Auto" Height="Auto" Background="{StaticResource WindowBackgroundColorBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <Border
+                <Border
                             Background="#323232" 
                             MouseDown="Window_MouseDown"/>
 
-                    <StackPanel
+                <StackPanel
                         x:Name="ControlPanel" 
                         Grid.Row="0" 
                         Width="Auto"
@@ -107,7 +105,7 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Right">
 
-                        <Button
+                    <Button
                             x:Name="MinimizeButton" 
                             Width="50" 
                             Content="—"
@@ -116,7 +114,7 @@
                             Style="{StaticResource ControlPanelButtonBase}" 
                             Click="MinimizeButton_OnClick"/>
 
-                        <Button 
+                    <Button 
                             x:Name="MaximizeButton" 
                             Width="50" 
                             FontFamily="Segoe MDL2 Assets" 
@@ -126,7 +124,7 @@
                             Style="{StaticResource ControlPanelButtonBase}" 
                             Click="MaximizeRestoreButton_OnClick"/>
 
-                        <Button 
+                    <Button 
                             x:Name="CloseButton" 
                             Width="50" 
                             FontFamily="Segoe MDL2 Assets" 
@@ -135,18 +133,17 @@
                             Style="{StaticResource ControlPanelCloseButton}" 
                             Click="CloseButton_OnClick"/>
 
-                    </StackPanel>
+                </StackPanel>
 
 
 
-                    <Grid Grid.Row="1">
-                        <AdornerDecorator>
-                            <ContentPresenter/>
-                        </AdornerDecorator>
-                    </Grid>
+                <Grid Grid.Row="1">
+                    <AdornerDecorator>
+                        <ContentPresenter/>
+                    </AdornerDecorator>
                 </Grid>
-            </Grid>
 
+            </Grid>
         </ControlTemplate>
 
 
@@ -159,12 +156,11 @@
             <Setter Property="WindowChrome.WindowChrome">
                 <Setter.Value>
                     <WindowChrome
-                        CaptionHeight="38"
-                    CornerRadius="6"
-                    GlassFrameThickness="0"
-                    NonClientFrameEdges="None"
-                    ResizeBorderThickness="10"
-                    UseAeroCaptionButtons="False"/>
+                        CornerRadius="6"
+                        NonClientFrameEdges="None"
+                        ResizeBorderThickness="10"
+                        UseAeroCaptionButtons="False"
+                        CaptionHeight="40"/>
                 </Setter.Value>
             </Setter>
             <Setter Property="Template" Value="{StaticResource WindowTemplate}"></Setter>

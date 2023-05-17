@@ -11,12 +11,14 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Ardalis.GuardClauses" Version="4.0.1" />
       <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.2" />
       <PackageReference Include="MediatR" Version="12.0.1" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Common\Exceptions\" />
       <Folder Include="Users\Commands\AuthenticateUser\" />
       <Folder Include="Users\Queries\" />
     </ItemGroup>
