@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client.Views.Pages"
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:userControls="clr-namespace:Client.Views.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="600" 
       d:DesignWidth="1080">
@@ -71,143 +72,9 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Column="1">
+        <userControls:MessageSelectChat Grid.Column="1"/>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"/>
-                <RowDefinition/>
-                <RowDefinition Height="60"/>
-            </Grid.RowDefinitions>
-
-
-            <Border Background="#272727" Grid.ColumnSpan="2">
-                <Grid HorizontalAlignment="Stretch" Margin="0">
-
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="50"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel  VerticalAlignment="Center" Margin="5, 0, 5, 0">
-                        <Label Content="@UserName"
-                               Foreground="White"
-                               FontSize="13"
-                               FontWeight="SemiBold"/>
-                        <Label Content="Last seen 10 minutes ago"
-                               Foreground="White"
-                               FontSize="13"
-                               Opacity="0.5"
-                               FontWeight="Normal"/>
-                    </StackPanel>
-
-                    <iconPacks:PackIconMaterialDesign     Kind="Search"
-                                                          VerticalAlignment="Center"
-                                                          HorizontalAlignment="Center"
-                                                          Width="19"
-                                                          Opacity="0.8"
-                                                          Grid.Column="2"
-                                                          Height="19"
-                                                          SnapsToDevicePixels="True"
-                                                          Foreground="White" />
-
-                    <iconPacks:PackIconMaterialDesign     Kind="Phone"
-                                                          VerticalAlignment="Center"
-                                                          HorizontalAlignment="Center"
-                                                          Width="19"
-                                                          Opacity="0.8"
-                                                          Grid.Column="3"
-                                                          Height="19"
-                                                          SnapsToDevicePixels="True"
-                                                          Foreground="White" />
-
-                    <iconPacks:PackIconMaterialDesign     Kind="AccountCircle"
-                                                          VerticalAlignment="Center"
-                                                          HorizontalAlignment="Center"
-                                                          Width="19"
-                                                          Opacity="0.8"
-                                                          Grid.Column="4"
-                                                          Height="19"
-                                                          SnapsToDevicePixels="True"
-                                                          Foreground="White" />
-
-                    <iconPacks:PackIconMaterialDesign     Kind="MoreVert"
-                                                          VerticalAlignment="Center"
-                                                          HorizontalAlignment="Center"
-                                                          Width="19"
-                                                          Opacity="0.8"
-                                                          Grid.Column="5"
-                                                          Height="19"
-                                                          Foreground="White" />
-
-                </Grid>
-
-
-            </Border>
-
-
-            <ListView Grid.Row="1" Background="Transparent"
-                      BorderThickness="0"></ListView>
-
-
-            <Grid Grid.Row="2"  Background="#272727">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="40"/>
-                </Grid.ColumnDefinitions>
-
-
-                <iconPacks:PackIconMaterialDesign     Kind="AttachFile"
-                                                      VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"
-                                                      Width="23"
-                                                      RotationAngle="220"
-                                                      Opacity="0.8"
-                                                      Grid.Column="0"
-                                                      Height="23"
-                                                      Foreground="White" />
-
-                <iconPacks:PackIconMaterialDesign     Kind="InsertEmoticon"
-                                                      VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"
-                                                      Width="20"
-                                                      Opacity="0.8"
-                                                      Grid.Column="2"
-                                                      Height="20"
-                                                      Foreground="White" />
-
-
-                <iconPacks:PackIconMaterialDesign     Kind="Send"
-                                                      VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"
-                                                      Width="20"
-                                                      Opacity="0.8"
-                                                      Grid.Column="3"
-                                                      Height="20"
-                                                      Foreground="White" />
-
-
-
-
-                <TextBox Grid.Column="1" Tag="Write a message..."
-                         BorderThickness="0"
-                         FontSize="15"
-                         Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}"
-                         Width="Auto"
-                         Height="Auto"/>
-
-
-            </Grid>
-
-        </Grid>
-
+        <!--<userControls:UserChat Grid.Column="1"/>-->
 
     </Grid>
 </Page>
