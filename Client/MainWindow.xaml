@@ -163,8 +163,7 @@
                         CaptionHeight="40"/>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Template" Value="{StaticResource WindowTemplate}"></Setter>
-        </Style>
+            <Setter Property="Template" Value="{StaticResource WindowTemplate}"/>
 
     </Window.Resources>
 

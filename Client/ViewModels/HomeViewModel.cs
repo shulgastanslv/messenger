@@ -13,7 +13,7 @@ public class HomeViewModel : ViewModel
     {
         get => _navigationService;
         set
-        {
+        { 
             _navigationService = value;
             OnPropertyChanged();
         }
