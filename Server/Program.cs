@@ -1,4 +1,5 @@
 using Application;
+using FluentValidation;
 using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);

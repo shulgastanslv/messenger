@@ -6,6 +6,9 @@
       xmlns:local="clr-namespace:Client.Views.Pages"
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:userControls="clr-namespace:Client.Views.UserControls"
+      xmlns:viewModels="clr-namespace:Client.ViewModels"
+      xmlns:visualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
+      xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
       d:DesignHeight="600" 
       d:DesignWidth="1080">
@@ -41,13 +44,12 @@
             </StackPanel>
 
 
-
-
             <ListView Background="Transparent"
+                      x:Name="UsersListView"
                       BorderThickness="0"
-                      ItemsSource="{Binding Contacts}" 
-                      Grid.Row="1"/>
-
+                      ItemContainerStyle="{StaticResource UserCard}"
+                      Grid.Row="1">
+            </ListView>
 
             <StackPanel
                  Grid.Row="2"
@@ -57,12 +59,12 @@
                 <Border CornerRadius="25" Width="40" Height="40" Background="White" Margin="10, 0, 0, 0"/>
 
                 <StackPanel VerticalAlignment="Center" Margin="5">
-                    <Label Content="UserName"
+                    <Label Content="@Test"
                            Foreground="White"
                            FontWeight="SemiBold"
                            FontSize="13"
                            FontFamily="Poppins"/>
-                    <Label Content="Status"
+                    <Label Content="Online"
                            Foreground="White"
                            FontWeight="SemiBold"
                            FontSize="13"
@@ -71,10 +73,6 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-
-        <userControls:MessageSelectChat Grid.Column="1"/>
-
-        <!--<userControls:UserChat Grid.Column="1"/>-->
 
     </Grid>
 </Page>

@@ -17,7 +17,7 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<Result<User>>? CreateUserAsync(User user)
+    public async Task<Result<User>> CreateUserAsync(User user)
     {
         await _context.Users.AddAsync(user);
         await _context.SaveChangesAsync();
@@ -25,11 +25,11 @@ public class UserRepository : IUserRepository
         return Result<User>.Success(user);
     }
 
-    public bool AuthenticateUserAsync(string requestEmail, string requestPassword)
+    public async Task<bool> AuthenticateUserAsync(string requestEmail, string requestPassword)
     {
-        var user = _context.Users.FirstOrDefault(u => u.Email == requestEmail && u.Password == requestPassword);
+        var user = await _context.Users.FirstOrDefaultAsync(i => i.Email == requestEmail && i.Password == requestPassword);
 
-        return user is not null;
+        return user != null;
     }
 
     public async Task<IEnumerable<User>> GetAllUsersAsync()
@@ -39,10 +39,17 @@ public class UserRepository : IUserRepository
         return users;
     }
 
-    public async Task<User> GetUserByIdAsync(string Id)
+    public async Task<User> GetUserByIdAsync(string id)
     {
-        var user = _context.Users.FindAsync(Id)!;
+        var user = await _context.Users.FindAsync(id);
 
-        return user.Result!;
+        return user!;
+    }
+
+    public async Task<string?> GetUserNameAsync(string id)
+    {
+        var user = await _context.Users.FirstAsync(i => i.Id == id);
+
+        return user.UserName;
     }
 }

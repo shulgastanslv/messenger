@@ -16,7 +16,9 @@ namespace Client.ViewModels;
 public class SignInViewModel : ViewModel
 {
     private string _email;
+
     private string _password;
+
     private INavigationService _navigationService;
     public string Email
     {
@@ -83,7 +85,5 @@ public class SignInViewModel : ViewModel
                 NavigationService.NavigateTo<HomeViewModel>();
             }
         }
-
-
     }
 }

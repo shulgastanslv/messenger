@@ -23,6 +23,7 @@ public partial class App
         services.AddSingleton<MainViewModel>();
         services.AddSingleton<SignUpViewModel>();
         services.AddSingleton<HomeViewModel>();
+        services.AddSingleton<UserChatViewModel>();
         services.AddSingleton<INavigationService, NavigationService>();
 
         services.AddSingleton<Func<Type, ViewModel>>(serviceProvider => viewModelType => 

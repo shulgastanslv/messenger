@@ -14,9 +14,6 @@
     <Compile Update="Views\Pages\SignUpPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\UserControls\MessageSelectChat.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\UserControls\UserChat.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -37,6 +34,9 @@
     <Page Update="Styles\TextBoxes.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Styles\UserCard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Pages\HomePage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -44,9 +44,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Pages\SignUpPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\UserControls\MessageSelectChat.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\UserControls\UserChat.xaml">

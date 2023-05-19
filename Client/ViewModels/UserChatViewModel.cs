@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using Client.Interfaces;
-using Client.Models;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Client.Interfaces;
 
 namespace Client.ViewModels;
 
-public class HomeViewModel : ViewModel
+public class UserChatViewModel : ViewModel
 {
     private INavigationService _navigationService;
+
     public INavigationService NavigationService
     {
         get => _navigationService;
@@ -19,7 +16,7 @@ public class HomeViewModel : ViewModel
         }
     }
 
-    public HomeViewModel(INavigationService navigationService)
+    public UserChatViewModel(INavigationService navigationService)
     {
         NavigationService = navigationService;
     }

@@ -13,7 +13,6 @@
       <Folder Include="Icons\" />
       <Folder Include="Services\" />
       <Folder Include="ViewModels\" />
-      <Folder Include="СustomControls\" />
     </ItemGroup>
 
     <ItemGroup>

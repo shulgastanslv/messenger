@@ -1,26 +1,22 @@
 ﻿using Application.Common.Interfaces;
 using Ardalis.GuardClauses;
 using Domain.Shared;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Users.Commands.AuthenticateUser;
 
-public class AuthenticateUserCommandHandler : ICommandHandler<AuthenticateUserCommand>
+public class AuthenticateUserCommandHandler : ICommandHandler<AuthenticateUserCommand, bool>
 {
     private readonly IUserRepository _userRepository;
-    private readonly IApplicationDbContext _applicationDbContext;
 
-    public AuthenticateUserCommandHandler(IUserRepository userRepository, IApplicationDbContext applicationDbContext)
+    public AuthenticateUserCommandHandler(IUserRepository userRepository)
     {
         _userRepository = userRepository;
-        _applicationDbContext = applicationDbContext;
     }
-    public async Task<Result> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
+    public async Task<Result<bool>> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
     {
-        var user = _userRepository.AuthenticateUserAsync(Guard.Against.NullOrWhiteSpace(
-            request.Email, nameof(request.Email)), 
-            Guard.Against.NullOrWhiteSpace(request.Password, nameof(request.Password)));
+        var user = await _userRepository.AuthenticateUserAsync(request.Email, request.Password);
 
-        return user ? Result.Success() : Result.Failure(
-            new []{"User not found!"});
+        return user ? Result<bool>.Success(user) : Result<bool>.Failure(new []{""});
     }
 }
