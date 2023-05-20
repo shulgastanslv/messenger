@@ -1,6 +1,4 @@
 using Application;
-using Application.Common.Interfaces;
-using FluentValidation;
 using Infrastructure;
 using Presentation;
 

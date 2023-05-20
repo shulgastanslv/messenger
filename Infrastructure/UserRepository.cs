@@ -48,7 +48,7 @@ public class UserRepository : IUserRepository
 
     public async Task<string?> GetUserNameAsync(string id)
     {
-        var user = await _context.Users.FirstAsync(i => i.Id == id);
+        var user = await _context.Users.FirstAsync(i => i.Id.ToString() == id);
 
         return user.UserName;
     }

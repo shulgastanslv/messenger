@@ -25,7 +25,7 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand>
     {
         var user = new User
         { 
-            Id = Guid.NewGuid().ToString(),
+            Id = Guid.NewGuid(),
             UserName = request.UserName,
             Email = request.Email,
             Password = request.Password,
