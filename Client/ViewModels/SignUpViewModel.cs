@@ -94,9 +94,8 @@ public class SignUpViewModel : ViewModel
 
         using (var httpClient = new HttpClient())
         {
-            var content = new StringContent(JsonConvert.SerializeObject(new UserModel()
+            var content = new StringContent(JsonConvert.SerializeObject(new UserModel
             {
-                Id = Guid.NewGuid().ToString(),
                 UserName = UserName,
                 Email = Email,
                 Password = Password,

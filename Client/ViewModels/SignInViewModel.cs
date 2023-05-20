@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -57,8 +58,10 @@ public class SignInViewModel : ViewModel
             NavigationService.NavigateTo<SignUpViewModel>());
     }
 
+    //TOD0: Create regex
     private bool CanExecuteSignInCommand(object obj)
     {
+
         if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password) ||
             Password.Length < 16 || !Email.Contains("@") || !Email.Contains(".") || Email.Length == 1)
             return false;

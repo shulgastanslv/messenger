@@ -16,7 +16,7 @@ public static class DependencyInjection
     {
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-        services.AddTransient<IUserRepository, UserRepository>();
+        services.AddTransient<IUserRepository, UserRepository>(); 
         services.AddScoped<CreateUserCommandHandler>();
         services.AddScoped<AuthenticateUserCommandHandler>();
 
@@ -25,7 +25,6 @@ public static class DependencyInjection
                 builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
         
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
-
 
 
         return services;

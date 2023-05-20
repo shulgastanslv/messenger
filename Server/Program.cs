@@ -1,18 +1,20 @@
 using Application;
+using Application.Common.Interfaces;
 using FluentValidation;
 using Infrastructure;
+using Presentation;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.
     AddApplication().
+    AddPresentation().
     AddInfrastructure(builder.Configuration);
-
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+    
 builder.Services.AddSwaggerGen(options =>
 {
     options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
@@ -20,6 +22,7 @@ builder.Services.AddSwaggerGen(options =>
 
 
 var app = builder.Build();
+
 
 if (app.Environment.IsDevelopment())
 {

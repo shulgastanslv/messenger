@@ -164,6 +164,7 @@
                 </Setter.Value>
             </Setter>
             <Setter Property="Template" Value="{StaticResource WindowTemplate}"/>
+        </Style>
 
     </Window.Resources>
 
