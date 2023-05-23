@@ -2,4 +2,4 @@
 
 namespace Application.Users.Queries.GetUserById;
 
-public sealed record GetUserByIdQuery(string Id) : IQuery<UserResponse>;
+public sealed record GetUserByIdQuery(Guid Id) : IQuery<UserResponse>;

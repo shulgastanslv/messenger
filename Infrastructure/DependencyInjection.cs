@@ -1,9 +1,11 @@
 ﻿using System.Reflection;
+using Application.Common.Behaviours;
 using Application.Common.Interfaces;
 using Application.Users.Commands.AuthenticateUser;
 using Application.Users.Commands.CreateUser;
 using FluentValidation;
 using Infrastructure.Persistence;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,9 +16,9 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        var assembly = typeof(DependencyInjection).Assembly;
 
-        services.AddTransient<IUserRepository, UserRepository>(); 
+        services.AddTransient<IUserRepository, UserRepository>();
         services.AddScoped<CreateUserCommandHandler>();
         services.AddScoped<AuthenticateUserCommandHandler>();
 
@@ -26,6 +28,7 @@ public static class DependencyInjection
         
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
 
+        services.AddValidatorsFromAssembly(assembly);
 
         return services;
     }

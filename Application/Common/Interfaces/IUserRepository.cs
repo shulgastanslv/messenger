@@ -8,6 +8,6 @@ public interface IUserRepository
     Task<Result<User>> CreateUserAsync(User user);
     Task<bool> AuthenticateUserAsync(string requestEmail, string requestPassword);
     Task<IEnumerable<User>> GetAllUsersAsync();
-    Task<User> GetUserByIdAsync(string id);
+    Task<User> GetUserByIdAsync(Guid id);
     Task<string?> GetUserNameAsync(string id);
 }

@@ -39,7 +39,7 @@ public class UserRepository : IUserRepository
         return users;
     }
 
-    public async Task<User> GetUserByIdAsync(string id)
+    public async Task<User> GetUserByIdAsync(Guid id)
     {
         var user = await _context.Users.FindAsync(id);
 
