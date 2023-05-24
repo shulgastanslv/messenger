@@ -1,15 +1,16 @@
-﻿using System.Reflection;
-using Application.Common.Behaviours;
+﻿using Application.Common.Abstractions;
 using Application.Common.Interfaces;
 using Application.Users.Commands.AuthenticateUser;
 using Application.Users.Commands.CreateUser;
+using Domain.Entities.User;
 using FluentValidation;
+using Infrastructure.Authentication;
 using Infrastructure.Persistence;
 using Infrastructure.Repositories;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Infrastructure;
 
@@ -20,6 +21,9 @@ public static class DependencyInjection
         var assembly = typeof(DependencyInjection).Assembly;
 
         services.AddTransient<IUserRepository, UserRepository>();
+
+        services.AddTransient<IJwtProvider, JwtProvider>();
+
         services.AddScoped<CreateUserCommandHandler>();
         services.AddScoped<AuthenticateUserCommandHandler>();
 

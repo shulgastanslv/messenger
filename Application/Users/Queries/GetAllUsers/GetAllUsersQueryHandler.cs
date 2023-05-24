@@ -1,6 +1,5 @@
 ﻿using Application.Common.Abstractions.Messaging;
-using Application.Common.Interfaces;
-using Domain.Primitives.Result;
+using Domain.Entities.User;
 
 namespace Application.Users.Queries.GetAllUsers;
 

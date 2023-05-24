@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain.Entities.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Common.Interfaces;

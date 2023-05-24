@@ -1,6 +1,6 @@
 ﻿using Application.Common.Abstractions.Messaging;
 using Application.Common.Interfaces;
-using Domain.Entities;
+using Domain.Entities.User;
 using Domain.Primitives.Result;
 
 namespace Application.Users.Commands.CreateUser;
@@ -19,14 +19,9 @@ public sealed class CreateUserCommandHandler : ICommandHandler<CreateUserCommand
 
     public async Task<Result> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        var user = new User
-        { 
-            Id = Guid.NewGuid(),
-            UserName = request.UserName,
-            Email = request.Email,
-            Password = request.Password,
-            CreationTime = request.CreationTime
-        };
+        var user = new User(Guid.NewGuid(),
+            request.UserName, request.Email,
+            request.Password);
 
         var result = await _userRepository.CreateUserAsync(user, cancellationToken);
 

@@ -1,24 +1,28 @@
-﻿using Application.Common.Abstractions.Messaging;
-using Application.Common.Interfaces;
+﻿using Application.Common.Abstractions;
+using Application.Common.Abstractions.Messaging;
+using Domain.Entities.User;
 using Domain.Primitives.Result;
 
 namespace Application.Users.Commands.AuthenticateUser;
 
-public class AuthenticateUserCommandHandler : ICommandHandler<AuthenticateUserCommand, Result>
+public class AuthenticateUserCommandHandler : ICommandHandler<AuthenticateUserCommand, Result<string>>
 {
     private readonly IUserRepository _userRepository;
 
-    public AuthenticateUserCommandHandler(IUserRepository userRepository)
+    private readonly IJwtProvider _jwtProvider;
+
+    public AuthenticateUserCommandHandler(IUserRepository userRepository, IJwtProvider jwtProvider)
     {
         _userRepository = userRepository;
+        _jwtProvider = jwtProvider;
     }
 
-    public async Task<Result> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
+    public async Task<Result<string>> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.AuthenticateUserAsync(request.Email, 
-            request.Password, cancellationToken);
+        var user = await _userRepository.GetUserByEmail(request.Email, cancellationToken);
 
-        return user.HasValue ? Result.Success() : 
-            Result.Failure(new("The user with the specified user name was not found."));
+        string token = _jwtProvider.GetJwtToken(user.Value!);
+
+        return Result.Success(token);
     }
 }

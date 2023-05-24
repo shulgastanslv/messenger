@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain.Entities.User;
 
 namespace Application.Users.Queries.GetUserById;
 

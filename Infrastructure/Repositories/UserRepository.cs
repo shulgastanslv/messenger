@@ -1,9 +1,8 @@
-﻿using Domain.Entities;
-using Application.Common.Interfaces;
-using Infrastructure.Persistence;
+﻿using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Domain.Primitives.Result;
 using Domain.Primitives.Maybe;
+using Domain.Entities.User;
 
 namespace Infrastructure.Repositories;
 
@@ -25,10 +24,10 @@ public class UserRepository : IUserRepository
         return Result.Success(user)!;
     }
 
-    public async Task<Maybe<User?>> AuthenticateUserAsync(string requestEmail, string requestPassword, CancellationToken cancellationToken)
+
+    public async Task<Maybe<User?>> GetUserByEmail(string email, CancellationToken cancellationToken)
     {
-        var user = await _context.Users.FirstOrDefaultAsync(i => i.Email == requestEmail && i.Password == requestPassword,
-            cancellationToken: cancellationToken);
+        var user = await _context.Users.FirstOrDefaultAsync(i => i.Email == email, cancellationToken);
 
         return user;
     }
