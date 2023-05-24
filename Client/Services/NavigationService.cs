@@ -7,6 +7,7 @@ namespace Client.Services;
 public class NavigationService : ViewModelBase, INavigationService
 {
     private readonly Func<Type, ViewModel> _viewFactory;
+
     private ViewModel _currentView;
     public ViewModel CurrentView
     {

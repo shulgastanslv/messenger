@@ -21,7 +21,6 @@
         </Grid.ColumnDefinitions>
 
 
-
         <Grid Background="{StaticResource ContactListBackgroundColorBrush}" Grid.Column="0">
 
             <Grid.RowDefinitions>
@@ -47,6 +46,7 @@
             <ListView Background="Transparent"
                       x:Name="UsersListView"
                       BorderThickness="0"
+                      ItemsSource="{Binding Users}"
                       ItemContainerStyle="{StaticResource UserCard}"
                       Grid.Row="1">
             </ListView>
@@ -73,6 +73,8 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
+
+        <userControls:UserChat Grid.Column="1"></userControls:UserChat>
 
     </Grid>
 </Page>

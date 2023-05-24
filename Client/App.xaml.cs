@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.Http;
 using System.Windows;
 using Client.Interfaces;
 using Client.Services;
@@ -14,7 +13,7 @@ public partial class App
     {
         IServiceCollection services = new ServiceCollection();
 
-        services.AddSingleton<MainWindow>(provider => new MainWindow
+        services.AddSingleton(provider => new MainWindow
         {
             DataContext = provider.GetRequiredService<MainViewModel>()
         });
@@ -24,6 +23,8 @@ public partial class App
         services.AddSingleton<SignUpViewModel>();
         services.AddSingleton<HomeViewModel>();
         services.AddSingleton<UserChatViewModel>();
+
+
         services.AddSingleton<INavigationService, NavigationService>();
 
         services.AddSingleton<Func<Type, ViewModel>>(serviceProvider => viewModelType => 

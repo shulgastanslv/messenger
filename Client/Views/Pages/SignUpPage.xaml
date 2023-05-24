@@ -6,18 +6,22 @@
       xmlns:local="clr-namespace:Client.Views.Pages"
       xmlns:viewModels="clr-namespace:Client.ViewModels"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="1080"
+      d:DesignHeight="620" d:DesignWidth="1080"
       Title="SignUpPage">
 
     <Grid>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="420"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Width="455" Grid.Column="1" Background="{StaticResource WrapperColorBrush}">
+        <Border Width="420" CornerRadius="4" Height="580" Grid.Column="1" Background="{StaticResource WrapperColorBrush}">
+
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="3" BlurRadius="5" Opacity="0.2"/>
+            </Border.Effect>
 
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="250">
 
@@ -85,6 +89,6 @@
                         Content="&lt;Back"/>
 
             </StackPanel>
-        </Grid>
+        </Border>
     </Grid>
 </Page>

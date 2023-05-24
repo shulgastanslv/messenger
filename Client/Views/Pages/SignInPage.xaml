@@ -5,17 +5,22 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client.Views.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="1080">
+      d:DesignHeight="620" d:DesignWidth="1080">
 
     <Grid>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="420"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Border CornerRadius="6" Background="{StaticResource WrapperColorBrush}" Grid.Column="1" Height="Auto" Width="455">
+        <Border CornerRadius="4" Background="{StaticResource WrapperColorBrush}" Grid.Column="1" Width="420" Height="570">
+
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="3" BlurRadius="5" Opacity="0.2"/>
+            </Border.Effect>
+
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="250">
 
                 <TextBlock Text="Sign In" FontSize="20" 
@@ -68,7 +73,6 @@
                         Sign Up
                     </Hyperlink>
                 </TextBlock>
-
             </StackPanel>
         </Border>
     </Grid>

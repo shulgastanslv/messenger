@@ -1,4 +1,4 @@
-﻿using Domain.Shared;
+﻿using Domain.Primitives.Result;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -19,10 +19,10 @@ public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest,
 
         var result = await next();
 
-        if (!result.Succeeded)
+        if (!result.IsSuccess)
         {
             _logger.LogError(
-                $"Request failure {typeof(TRequest).Name}, {result.Errors} {DateTime.UtcNow}");
+                $"Request failure {typeof(TRequest).Name}, {result.Error} {DateTime.UtcNow}");
         }
 
         _logger.LogInformation(

@@ -1,12 +1,11 @@
-﻿using Application.Common.Interfaces;
-using Ardalis.GuardClauses;
+﻿using Application.Common.Abstractions.Messaging;
+using Application.Common.Interfaces;
 using Domain.Entities;
-using Domain.Shared;
-using Microsoft.Extensions.Logging;
+using Domain.Primitives.Result;
 
 namespace Application.Users.Commands.CreateUser;
 
-public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand>
+public sealed class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, Result>
 {
     private readonly IUserRepository _userRepository;
 
@@ -29,7 +28,12 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand>
             CreationTime = request.CreationTime
         };
 
-        await _userRepository.CreateUserAsync(user)!;
+        var result = await _userRepository.CreateUserAsync(user, cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return result;
+        }
 
         await _applicationDbContext.SaveChangesAsync(cancellationToken);
 

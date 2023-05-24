@@ -23,6 +23,6 @@ public class MainViewModel : ViewModel
     {
         NavigationService = navigationService;
 
-        NavigationService.NavigateTo<SignInViewModel>();
+        NavigationService.NavigateTo<HomeViewModel>();
     }
 }

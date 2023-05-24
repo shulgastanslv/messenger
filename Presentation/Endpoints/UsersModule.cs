@@ -20,14 +20,14 @@ public class UsersModule : CarterModule
         {
             var result = await sender.Send(new GetAllUsersQuery());
 
-            return result.Succeeded ? Results.Ok(result) : Results.BadRequest(result.Errors);
+            return Results.Ok(result.Users);
         });
 
         app.MapGet("/getUserById", async (Guid id, ISender sender) =>
         {
             var result = await sender.Send(new GetUserByIdQuery(id));
 
-            return result.Succeeded ? Results.Ok(result) : Results.BadRequest(result.Errors);
+            return Results.Ok(result);
         });
     }
 }

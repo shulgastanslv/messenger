@@ -1,11 +1,10 @@
-﻿using Application.Common.Interfaces;
-using Ardalis.GuardClauses;
-using Domain.Shared;
-using Microsoft.Extensions.Logging;
+﻿using Application.Common.Abstractions.Messaging;
+using Application.Common.Interfaces;
+using Domain.Primitives.Result;
 
 namespace Application.Users.Commands.AuthenticateUser;
 
-public class AuthenticateUserCommandHandler : ICommandHandler<AuthenticateUserCommand, bool>
+public class AuthenticateUserCommandHandler : ICommandHandler<AuthenticateUserCommand, Result>
 {
     private readonly IUserRepository _userRepository;
 
@@ -13,10 +12,13 @@ public class AuthenticateUserCommandHandler : ICommandHandler<AuthenticateUserCo
     {
         _userRepository = userRepository;
     }
-    public async Task<Result<bool>> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
-    {
-        var user = await _userRepository.AuthenticateUserAsync(request.Email, request.Password);
 
-        return user ? Result<bool>.Success(user) : Result<bool>.Failure(new []{""});
+    public async Task<Result> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
+    {
+        var user = await _userRepository.AuthenticateUserAsync(request.Email, 
+            request.Password, cancellationToken);
+
+        return user.HasValue ? Result.Success() : 
+            Result.Failure(new("The user with the specified user name was not found."));
     }
 }

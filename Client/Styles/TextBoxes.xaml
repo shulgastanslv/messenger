@@ -15,7 +15,7 @@
         <Setter Property="Padding" Value="6, 3"/>
         <Setter Property="Cursor" Value="IBeam"/>
         <Setter Property="FontSize" Value="13"/>
-        <Setter Property="Height" Value="42"/>
+        <Setter Property="Height" Value="44"/>
         <Setter Property="Width" Value="250"/>
 
         <Setter Property="Template">
@@ -57,7 +57,7 @@
                         </MultiTrigger>
 
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="Height" Value="44"></Setter>
+                            <Setter Property="Height" Value="45"></Setter>
                             <Setter Property="BorderBrush" Value="White"/>
                         </Trigger>
 

@@ -1,4 +1,5 @@
-﻿using Application.Common.Interfaces;
+﻿using Application.Common.Abstractions.Messaging;
+using Domain.Primitives.Result;
 
 namespace Application.Users.Commands.CreateUser;
 
@@ -7,4 +8,4 @@ public sealed record CreateUserCommand(
     string UserName, 
     string Email, 
     string Password, 
-    DateTime CreationTime) : ICommand;
+    DateTime CreationTime) : ICommand<Result>;

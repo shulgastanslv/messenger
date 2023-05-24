@@ -2,4 +2,4 @@
 
 namespace Application.Users.Queries.GetAllUsers;
 
-public sealed record UsersResponse(List<User> Users);
+public sealed record UsersResponse(IEnumerable<User> Users);

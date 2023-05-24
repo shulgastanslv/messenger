@@ -5,6 +5,7 @@ using Application.Users.Commands.AuthenticateUser;
 using Application.Users.Commands.CreateUser;
 using FluentValidation;
 using Infrastructure.Persistence;
+using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

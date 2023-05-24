@@ -1,4 +1,4 @@
-﻿using Domain.Shared;
+﻿using Domain.Primitives.Result;
 using FluentValidation;
 using MediatR;
 

@@ -20,7 +20,7 @@ public class Registration : CarterModule
         {
             var result = await sender.Send(request, cancellationToken);
 
-            return result.Succeeded ? Results.Ok(result) : Results.BadRequest(result.Errors);
+            return result.IsSuccess ? Results.Ok(result) : Results.BadRequest(result.Error);
         });
     }
 

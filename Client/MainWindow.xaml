@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Client"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Height="600" 
+        Height="620" 
         Width="1080"
         Style="{DynamicResource {x:Type Window}}" 
         MinHeight="500"

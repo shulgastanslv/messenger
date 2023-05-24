@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Windows.Input;
@@ -29,7 +28,6 @@ public class SignUpViewModel : ViewModel
             OnPropertyChanged(nameof(IsChecked));
         }
     }
-
     public string UserName
     {
         get => _userName;
@@ -46,7 +44,7 @@ public class SignUpViewModel : ViewModel
         {
             _email = value ?? throw new ArgumentNullException(nameof(value));
             OnPropertyChanged(nameof(Email));
-        } 
+        }
     }
     public string Password
     {
@@ -67,7 +65,6 @@ public class SignUpViewModel : ViewModel
             OnPropertyChanged();
         }
     }
-
     public ICommand SignUpCommand { get; set; }
 
     public ICommand BackToSignInCommand { get; set; }
@@ -82,35 +79,34 @@ public class SignUpViewModel : ViewModel
 
     private bool CanExecuteSignUpCommand(object obj)
     {
-        if (string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Email)  || string.IsNullOrWhiteSpace(Password) ||
-            UserName.Length == 1 || Password.Length < 16 || !Email.Contains("@") || !Email.Contains(".") || Email.Length == 1 || IsChecked == false)
-            return false;
+        //if (string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Email)  || string.IsNullOrWhiteSpace(Password) ||
+        //    UserName.Length == 1 || Password.Length < 16 || !Email.Contains("@") || !Email.Contains(".") || Email.Length == 1 || IsChecked == false)
+        //    return false;
 
         return true;
     }
 
     private async void ExecuteSignUpCommand(object obj)
     {
+        using var httpClient = new HttpClient();
 
-        using (var httpClient = new HttpClient())
+        var userModel = new UserModel
         {
-            var content = new StringContent(JsonConvert.SerializeObject(new UserModel
-            {
-                UserName = UserName,
-                Email = Email,
-                Password = Password,
-                CreationTime = DateTime.Now
-            }), Encoding.UTF8, "application/json");
+            UserName = UserName,
+            Email = Email,
+            Password = Password,
+            CreationTime = DateTime.Now
+        };
 
+        var content = new StringContent(JsonConvert.SerializeObject(userModel), Encoding.UTF8, "application/json");
 
-            var response = await httpClient.PostAsync("https://localhost:7289/api/Registration", content);
+        var response = await httpClient.PostAsync("https://localhost:7289/registration/reg", content);
 
-            await response.Content.ReadAsStringAsync();
+        await response.Content.ReadAsStringAsync();
 
-            if (response.IsSuccessStatusCode)
-            {
-                NavigationService.NavigateTo<HomeViewModel>();
-            }
+        if (response.IsSuccessStatusCode)
+        {
+            NavigationService.NavigateTo<HomeViewModel>();
         }
 
     }

@@ -1,4 +1,4 @@
-﻿using Application.Common.Interfaces;
+﻿using Application.Common.Abstractions.Messaging;
 using Domain.Entities;
 using MediatR;
 

@@ -1,6 +1,6 @@
-﻿using Application.Common.Interfaces;
-using Application.Users.Queries.GetAllUsers;
-using Domain.Shared;
+﻿using Application.Common.Abstractions.Messaging;
+using Application.Common.Interfaces;
+using Domain.Primitives.Result;
 
 namespace Application.Users.Queries.GetUserById;
 
@@ -8,20 +8,15 @@ public class GetUserByIdQueryHandler : IQueryHandler<GetUserByIdQuery, UserRespo
 {
     private readonly IUserRepository _userRepository;
 
-    private readonly IApplicationDbContext _applicationDbContext;
-
-    public GetUserByIdQueryHandler(IUserRepository userRepository, IApplicationDbContext applicationDbContext)
+    public GetUserByIdQueryHandler(IUserRepository userRepository)
     {
         _userRepository = userRepository;
-        _applicationDbContext = applicationDbContext;
     }
 
-    public async Task<Result<UserResponse>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+    public async Task<UserResponse> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
     {
-        var result = await _userRepository.GetUserByIdAsync(request.Id);
+        var result = await _userRepository.GetUserByIdAsync(request.Id, cancellationToken);
 
-        var response = new UserResponse(result);
-
-        return Result<UserResponse>.Success(response);
+        return new UserResponse(result.Value!);
     }
 }
