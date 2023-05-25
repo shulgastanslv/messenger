@@ -1,7 +1,7 @@
 ﻿using Infrastructure.Authentication;
 using Microsoft.Extensions.Options;
 
-namespace Server.OptionsSetup;
+namespace Server.JwtOptionsSetup;
 
 public class JwtOptionsSetup : IConfigureOptions<JwtOptions>
 {

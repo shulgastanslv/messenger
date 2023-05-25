@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Server.OptionsSetup;
+namespace Server.JwtOptionsSetup;
 
 public class JwtBearerOptionsSetup : IConfigureOptions<JwtBearerOptions>
 {

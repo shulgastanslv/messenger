@@ -20,13 +20,11 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-
         <Grid Background="{StaticResource ContactListBackgroundColorBrush}" Grid.Column="0">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition/>
-                <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
 
 
@@ -42,16 +40,27 @@
                 <TextBox Width="190" Tag="Search" Margin="6, 0, 0 ,0"/>
             </StackPanel>
 
-
-            <ListView Background="Transparent"
+            <!--ItemContainerStyle="{StaticResource UserCard}"-->
+            <ListBox Background="Transparent"
                       x:Name="UsersListView"
                       BorderThickness="0"
                       ItemsSource="{Binding Users}"
                       ItemContainerStyle="{StaticResource UserCard}"
                       Grid.Row="1">
-            </ListView>
 
-            <StackPanel
+                <!--<ListBox.Resources>
+                    --><!--<DataTemplate DataType="{x:Type viewModels:UserChatViewModel}">
+                        <StackPanel>
+                            <TextBlock>
+                                <Run Text="{Binding Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>--><!--
+                </ListBox.Resources>-->
+            </ListBox>
+
+
+            <!--<StackPanel
                  Grid.Row="2"
                  Orientation="Horizontal"
                  Background="#303030">
@@ -71,10 +80,19 @@
                            Opacity="0.5"
                            FontFamily="Poppins"/>
                 </StackPanel>
-            </StackPanel>
+            </StackPanel>-->
         </Grid>
 
-        <userControls:UserChat Grid.Column="1"></userControls:UserChat>
+        <Grid Column="1">
+            <ContentControl Content="{Binding ElementName=UsersListView, Path=SelectedValue}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type viewModels:UserChatViewModel}">
+                        <userControls:UserChat/>
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </Grid>
+
 
     </Grid>
 </Page>

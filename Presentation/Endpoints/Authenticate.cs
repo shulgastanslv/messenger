@@ -8,13 +8,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using System.Diagnostics;
 
 namespace Presentation.Endpoints;
 
 
+[Authorize]
 public class Authenticate : CarterModule
 {
-    public Authenticate() : base("/authenticate"){}
+    public Authenticate() : base("/authenticate") { }
 
     public override void AddRoutes(IEndpointRouteBuilder app)
     {

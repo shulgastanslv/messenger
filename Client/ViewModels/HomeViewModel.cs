@@ -13,6 +13,8 @@ namespace Client.ViewModels;
 
 public class HomeViewModel : ViewModel
 {
+    private List<UserChatViewModel> _users;
+
     private INavigationService _navigationService;
     public INavigationService NavigationService
     {
@@ -23,8 +25,31 @@ public class HomeViewModel : ViewModel
             OnPropertyChanged();
         }
     }
+
+    public List<UserChatViewModel> Users
+    {
+        get => _users;
+        set
+        {
+            _users = value;
+            OnPropertyChanged(nameof(Users));
+        }
+    }
+
     public HomeViewModel(INavigationService navigationService)
     {
         NavigationService = navigationService;
+
+        Users = new List<UserChatViewModel>
+        {
+            new(navigationService)
+            {
+                User = new UserModel()
+                {
+                    UserName = "akiroqw",
+                    LastMessage = "test"
+                }
+            }
+        };
     }
 }
