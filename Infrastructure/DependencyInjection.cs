@@ -2,7 +2,7 @@
 using Application.Common.Interfaces;
 using Application.Users.Commands.AuthenticateUser;
 using Application.Users.Commands.CreateUser;
-using Domain.Entities.User;
+using Domain.Entities;
 using FluentValidation;
 using Infrastructure.Authentication;
 using Infrastructure.Persistence;

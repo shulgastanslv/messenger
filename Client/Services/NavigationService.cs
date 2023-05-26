@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Windows;
 using Client.Interfaces;
 using Client.ViewModels;
 
 namespace Client.Services;
 
-public class NavigationService : ViewModelBase, INavigationService
+public class NavigationService : ViewModel, INavigationService
 {
     private readonly Func<Type, ViewModel> _viewFactory;
 
@@ -27,7 +28,16 @@ public class NavigationService : ViewModelBase, INavigationService
 
     public void NavigateTo<TViewModel>() where TViewModel : ViewModel
     {
-       ViewModel viewModel = _viewFactory.Invoke(typeof(TViewModel));
+       var viewModel = _viewFactory.Invoke(typeof(TViewModel));
        CurrentView = viewModel;
     }
+
+    public void AddNewWindowAndNavigateTo<TViewModel>() where TViewModel : ViewModel
+    {
+        var viewModel = _viewFactory.Invoke(typeof(TViewModel));
+        var newWindow = new MainWindow();
+        newWindow.Content = viewModel;
+        newWindow.Show();
+    }
+
 }

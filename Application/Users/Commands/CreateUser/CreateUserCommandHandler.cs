@@ -1,6 +1,6 @@
 ﻿using Application.Common.Abstractions.Messaging;
 using Application.Common.Interfaces;
-using Domain.Entities.User;
+using Domain.Entities;
 using Domain.Primitives.Result;
 
 namespace Application.Users.Commands.CreateUser;

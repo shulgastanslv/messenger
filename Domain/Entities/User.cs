@@ -1,4 +1,4 @@
-﻿namespace Domain.Entities.User;
+﻿namespace Domain.Entities;
 
 public class User : Entity
 {
@@ -11,7 +11,7 @@ public class User : Entity
         CreationTime = DateTime.Now;
     }
 
-    public User(){}
+    public User() { }
 
     public string UserName { get; set; }
 

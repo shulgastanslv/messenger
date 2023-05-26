@@ -1,7 +1,8 @@
-﻿using Domain.Entities.Message;
+﻿using Domain.Entities;
 
 namespace Client.Models;
 
 public class MessageModel : Message
 {
+
 }

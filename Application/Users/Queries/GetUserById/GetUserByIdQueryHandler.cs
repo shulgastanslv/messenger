@@ -1,5 +1,5 @@
 ﻿using Application.Common.Abstractions.Messaging;
-using Domain.Entities.User;
+using Domain.Entities;
 
 namespace Application.Users.Queries.GetUserById;
 

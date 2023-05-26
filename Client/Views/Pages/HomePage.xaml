@@ -20,7 +20,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Grid Background="{StaticResource ContactListBackgroundColorBrush}" Grid.Column="0">
+
+        <Grid Background="{StaticResource UsersListBackgroundColorBrush}" Grid.Column="0">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
@@ -40,7 +41,6 @@
                 <TextBox Width="190" Tag="Search" Margin="6, 0, 0 ,0"/>
             </StackPanel>
 
-            <!--ItemContainerStyle="{StaticResource UserCard}"-->
             <ListBox Background="Transparent"
                       x:Name="UsersListView"
                       BorderThickness="0"
@@ -48,39 +48,17 @@
                       ItemContainerStyle="{StaticResource UserCard}"
                       Grid.Row="1">
 
-                <!--<ListBox.Resources>
-                    --><!--<DataTemplate DataType="{x:Type viewModels:UserChatViewModel}">
-                        <StackPanel>
-                            <TextBlock>
-                                <Run Text="{Binding Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"/>
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>--><!--
-                </ListBox.Resources>-->
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Open in new window"/>
+                        <MenuItem Header="Pin"/>
+                        <MenuItem Header="Mark as unread"/>
+                        <MenuItem Header="Block user"/>
+                        <MenuItem Header="Clear history"/>
+                        <MenuItem Header="Delete chat"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
             </ListBox>
-
-
-            <!--<StackPanel
-                 Grid.Row="2"
-                 Orientation="Horizontal"
-                 Background="#303030">
-
-                <Border CornerRadius="25" Width="40" Height="40" Background="White" Margin="10, 0, 0, 0"/>
-
-                <StackPanel VerticalAlignment="Center" Margin="5">
-                    <Label Content="@Test"
-                           Foreground="White"
-                           FontWeight="SemiBold"
-                           FontSize="13"
-                           FontFamily="Poppins"/>
-                    <Label Content="Online"
-                           Foreground="White"
-                           FontWeight="SemiBold"
-                           FontSize="13"
-                           Opacity="0.5"
-                           FontFamily="Poppins"/>
-                </StackPanel>
-            </StackPanel>-->
         </Grid>
 
         <Grid Column="1">
@@ -92,7 +70,5 @@
                 </ContentControl.Resources>
             </ContentControl>
         </Grid>
-
-
     </Grid>
 </Page>

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 using Client.Interfaces;
@@ -13,7 +8,27 @@ namespace Client.ViewModels;
 
 public class HomeViewModel : ViewModel
 {
+    private UserModel _selfModel;
+    public UserModel SelfModel
+    {
+        get => _selfModel;
+        set
+        {
+            _selfModel = value;
+            OnPropertyChanged(nameof(SelfModel));
+        }
+    }
+
     private List<UserChatViewModel> _users;
+    public List<UserChatViewModel> Users
+    {
+        get => _users;
+        set
+        {
+            _users = value;
+            OnPropertyChanged(nameof(Users));
+        }
+    }
 
     private INavigationService _navigationService;
     public INavigationService NavigationService
@@ -26,30 +41,10 @@ public class HomeViewModel : ViewModel
         }
     }
 
-    public List<UserChatViewModel> Users
-    {
-        get => _users;
-        set
-        {
-            _users = value;
-            OnPropertyChanged(nameof(Users));
-        }
-    }
-
     public HomeViewModel(INavigationService navigationService)
     {
         NavigationService = navigationService;
 
-        Users = new List<UserChatViewModel>
-        {
-            new(navigationService)
-            {
-                User = new UserModel()
-                {
-                    UserName = "akiroqw",
-                    LastMessage = "test"
-                }
-            }
-        };
+
     }
 }

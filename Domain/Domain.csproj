@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Entities\Message\" />
       <Folder Include="Enums\" />
       <Folder Include="Primitives\Maybe\" />
       <Folder Include="Primitives\Errors\" />

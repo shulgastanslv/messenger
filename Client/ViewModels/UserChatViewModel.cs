@@ -1,19 +1,22 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Client.Interfaces;
 using Client.Models;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Client.ViewModels;
 
 public class UserChatViewModel : ViewModel
 {
-    private ObservableCollection<MessageModel> _messages;
+    private ObservableCollection<MessageViewModel> _messages;
 
     private string _message;
 
     private UserModel _user;
 
-    public ObservableCollection<MessageModel> Messages
+    public ObservableCollection<MessageViewModel> Messages
     {
         get => _messages;
         set
@@ -61,10 +64,14 @@ public class UserChatViewModel : ViewModel
     {
         NavigationService = navigationService;
         SendMessageCommand = new ViewModelCommand(ExecuteSendMessageCommand, CanExecuteSendMessageCommand);
+        Messages = new ObservableCollection<MessageViewModel>();
     }
 
     private bool CanExecuteSendMessageCommand(object obj)
     {
+        if (Message.IsNullOrEmpty())
+            return false;
+
         return true;
     }
 
@@ -72,9 +79,17 @@ public class UserChatViewModel : ViewModel
     {
         var message = new MessageModel()
         {
-            Content = Message
+            Id = Guid.NewGuid(),
+            From = "test1",
+            To = "test2",
+            Content = Message,
+            SendTime = DateTime.Now
         };
 
-        Messages.Add(message);
+        var messageViewModel = new MessageViewModel(message);
+
+        Messages.Add(messageViewModel);
+
+        Message = string.Empty;
     }
 }

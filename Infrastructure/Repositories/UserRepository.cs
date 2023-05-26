@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Domain.Primitives.Result;
 using Domain.Primitives.Maybe;
-using Domain.Entities.User;
+using Domain.Entities;
 
 namespace Infrastructure.Repositories;
 
