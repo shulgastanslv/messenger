@@ -1,11 +1,12 @@
 ﻿using Infrastructure.Authentication;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
-namespace Server.JwtOptionsSetup;
+namespace Presentation.JwtSetup;
 
 public class JwtOptionsSetup : IConfigureOptions<JwtOptions>
 {
-    private const string SectionName = "Jwt";
+    private const string SectionName = "JwtOptions";
 
     private readonly IConfiguration _configuration;
 
@@ -16,6 +17,6 @@ public class JwtOptionsSetup : IConfigureOptions<JwtOptions>
 
     public void Configure(JwtOptions options)
     {
-       _configuration.GetSection(SectionName).Bind(options);
+        _configuration.GetSection(SectionName).Bind(options);
     }
 }

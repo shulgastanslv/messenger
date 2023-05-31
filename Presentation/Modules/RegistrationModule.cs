@@ -1,22 +1,24 @@
-﻿using Application.Users.Commands.CreateUser;
+﻿using Application.Users.Commands.UserRegistration;
 using Carter;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Presentation.Endpoints;
+namespace Presentation.Modules;
 
-public class Registration : CarterModule
+public class RegistrationModule : CarterModule
 {
-    public Registration()
+    public RegistrationModule()
         : base("/registration")
     {
     }
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/reg", async ([FromBody] CreateUserCommand request, ISender sender, CancellationToken cancellationToken) =>
+        app.MapPost("/reg", [AllowAnonymous] async ([FromBody] UserRegistrationCommand request,
+            ISender sender, CancellationToken cancellationToken) =>
         {
             var result = await sender.Send(request, cancellationToken);
 

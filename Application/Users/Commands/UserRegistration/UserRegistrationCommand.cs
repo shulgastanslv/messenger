@@ -1,11 +1,11 @@
 ﻿using Application.Common.Abstractions.Messaging;
 using Domain.Primitives.Result;
 
-namespace Application.Users.Commands.CreateUser;
+namespace Application.Users.Commands.UserRegistration;
 
-public sealed record CreateUserCommand(
+public sealed record UserRegistrationCommand(
     Guid Id,
     string UserName, 
     string Email, 
     string Password, 
-    DateTime CreationTime) : ICommand<Result>;
+    DateTime CreationTime) : ICommand<Result<string>>;

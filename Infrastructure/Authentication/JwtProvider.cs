@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using Application.Common.Abstractions;
-using Domain.Entities;
+using Domain.Entities.Users;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -24,17 +24,19 @@ internal sealed class JwtProvider : IJwtProvider
             new (JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new (JwtRegisteredClaimNames.Email, user.Email!),
 
-        }; 
+        };
 
         var signingCredentials = new SigningCredentials(
-            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.SecretKey)), SecurityAlgorithms.HmacSha256);
-          
+            new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(_jwtOptions.SecretKey)),
+            SecurityAlgorithms.HmacSha256);
+
         var token = new JwtSecurityToken(
             _jwtOptions.Issuer,
             _jwtOptions.Audience,
             claims,
             null,  
-            DateTime.Now.AddHours(7),
+            DateTime.Now.AddDays(7),
             signingCredentials);
 
         var tokenValue = new JwtSecurityTokenHandler().WriteToken(token);

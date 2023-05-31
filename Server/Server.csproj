@@ -1,10 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-    </PropertyGroup>
+      <UserSecretsId>102afb16-f1cb-4b65-a6e7-ccf3a75c1d3f</UserSecretsId>
+  </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
@@ -20,7 +21,6 @@
 
     <ItemGroup>
       <Folder Include="Controllers\" />
-      <Folder Include="JwtOptionsSetup\" />
     </ItemGroup>
 
 </Project>

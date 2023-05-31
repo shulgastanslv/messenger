@@ -1,7 +1,7 @@
 ﻿using Domain.Primitives.Maybe;
 using Domain.Primitives.Result;
 
-namespace Domain.Entities;
+namespace Domain.Entities.Users;
 
 public interface IUserRepository
 {

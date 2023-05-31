@@ -1,8 +1,8 @@
 ﻿using Application.Common.Abstractions;
 using Application.Common.Interfaces;
-using Application.Users.Commands.AuthenticateUser;
-using Application.Users.Commands.CreateUser;
-using Domain.Entities;
+using Application.Users.Commands.UserAuthentication;
+using Application.Users.Commands.UserRegistration;
+using Domain.Entities.Users;
 using FluentValidation;
 using Infrastructure.Authentication;
 using Infrastructure.Persistence;
@@ -24,8 +24,8 @@ public static class DependencyInjection
 
         services.AddTransient<IJwtProvider, JwtProvider>();
 
-        services.AddScoped<CreateUserCommandHandler>();
-        services.AddScoped<AuthenticateUserCommandHandler>();
+        services.AddScoped<UserRegistrationCommandHandler>();
+        services.AddScoped<UserAuthenticationCommandHandler>();
 
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),

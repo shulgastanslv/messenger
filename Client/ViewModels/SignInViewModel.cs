@@ -79,7 +79,7 @@ public class SignInViewModel : ViewModel
         var content = new StringContent(JsonConvert.SerializeObject(userModel), 
             Encoding.UTF8, "application/json");
 
-        var response = await httpClient.PostAsync("https://localhost:7289/authenticate/auth", content);
+        var response = await httpClient.PostAsync("https://localhost:7289/authentication/auth", content);
 
         await response.Content.ReadAsStringAsync();
 

@@ -1,26 +1,22 @@
-﻿using Application.Users.Commands.AuthenticateUser;
-using Application.Users.Commands.CreateUser;
-using Carter;
+﻿using Carter;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using System.Diagnostics;
+using Application.Users.Commands.UserAuthentication;
 
-namespace Presentation.Endpoints;
+namespace Presentation.Modules;
 
-
-[Authorize]
-public class Authenticate : CarterModule
+public class AuthenticationModule : CarterModule
 {
-    public Authenticate() : base("/authenticate") { }
+    public AuthenticationModule() : base("/authentication") { }
 
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/auth", async ([FromBody] AuthenticateUserCommand request, ISender sender, CancellationToken cancellationToken) =>
+        app.MapPost("/auth", [AllowAnonymous] async ([FromBody] UserAuthenticationCommand request, 
+            ISender sender, CancellationToken cancellationToken) =>
         {
             var result = await sender.Send(request, cancellationToken);
 

@@ -1,22 +1,17 @@
 ﻿using Application.Users.Queries.GetAllUsers;
 using Application.Users.Queries.GetUserById;
 using Carter;
-using Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
-namespace Presentation.Endpoints;
+namespace Presentation.Modules;
 
-
-public class UsersModule : CarterModule
+public class GetAllUsersModule : CarterModule
 {
-    public UsersModule() : base("/users") {}
+    public GetAllUsersModule() : base("/users") {}
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapGet("/getAllUsers", [Authorize] async (ISender sender) =>
@@ -24,13 +19,7 @@ public class UsersModule : CarterModule
             var result = await sender.Send(new GetAllUsersQuery());
 
             return Results.Ok(result.Users);
-        });
 
-        app.MapGet("/getUserById", async (Guid id, ISender sender) =>
-        {
-            var result = await sender.Send(new GetUserByIdQuery(id));
-
-            return Results.Ok(result);
         });
     }
 }
