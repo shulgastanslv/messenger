@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Users.Commands.UserRegistration;
 
-public sealed class UserRegistrationCommandHandler : ICommandHandler<UserRegistrationCommand, Result>
+public sealed class UserRegistrationCommandHandler : ICommandHandler<UserRegistrationCommand, Result<string>>
 {
     private readonly IUserRepository _userRepository;
 
@@ -23,10 +23,12 @@ public sealed class UserRegistrationCommandHandler : ICommandHandler<UserRegistr
         _jwtProvider = jwtProvider;
     }
 
-    public async Task<Result> Handle(UserRegistrationCommand request, CancellationToken cancellationToken)
+    public async Task<Result<string>> Handle(UserRegistrationCommand request, CancellationToken cancellationToken)
     {
-        var user = new User(Guid.NewGuid(),
-            request.UserName, request.Email,
+        var user = new User(
+            Guid.NewGuid(),
+            request.UserName, 
+            request.Email,
             request.Password);
 
         var result = await _userRepository.CreateUserAsync(user, cancellationToken);

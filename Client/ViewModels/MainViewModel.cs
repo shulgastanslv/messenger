@@ -1,28 +1,22 @@
-﻿using System;
-using System.Net.Http;
-using System.Windows.Input;
-using Client.Interfaces;
+﻿using Client.Stores;
 
 namespace Client.ViewModels;
 
-public class MainViewModel : ViewModel
+public class MainViewModel : ViewModelBase
 {
-    private INavigationService _navigationService;
+    private readonly NavigationStore _navigationStore;
 
-    public INavigationService NavigationService
+    public MainViewModel(NavigationStore navigationStore)
     {
-        get => _navigationService;
-        set
-        {
-            _navigationService = value;
-            OnPropertyChanged();
-        }
+        _navigationStore = navigationStore;
+
+        _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
     }
 
-    public MainViewModel(INavigationService navigationService)
+    private void OnCurrentViewModelChanged()
     {
-        NavigationService = navigationService;
-
-        NavigationService.NavigateTo<SignInViewModel>();
+        OnPropertyChanged(nameof(CurrentViewModel));
     }
+
+    public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
 }

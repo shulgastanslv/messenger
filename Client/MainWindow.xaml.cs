@@ -16,8 +16,8 @@ public partial class MainWindow : Window
     }
     private void MaximizeRestoreButton_OnClick(object sender, RoutedEventArgs e)
     {
-        var window = (System.Windows.Window)((FrameworkElement)sender).TemplatedParent;
-        window.WindowState = window.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
+        //var window = (System.Windows.Window)((FrameworkElement)sender).TemplatedParent;
+        //window.WindowState = window.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
     }
     private void CloseButton_OnClick(object sender, RoutedEventArgs e)
     {

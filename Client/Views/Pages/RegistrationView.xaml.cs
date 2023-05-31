@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Client.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for HomePage.xaml
+    /// Interaction logic for RegistrationView.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class RegistrationView : Page
     {
-        public HomePage()
+        public RegistrationView()
         {
             InitializeComponent();
         }

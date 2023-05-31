@@ -11,13 +11,13 @@ namespace Presentation.Modules;
 
 public class RegistrationModule : CarterModule
 {
-    public RegistrationModule()
+    public RegistrationModule() 
         : base("/registration")
     {
     }
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/reg", [AllowAnonymous] async ([FromBody] UserRegistrationCommand request,
+        app.MapPost("/reg", [AllowAnonymous] async (UserRegistrationCommand request,
             ISender sender, CancellationToken cancellationToken) =>
         {
             var result = await sender.Send(request, cancellationToken);

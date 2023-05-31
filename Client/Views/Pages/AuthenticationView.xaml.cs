@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Client.Views.UserControls
+namespace Client.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for UserChat.xaml
+    /// Interaction logic for AuthenticationView.xaml
     /// </summary>
-    public partial class UserChat : UserControl
+    public partial class AuthenticationView : Page
     {
-        public UserChat()
+        public AuthenticationView()
         {
             InitializeComponent();
         }

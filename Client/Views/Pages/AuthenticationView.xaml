@@ -1,33 +1,47 @@
-﻿<Page x:Class="Client.Views.Pages.SignInPage"
+﻿<Page x:Class="Client.Views.Pages.AuthenticationView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client.Views.Pages"
+      xmlns:loadingSpinnerControl="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
+      xmlns:converters="clr-namespace:Client.Converters"
       mc:Ignorable="d" 
-      d:DesignHeight="620" d:DesignWidth="1080">
+      d:DesignHeight="600" 
+      d:DesignWidth="1080"
+      Title="AuthenticationView">
 
-    <Grid>
+    <Page.Resources>
+        <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
+    </Page.Resources>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="420"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+    <ScrollViewer>
 
-        <Border CornerRadius="4" Background="{StaticResource WrapperColorBrush}" Grid.Column="1" Width="420" Height="570">
+        <Grid SnapsToDevicePixels="True" 
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Background="{StaticResource WrapperColorBrush}" 
+                  Width="430" 
+                  Height="600">
 
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="3" BlurRadius="5" Opacity="0.2"/>
-            </Border.Effect>
 
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="250">
+            <loadingSpinnerControl:LoadingSpinner
+                    Color="White"
+                    Width="100"
+                    Height="100"
+                    IsLoading="{Binding IsLoading}"/>
+
+            <StackPanel HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            Width="250" 
+                            Visibility="{Binding IsLoading, 
+                Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+
 
                 <TextBlock Text="Sign In" FontSize="20" 
                            FontWeight="SemiBold" 
                            Foreground="White"
                            Margin="0, 0, 0, 10"/>
-
 
                 <TextBlock Text="Enter your credentials to log in to your account." 
                            FontSize="13" FontWeight="Normal" 
@@ -35,7 +49,6 @@
                            TextWrapping="Wrap"
                            Margin="0, 0, 0, 10"
                 />
-
 
                 <TextBlock Text="Enter your Email" 
                            Foreground="White" 
@@ -57,7 +70,7 @@
                          Tag="Enter Password"
                          Margin="0, 0, 0, 30"/>
 
-                <Button Command="{Binding SignInCommand}"
+                <Button Command="{Binding AuthenticationCommand}"
                         Content="Sign In"
                         Margin="0, 0, 0, 15"/>
 
@@ -69,11 +82,12 @@
                     <Hyperlink Foreground="White"
                                FontWeight="SemiBold"
                                TextDecorations="None"
-                               Command="{Binding NavigateToSignUpCommand}">
+                               Command="{Binding NavigateCommand}">
                         Sign Up
                     </Hyperlink>
                 </TextBlock>
             </StackPanel>
-        </Border>
-    </Grid>
+        </Grid>
+    </ScrollViewer>
+
 </Page>

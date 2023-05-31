@@ -2,10 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Client"
-             xmlns:viewModel="clr-namespace:Client.ViewModels"
-             xmlns:view="clr-namespace:Client.Views.Pages"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
-             xmlns:userControls="clr-namespace:Client.Views.UserControls">
+             xmlns:viewModels="clr-namespace:Client.ViewModels"
+             xmlns:pages="clr-namespace:Client.Views.Pages">
 
     <Application.Resources>
 
@@ -19,27 +18,21 @@
                 <ResourceDictionary Source="Styles/Buttons.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type TypeName=viewModel:SignUpViewModel}">
-                <view:SignUpPage/>
+            <DataTemplate DataType="{x:Type viewModels:AuthenticationViewModel}">
+                <pages:AuthenticationView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type TypeName=viewModel:UserChatViewModel}">
-                <userControls:UserChat/>
+            <DataTemplate DataType="{x:Type viewModels:RegistrationViewModel}">
+                <pages:RegistrationView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type TypeName=viewModel:SignInViewModel}">
-                <view:SignInPage/>
+            <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
+                <pages:HomeView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type TypeName=viewModel:HomeViewModel}">
-                <view:HomePage/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:MainViewModel}">
+            <DataTemplate DataType="{x:Type TypeName=viewModels:MainViewModel}">
                 <local:MainWindow/>
             </DataTemplate>
-
-
 
         </ResourceDictionary>
 

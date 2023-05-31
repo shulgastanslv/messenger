@@ -168,6 +168,6 @@
 
     </Window.Resources>
 
-    <Frame Content="{Binding NavigationService.CurrentView}" NavigationUIVisibility="Hidden"/>
+    <Frame Content="{Binding CurrentViewModel}" NavigationUIVisibility="Hidden"/>
 
 </Window>

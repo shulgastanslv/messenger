@@ -1,43 +1,22 @@
 ﻿using System;
-using System.Windows;
-using Client.Interfaces;
+using Client.Stores;
 using Client.ViewModels;
 
 namespace Client.Services;
 
-public class NavigationService : ViewModel, INavigationService
+public class NavigationService<TViewModel> where TViewModel : ViewModelBase
 {
-    private readonly Func<Type, ViewModel> _viewFactory;
+    private readonly NavigationStore _navigationStore;
+    private readonly Func<TViewModel> _createViewModel;
 
-    private ViewModel _currentView;
-    public ViewModel CurrentView
+    public NavigationService(NavigationStore navigationStore, Func<TViewModel> createViewModel)
     {
-        get => _currentView;
-        private set
-        {
-            _currentView = value;
-            OnPropertyChanged();
-
-        }
+        _navigationStore = navigationStore;
+        _createViewModel = createViewModel;
     }
 
-    public NavigationService(Func<Type, ViewModel> viewFactory)
+    public void Navigate()
     {
-        _viewFactory = viewFactory;
+        _navigationStore.CurrentViewModel = _createViewModel();
     }
-
-    public void NavigateTo<TViewModel>() where TViewModel : ViewModel
-    {
-       var viewModel = _viewFactory.Invoke(typeof(TViewModel));
-       CurrentView = viewModel;
-    }
-
-    public void AddNewWindowAndNavigateTo<TViewModel>() where TViewModel : ViewModel
-    {
-        var viewModel = _viewFactory.Invoke(typeof(TViewModel));
-        var newWindow = new MainWindow();
-        newWindow.Content = viewModel;
-        newWindow.Show();
-    }
-
 }

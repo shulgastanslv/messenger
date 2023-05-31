@@ -1,48 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Input;
-using Client.Interfaces;
-using Client.Models;
+﻿using Client.Stores;
+using System.Net.Http;
 
 namespace Client.ViewModels;
 
-public class HomeViewModel : ViewModel
+public class HomeViewModel : ViewModelBase
 {
-    private UserModel _selfModel;
-    public UserModel SelfModel
+    private readonly UserStore _userStore;
+
+    public string Text
     {
-        get => _selfModel;
-        set
-        {
-            _selfModel = value;
-            OnPropertyChanged(nameof(SelfModel));
-        }
+        get => _userStore.User.Email;
     }
 
-    private List<UserChatViewModel> _users;
-    public List<UserChatViewModel> Users
+    public HomeViewModel(UserStore userStore)
     {
-        get => _users;
-        set
-        {
-            _users = value;
-            OnPropertyChanged(nameof(Users));
-        }
+        _userStore = userStore;
     }
 
-    private INavigationService _navigationService;
-    public INavigationService NavigationService
-    {
-        get => _navigationService;
-        set
-        {
-            _navigationService = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public HomeViewModel(INavigationService navigationService)
-    {
-        NavigationService = navigationService;
-    }
 }
