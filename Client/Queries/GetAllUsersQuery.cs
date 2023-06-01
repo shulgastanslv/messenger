@@ -1,17 +1,14 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
-using Client.Services;
 using Client.Stores;
 using Client.ViewModels;
-using Microsoft.AspNetCore.Identity;
 using System.Net.Http;
-using System.Windows.Navigation;
 using Client.Models;
 using System.Net.Http.Headers;
+using Client.Commands;
 
-namespace Client.Commands;
+namespace Client.Queries;
 
-public class GetAllUsersCommand : ViewModelCommand
+public class GetAllUsersQuery : ViewModelCommand
 {
     private readonly HomeViewModel _homeViewModel;
 
@@ -19,7 +16,7 @@ public class GetAllUsersCommand : ViewModelCommand
 
     private readonly UserStore _userStore;
 
-    public GetAllUsersCommand(UserStore userStore, HomeViewModel homeViewModel,
+    public GetAllUsersQuery(HomeViewModel homeViewModel, UserStore userStore,
         HttpClient httpClient)
     {
         _homeViewModel = homeViewModel;

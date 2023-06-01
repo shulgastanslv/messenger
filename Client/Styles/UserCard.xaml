@@ -6,7 +6,7 @@
             
             <Style.Triggers>
                 <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="#292b2f"></Setter>
+                <Setter Property="Background" Value="#3B3C3E"></Setter>
                 </Trigger>
             </Style.Triggers>
 

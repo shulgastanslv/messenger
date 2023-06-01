@@ -24,6 +24,9 @@
                   Height="580">
 
                 <loadingSpinnerControl:LoadingSpinner
+                    Width="50"
+                    Height="50"
+                    Diameter="45"
                     IsLoading="{Binding IsLoading}"/>
 
             <StackPanel HorizontalAlignment="Center" 

@@ -14,7 +14,7 @@
     <Color x:Key="ContextMenuColor">#303030</Color>
     <SolidColorBrush x:Key="ContextMenuColorBrush" Color="{StaticResource ContextMenuColor}"></SolidColorBrush>
 
-    <Color x:Key="UsersListBackgroundColor">#252525</Color>
+    <Color x:Key="UsersListBackgroundColor">#282828</Color>
     <SolidColorBrush x:Key="UsersListBackgroundColorBrush" Color="{StaticResource UsersListBackgroundColor}"></SolidColorBrush>
 
     <Color x:Key="BorderColor">#5E6175</Color>

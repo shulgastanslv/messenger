@@ -3,6 +3,7 @@ using System.Windows.Input;
 using Client.Commands;
 using Client.Services;
 using Client.Stores;
+using Domain.Entities.Users;
 
 namespace Client.ViewModels;
 
@@ -36,10 +37,10 @@ public class RegistrationViewModel : ViewModelBase
 
     public string Email
     {
-        get => _userStore.User.Email!;
+        get => ((User)_userStore.User).Email!;
         set
         {
-            _userStore.User.Email = value;
+            ((User)_userStore.User).Email = value;
             OnPropertyChanged(nameof(Email));
         }
     }

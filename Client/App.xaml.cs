@@ -21,6 +21,7 @@ public partial class App
         var navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
         navigationStore.CurrentViewModel = authenticationView;
 
+
         MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
         MainWindow.Show();
 

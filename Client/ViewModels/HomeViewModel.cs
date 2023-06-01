@@ -2,26 +2,57 @@
 using Client.Stores;
 using System.Net.Http;
 using System.Windows.Input;
-using Client.Commands;
 using Client.Models;
+using Client.Queries;
+using System.Linq;
+using Client.Commands;
 
 namespace Client.ViewModels;
 
 public class HomeViewModel : ViewModelBase
 {
+    private readonly UserStore _userStore;
+    public UserStore UserStore => _userStore;
+
     private List<UserModel> _users = new ();
 
-    private readonly UserStore _userStoreStore;
+    private bool _isPanelVisible;
+    public bool IsPanelVisible
+    {
+        get => _isPanelVisible;
+        set
+        {
+            _isPanelVisible = value;
+            OnPropertyChanged(nameof(IsPanelVisible));
+        }
+    }
+
+    private string _searchText;
+    public string SearchText
+    {
+        get => _searchText;
+        set
+        {
+            _searchText = value;
+            OnPropertyChanged(nameof(SearchText));
+            OnPropertyChanged(nameof(Users));
+        }
+    }
     public List<UserModel> Users
     {
-        get => _users;
+        get
+        {
+            if(string.IsNullOrEmpty(SearchText))
+                return _users;
+
+            return _users.Where(u => u.UserName.Contains(SearchText)).ToList();
+        }
         set
         {
             _users = value;
             OnPropertyChanged(nameof(Users));
         }
     }
-    public UserStore UserStore => _userStoreStore;
 
     private bool _isLoading;
     public bool IsLoading
@@ -35,14 +66,24 @@ public class HomeViewModel : ViewModelBase
     }
 
     public ICommand GetAllUsersCommand { get;  }
+    public ICommand ShowPanelCommand { get;  }
+    public ICommand HidePanelCommand { get;  }
 
-    public HomeViewModel(UserStore userStoreStore, HttpClient httpClient)
+
+    public HomeViewModel(UserStore userStore, HttpClient httpClient)
     {
-        _userStoreStore = userStoreStore;
+        _userStore = userStore;
 
-        GetAllUsersCommand = new GetAllUsersCommand(userStoreStore, this, httpClient);
+        _isPanelVisible = false;
 
-        GetAllUsersCommand.Execute(httpClient);
+        GetAllUsersCommand = new GetAllUsersQuery( this, userStore, httpClient);
+        GetAllUsersCommand.Execute(null);
+
+        ShowPanelCommand = new ShowPanelCommand(this);
+        ShowPanelCommand.Execute(null);
+
+        HidePanelCommand = new HidePanelCommand(this);
+        HidePanelCommand.Execute(null);
+
     }
-
 }
