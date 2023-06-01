@@ -50,7 +50,7 @@ public sealed class AuthenticationViewModel : ViewModelBase
 
         var navigationService = new NavigationService<HomeViewModel>(
             navigationStore,
-            () => new HomeViewModel(userStore));
+            () => new HomeViewModel(userStore, httpClient));
 
         AuthenticationCommand = new AuthenticationCommand(this, httpClient, userStore, navigationService);
     }

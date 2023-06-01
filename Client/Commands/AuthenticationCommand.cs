@@ -65,6 +65,11 @@ public class AuthenticationCommand : ViewModelCommand
         {
             _userStore.Token = await response.Content.ReadAsStringAsync();
 
+
+            //ЧТО С СОХРАНЕНИЕМ???
+            _userStore.Token = _userStore.Token.Trim('"');
+            _userStore.Token = _userStore.Token.Trim('\\');
+
             _navigationService.Navigate();
         }
 
