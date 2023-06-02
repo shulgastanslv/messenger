@@ -12,20 +12,12 @@ namespace Client.ViewModels;
 public class HomeViewModel : ViewModelBase
 {
     private readonly UserStore _userStore;
+
+    private readonly NavigationStore _navigationStore = new();
+
     public UserStore UserStore => _userStore;
 
     private List<UserModel> _users = new ();
-
-    private bool _isPanelVisible;
-    public bool IsPanelVisible
-    {
-        get => _isPanelVisible;
-        set
-        {
-            _isPanelVisible = value;
-            OnPropertyChanged(nameof(IsPanelVisible));
-        }
-    }
 
     private string _searchText;
     public string SearchText
@@ -65,25 +57,35 @@ public class HomeViewModel : ViewModelBase
         }
     }
 
-    public ICommand GetAllUsersCommand { get;  }
-    public ICommand ShowPanelCommand { get;  }
-    public ICommand HidePanelCommand { get;  }
+    public UserModel _selectedUser;
+    public UserModel SelectedUser
+    {
+        get => _selectedUser;
+        set
+        {
+            _selectedUser = value;
+            OnPropertyChanged(nameof(SelectedUser));
+            _navigationStore.CurrentViewModel = new ChatViewModel(SelectedUser);
+        }
+    }
 
+    public ICommand GetAllUsersCommand { get; }
 
     public HomeViewModel(UserStore userStore, HttpClient httpClient)
-    {
+    { 
         _userStore = userStore;
 
-        _isPanelVisible = false;
+        GetAllUsersCommand = new GetAllUsersQuery(this, userStore, httpClient);
 
-        GetAllUsersCommand = new GetAllUsersQuery( this, userStore, httpClient);
         GetAllUsersCommand.Execute(null);
 
-        ShowPanelCommand = new ShowPanelCommand(this);
-        ShowPanelCommand.Execute(null);
-
-        HidePanelCommand = new HidePanelCommand(this);
-        HidePanelCommand.Execute(null);
-
+        _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
     }
+
+    private void OnCurrentViewModelChanged()
+    {
+        OnPropertyChanged(nameof(CurrentChatViewModel));
+    }
+
+    public ViewModelBase CurrentChatViewModel => _navigationStore.CurrentViewModel;
 }

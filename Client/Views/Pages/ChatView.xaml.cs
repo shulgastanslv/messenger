@@ -15,9 +15,12 @@ using System.Windows.Shapes;
 
 namespace Client.Views.Pages
 {
-    public partial class HomeView : Page
+    /// <summary>
+    /// Interaction logic for ChatView.xaml
+    /// </summary>
+    public partial class ChatView : Page
     {
-        public HomeView()
+        public ChatView()
         {
             InitializeComponent();
         }

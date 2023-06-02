@@ -6,21 +6,15 @@
       xmlns:local="clr-namespace:Client.Views.Pages"
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:loadingSpinnerControl="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
+      xmlns:viewModels="clr-namespace:Client.ViewModels"
+      xmlns:models="clr-namespace:Client.Models"
+      xmlns:customMenuControl="clr-namespace:DropdownMenuControl;assembly=DropdownMenuControl"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="1080"
+      d:DesignHeight="600"
+      d:DesignWidth="1080"
       Title="HomeView">
 
-
-    <Page.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
-    </Page.Resources>
-
     <Grid  Width="Auto" Height="Auto">
-
-
-        <Grid.InputBindings>
-            <MouseBinding Gesture="LeftClick" Command="{Binding HidePanelCommand}"/>
-        </Grid.InputBindings>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="280"/>
@@ -56,7 +50,7 @@
                                                           Opacity="0.8"
                                                           Grid.Column="5"
                                                           Height="19"
-                                                          Foreground="White" />
+                                                          Foreground="White"/>
                 </Button>
 
                 <TextBox Width="230"
@@ -64,42 +58,72 @@
                          Grid.Column="1"
                          Background="#313131"
                          BorderThickness="0"
-                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                         Text="{Binding SearchText, 
+                    UpdateSourceTrigger=PropertyChanged}"
                          Tag="Search"/>
-
             </Grid>
 
 
-            <ListBox Background="Transparent"
+            <ListView    Background="Transparent"
                          x:Name="UsersListView"
                          BorderThickness="0"
+                         SelectedItem="{Binding SelectedUser}"
                          ItemsSource="{Binding Users}"
-                         ItemContainerStyle="{StaticResource UserCard}"
                          Grid.Row="1">
 
-            </ListBox>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
 
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="Transparent"
+                                Height="65">
+
+                            <Grid>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="15, 0, 0, 0">
+
+                                    <Border Width="40"  Height="40" CornerRadius="25" Background="White"/>
+
+                                    <StackPanel Margin="5, 5, 0, 0">
+                                        <Label Content="{Binding UserName}" 
+                                               Foreground="White"   
+                                               FontSize="13"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete"/>
+                    </ContextMenu>
+                </ListView.ContextMenu>
+            </ListView>
         </Grid>
-
-        <Border Grid.Row="0" Grid.Column="0" Background="#252525" 
-                Visibility="{Binding IsPanelVisible, 
-                Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
         <loadingSpinnerControl:LoadingSpinner
             Color="White"
             Width="50"
             Grid.Column="1"
+            Thickness="2"
             Height="50"
             Diameter="45"
             IsLoading="{Binding IsLoading}"/>
 
-
-        <Grid Grid.Column="1">
-
-
-        </Grid>
+        <Frame Grid.Column="1" Content="{Binding CurrentChatViewModel}"/>
 
     </Grid>
+
+
+
+
 
 
 </Page>

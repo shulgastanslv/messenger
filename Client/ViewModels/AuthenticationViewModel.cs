@@ -23,10 +23,10 @@ public sealed class AuthenticationViewModel : ViewModelBase
     }
     public string Email
     {
-        get => ((User)_userStore.User).Email!;
+        get => _userStore.User.Email!;
         set
         {
-            ((User)_userStore.User).Email = value;
+            _userStore.User.Email = value;
             OnPropertyChanged(nameof(Email));
         }
     }
@@ -43,7 +43,10 @@ public sealed class AuthenticationViewModel : ViewModelBase
     public ICommand NavigateCommand { get; }
     public AuthenticationViewModel(UserStore userStore, HttpClient httpClient, NavigationStore navigationStore)
     {
+
         _userStore = userStore;
+        _userStore.User.Email = "akiroqw@gmail.com";
+        _userStore.User.Password = "qwerty";
 
         NavigateCommand = new NavigateCommand<RegistrationViewModel>(
             new NavigationService<RegistrationViewModel>(navigationStore,
