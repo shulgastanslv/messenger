@@ -5,15 +5,13 @@ namespace Client.Models;
 
 public class UserModel : User
 {
-    public UserModel(string email, string password)
+    public UserModel(Guid id, string userName, string email, string password)
+        : base(id, userName, email, password)
     {
+        UserName = userName;
         Email = email;
         Password = password;
+        CreationTime = DateTime.Now;
     }
-
-    public UserModel(){}
-
-    public string Email { get; set; }
-
-    public string Password { get; set; }
+    public UserModel() {}
 }

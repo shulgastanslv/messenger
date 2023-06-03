@@ -53,12 +53,11 @@ public class RegistrationCommand : ViewModelCommand
     {
         _registrationViewModel.IsLoading = true;
 
-        _userStore.User = new UserModel
-        {
-            Email = _registrationViewModel.Email,
-            Password = _registrationViewModel.Password,
-            UserName = _registrationViewModel.UserName
-        };
+        _userStore.User = new UserModel(
+            Guid.NewGuid(), 
+            _registrationViewModel.UserName,
+            _registrationViewModel.Email,
+            _registrationViewModel.Password);
 
         var content = new StringContent(JsonConvert.SerializeObject(_userStore.User),
             Encoding.UTF8, "application/json");

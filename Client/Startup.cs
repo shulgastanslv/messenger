@@ -35,7 +35,7 @@ public class Startup
 
         services.AddSingleton(new UserStore
         {
-            User = new UserModel(string.Empty, string.Empty)
+            User = new UserModel()
         });
 
         return services.BuildServiceProvider();

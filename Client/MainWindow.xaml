@@ -6,13 +6,12 @@
         xmlns:local="clr-namespace:Client"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Height="660" 
+        Height="660"
         Width="1200"
         Style="{DynamicResource {x:Type Window}}" 
-        MinHeight="400"
-        MinWidth="400"
         WindowStartupLocation="CenterScreen" 
-        WindowStyle="None">
+        Loaded="Window_Loaded" 
+        >
 
     <Window.Resources>
 
@@ -85,7 +84,7 @@
 
         <ControlTemplate x:Key="WindowTemplate" TargetType="{x:Type Window}">
 
-            <Grid Name="MyGrid" Width="Auto" Height="Auto" Background="{StaticResource WindowBackgroundColorBrush}">
+            <Grid Background="{StaticResource WindowBackgroundColorBrush}" SnapsToDevicePixels="True">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -134,9 +133,6 @@
                             Click="CloseButton_OnClick"/>
 
                 </StackPanel>
-
-
-
                 <Grid Grid.Row="1">
                     <AdornerDecorator>
                         <ContentPresenter/>
@@ -148,7 +144,6 @@
 
 
         <Style TargetType="{x:Type Window}">
-
             <Setter Property="UseLayoutRounding" Value="True"/>
             <Setter Property="TextOptions.TextFormattingMode" Value="Ideal"/>
             <Setter Property="TextOptions.TextRenderingMode" Value="ClearType"/>
@@ -156,7 +151,6 @@
             <Setter Property="WindowChrome.WindowChrome">
                 <Setter.Value>
                     <WindowChrome
-                        CornerRadius="6"
                         NonClientFrameEdges="None"
                         ResizeBorderThickness="10"
                         UseAeroCaptionButtons="False"

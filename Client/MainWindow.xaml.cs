@@ -11,26 +11,27 @@ public partial class MainWindow : Window
 
     private void MinimizeButton_OnClick(object sender, RoutedEventArgs e)
     {
-        var window = (System.Windows.Window)((FrameworkElement)sender).TemplatedParent;
-        window.WindowState = WindowState.Minimized;
+        WindowState = WindowState.Minimized;
     }
     private void MaximizeRestoreButton_OnClick(object sender, RoutedEventArgs e)
     {
-        //var window = (System.Windows.Window)((FrameworkElement)sender).TemplatedParent;
-        //window.WindowState = window.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
+        WindowState = WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
     }
     private void CloseButton_OnClick(object sender, RoutedEventArgs e)
     {
-        var window = (System.Windows.Window)((FrameworkElement)sender).TemplatedParent;
-        window.Close();
+        Close();
     }
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
     {
         if (e.ChangedButton == MouseButton.Left)
         {
-            var window = (System.Windows.Window)((FrameworkElement)sender).TemplatedParent;
-
-            window.DragMove();
+            DragMove();
         }
+    }
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+       MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+       MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
     }
 }

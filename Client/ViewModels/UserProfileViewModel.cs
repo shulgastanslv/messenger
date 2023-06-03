@@ -1,4 +1,5 @@
-﻿using Client.Stores;
+﻿using System;
+using Client.Stores;
 using System.Net.Http;
 using System.Windows;
 using System.Windows.Input;
@@ -11,7 +12,10 @@ public class UserProfileViewModel : ViewModelBase
 {
     private UserStore _userStore;
     public string UserName => _userStore.User.UserName;
-    public string Email => _userStore.User.Email;
+    public string? Email => _userStore.User.Email;
+    public string? Password => _userStore.User.Password;
+    public string ? Id => _userStore.User.Id.ToString();
+    public string? CreationTime => _userStore.User.CreationTime.ToString();
 
     private bool _isLoading;
     public bool IsLoading

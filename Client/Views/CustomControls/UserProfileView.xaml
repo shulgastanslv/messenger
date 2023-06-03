@@ -21,14 +21,31 @@
 
                 <StackPanel VerticalAlignment="Center">
                 <TextBlock FontSize="13" 
+                           Text="{Binding Id}"
+                           Foreground="White" 
+                           FontFamily="Poppins"/>
+
+                <TextBlock FontSize="13" 
                        Text="{Binding UserName}"
                        Foreground="White" 
                        FontFamily="Poppins"/>
+
 
                 <TextBlock FontSize="13" 
                        Text="{Binding Email}"
                        Foreground="White" 
                        FontFamily="Poppins"/>
+
+                <TextBlock FontSize="13" 
+                           Text="{Binding Password}"
+                           Foreground="White" 
+                           FontFamily="Poppins"/>
+
+                <TextBlock FontSize="13" 
+                           Text="{Binding CreationTime}"
+                           Foreground="White" 
+                           FontFamily="Poppins"/>
+
             </StackPanel>
         </Grid>
     </Border>

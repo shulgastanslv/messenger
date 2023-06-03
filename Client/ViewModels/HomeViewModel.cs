@@ -83,11 +83,15 @@ public class HomeViewModel : ViewModelBase
     }
 
     public ICommand GetAllUsersCommand { get; }
+    public ICommand GetUserByEmailCommand { get; }
     public ICommand NavigateCommand { get; }
-
     public HomeViewModel(UserStore userStore, HttpClient httpClient)
     {
         _userStore = userStore;
+
+        GetUserByEmailCommand = new GetUserByEmailQuery(this, userStore, httpClient);
+
+        GetUserByEmailCommand.Execute(null);
 
         GetAllUsersCommand = new GetAllUsersQuery(this, userStore, httpClient);
 
@@ -95,7 +99,7 @@ public class HomeViewModel : ViewModelBase
 
         NavigateCommand = new NavigateCommand<UserProfileViewModel>(
             new NavigationService<UserProfileViewModel>(_modalNavigationStore,
-                () => new UserProfileViewModel(httpClient, userStore, _modalNavigationStore)));
+                () => new UserProfileViewModel(httpClient, _userStore, _modalNavigationStore)));
 
         _navigationStore.CurrentViewModelChanged += () => {
             OnPropertyChanged(nameof(CurrentChatViewModel));

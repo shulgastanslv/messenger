@@ -48,8 +48,11 @@ public class AuthenticationCommand : ViewModelCommand
     {
         _authenticationViewModel.IsLoading = true;
 
-        _userStore.User = new UserModel(_authenticationViewModel.Email,
-            _authenticationViewModel.Password);
+        _userStore.User = new UserModel
+        {
+            Email = _authenticationViewModel.Email,
+            Password = _authenticationViewModel.Password
+        };
 
         var content = new StringContent(JsonConvert.SerializeObject(_userStore.User),
             Encoding.UTF8, "application/json");

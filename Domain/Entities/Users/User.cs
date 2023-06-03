@@ -7,6 +7,7 @@ public class User : Entity
     public User(Guid id, string userName, string email, string password)
         : base(id)
     {
+        Id = id;
         UserName = userName;
         Email = email;
         Password = password;
@@ -15,7 +16,9 @@ public class User : Entity
 
     public User() { }
 
-    public string UserName { get; set; }
+    public Guid Id { get; set; }
+
+    public string? UserName { get; set; }
 
     public string? Email { get; set; }
 

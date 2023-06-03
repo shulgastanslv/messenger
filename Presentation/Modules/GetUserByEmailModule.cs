@@ -16,11 +16,11 @@ public class GetUserByEmailModule : CarterModule
     public GetUserByEmailModule() : base("/users") { }
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("/getUserByEmail", [Authorize] async (string email, ISender sender) =>
+        app.MapGet("/getUserByEmail", [AllowAnonymous] async (string email, ISender sender) =>
         {
-            var user = await sender.Send(new GetUserByEmailQuery(email));
+            var result = await sender.Send(new GetUserByEmailQuery(email));
 
-            return Results.Ok(user);
+            return Results.Ok(result.user);
         });
     }
 }

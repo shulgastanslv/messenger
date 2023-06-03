@@ -22,6 +22,7 @@ internal sealed class JwtProvider : IJwtProvider
         var claims = new Claim[]
         {
             new (JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new (JwtRegisteredClaimNames.Name, user.UserName!),
             new (JwtRegisteredClaimNames.Email, user.Email!),
 
         };
