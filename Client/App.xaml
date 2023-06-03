@@ -4,13 +4,15 @@
              xmlns:local="clr-namespace:Client"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:viewModels="clr-namespace:Client.ViewModels"
-             xmlns:pages="clr-namespace:Client.Views.Pages">
+             xmlns:pages="clr-namespace:Client.Views.Pages"
+             xmlns:customControls="clr-namespace:Client.Views.CustomControls">
 
     <Application.Resources>
 
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/Colors.xaml"/>
+                <ResourceDictionary Source="Styles/ModalControlStyle.xaml"/>
                 <ResourceDictionary Source="Styles/ContextMenus.xaml"/>
                 <ResourceDictionary Source="Styles/CheckBoxes.xaml"/>
                 <ResourceDictionary Source="Styles/TextBoxes.xaml"/>
@@ -31,6 +33,10 @@
 
             <DataTemplate DataType="{x:Type viewModels:ChatViewModel}">
                 <pages:ChatView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:UserProfileViewModel}">
+                <customControls:UserProfileView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type TypeName=viewModels:MainViewModel}">

@@ -6,16 +6,29 @@ using Client.Models;
 using Client.Queries;
 using System.Linq;
 using Client.Commands;
+using Client.Services;
 
 namespace Client.ViewModels;
 
+
 public class HomeViewModel : ViewModelBase
 {
-    private readonly UserStore _userStore;
+    private UserStore _userStore;
 
     private readonly NavigationStore _navigationStore = new();
 
-    public UserStore UserStore => _userStore;
+    private readonly NavigationStore _modalNavigationStore = new();
+    public bool IsOpen => _modalNavigationStore.IsOpen;
+
+    public UserStore UserStore
+    {
+        get => _userStore;
+        set
+        {
+            _userStore = value;
+            OnPropertyChanged(nameof(UserStore));
+        }
+    }
 
     private List<UserModel> _users = new ();
 
@@ -70,22 +83,31 @@ public class HomeViewModel : ViewModelBase
     }
 
     public ICommand GetAllUsersCommand { get; }
+    public ICommand NavigateCommand { get; }
 
     public HomeViewModel(UserStore userStore, HttpClient httpClient)
-    { 
+    {
         _userStore = userStore;
 
         GetAllUsersCommand = new GetAllUsersQuery(this, userStore, httpClient);
 
         GetAllUsersCommand.Execute(null);
 
-        _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
-    }
+        NavigateCommand = new NavigateCommand<UserProfileViewModel>(
+            new NavigationService<UserProfileViewModel>(_modalNavigationStore,
+                () => new UserProfileViewModel(httpClient, userStore, _modalNavigationStore)));
 
-    private void OnCurrentViewModelChanged()
-    {
-        OnPropertyChanged(nameof(CurrentChatViewModel));
+        _navigationStore.CurrentViewModelChanged += () => {
+            OnPropertyChanged(nameof(CurrentChatViewModel));
+            OnPropertyChanged(nameof(IsOpen));
+        };
+
+        _modalNavigationStore.CurrentViewModelChanged += () => {
+            OnPropertyChanged(nameof(CurrentModalViewModel));
+            OnPropertyChanged(nameof(IsOpen));
+        };
     }
 
     public ViewModelBase CurrentChatViewModel => _navigationStore.CurrentViewModel;
+    public ViewModelBase CurrentModalViewModel => _modalNavigationStore.CurrentViewModel;
 }

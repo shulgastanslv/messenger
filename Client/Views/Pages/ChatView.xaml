@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Client.Views.Pages"
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="1080"
+      d:DesignHeight="660" d:DesignWidth="1200"
       Title="ChatView">
 
     <Grid>
@@ -32,7 +32,10 @@
                     <StackPanel  VerticalAlignment="Center" Grid.Column="1">
                         <Label Content="{Binding UserModel.UserName}" 
                                Foreground="White"
+                               HorizontalContentAlignment="Left"
                                FontSize="14"
+                               Padding="0, 5, 5, 5"
+                               Width="Auto"
                                Height="Auto"
                                FontWeight="Normal"/>
 

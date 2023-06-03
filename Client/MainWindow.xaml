@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Client"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Height="620" 
-        Width="1080"
+        Height="660" 
+        Width="1200"
         Style="{DynamicResource {x:Type Window}}" 
         MinHeight="400"
         MinWidth="400"
@@ -169,5 +169,4 @@
     </Window.Resources>
 
     <Frame Content="{Binding CurrentViewModel}" NavigationUIVisibility="Hidden"/>
-
 </Window>

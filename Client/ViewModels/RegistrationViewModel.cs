@@ -27,7 +27,7 @@ public class RegistrationViewModel : ViewModelBase
 
     public string UserName
     {
-        get => _userStore.User.UserName!;
+        get => _userStore.User.UserName;
         set
         {
             _userStore.User.UserName = value;
@@ -37,17 +37,17 @@ public class RegistrationViewModel : ViewModelBase
 
     public string Email
     {
-        get => ((User)_userStore.User).Email!;
+        get => _userStore.User.Email;
         set
         {
-            ((User)_userStore.User).Email = value;
+            _userStore.User.Email = value;
             OnPropertyChanged(nameof(Email));
         }
     }
 
     public string Password
     {
-        get => _userStore.User.Password!;
+        get => _userStore.User.Password;
         set
         {
             _userStore.User.Password = value;

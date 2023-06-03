@@ -17,6 +17,7 @@ public class Startup
         services.AddSingleton<AuthenticationViewModel>();
         services.AddSingleton<RegistrationViewModel>();
         services.AddSingleton<HomeViewModel>();
+        services.AddSingleton<UserProfileViewModel>();
         services.AddSingleton<ChatViewModel>();
 
         services.AddSingleton(provider => new MainWindow

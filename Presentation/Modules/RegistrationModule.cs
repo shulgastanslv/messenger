@@ -1,5 +1,6 @@
 ﻿using Application.Users.Commands.UserRegistration;
 using Carter;
+using Domain.Primitives.Result;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -22,7 +23,7 @@ public class RegistrationModule : CarterModule
         {
             var result = await sender.Send(request, cancellationToken);
 
-            return result.IsSuccess ? Results.Ok(result) : Results.BadRequest(result.Error);
+            return result.IsSuccess ? Results.Ok(result.Value) : Results.BadRequest(result.Error);
         });
     }
 

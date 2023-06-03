@@ -71,6 +71,9 @@ public class RegistrationCommand : ViewModelCommand
         {
             _userStore.Token = await response.Content.ReadAsStringAsync();
 
+            _userStore.Token = _userStore.Token.Trim('"');
+            _userStore.Token = _userStore.Token.Trim('\\');
+
             _navigationService.Navigate();
         }
 

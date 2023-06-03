@@ -7,7 +7,7 @@
       xmlns:converters="clr-namespace:Client.Converters"
       xmlns:loadingSpinnerControl="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="1080"
+      d:DesignHeight="660" d:DesignWidth="1200"
       Title="RegistrationView">
 
     <Page.Resources>
@@ -23,11 +23,12 @@
                   Width="430" 
                   Height="580">
 
-                <loadingSpinnerControl:LoadingSpinner
-                    Width="50"
-                    Height="50"
-                    Diameter="45"
-                    IsLoading="{Binding IsLoading}"/>
+            <loadingSpinnerControl:LoadingSpinner
+                Color="White"
+                Width="50"
+                Height="50"
+                Diameter="45"
+                IsLoading="{Binding IsLoading}"/>
 
             <StackPanel HorizontalAlignment="Center" 
                         VerticalAlignment="Center" 
@@ -54,7 +55,7 @@
 
 
                 <TextBox  Tag="Enter username"
-                          Text="{Binding UserName}"
+                          Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
                           Name="UserNameTextBox" 
                           Margin="0, 0, 0, 15"/>
 
@@ -67,7 +68,7 @@
 
 
                 <TextBox  Tag="Enter Email"
-                          Text="{Binding Email}"
+                          Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
                           Margin="0, 0, 0, 15"/>
 
                 <TextBlock Text="Enter your Password" 

@@ -7,8 +7,8 @@
       xmlns:loadingSpinnerControl="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
       xmlns:converters="clr-namespace:Client.Converters"
       mc:Ignorable="d" 
-      d:DesignHeight="600" 
-      d:DesignWidth="1080"
+      d:DesignHeight="660" 
+      d:DesignWidth="1200"
       Title="AuthenticationView">
 
     <Page.Resources>
