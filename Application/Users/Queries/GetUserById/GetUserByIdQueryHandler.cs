@@ -14,8 +14,8 @@ public class GetUserByIdQueryHandler : IQueryHandler<GetUserByIdQuery, UserRespo
 
     public async Task<UserResponse> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
     {
-        var result = await _userRepository.GetUserByIdAsync(request.Id, cancellationToken);
+        var user = await _userRepository.GetUserByIdAsync(request.Id, cancellationToken);
 
-        return new UserResponse(result.Value!);
+        return new UserResponse(user.Value!);
     }
 }

@@ -14,8 +14,8 @@ public sealed class GetAllUsersQueryHandler : IQueryHandler<GetAllUsersQuery, Us
 
     public async Task<UsersResponse> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
     {
-        var result = await _userRepository.GetAllUsersAsync();
+        var users = await _userRepository.GetAllUsersAsync();
 
-        return new UsersResponse(result);
+        return new UsersResponse(users);
     }
 }
