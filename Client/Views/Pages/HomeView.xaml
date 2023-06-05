@@ -61,7 +61,7 @@
 
                     </Button>
 
-                        <TextBox Width="230"
+                    <TextBox Width="230"
                              Height="38"
                              Grid.Column="1"
                              Background="#313131"

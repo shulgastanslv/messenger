@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client.Views.Pages"
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
       d:DesignHeight="620" d:DesignWidth="1085"
       Title="ChatView">
@@ -16,11 +17,12 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="55"/>
             </Grid.RowDefinitions>
 
 
             <Border Background="{StaticResource HeaderChatColorBrush}">
+
                 <Grid HorizontalAlignment="Stretch" Margin="0">
 
                     <Grid.ColumnDefinitions>
@@ -50,26 +52,26 @@
             </Border>
 
 
-            <Grid Grid.Row="2" Background="{StaticResource BottomChatPanelColorBrush}" Width="Auto" Height="Auto">
+            <Grid Grid.Row="2" Margin="5" Background="{StaticResource BottomChatPanelColorBrush}" Width="Auto" Height="Auto">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="45"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Column="0"
-                        Width="25"
+                        Width="23"
                         Style="{x:Null}"
                         Background="Transparent"
                         BorderThickness="0"
-                        Height="25">
+                        Height="23">
                     <iconPacks:PackIconMaterialDesign     Kind="AttachFile"
                                                           VerticalAlignment="Center"
                                                           HorizontalAlignment="Center"
                                                           Width="23"
                                                           Height="23"
-                                                          RotationAngle="45"
+                                                          RotationAngle="220"
                                                           Opacity="1"
                                                           Grid.Column="2"
                                                           SnapsToDevicePixels="True"
@@ -100,7 +102,7 @@
 
                 <TextBox Grid.Column="1" Tag="Write a message..."
                          BorderThickness="0"
-                         FontSize="15"
+                         FontSize="13"
                          HorizontalAlignment="Left"
                          Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}"
                          Height="Auto" 

@@ -17,7 +17,6 @@ builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).
     AddJwtBearer();
 
-
 builder.Services.AddCarter();
 
 var app = builder.Build();

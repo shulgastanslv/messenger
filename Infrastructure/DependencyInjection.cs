@@ -21,7 +21,7 @@ public static class DependencyInjection
         var assembly = typeof(DependencyInjection).Assembly;
 
         services.AddTransient<IUserRepository, UserRepository>();
-
+        services.AddTransient<IEmailService, EmailService>();
         services.AddTransient<IJwtProvider, JwtProvider>();
 
         services.AddScoped<UserRegistrationCommandHandler>();

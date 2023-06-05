@@ -16,26 +16,30 @@
 
     <Grid>
 
-        <loadingSpinnerControl:LoadingSpinner
+        <Grid  Background="{StaticResource WrapperColorBrush}"
+        Width="420" 
+        Height="400">
+
+            <loadingSpinnerControl:LoadingSpinner
             Color="White"
             Width="50"
             Height="50"
             Diameter="45"
             IsLoading="{Binding IsLoading}"/>
 
-        <StackPanel VerticalAlignment="Center"
+            <StackPanel VerticalAlignment="Center"
                     Visibility="{Binding IsLoading, 
                 Converter={StaticResource InverseBooleanToVisibilityConverter}}"
                     Width="300">
 
-            <TextBlock Foreground="White"
+                <TextBlock Foreground="White"
                        FontSize="15"
                        TextAlignment="Center"
                        Text="Messenger Service"
                        FontWeight="SemiBold"
                        FontFamily="Poppins"/>
 
-            <TextBlock Foreground="White"
+                <TextBlock Foreground="White"
                            Margin="0, 10, 0, 0"
                            FontSize="13"
                            TextAlignment="Center"
@@ -43,17 +47,19 @@
                            FontWeight="Regular"
                            FontFamily="Poppins"/>
 
-            <TextBlock Foreground="White"
+                <TextBlock Foreground="White"
                            FontSize="13"
                            TextAlignment="Center"
                            Text="It`s fast and secure."
                            FontWeight="Regular"
                            FontFamily="Poppins"/>
 
-            <Button
+                <Button
                     Margin="0, 10, 0, 0"
                     Command="{Binding NavigateCommand}"
                     Content="Start"/>
-        </StackPanel>
+
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

@@ -20,17 +20,15 @@ public class RegistrationCommand : ViewModelCommand
 
     private readonly UserStore _userStore;
 
-    public RegistrationCommand(RegistrationViewModel registrationViewModel,
-        HttpClient httpClient, UserStore userStore, NavigationService<HomeViewModel> navigationService)
+    public RegistrationCommand(UserStore userStore, HttpClient httpClient, NavigationService<HomeViewModel> navigationService, RegistrationViewModel registrationViewModel)
     {
+        _userStore = userStore;
+        _httpClient = httpClient;
+        _navigationService = navigationService;
         _registrationViewModel = registrationViewModel;
 
         _registrationViewModel.PropertyChanged += OnPropertyChanged;
 
-        _httpClient = httpClient;
-
-        _userStore = userStore;
-        _navigationService = navigationService;
     }
 
     private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)

@@ -19,10 +19,10 @@ public partial class App
 
     protected override void OnStartup(StartupEventArgs e)
     {
-        var welcomePage = _serviceProvider.GetRequiredService<WelcomeViewModel>();
+        var startPage = _serviceProvider.GetRequiredService<HomeViewModel>();
 
         var navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
-        navigationStore.CurrentViewModel = welcomePage;
+        navigationStore.CurrentViewModel = startPage;
 
         MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
         MainWindow.Show();

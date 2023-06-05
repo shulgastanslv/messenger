@@ -1,18 +1,15 @@
 ﻿using Client.Models;
 using Client.Stores;
 using System.Net.Http;
+using System.Windows.Input;
+using Client.Commands;
+using Client.Services;
 
 namespace Client.ViewModels;
 
 public class ChatViewModel : ViewModelBase
 {
     private UserModel? _userModel;
-
-    public ChatViewModel(UserModel? userModel)
-    {
-        _userModel = userModel;
-    }
-
     public UserModel? UserModel
     {
         get => _userModel;
@@ -23,5 +20,13 @@ public class ChatViewModel : ViewModelBase
         }
     }
 
+    public ICommand SendMessageCommand { get; }
+
+    public ChatViewModel(UserModel? userModel)
+    {
+        _userModel = userModel;
+
+        SendMessageCommand = 
+    }
    
 }

@@ -72,15 +72,26 @@
                         Content="Sign In"
                         Margin="0, 0, 0, 15"/>
 
+                <Button Command="{Binding NavigateBackCommand}"
+                        BorderThickness="1"
+                        BorderBrush="#5E6175"
+                        Width="89"
+                        Background="Transparent"
+                        HorizontalAlignment="Center"
+                        Margin="0, 0, 0, 15"
+                        Content="&lt;Back"/>
+
                 <TextBlock
                     FontWeight="Medium"
                     FontSize="13"
+                    TextDecorations="Underline"
+                    TextAlignment="Center"
                     HorizontalAlignment="Center">
 
                     <Hyperlink Foreground="White"
                                FontWeight="SemiBold"
                                TextDecorations="None"
-                               Command="{Binding NavigateCommand}">
+                               Command="{Binding NavigateToRegistrationCommand}">
                         Sign Up
                     </Hyperlink>
                 </TextBlock>

@@ -28,27 +28,9 @@ public class HomeViewModel : ViewModelBase
     private readonly NavigationStore _chatStore = new();
 
     private readonly NavigationStore _menuStore = new();
-
-    private string? _searchText;
-    public string? SearchText
-    {
-        get => _searchText;
-        set
-        {
-            _searchText = value;
-            OnPropertyChanged(nameof(SearchText));
-            OnPropertyChanged(nameof(Users));
-        }
-    }
     public List<UserModel> Users
     {
-        get
-        {
-            if (string.IsNullOrEmpty(SearchText))
-                return _users;
-
-            return _users.Where(u => u.UserName.Contains(SearchText)).ToList();
-        }
+        get => _users;
         set
         {
             _users = value;
@@ -75,7 +57,7 @@ public class HomeViewModel : ViewModelBase
         {
             _selectedUser = value;
             OnPropertyChanged(nameof(SelectedUser));
-            _chatStore.CurrentViewModel = new ChatViewModel(SelectedUser);
+            _chatStore.CurrentViewModel = new ChatViewModel(_selectedUser);
             OnPropertyChanged(nameof(CurrentChatViewModel));
         }
     }
@@ -93,7 +75,7 @@ public class HomeViewModel : ViewModelBase
 
         OpenMenuCommand = new NavigateCommand<MenuViewModel>(
                 new NavigationService<MenuViewModel>(_menuStore,
-                    () => new MenuViewModel(_menuStore, _userStore)));
+                    () => new MenuViewModel(_menuStore, _userStore.User)));
 
         _menuStore.CurrentViewModelChanged += () =>
         {

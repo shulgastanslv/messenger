@@ -14,12 +14,12 @@ public class AuthenticationCommand : ViewModelCommand
 
     private readonly HttpClient _httpClient;
 
-    private readonly NavigationService<HomeViewModel> _navigationService;
+    private readonly NavigationService<EmailVerificationViewModel> _navigationService;
 
     private readonly UserStore _userStore;
 
     public AuthenticationCommand(AuthenticationViewModel authenticationViewModel,
-        HttpClient httpClient, UserStore userStore, NavigationService<HomeViewModel> navigationService)
+        HttpClient httpClient, UserStore userStore, NavigationService<EmailVerificationViewModel> navigationService)
     {
         _authenticationViewModel = authenticationViewModel;
         _httpClient = httpClient;

@@ -30,6 +30,11 @@
                 <pages:HomeView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModels:EmailVerificationViewModel}">
+                <pages:EmailVerificationView/>
+            </DataTemplate>
+
+
             <DataTemplate DataType="{x:Type viewModels:WelcomeViewModel}">
                 <pages:WelcomeView/>
             </DataTemplate>

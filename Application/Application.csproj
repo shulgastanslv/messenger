@@ -22,6 +22,7 @@
     <ItemGroup>
       <Folder Include="Common\Exceptions\" />
       <Folder Include="Common\Behaviours\" />
+      <Folder Include="Users\Commands\UserEmailVerification\" />
       <Folder Include="Users\Queries\GetAllUsers\" />
       <Folder Include="Users\Queries\GetUserById\" />
       <Folder Include="Users\Queries\GetUserByEmail\" />

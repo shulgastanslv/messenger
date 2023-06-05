@@ -14,7 +14,7 @@ public class GetAllUsersModule : CarterModule
     public GetAllUsersModule() : base("/users") {}
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("/getAllUsers", [Authorize] async (ISender sender) =>
+        app.MapGet("/getAllUsers", [AllowAnonymous] async (ISender sender) =>
         {
             var result = await sender.Send(new GetAllUsersQuery());
 

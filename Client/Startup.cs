@@ -20,6 +20,7 @@ public class Startup
         services.AddSingleton<ChatViewModel>();
         services.AddSingleton<MenuViewModel>();
         services.AddSingleton<WelcomeViewModel>();
+        services.AddSingleton<EmailVerificationViewModel>();
 
 
         services.AddSingleton(provider => new MainWindow
@@ -38,7 +39,11 @@ public class Startup
 
         services.AddSingleton(new UserStore
         {
-            User = new UserModel()
+            User = new UserModel
+            {
+                Email = "akiroqw@gmail.com",
+                Password = "qwerty"
+            }
         });
 
         return services.BuildServiceProvider();

@@ -41,18 +41,23 @@ public sealed class AuthenticationViewModel : ViewModelBase
         }
     }
     public ICommand AuthenticationCommand { get; }
-    public ICommand NavigateCommand { get; }
+    public ICommand NavigateToRegistrationCommand { get; }
+    public ICommand NavigateBackCommand { get; }
     public AuthenticationViewModel(UserStore userStore, HttpClient httpClient, NavigationStore navigationStore)
     {
         _userStore = userStore;
 
-        NavigateCommand = new NavigateCommand<RegistrationViewModel>(
+        NavigateToRegistrationCommand = new NavigateCommand<RegistrationViewModel>(
             new NavigationService<RegistrationViewModel>(navigationStore,
-                () => new RegistrationViewModel(httpClient, userStore, navigationStore)));
+                () => new RegistrationViewModel(userStore, httpClient, navigationStore)));
 
-        var navigationService = new NavigationService<HomeViewModel>(
+        NavigateBackCommand = new NavigateCommand<WelcomeViewModel>(
+            new NavigationService<WelcomeViewModel>(navigationStore,
+                () => new WelcomeViewModel(userStore, httpClient, navigationStore)));
+
+        var navigationService = new NavigationService<EmailVerificationViewModel>(
             navigationStore,
-            () => new HomeViewModel(userStore, httpClient));
+            () => new EmailVerificationViewModel(userStore, httpClient, navigationStore));
 
         AuthenticationCommand = new AuthenticationCommand(this, httpClient, userStore, navigationService);
     }

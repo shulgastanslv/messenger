@@ -14,7 +14,6 @@ public class RegistrationViewModel : ViewModelBase
     private bool _isLoading;
 
     private bool _isAgree;
-
     public bool IsAgree
     {
         get => _isAgree;
@@ -24,7 +23,6 @@ public class RegistrationViewModel : ViewModelBase
             OnPropertyChanged(nameof(IsAgree));
         }
     }
-
     public string UserName
     {
         get => _userStore.User.UserName;
@@ -34,7 +32,6 @@ public class RegistrationViewModel : ViewModelBase
             OnPropertyChanged(nameof(UserName));
         }
     }
-
     public string Email
     {
         get => _userStore.User.Email;
@@ -44,7 +41,6 @@ public class RegistrationViewModel : ViewModelBase
             OnPropertyChanged(nameof(Email));
         }
     }
-
     public string Password
     {
         get => _userStore.User.Password;
@@ -54,7 +50,6 @@ public class RegistrationViewModel : ViewModelBase
             OnPropertyChanged(nameof(Password));
         }
     }
-
     public bool IsLoading
     {
         get => _isLoading;
@@ -64,14 +59,14 @@ public class RegistrationViewModel : ViewModelBase
             OnPropertyChanged(nameof(IsLoading));
         }
     }
-    public ICommand NavigateCommand { get; }
+    public ICommand NavigateToAuthenticationCommand { get; }
     public ICommand RegistrationCommand { get; }
 
-    public RegistrationViewModel(HttpClient httpClient, UserStore userStore, NavigationStore navigationStore)
+    public RegistrationViewModel(UserStore userStore, HttpClient httpClient, NavigationStore navigationStore)
     {
         _userStore = userStore;
 
-        NavigateCommand = new NavigateCommand<AuthenticationViewModel>(
+        NavigateToAuthenticationCommand = new NavigateCommand<AuthenticationViewModel>(
             new NavigationService<AuthenticationViewModel>(navigationStore,
                 () => new AuthenticationViewModel(userStore, httpClient, navigationStore)));
 
@@ -79,7 +74,7 @@ public class RegistrationViewModel : ViewModelBase
             navigationStore,
             () => new HomeViewModel(userStore, httpClient));
 
-
-        RegistrationCommand = new RegistrationCommand(this, httpClient, userStore, navigateService);
+        RegistrationCommand = new RegistrationCommand(userStore, httpClient, 
+            navigateService, this);
     }
 }
