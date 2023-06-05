@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Net.Http;
+using System.Threading;
 using System.Windows;
+using Azure;
 using Client.Stores;
 using Client.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,11 +19,10 @@ public partial class App
 
     protected override void OnStartup(StartupEventArgs e)
     {
-        var authenticationView = _serviceProvider.GetRequiredService<AuthenticationViewModel>();
+        var welcomePage = _serviceProvider.GetRequiredService<WelcomeViewModel>();
 
         var navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
-        navigationStore.CurrentViewModel = authenticationView;
-
+        navigationStore.CurrentViewModel = welcomePage;
 
         MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
         MainWindow.Show();

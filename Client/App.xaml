@@ -12,8 +12,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/Colors.xaml"/>
-                <ResourceDictionary Source="Styles/ModalControlStyle.xaml"/>
-                <ResourceDictionary Source="Styles/ContextMenus.xaml"/>
+                <ResourceDictionary Source="Styles/TextBlocks.xaml"/>
                 <ResourceDictionary Source="Styles/CheckBoxes.xaml"/>
                 <ResourceDictionary Source="Styles/TextBoxes.xaml"/>
                 <ResourceDictionary Source="Styles/Buttons.xaml"/>
@@ -31,13 +30,19 @@
                 <pages:HomeView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModels:WelcomeViewModel}">
+                <pages:WelcomeView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModels:ChatViewModel}">
                 <pages:ChatView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModels:UserProfileViewModel}">
-                <customControls:UserProfileView/>
+            <DataTemplate DataType="{x:Type viewModels:MenuViewModel}">
+                <customControls:MenuView/>
             </DataTemplate>
+
+
 
             <DataTemplate DataType="{x:Type TypeName=viewModels:MainViewModel}">
                 <local:MainWindow/>

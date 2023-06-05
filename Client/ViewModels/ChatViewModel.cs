@@ -6,14 +6,14 @@ namespace Client.ViewModels;
 
 public class ChatViewModel : ViewModelBase
 {
-    private UserModel _userModel;
+    private UserModel? _userModel;
 
-    public ChatViewModel(UserModel userModel)
+    public ChatViewModel(UserModel? userModel)
     {
         _userModel = userModel;
     }
 
-    public UserModel UserModel
+    public UserModel? UserModel
     {
         get => _userModel;
         set

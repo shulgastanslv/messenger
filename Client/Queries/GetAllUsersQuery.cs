@@ -8,7 +8,7 @@ using Client.Commands;
 
 namespace Client.Queries;
 
-public class GetAllUsersQuery : ViewModelCommand
+public sealed class GetAllUsersQuery : ViewModelCommand
 {
     private readonly HomeViewModel _homeViewModel;
 
@@ -22,9 +22,11 @@ public class GetAllUsersQuery : ViewModelCommand
         _homeViewModel = homeViewModel;
         _httpClient = httpClient;
         _userStore = userStore;
+
+        Execute(null);
     }
 
-    public sealed override async void Execute(object? parameter)
+    public override async void Execute(object? parameter)
     {
         _homeViewModel.IsLoading = true;
 

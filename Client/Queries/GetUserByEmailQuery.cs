@@ -9,7 +9,7 @@ using Domain.Entities.Users;
 
 namespace Client.Queries;
 
-public class GetUserByEmailQuery : ViewModelCommand
+public sealed class GetUserByEmailQuery : ViewModelCommand
 {
     private readonly HomeViewModel _homeViewModel;
 
@@ -22,14 +22,16 @@ public class GetUserByEmailQuery : ViewModelCommand
         _userStore = userStore;
         _httpClient = httpClient;
         _homeViewModel = homeViewModel;
+
+        Execute(null);
     }
 
-    public override async void Execute(object? parameter)
+    public sealed override async void Execute(object? parameter)
     {
         _homeViewModel.IsLoading = true;
 
-        //_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-        //    _userStore.Token);
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
+           _userStore.Token);
 
         var response = await _httpClient.GetAsync($"https://localhost:7289/users/getUserByEmail?email={_userStore.User.Email}");
 

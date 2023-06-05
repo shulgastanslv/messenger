@@ -17,13 +17,16 @@ public class Startup
         services.AddSingleton<AuthenticationViewModel>();
         services.AddSingleton<RegistrationViewModel>();
         services.AddSingleton<HomeViewModel>();
-        services.AddSingleton<UserProfileViewModel>();
         services.AddSingleton<ChatViewModel>();
+        services.AddSingleton<MenuViewModel>();
+        services.AddSingleton<WelcomeViewModel>();
+
 
         services.AddSingleton(provider => new MainWindow
         {
             DataContext = provider.GetRequiredService<MainViewModel>()
         });
+
 
         services.AddSingleton(new HttpClient
         {

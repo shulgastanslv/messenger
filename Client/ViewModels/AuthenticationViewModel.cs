@@ -1,4 +1,5 @@
 ﻿using System.Net.Http;
+using System.Windows;
 using System.Windows.Input;
 using Client.Commands;
 using Client.Services;
@@ -44,8 +45,6 @@ public sealed class AuthenticationViewModel : ViewModelBase
     public AuthenticationViewModel(UserStore userStore, HttpClient httpClient, NavigationStore navigationStore)
     {
         _userStore = userStore;
-        _userStore.User.Email = "akiroqw@gmail.com";
-        _userStore.User.Password = "qwerty";
 
         NavigateCommand = new NavigateCommand<RegistrationViewModel>(
             new NavigationService<RegistrationViewModel>(navigationStore,

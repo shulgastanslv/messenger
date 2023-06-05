@@ -2,23 +2,29 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
-    <Color x:Key="WindowBackgroundColor">#242424</Color>
-    <SolidColorBrush x:Key="WindowBackgroundColorBrush" Color="{StaticResource WindowBackgroundColor}"></SolidColorBrush>
+    <Color x:Key="WindowBackgroundColor">#222222</Color>
+    <SolidColorBrush x:Key="WindowBackgroundColorBrush" Color="{StaticResource WindowBackgroundColor}"/>
 
     <Color x:Key="ButtonColor">#a8a5ff</Color>
-    <SolidColorBrush x:Key="ButtonColorBrush" Color="{StaticResource ButtonColor}"></SolidColorBrush>
+    <SolidColorBrush x:Key="ButtonColorBrush" Color="{StaticResource ButtonColor}"/>
 
-    <Color x:Key="WrapperColor">#262627</Color>
-    <SolidColorBrush x:Key="WrapperColorBrush" Color="{StaticResource WrapperColor}"></SolidColorBrush>
+    <Color x:Key="WrapperColor">#242424</Color>
+    <SolidColorBrush x:Key="WrapperColorBrush" Color="{StaticResource WrapperColor}"/>
 
-    <Color x:Key="ContextMenuColor">#303030</Color>
-    <SolidColorBrush x:Key="ContextMenuColorBrush" Color="{StaticResource ContextMenuColor}"></SolidColorBrush>
+    <Color x:Key="MenuColor">#303030</Color>
+    <SolidColorBrush x:Key="MenuColorBrush" Color="{StaticResource MenuColor}"/>
 
-    <Color x:Key="UsersListBackgroundColor">#282828</Color>
-    <SolidColorBrush x:Key="UsersListBackgroundColorBrush" Color="{StaticResource UsersListBackgroundColor}"></SolidColorBrush>
+    <Color x:Key="HeaderChatColor">#282828</Color>
+    <SolidColorBrush x:Key="HeaderChatColorBrush" Color="{StaticResource HeaderChatColor}"/>
+
+    <Color x:Key="BottomChatPanelColor">#282828</Color>
+    <SolidColorBrush x:Key="BottomChatPanelColorBrush" Color="{StaticResource BottomChatPanelColor}"/>
+
+    <Color x:Key="UsersListBackgroundColor">#292929</Color>
+    <SolidColorBrush x:Key="UsersListBackgroundColorBrush" Color="{StaticResource UsersListBackgroundColor}"/>
 
     <Color x:Key="BorderColor">#5E6175</Color>
-    <SolidColorBrush x:Key="BorderBrushColor" Color="{StaticResource BorderColor}"></SolidColorBrush>
+    <SolidColorBrush x:Key="BorderBrushColor" Color="{StaticResource BorderColor}"/>
 
 
 </ResourceDictionary>

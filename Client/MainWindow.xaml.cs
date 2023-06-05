@@ -31,7 +31,7 @@ public partial class MainWindow : Window
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
-       MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-       MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
+        MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
+        MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
     }
 }

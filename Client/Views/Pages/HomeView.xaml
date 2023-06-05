@@ -8,33 +8,23 @@
       xmlns:loadingSpinnerControl="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
       xmlns:modalControl="clr-namespace:ModalControl;assembly=ModalControl"
       mc:Ignorable="d"
-      d:DesignHeight="660"
-      d:DesignWidth="1200"
-      Title="HomeView">
-
+      d:DesignHeight="620"
+      d:DesignWidth="1085">
 
     <Grid>
 
-        <modalControl:Modal Style="{StaticResource ModalControl}"
-                            IsOpen="{Binding IsOpen}"
-                            Panel.ZIndex="1">
-            <modalControl:Modal.Effect>
-                <DropShadowEffect
-                    BlurRadius="0"
-                    ShadowDepth="0"
-                    Color="Gray" />
-            </modalControl:Modal.Effect>
-            <ContentControl Content="{Binding CurrentModalViewModel}" />
-        </modalControl:Modal>
+        <ContentControl Content="{Binding MenuViewModel}" Panel.ZIndex="1"/>
 
         <Grid>
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="280"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Grid Background="{StaticResource UsersListBackgroundColorBrush}" Grid.Column="0">
+
+            <Grid
+                Background="{StaticResource UsersListBackgroundColorBrush}" 
+                Grid.Column="0">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70"/>
@@ -46,26 +36,40 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="40"/>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="10"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Style="{x:Null}" 
-                        Background="White"
-                        Command="{Binding NavigateCommand}"
+                    <Button 
+                        Width="30"
+                        Grid.Column="0"
+                        Height="30"
+                        Style="{x:Null}"
+                        Background="Transparent"
                         BorderThickness="0"
-                        Height="25" Width="25">
+                        Command="{Binding OpenMenuCommand}"
+                            >
+
+                        <iconPacks:PackIconMaterialDesign     Kind="Menu"
+                                                              VerticalAlignment="Center"
+                                                              HorizontalAlignment="Center"
+                                                              Width="20"
+                                                              Opacity="0.8"
+                                                              Grid.Column="2"
+                                                              Height="20"
+                                                              Foreground="White" />
+
+
+
                     </Button>
 
-                    <TextBox Width="230"
-                         Height="38"
-                         Grid.Column="1"
-                         Background="#313131"
-                         BorderThickness="0"
-                         Text="{Binding SearchText, 
+                        <TextBox Width="230"
+                             Height="38"
+                             Grid.Column="1"
+                             Background="#313131"
+                             BorderThickness="0"
+                             Text="{Binding SearchText, 
                     UpdateSourceTrigger=PropertyChanged}"
-                         Tag="Search"/>
+                             Tag="Search"/>
                 </Grid>
-
 
                 <ListView    Background="Transparent"
                          x:Name="UsersListView"
@@ -116,7 +120,6 @@
                 Height="50"
                 Diameter="45"
                 IsLoading="{Binding IsLoading}"/>
-
 
             <Frame Grid.Column="1" Content="{Binding CurrentChatViewModel}"/>
 

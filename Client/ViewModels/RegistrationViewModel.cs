@@ -69,6 +69,8 @@ public class RegistrationViewModel : ViewModelBase
 
     public RegistrationViewModel(HttpClient httpClient, UserStore userStore, NavigationStore navigationStore)
     {
+        _userStore = userStore;
+
         NavigateCommand = new NavigateCommand<AuthenticationViewModel>(
             new NavigationService<AuthenticationViewModel>(navigationStore,
                 () => new AuthenticationViewModel(userStore, httpClient, navigationStore)));
@@ -77,7 +79,6 @@ public class RegistrationViewModel : ViewModelBase
             navigationStore,
             () => new HomeViewModel(userStore, httpClient));
 
-        _userStore = userStore;
 
         RegistrationCommand = new RegistrationCommand(this, httpClient, userStore, navigateService);
     }

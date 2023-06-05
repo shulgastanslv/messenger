@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Client.Views.Pages"
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
-      d:DesignHeight="660" d:DesignWidth="1200"
+      d:DesignHeight="620" d:DesignWidth="1085"
       Title="ChatView">
 
     <Grid>
@@ -16,11 +16,11 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition/>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
 
-            <Border Background="#272727">
+            <Border Background="{StaticResource HeaderChatColorBrush}">
                 <Grid HorizontalAlignment="Stretch" Margin="0">
 
                     <Grid.ColumnDefinitions>
@@ -50,7 +50,7 @@
             </Border>
 
 
-            <Grid Grid.Row="2" Background="#272727" Width="Auto" Height="Auto">
+            <Grid Grid.Row="2" Background="{StaticResource BottomChatPanelColorBrush}" Width="Auto" Height="Auto">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="*"/>
@@ -58,14 +58,45 @@
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
 
+                <Button Grid.Column="0"
+                        Width="25"
+                        Style="{x:Null}"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Height="25">
+                    <iconPacks:PackIconMaterialDesign     Kind="AttachFile"
+                                                          VerticalAlignment="Center"
+                                                          HorizontalAlignment="Center"
+                                                          Width="23"
+                                                          Height="23"
+                                                          RotationAngle="45"
+                                                          Opacity="1"
+                                                          Grid.Column="2"
+                                                          SnapsToDevicePixels="True"
+                                                          Foreground="White" />
+                </Button>
+
 
                 <Button Grid.Column="3"
                     Width="30"
                     Style="{x:Null}"
-                    Background="White"
+                    Background="Transparent"
+                    BorderThickness="0"
                     Height="30"
                     Command="{Binding SendMessageCommand}">
+                    <iconPacks:PackIconMaterialDesign     Kind="Send"
+                                                          VerticalAlignment="Center"
+                                                          HorizontalAlignment="Center"
+                                                          Width="20"
+                                                          Opacity="1"
+                                                          Grid.Column="2"
+                                                          Height="20"
+                                                          SnapsToDevicePixels="True"
+                                                          Foreground="White" />
                 </Button>
+
+
+
 
                 <TextBox Grid.Column="1" Tag="Write a message..."
                          BorderThickness="0"

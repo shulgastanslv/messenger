@@ -7,7 +7,7 @@
       xmlns:converters="clr-namespace:Client.Converters"
       xmlns:loadingSpinnerControl="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
       mc:Ignorable="d" 
-      d:DesignHeight="660" d:DesignWidth="1200"
+      d:DesignHeight="620" d:DesignWidth="1085"
       Title="RegistrationView">
 
     <Page.Resources>
@@ -20,8 +20,8 @@
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center"
                   Background="{StaticResource WrapperColorBrush}" 
-                  Width="430" 
-                  Height="580">
+                  Width="420" 
+                  Height="590">
 
             <loadingSpinnerControl:LoadingSpinner
                 Color="White"

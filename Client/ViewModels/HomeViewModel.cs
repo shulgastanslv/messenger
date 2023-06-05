@@ -10,16 +10,9 @@ using Client.Services;
 
 namespace Client.ViewModels;
 
-
 public class HomeViewModel : ViewModelBase
 {
     private UserStore _userStore;
-
-    private readonly NavigationStore _navigationStore = new();
-
-    private readonly NavigationStore _modalNavigationStore = new();
-    public bool IsOpen => _modalNavigationStore.IsOpen;
-
     public UserStore UserStore
     {
         get => _userStore;
@@ -30,10 +23,14 @@ public class HomeViewModel : ViewModelBase
         }
     }
 
-    private List<UserModel> _users = new ();
+    private List<UserModel> _users = new();
 
-    private string _searchText;
-    public string SearchText
+    private readonly NavigationStore _chatStore = new();
+
+    private readonly NavigationStore _menuStore = new();
+
+    private string? _searchText;
+    public string? SearchText
     {
         get => _searchText;
         set
@@ -47,7 +44,7 @@ public class HomeViewModel : ViewModelBase
     {
         get
         {
-            if(string.IsNullOrEmpty(SearchText))
+            if (string.IsNullOrEmpty(SearchText))
                 return _users;
 
             return _users.Where(u => u.UserName.Contains(SearchText)).ToList();
@@ -70,48 +67,40 @@ public class HomeViewModel : ViewModelBase
         }
     }
 
-    public UserModel _selectedUser;
-    public UserModel SelectedUser
+    private UserModel? _selectedUser;
+    public UserModel? SelectedUser
     {
         get => _selectedUser;
         set
         {
             _selectedUser = value;
             OnPropertyChanged(nameof(SelectedUser));
-            _navigationStore.CurrentViewModel = new ChatViewModel(SelectedUser);
+            _chatStore.CurrentViewModel = new ChatViewModel(SelectedUser);
+            OnPropertyChanged(nameof(CurrentChatViewModel));
         }
     }
-
+    public ICommand OpenMenuCommand { get; }
     public ICommand GetAllUsersCommand { get; }
     public ICommand GetUserByEmailCommand { get; }
-    public ICommand NavigateCommand { get; }
+
     public HomeViewModel(UserStore userStore, HttpClient httpClient)
     {
         _userStore = userStore;
 
-        GetUserByEmailCommand = new GetUserByEmailQuery(this, userStore, httpClient);
+        GetAllUsersCommand = new GetAllUsersQuery(this, _userStore, httpClient);
 
-        GetUserByEmailCommand.Execute(null);
+        GetUserByEmailCommand = new GetUserByEmailQuery(this, _userStore, httpClient);
 
-        GetAllUsersCommand = new GetAllUsersQuery(this, userStore, httpClient);
+        OpenMenuCommand = new NavigateCommand<MenuViewModel>(
+                new NavigationService<MenuViewModel>(_menuStore,
+                    () => new MenuViewModel(_menuStore, _userStore)));
 
-        GetAllUsersCommand.Execute(null);
-
-        NavigateCommand = new NavigateCommand<UserProfileViewModel>(
-            new NavigationService<UserProfileViewModel>(_modalNavigationStore,
-                () => new UserProfileViewModel(httpClient, _userStore, _modalNavigationStore)));
-
-        _navigationStore.CurrentViewModelChanged += () => {
-            OnPropertyChanged(nameof(CurrentChatViewModel));
-            OnPropertyChanged(nameof(IsOpen));
-        };
-
-        _modalNavigationStore.CurrentViewModelChanged += () => {
-            OnPropertyChanged(nameof(CurrentModalViewModel));
-            OnPropertyChanged(nameof(IsOpen));
+        _menuStore.CurrentViewModelChanged += () =>
+        {
+            OnPropertyChanged(nameof(MenuViewModel));
         };
     }
 
-    public ViewModelBase CurrentChatViewModel => _navigationStore.CurrentViewModel;
-    public ViewModelBase CurrentModalViewModel => _modalNavigationStore.CurrentViewModel;
+    public ViewModelBase CurrentChatViewModel => _chatStore.CurrentViewModel;
+    public ViewModelBase MenuViewModel => _menuStore.CurrentViewModel;
 }

@@ -19,8 +19,6 @@ public class NavigationStore
 
     public event Action? CurrentViewModelChanged;
 
-    public bool IsOpen => CurrentViewModel != null;
-
     private void OnCurrentViewModelChanged()
     {
         CurrentViewModelChanged?.Invoke();
