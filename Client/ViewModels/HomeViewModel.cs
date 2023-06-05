@@ -57,8 +57,7 @@ public class HomeViewModel : ViewModelBase
         {
             _selectedUser = value;
             OnPropertyChanged(nameof(SelectedUser));
-            _chatStore.CurrentViewModel = new ChatViewModel(_selectedUser);
-            OnPropertyChanged(nameof(CurrentChatViewModel));
+            _chatStore.CurrentViewModel = new ChatViewModel(_selectedUser, _userStore);
         }
     }
     public ICommand OpenMenuCommand { get; }
@@ -80,6 +79,12 @@ public class HomeViewModel : ViewModelBase
         _menuStore.CurrentViewModelChanged += () =>
         {
             OnPropertyChanged(nameof(MenuViewModel));
+        };
+
+
+        _chatStore.CurrentViewModelChanged += () =>
+        {
+            OnPropertyChanged(nameof(CurrentChatViewModel));
         };
     }
 

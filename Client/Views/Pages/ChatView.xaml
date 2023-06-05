@@ -6,6 +6,8 @@
       xmlns:local="clr-namespace:Client.Views.Pages"
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:viewModels="clr-namespace:Client.ViewModels"
+      xmlns:models="clr-namespace:Client.Models"
       mc:Ignorable="d" 
       d:DesignHeight="620" d:DesignWidth="1085"
       Title="ChatView">
@@ -51,6 +53,39 @@
                 </Grid>
             </Border>
 
+            <ScrollViewer Grid.Row="1">
+                <ItemsControl Margin="15" ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}">
+                    <ItemsControl.Resources>
+                        <DataTemplate DataType="{x:Type models:MessageModel}">
+                            <Border Background="#323232"
+                                    Width="Auto"
+                                    Height="Auto"
+                                    MinWidth="170"
+                                    MinHeight="5"
+                                    MaxWidth="600"
+                                    MaxHeight="800"
+                                    CornerRadius="25, 25, 25, 25"
+                                    Margin="5"
+                                    Padding="2"
+                                    HorizontalAlignment="Left">
+                                <StackPanel>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Padding="10" Grid.Row="0" Foreground="White" FontSize="13" FontFamily="Poppins" TextWrapping="Wrap" Text="{Binding Content}"/>
+                                        <Label Grid.Row="1" Foreground="White" Content="{Binding SendTime}" FontSize="12"  FontFamily="Poppins" FontWeight="Normal" HorizontalAlignment="Right" ContentStringFormat="{}{0:HH:mm}"/>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.Resources>
+                </ItemsControl>
+
+            </ScrollViewer>
+          
+
 
             <Grid Grid.Row="2" Margin="5" Background="{StaticResource BottomChatPanelColorBrush}" Width="Auto" Height="Auto">
                 <Grid.ColumnDefinitions>
@@ -82,22 +117,9 @@
                 <Button Grid.Column="3"
                     Width="30"
                     Style="{x:Null}"
-                    Background="Transparent"
-                    BorderThickness="0"
                     Height="30"
                     Command="{Binding SendMessageCommand}">
-                    <iconPacks:PackIconMaterialDesign     Kind="Send"
-                                                          VerticalAlignment="Center"
-                                                          HorizontalAlignment="Center"
-                                                          Width="20"
-                                                          Opacity="1"
-                                                          Grid.Column="2"
-                                                          Height="20"
-                                                          SnapsToDevicePixels="True"
-                                                          Foreground="White" />
                 </Button>
-
-
 
 
                 <TextBox Grid.Column="1" Tag="Write a message..."
