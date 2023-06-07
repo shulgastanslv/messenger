@@ -75,7 +75,7 @@
                          x:Name="UsersListView"
                          BorderThickness="0"
                          SelectedItem="{Binding SelectedUser}"
-                         ItemsSource="{Binding Users}"
+                         ItemsSource="{Binding Contacts}"
                          Grid.Row="1">
 
                     <ListView.ItemContainerStyle>
@@ -121,7 +121,7 @@
                 Diameter="45"
                 IsLoading="{Binding IsLoading}"/>
 
-            <Frame Grid.Column="1" Content="{Binding CurrentChatViewModel}"/>
+            <Frame Grid.Column="1" Content="{Binding ChatViewModel}"/>
 
         </Grid>
     </Grid>

@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace Presentation.Modules;
+namespace Presentation.Modules.Users;
 
 public class GetAllUsersModule : CarterModule
 {
-    public GetAllUsersModule() : base("/users") {}
+    public GetAllUsersModule() : base("/users") { }
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapGet("/getAllUsers", [AllowAnonymous] async (ISender sender) =>

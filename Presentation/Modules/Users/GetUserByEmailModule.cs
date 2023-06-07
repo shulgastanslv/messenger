@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
-namespace Presentation.Modules;
+namespace Presentation.Modules.Users;
 
 public class GetUserByEmailModule : CarterModule
 {

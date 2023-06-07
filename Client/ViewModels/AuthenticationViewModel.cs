@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using Client.Commands;
+using Client.Commands.Users;
 using Client.Services;
 using Client.Stores;
 using Domain.Entities.Users;
@@ -55,9 +56,9 @@ public sealed class AuthenticationViewModel : ViewModelBase
             new NavigationService<WelcomeViewModel>(navigationStore,
                 () => new WelcomeViewModel(userStore, httpClient, navigationStore)));
 
-        var navigationService = new NavigationService<EmailVerificationViewModel>(
+        var navigationService = new NavigationService<HomeViewModel>(
             navigationStore,
-            () => new EmailVerificationViewModel(userStore, httpClient, navigationStore));
+            () => new HomeViewModel(userStore, httpClient));
 
         AuthenticationCommand = new AuthenticationCommand(this, httpClient, userStore, navigationService);
     }

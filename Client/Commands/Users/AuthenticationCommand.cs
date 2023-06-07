@@ -1,4 +1,5 @@
-﻿using Client.Models;
+﻿using System;
+using Client.Models;
 using Client.Services;
 using Client.Stores;
 using Client.ViewModels;
@@ -6,20 +7,20 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
 
-namespace Client.Commands;
+namespace Client.Commands.Users;
 
-public class AuthenticationCommand : ViewModelCommand
+public sealed class AuthenticationCommand : ViewModelCommand
 {
     private readonly AuthenticationViewModel _authenticationViewModel;
 
     private readonly HttpClient _httpClient;
 
-    private readonly NavigationService<EmailVerificationViewModel> _navigationService;
+    private readonly NavigationService<HomeViewModel> _navigationService;
 
     private readonly UserStore _userStore;
 
     public AuthenticationCommand(AuthenticationViewModel authenticationViewModel,
-        HttpClient httpClient, UserStore userStore, NavigationService<EmailVerificationViewModel> navigationService)
+        HttpClient httpClient, UserStore userStore, NavigationService<HomeViewModel> navigationService)
     {
         _authenticationViewModel = authenticationViewModel;
         _httpClient = httpClient;
@@ -66,7 +67,6 @@ public class AuthenticationCommand : ViewModelCommand
             _userStore.Token = await response.Content.ReadAsStringAsync();
 
             _userStore.Token = _userStore.Token.Trim('"');
-            _userStore.Token = _userStore.Token.Trim('\\');
 
             _navigationService.Navigate();
         }

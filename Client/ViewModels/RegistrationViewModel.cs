@@ -1,9 +1,9 @@
 ﻿using System.Net.Http;
 using System.Windows.Input;
 using Client.Commands;
+using Client.Commands.Users;
 using Client.Services;
 using Client.Stores;
-using Domain.Entities.Users;
 
 namespace Client.ViewModels;
 

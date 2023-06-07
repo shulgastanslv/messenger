@@ -1,7 +1,10 @@
 ﻿using Application.Common.Abstractions;
 using Application.Common.Interfaces;
+using Application.Messages.Commands.SaveMessageCommand;
 using Application.Users.Commands.UserAuthentication;
 using Application.Users.Commands.UserRegistration;
+using Domain.Entities.Chats;
+using Domain.Entities.Messages;
 using Domain.Entities.Users;
 using FluentValidation;
 using Infrastructure.Authentication;
@@ -20,7 +23,11 @@ public static class DependencyInjection
     {
         var assembly = typeof(DependencyInjection).Assembly;
 
+        services.AddSingleton(configuration.GetSection("FilePath:MessageFilePath").Value ?? "");
+
+        services.AddTransient<IMessageRepository, MessageRepository>();
         services.AddTransient<IUserRepository, UserRepository>();
+        services.AddTransient<IChatRepository, ChatRepository>();
         services.AddTransient<IEmailService, EmailService>();
         services.AddTransient<IJwtProvider, JwtProvider>();
 

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Application.Users.Commands.UserAuthentication;
 
-namespace Presentation.Modules;
+namespace Presentation.Modules.Users;
 
 public class AuthenticationModule : CarterModule
 {
@@ -15,7 +15,7 @@ public class AuthenticationModule : CarterModule
 
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/auth", [AllowAnonymous] async ([FromBody] UserAuthenticationCommand request, 
+        app.MapPost("/auth", [AllowAnonymous] async ([FromBody] UserAuthenticationCommand request,
             ISender sender, CancellationToken cancellationToken) =>
         {
             var result = await sender.Send(request, cancellationToken);

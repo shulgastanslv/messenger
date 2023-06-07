@@ -8,15 +8,11 @@ using System.Text;
 using Newtonsoft.Json;
 using Client.Models;
 
-namespace Client.Commands;
+namespace Client.Commands.EmailVerification;
 
 public class EmailVerificationCommand : ViewModelCommand
 {
-    private readonly HttpClient _httpClient;
-
     private readonly NavigationService<HomeViewModel> _navigationService;
-
-    private readonly UserStore _userStore;
 
     private readonly EmailVerificationViewModel _emailVerificationViewModel;
 
@@ -26,8 +22,6 @@ public class EmailVerificationCommand : ViewModelCommand
         NavigationService<HomeViewModel> navigationService,
         EmailVerificationViewModel emailVerificationViewModel, int code)
     {
-        _userStore = userStore;
-        _httpClient = httpClient;
         _navigationService = navigationService;
         _emailVerificationViewModel = emailVerificationViewModel;
         _code = code;

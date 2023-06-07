@@ -1,18 +1,16 @@
 ﻿using Application.Users.Commands.UserRegistration;
 using Carter;
-using Domain.Primitives.Result;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.Mvc;
 
-namespace Presentation.Modules;
+namespace Presentation.Modules.Users;
 
 public class RegistrationModule : CarterModule
 {
-    public RegistrationModule() 
+    public RegistrationModule()
         : base("/registration")
     {
     }

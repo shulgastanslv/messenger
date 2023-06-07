@@ -26,7 +26,7 @@ public sealed class GetUserByEmailQuery : ViewModelCommand
         Execute(null);
     }
 
-    public sealed override async void Execute(object? parameter)
+    public override async void Execute(object? parameter)
     {
         _homeViewModel.IsLoading = true;
 

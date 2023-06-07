@@ -8,25 +8,25 @@ using Client.Commands;
 using Client.Services;
 using System.Collections.ObjectModel;
 using System.Windows;
+using Client.Commands.Messages;
 using MediatR;
 
 namespace Client.ViewModels;
 
 public class ChatViewModel : ViewModelBase
 {
-    private UserModel? _userModel;
-    public UserModel? UserModel
+    private ContactModel _currentContact;
+    public ContactModel CurrentContact
     {
-        get => _userModel;
+        get => _currentContact;
         set
         {
-            _userModel = value;
-            OnPropertyChanged(nameof(UserModel));
+            _currentContact = value;
+            OnPropertyChanged(nameof(CurrentContact));
         }
     }
 
-    private ObservableCollection<MessageModel> _messages = new ();
-
+    private ObservableCollection<MessageModel> _messages = new();
     public ObservableCollection<MessageModel> Messages
     {
         get => _messages;
@@ -37,25 +37,23 @@ public class ChatViewModel : ViewModelBase
         }
     }
 
-    private string _message;
-
-    public string Message
+    private string _messageText;
+    public string MessageText
     {
-        get => _message;
+        get => _messageText;
         set
         {
-            _message = value;
-            OnPropertyChanged(nameof(Message));
+            _messageText = value;
+            OnPropertyChanged(nameof(MessageText));
         }
     }
-
     public ICommand SendMessageCommand { get; }
 
-    public ChatViewModel(UserModel? userModel, UserStore userStore)
+    public ChatViewModel(ContactModel currentContact, HttpClient httpClient)
     {
-        _userModel = userModel;
+        _currentContact = currentContact;
 
-        SendMessageCommand = new SendMessageCommand(userModel, userStore, Messages, this);
+        SendMessageCommand = new SendMessageCommand(CurrentContact, httpClient, this);
     }
 
 }

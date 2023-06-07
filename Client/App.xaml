@@ -12,7 +12,6 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/Colors.xaml"/>
-                <ResourceDictionary Source="Styles/TextBlocks.xaml"/>
                 <ResourceDictionary Source="Styles/CheckBoxes.xaml"/>
                 <ResourceDictionary Source="Styles/TextBoxes.xaml"/>
                 <ResourceDictionary Source="Styles/Buttons.xaml"/>
@@ -34,7 +33,6 @@
                 <pages:EmailVerificationView/>
             </DataTemplate>
 
-
             <DataTemplate DataType="{x:Type viewModels:WelcomeViewModel}">
                 <pages:WelcomeView/>
             </DataTemplate>
@@ -46,8 +44,6 @@
             <DataTemplate DataType="{x:Type viewModels:MenuViewModel}">
                 <customControls:MenuView/>
             </DataTemplate>
-
-
 
             <DataTemplate DataType="{x:Type TypeName=viewModels:MainViewModel}">
                 <local:MainWindow/>

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using Client.Stores;
 using Client.ViewModels;
 using System.Net.Http;
@@ -37,7 +37,7 @@ public sealed class GetAllUsersQuery : ViewModelCommand
 
         if (response.IsSuccessStatusCode)
         {
-            _homeViewModel.Users = await response.Content.ReadAsAsync<List<UserModel>>();
+            _homeViewModel.Contacts = await response.Content.ReadAsAsync<ObservableCollection<ContactModel>>();
 
             _homeViewModel.IsLoading = false;
         }

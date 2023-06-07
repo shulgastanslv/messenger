@@ -7,11 +7,14 @@ using Client.Queries;
 using System.Linq;
 using Client.Commands;
 using Client.Services;
+using System.Collections.ObjectModel;
 
 namespace Client.ViewModels;
 
 public class HomeViewModel : ViewModelBase
 {
+    private readonly HttpClient _httpClient;
+
     private UserStore _userStore;
     public UserStore UserStore
     {
@@ -23,18 +26,14 @@ public class HomeViewModel : ViewModelBase
         }
     }
 
-    private List<UserModel> _users = new();
-
-    private readonly NavigationStore _chatStore = new();
-
-    private readonly NavigationStore _menuStore = new();
-    public List<UserModel> Users
+    private ObservableCollection<ContactModel> _contacts = new();
+    public ObservableCollection<ContactModel> Contacts
     {
-        get => _users;
+        get => _contacts;
         set
         {
-            _users = value;
-            OnPropertyChanged(nameof(Users));
+            _contacts = value;
+            OnPropertyChanged(nameof(Contacts));
         }
     }
 
@@ -49,45 +48,37 @@ public class HomeViewModel : ViewModelBase
         }
     }
 
-    private UserModel? _selectedUser;
-    public UserModel? SelectedUser
+    private ChatViewModel? _chatViewModel;
+    public ChatViewModel? ChatViewModel
+    {
+        get => _chatViewModel;
+        set
+        {
+            _chatViewModel = value;
+            OnPropertyChanged(nameof(ChatViewModel));
+        }
+    }
+
+    private ContactModel? _selectedUser;
+    public ContactModel? SelectedUser
     {
         get => _selectedUser;
         set
         {
             _selectedUser = value;
             OnPropertyChanged(nameof(SelectedUser));
-            _chatStore.CurrentViewModel = new ChatViewModel(_selectedUser, _userStore);
+            ChatViewModel = new ChatViewModel(_selectedUser, _httpClient);
         }
     }
-    public ICommand OpenMenuCommand { get; }
-    public ICommand GetAllUsersCommand { get; }
-    public ICommand GetUserByEmailCommand { get; }
+    public ICommand GetAllUsersQuery { get; }
+    public ICommand GetUserByEmailQuery { get; }
 
     public HomeViewModel(UserStore userStore, HttpClient httpClient)
     {
         _userStore = userStore;
+        _httpClient = httpClient;
 
-        GetAllUsersCommand = new GetAllUsersQuery(this, _userStore, httpClient);
-
-        GetUserByEmailCommand = new GetUserByEmailQuery(this, _userStore, httpClient);
-
-        OpenMenuCommand = new NavigateCommand<MenuViewModel>(
-                new NavigationService<MenuViewModel>(_menuStore,
-                    () => new MenuViewModel(_menuStore, _userStore.User)));
-
-        _menuStore.CurrentViewModelChanged += () =>
-        {
-            OnPropertyChanged(nameof(MenuViewModel));
-        };
-
-
-        _chatStore.CurrentViewModelChanged += () =>
-        {
-            OnPropertyChanged(nameof(CurrentChatViewModel));
-        };
+        GetAllUsersQuery = new GetAllUsersQuery(this, _userStore, httpClient);
+        GetUserByEmailQuery = new GetUserByEmailQuery(this, _userStore, httpClient);
     }
-
-    public ViewModelBase CurrentChatViewModel => _chatStore.CurrentViewModel;
-    public ViewModelBase MenuViewModel => _menuStore.CurrentViewModel;
 }

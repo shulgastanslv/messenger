@@ -1,4 +1,5 @@
-﻿using Domain.Primitives;
+﻿using Domain.Entities.Chats;
+using Domain.Primitives;
 
 namespace Domain.Entities.Users;
 
@@ -7,7 +8,6 @@ public class User : Entity
     public User(Guid id, string userName, string email, string password)
         : base(id)
     {
-        Id = id;
         UserName = userName;
         Email = email;
         Password = password;
@@ -15,8 +15,6 @@ public class User : Entity
     }
 
     public User() { }
-
-    public Guid Id { get; set; }
 
     public string? UserName { get; set; }
 

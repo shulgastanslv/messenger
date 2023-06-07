@@ -18,5 +18,5 @@ public class MainViewModel : ViewModelBase
         OnPropertyChanged(nameof(CurrentViewModel));
     }
 
-    public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
+    public ViewModelBase? CurrentViewModel => _navigationStore.CurrentViewModel;
 }

@@ -1,8 +1,8 @@
 using Carter;
 using Application;
 using Infrastructure;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Presentation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -6,7 +6,7 @@ using Client.Stores;
 using Client.ViewModels;
 using Newtonsoft.Json;
 
-namespace Client.Commands;
+namespace Client.Commands.EmailVerification;
 
 public class SendVerificationCodeCommand : ViewModelCommand
 {

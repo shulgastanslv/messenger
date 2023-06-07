@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Routing;
 
-namespace Presentation.Modules;
+namespace Presentation.Modules.Users;
 
 public class GetUserByIdModule : CarterModule
 {

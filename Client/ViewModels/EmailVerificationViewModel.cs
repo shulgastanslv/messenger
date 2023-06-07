@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Client.Commands;
 using Client.Services;
 using System;
+using Client.Commands.EmailVerification;
 
 namespace Client.ViewModels;
 

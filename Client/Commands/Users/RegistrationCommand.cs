@@ -8,7 +8,7 @@ using System.Text;
 using Client.Models;
 using Newtonsoft.Json;
 
-namespace Client.Commands;
+namespace Client.Commands.Users;
 
 public class RegistrationCommand : ViewModelCommand
 {
@@ -52,7 +52,7 @@ public class RegistrationCommand : ViewModelCommand
         _registrationViewModel.IsLoading = true;
 
         _userStore.User = new UserModel(
-            Guid.NewGuid(), 
+            Guid.NewGuid(),
             _registrationViewModel.UserName,
             _registrationViewModel.Email,
             _registrationViewModel.Password);
