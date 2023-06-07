@@ -1,18 +1,29 @@
 ﻿using System.Text;
 using System.Text.Json;
+using Application.Common.Interfaces;
+using Domain.Entities;
 using Domain.Entities.Chats;
 using Domain.Entities.Messages;
 using Domain.Entities.Users;
+using Domain.Primitives.Errors;
 using Domain.Primitives.Result;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Infrastructure.Repositories;
 
 public class MessageRepository : IMessageRepository
 {
     private readonly string _filePath;
-    public MessageRepository(string filePath)
+
+    private readonly IApplicationDbContext _applicationDbContext;
+
+    public MessageRepository(string filePath, IApplicationDbContext applicationDbContext)
     {
         _filePath = filePath;
+        _applicationDbContext = applicationDbContext;
     }
 
     public async Task<Result> SaveMessageAsync(Chat chat, Message message, CancellationToken cancellationToken)
@@ -31,5 +42,35 @@ public class MessageRepository : IMessageRepository
         await File.WriteAllTextAsync(_filePath + $"{chat.ChatId}\\{message.Id}.json", json, cancellationToken);
 
         return Result.Success();
+    }
+
+    public async Task<Result<List<Message>>> GetMessagesAsync(Guid receiver, Guid sender, CancellationToken cancellationToken)
+    {
+        var chat = await _applicationDbContext.Chats
+            .FirstOrDefaultAsync(i => i.Sender!.Id == sender && i.Receiver!.Id == receiver, cancellationToken);
+
+        if (chat == null)
+            return Result.Failure<List<Message>>(new Error("Chat not found"));
+
+        var dictionaryPath = Path.Combine(_filePath, chat.ChatId.ToString());
+
+        if (!Directory.Exists(dictionaryPath))
+            return Result.Failure<List<Message>>(new Error("Directory not found"));
+
+        var fileNames = await Task.Run(() =>
+            Directory.GetFiles(dictionaryPath), cancellationToken);
+
+        var messages = new List<Message>();
+
+        foreach (var file in fileNames)
+        {
+            string json = await File.ReadAllTextAsync(file, cancellationToken);
+
+            var message = JsonConvert.DeserializeObject<Message>(json);
+
+            messages.Add(message!);
+        }
+
+        return Result.Success(messages);
     }
 }
