@@ -9,10 +9,16 @@ public class MessageModel
         Id = id;
         Content = content;
         Receiver = receiver;
+        SendTime = DateTime.Now;
     }
 
     public Guid Id { get; set; }
-    public Guid Receiver { get; set; }
+
     public string Content { get; set; }
 
+    public Guid Sender { get; set; }
+
+    public Guid Receiver { get; set; }
+
+    public DateTime SendTime { get; set; }
 }

@@ -44,18 +44,18 @@ public class MessageRepository : IMessageRepository
         return Result.Success();
     }
 
-    public async Task<Result<List<Message>>> GetMessagesAsync(Guid receiver, Guid sender, CancellationToken cancellationToken)
+    public async Task<Result<IEnumerable<Message>>> GetMessagesAsync(Guid receiver, Guid sender, CancellationToken cancellationToken)
     {
         var chat = await _applicationDbContext.Chats
             .FirstOrDefaultAsync(i => i.Sender!.Id == sender && i.Receiver!.Id == receiver, cancellationToken);
 
         if (chat == null)
-            return Result.Failure<List<Message>>(new Error("Chat not found"));
+            return Result.Failure<IEnumerable<Message>>(new Error("Chat not found"));
 
         var dictionaryPath = Path.Combine(_filePath, chat.ChatId.ToString());
 
         if (!Directory.Exists(dictionaryPath))
-            return Result.Failure<List<Message>>(new Error("Directory not found"));
+            return Result.Failure<IEnumerable<Message>>(new Error("Directory not found"));
 
         var fileNames = await Task.Run(() =>
             Directory.GetFiles(dictionaryPath), cancellationToken);
@@ -71,6 +71,6 @@ public class MessageRepository : IMessageRepository
             messages.Add(message!);
         }
 
-        return Result.Success(messages);
+        return Result.Success<IEnumerable<Message>>(messages);
     }
 }

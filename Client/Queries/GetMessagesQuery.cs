@@ -7,35 +7,40 @@ using System.Collections.Generic;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace Client.Queries;
 
 public sealed class GetMessagesQuery : ViewModelCommand
 {
-    private readonly ChatViewModel _chatViewModel;
 
+    private readonly ChatViewModel _chatViewModel;
     private readonly HttpClient _httpClient;
 
-    private readonly UserStore _sender;
-
-    private readonly UserModel _receiver;
-
-    public GetMessagesQuery(UserStore sender, UserModel receiver, ChatViewModel chatViewModel, HttpClient httpClient)
+    public GetMessagesQuery(ChatViewModel chatViewModel, HttpClient httpClient)
     {
         _chatViewModel = chatViewModel;
         _httpClient = httpClient;
-        _sender = sender;
-        _receiver = receiver;
     }
 
     public override async void Execute(object? parameter)
     {
-        var response = await _httpClient.GetAsync($"getMessages?receiver={_receiver.UserName!}?sender={_sender.User.UserName!}");
+        var content = new StringContent(
+            JsonConvert.SerializeObject(_chatViewModel.CurrentContact),
+            Encoding.UTF8, "application/json");
 
-        if (response.IsSuccessStatusCode)
+        var response = await _httpClient.PostAsync("/message/get", content);
+
+        if (!response.IsSuccessStatusCode)
         {
-            _chatViewModel.Messages = await response.Content.ReadAsAsync<ObservableCollection<MessageModel>>();
+            return;
         }
 
+        var messages = await response.Content
+            .ReadAsAsync<List<MessageModel>>();
+
+        _chatViewModel.Messages = new ObservableCollection<MessageModel>(
+            messages.OrderBy(i => i.SendTime));
     }
 }

@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Application.Common.Abstractions;
 using Domain.Entities.Users;
+using Domain.Primitives.Maybe;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -44,5 +45,14 @@ internal sealed class JwtProvider : IJwtProvider
 
         return tokenValue;
 
+    }
+
+    public Maybe<Guid> GetUserIdAsync(ClaimsPrincipal principal)
+    {
+        var userIdClaim = principal.FindFirst(ClaimTypes.NameIdentifier);
+
+        if (userIdClaim == null) { return Maybe<Guid>.None; }
+
+        return Maybe<Guid>.From(Guid.Parse(userIdClaim.Value));
     }
 }

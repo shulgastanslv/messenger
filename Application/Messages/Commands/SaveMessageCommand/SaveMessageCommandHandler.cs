@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using Application.Common.Abstractions;
 using Application.Common.Abstractions.Messaging;
 using Domain.Entities.Chats;
 using Domain.Entities.Messages;
@@ -11,36 +12,26 @@ public class SaveMessageCommandHandler : ICommandHandler<SaveMessageCommand, Res
 {
     private readonly IMessageRepository _messageRepository;
 
-    private readonly IUserRepository _userRepository;
-
     private readonly IChatRepository _chatRepository;
 
-    public SaveMessageCommandHandler(IMessageRepository messageRepository, IUserRepository userRepository, IChatRepository chatRepository)
+    private readonly IJwtProvider _jwtProvider;
+
+    public SaveMessageCommandHandler(IMessageRepository messageRepository, IChatRepository chatRepository, IJwtProvider jwtProvider)
     {
-        _messageRepository = messageRepository;
-        _userRepository = userRepository;
+        _messageRepository = messageRepository; 
         _chatRepository = chatRepository;
+        _jwtProvider = jwtProvider;
     }
     public async Task<Result> Handle(SaveMessageCommand request, CancellationToken cancellationToken)
     {
-        var claimUser = request.Context.User;
-        var userIdClaim = claimUser.FindFirst(ClaimTypes.NameIdentifier);
-
-        if (userIdClaim == null)
+        var maybeSenderId = _jwtProvider.GetUserIdAsync(request.Context.User);
+        if (maybeSenderId.HasNoValue)
         {
-            return Result.Failure(new("Can't find maybeUser identifier"));
+            return Result.Failure(new("Can't find sender identifier"));
         }
 
-        var maybeUser = await _userRepository.GetUserByIdAsync(Guid.Parse(userIdClaim.Value), cancellationToken);
-
-        if (maybeUser.HasNoValue)
-        {
-            return Result.Failure(new("The user with the specified id was not found."));
-        }
-
-        var chatResult = await _chatRepository.CreateChatAsync(Guid.Parse(userIdClaim.Value), request.Message.Receiver,
-            cancellationToken);
-
+        var chatResult = await _chatRepository.GetChatAsync(maybeSenderId.Value,
+            request.Message.Receiver, cancellationToken);
 
         if (chatResult.IsFailure)
         {

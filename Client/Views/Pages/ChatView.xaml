@@ -53,7 +53,7 @@
                 </Grid>
             </Border>
 
-            <!--<ScrollViewer Grid.Row="1">
+            <ScrollViewer Grid.Row="1">
                 <ItemsControl Margin="15" ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}">
                     <ItemsControl.Resources>
                         <DataTemplate DataType="{x:Type models:MessageModel}">
@@ -83,7 +83,7 @@
                     </ItemsControl.Resources>
                 </ItemsControl>
 
-            </ScrollViewer>-->
+            </ScrollViewer>
           
 
 

@@ -9,6 +9,7 @@ using Client.Services;
 using System.Collections.ObjectModel;
 using System.Windows;
 using Client.Commands.Messages;
+using Client.Queries;
 using MediatR;
 
 namespace Client.ViewModels;
@@ -47,13 +48,16 @@ public class ChatViewModel : ViewModelBase
             OnPropertyChanged(nameof(MessageText));
         }
     }
+    public ICommand GetMessagesQuery { get; }
     public ICommand SendMessageCommand { get; }
 
     public ChatViewModel(ContactModel currentContact, HttpClient httpClient)
     {
         _currentContact = currentContact;
 
-        SendMessageCommand = new SendMessageCommand(CurrentContact, httpClient, this);
+        SendMessageCommand = new SendMessageCommand(httpClient, this, CurrentContact);
+        GetMessagesQuery = new GetMessagesQuery(this, httpClient);
+        GetMessagesQuery.Execute(null);
     }
 
 }

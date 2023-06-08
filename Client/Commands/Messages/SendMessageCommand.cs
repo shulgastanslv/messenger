@@ -16,11 +16,11 @@ public class SendMessageCommand : ViewModelCommand
 
     private readonly ChatViewModel _chatViewModel;
 
-    public SendMessageCommand(ContactModel receiver, HttpClient httpClient, ChatViewModel chatViewModel)
+    public SendMessageCommand(HttpClient httpClient, ChatViewModel chatViewModel, ContactModel receiver)
     {
-        _receiver = receiver;
         _httpClient = httpClient;
         _chatViewModel = chatViewModel;
+        _receiver = receiver;
 
         _chatViewModel.PropertyChanged += OnPropertyChanged;
     }
