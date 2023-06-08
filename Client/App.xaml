@@ -5,19 +5,24 @@
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:viewModels="clr-namespace:Client.ViewModels"
              xmlns:pages="clr-namespace:Client.Views.Pages"
-             xmlns:customControls="clr-namespace:Client.Views.CustomControls">
+             xmlns:customControls="clr-namespace:Client.Views.CustomControls"
+             xmlns:converters="clr-namespace:Client.Converters">
 
     <Application.Resources>
+
 
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/Colors.xaml"/>
+                <ResourceDictionary Source="Styles/LoadingSpinner.xaml"/>
                 <ResourceDictionary Source="Styles/Borders.xaml"/>
                 <ResourceDictionary Source="Styles/TextBlocks.xaml"/>
                 <ResourceDictionary Source="Styles/CheckBoxes.xaml"/>
                 <ResourceDictionary Source="Styles/TextBoxes.xaml"/>
                 <ResourceDictionary Source="Styles/Buttons.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
 
             <DataTemplate DataType="{x:Type viewModels:AuthenticationViewModel}">
                 <pages:AuthenticationView/>

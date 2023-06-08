@@ -4,104 +4,68 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client.Views.Pages"
-      xmlns:converters="clr-namespace:Client.Converters"
       xmlns:loadingSpinnerControl="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
       mc:Ignorable="d" 
       d:DesignHeight="630" 
       d:DesignWidth="1100">
 
-    <Page.Resources>
-        <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
-    </Page.Resources>
-
-        <ScrollViewer>
-
-            <Grid SnapsToDevicePixels="True" 
-                  HorizontalAlignment="Center"
-                  VerticalAlignment="Center"
-                  Background="{StaticResource ColorWrapBrush}" 
-                  Width="420" 
-                  Height="590">
+    <Border Style="{StaticResource BorderWrapStyle}">
+        <Grid>
 
             <loadingSpinnerControl:LoadingSpinner
-                Color="White"
-                Width="50"
-                Height="50"
-                Diameter="45"
                 IsLoading="{Binding IsLoading}"/>
 
             <StackPanel HorizontalAlignment="Center" 
                         VerticalAlignment="Center" 
-                        Width="250"
                         Visibility="{Binding IsLoading, 
                 Converter={StaticResource InverseBooleanToVisibilityConverter}}">
 
-                <TextBlock Text="Sign Up" FontSize="20" FontWeight="SemiBold"
-                           Foreground="White"
-                           Margin="0, 0, 0, 10"/>
-
-                <TextBlock Text="You will use this data every time you log in to your account." 
-                           FontSize="13" FontWeight="Normal" 
-                           Foreground="White"
-                           TextWrapping="Wrap"
-                           Margin="0, 0, 0, 10"
-                           />
-
-
-                <TextBlock Text="Enter username" 
-                           Foreground="White"
-                           FontSize="13"
+                <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
+                           Text="Enter UserName" 
                            Opacity="0.5" 
-                           Margin="0, 0, 0, 10"/>
+                           Margin="0, 0, 0, 15"/>
 
 
-                <TextBox  Tag="Enter username"
+                <TextBox  Tag="Enter UserName"
                           Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
                           Name="UserNameTextBox" 
                           Margin="0, 0, 0, 15"/>
 
 
-                <TextBlock Text="Enter Email" 
-                           Foreground="White"
-                           FontSize="13"
+                <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
+                           Text="Enter Email" 
                            Opacity="0.5" 
-                           Margin="0, 0, 0, 10"/>
+                           Margin="0, 0, 0, 15"/>
 
 
                 <TextBox  Tag="Enter Email"
                           Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
                           Margin="0, 0, 0, 15"/>
 
-                <TextBlock Text="Enter your Password" 
-                           Foreground="White" 
+                <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
+                           Text="Enter your Password" 
                            Opacity="0.5" 
-                           FontSize="13"
-                           Margin="0, 0, 0, 10"/>
+                           Margin="0, 0, 0, 15"/>
 
                 <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
                          Margin="0, 0, 0,15"
                          Tag="Enter Password"/>
 
                 <CheckBox
+                    IsChecked="{Binding IsAgree}"
                     Command="{Binding }"
                     Margin="0, 0, 0, 15"
-                    IsChecked="{Binding IsAgree}"
                     Content="I accept the user agreement"/>
 
                 <Button Command="{Binding RegistrationCommand}" 
                         Content="Sign Up"
                         />
 
-                <Button Command="{Binding NavigateToAuthenticationCommand}"
-                        BorderThickness="1"
-                        BorderBrush="#5E6175"
-                        Background="Transparent"
-                        Width="89"
-                        HorizontalAlignment="Center"
-                        Margin="0, 15, 0, 0"
-                        Content="&lt;Back"/>
+                <Button Style="{StaticResource BackButtonStyle}"
+                        Command="{Binding NavigateToAuthenticationCommand}"
+                        Margin="0, 15, 0, 0"/>
 
             </StackPanel>
         </Grid>
-    </ScrollViewer>
+    </Border>
 </Page>

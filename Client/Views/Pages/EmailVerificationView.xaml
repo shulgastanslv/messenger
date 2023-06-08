@@ -5,58 +5,36 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client.Views.Pages"
       xmlns:loadingSpinnerControl="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
-      xmlns:converters="clr-namespace:Client.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="630" 
       d:DesignWidth="1100">
 
-    <Page.Resources>
-        <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
-    </Page.Resources>
-
-    <Grid>
-
-        <Grid  Background="{StaticResource ColorWrapBrush}"
-               Width="420" 
-               Height="500">
-
+    <Border Style="{StaticResource BorderWrapStyle}" Height="500">
+        <Grid>
             <loadingSpinnerControl:LoadingSpinner
-                Color="White"
-                Width="50"
-                Height="50"
-                Diameter="45"
-                IsLoading="{Binding IsLoading}"/>
+                    IsLoading="{Binding IsLoading}"/>
 
-            <StackPanel Width="200" VerticalAlignment="Center"
-                        Visibility="{Binding IsLoading, 
-                Converter={StaticResource InverseBooleanToVisibilityConverter}}">
 
-                <TextBlock Foreground="White"
-                           TextWrapping="Wrap"
-                           FontSize="13"
-                           FontWeight="Regular"
-                           FontFamily="Poppins"
-                           Margin="0, 0, 0, 15"
-                           Text="An email was sent to you. Enter the code:"/>
+                <StackPanel    Visibility="{Binding IsLoading, 
+                                Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
 
-                <TextBox Width="200" 
-                         Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}"
-                         Margin="0, 0, 0, 15"/>
+                <TextBlock     Style="{StaticResource DefaultTextBlockStyle}"
+                               Text="An email was sent to you. Enter the code"
+                               Margin="0, 0, 0, 15"/>
+
+                <TextBox     Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}"
+                             Margin="0, 0, 0, 15"/>
 
                 <Button Content="Confirm"
-                        Command="{Binding EmailVerificationCommand}"/>
+                            Command="{Binding EmailVerificationCommand}"/>
 
-                <Button Command="{Binding NavigateBackCommand}"
-                        BorderThickness="1"
-                        BorderBrush="#5E6175"
-                        Background="Transparent"
-                        Width="89"
-                        HorizontalAlignment="Center"
-                        Margin="0, 15, 0, 0"
-                        Content="&lt;Back"/>
+                <Button Style="{StaticResource BackButtonStyle}"
+                        Command="{Binding NavigateBackCommand}"
+                        Margin="0, 15, 0, 0"/>
 
             </StackPanel>
-
         </Grid>
-    </Grid>
+    </Border>
 </Page>

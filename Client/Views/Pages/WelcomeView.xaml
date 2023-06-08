@@ -15,14 +15,10 @@
     </Page.Resources>
 
     <Grid>
-        <Border Style="{StaticResource BorderWrap}">
+        <Border Style="{StaticResource BorderWrapStyle}" Height="425">
             <Grid>
 
                 <loadingSpinnerControl:LoadingSpinner
-                    Color="White"
-                    Width="50"
-                    Height="50"
-                    Diameter="45"
                     IsLoading="{Binding IsLoading}"/>
 
                 <StackPanel VerticalAlignment="Center"
