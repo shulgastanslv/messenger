@@ -10,66 +10,96 @@
       xmlns:models="clr-namespace:Client.Models"
       xmlns:converters="clr-namespace:Client.Converters"
       mc:Ignorable="d" 
-      d:DesignHeight="620" d:DesignWidth="1085"
+      d:DesignHeight="630" 
+      d:DesignWidth="1100"
       Title="ChatView">
-
 
     <Page.Resources>
         <converters:MessageAlignmentConverter x:Key="MessageAlignmentConverter" />
     </Page.Resources>
 
     <Grid>
-
         <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="65"/>
                 <RowDefinition/>
-                <RowDefinition Height="55"/>
+                <RowDefinition Height="65"/>
             </Grid.RowDefinitions>
 
 
-            <Border Background="{StaticResource HeaderChatColorBrush}">
+            <Border Grid.Row="0" Background="{StaticResource HeaderChatColorBrush}">
 
-                <Grid HorizontalAlignment="Stretch" Margin="0">
+                <Grid HorizontalAlignment="Stretch">
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
+
+
+                    <Border Grid.Column="0" Height="38" Width="38"
+                            CornerRadius="25" Background="White"/>
 
                     <StackPanel  VerticalAlignment="Center" Grid.Column="1">
                         <Label Content="{Binding CurrentContact.UserName}" 
-                               Foreground="White"
-                               HorizontalContentAlignment="Left"
-                               FontSize="14"
-                               Padding="0, 5, 5, 5"
-                               Width="Auto"
-                               Height="Auto"
-                               FontWeight="Normal"/>
+                               FontSize="16"
+                               Padding="0, 0, 0,0"/>
 
                         <TextBlock Text="Last seen 10 minutes ago"
-                               Foreground="White"
                                FontSize="14"
-                               Height="Auto"
-                               Opacity="0.5"
-                               FontWeight="Normal"/>
+                               Opacity="0.5"/>
                     </StackPanel>
+
+
+                    <Button Grid.Column="2"
+                            Width="30"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Height="30">
+
+                        <iconPacks:PackIconMaterialDesign     Kind="Call"
+                                                              Width="18"
+                                                              Height="18"
+                                                              Foreground="White" />
+                    </Button>
+
+                    <Button Grid.Column="3"
+                                Width="30"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Height="30">
+
+                        <iconPacks:PackIconMaterialDesign     Kind="Videocam"
+                                                              Width="18"
+                                                              Height="18"
+                                                                  Foreground="White" />
+
+                    </Button>
+
+                    <Button Grid.Column="4"
+                            Width="30"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Height="30">
+
+                        <iconPacks:PackIconMaterialDesign     Kind="MoreVert"
+                                                              Width="18"
+                                                              Height="18"
+                                                              Foreground="White" />
+
+                    </Button>
                 </Grid>
             </Border>
 
             <ScrollViewer Grid.Row="1">
-                <ItemsControl Margin="15" ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}">
+                <ItemsControl Margin="10" ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}">
                     <ItemsControl.Resources>
                         <DataTemplate DataType="{x:Type models:MessageModel}">
-                            <Border Background="#333333"
-                                    CornerRadius="25, 25, 25, 25"
-                                    Margin="5"
-                                    MaxWidth="500"
-                                    MaxHeight="400"
-                                    MinHeight="35"
-                                    MinWidth="180"
+                            <Border Background="Transparent"
                                     VerticalAlignment="Stretch">
 
                                 <Border.HorizontalAlignment>
@@ -82,75 +112,60 @@
 
                                 <StackPanel Margin="15, 5, 5, 0" VerticalAlignment="Stretch">
                                     <TextBlock Foreground="White" FontSize="13" Text="{Binding Content}"/>
-                                    <Label Foreground="White" HorizontalAlignment="Right" FontSize="13" Margin="0 5 0 0"
-                                                Content="{Binding SendTime}" ContentStringFormat="HH:mm"/>
+                                    <Label Foreground="White" HorizontalAlignment="Right" FontSize="13" 
+                                           Content="{Binding SendTime}" ContentStringFormat="HH:mm"/>
                                 </StackPanel>
                             </Border>
-
-
-                            <!--<StackPanel Margin="15 5, 5, 0">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Content}" 
-                                               Foreground="White"
-                                               TextWrapping="Wrap"
-                                               TextAlignment="Center"
-                                               FontSize="13"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="Auto">
-                                    <Label Foreground="White" FontSize="13" Content="{Binding SendTime, StringFormat=HH:mm}"/>
-                                </StackPanel>
-                            </StackPanel>-->
-
                         </DataTemplate>
                     </ItemsControl.Resources>
                 </ItemsControl>
-
             </ScrollViewer>
 
 
+            <Grid Grid.Row="2"
+                  Background="{StaticResource BottomChatPanelColorBrush}">
 
-            <Grid Grid.Row="2" Margin="5" Background="{StaticResource BottomChatPanelColorBrush}" Width="Auto" Height="Auto">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="45"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="50"/>
-                </Grid.ColumnDefinitions>
+                <Border
+                    Margin="8"
+                    CornerRadius="2"
+                    Background="{StaticResource ChatTextBoxColorBrush}">
 
-                <Button Grid.Column="0"
-                        Width="23"
-                        Style="{x:Null}"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Height="23">
-                    <iconPacks:PackIconMaterialDesign     Kind="AttachFile"
-                                                          VerticalAlignment="Center"
-                                                          HorizontalAlignment="Center"
-                                                          Width="23"
-                                                          Height="23"
-                                                          RotationAngle="220"
-                                                          Opacity="1"
-                                                          Grid.Column="2"
-                                                          SnapsToDevicePixels="True"
-                                                          Foreground="White" />
-                </Button>
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
 
 
-                <Button Grid.Column="3"
-                    Width="30"
-                    Style="{x:Null}"
-                    Height="30"
-                    Command="{Binding SendMessageCommand}">
-                </Button>
+                        <TextBox Grid.Column="1" Tag="Type something..."
+                                 BorderThickness="0"
+                                 FontSize="13"
+                                 Width="Auto"
+                                 HorizontalAlignment="Left"
+                                 Text="{Binding MessageText, 
+                            UpdateSourceTrigger=PropertyChanged}"
+                        />
 
+                        <Button Grid.Column="2"
+                                Width="30"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Height="30"
+                                Command="{Binding SendMessageCommand}">
 
-                <TextBox Grid.Column="1" Tag="Write a message..."
-                         BorderThickness="0"
-                         FontSize="13"
-                         HorizontalAlignment="Left"
-                         Text="{Binding MessageText, UpdateSourceTrigger=PropertyChanged}"
-                         Height="Auto" 
-                         Width="Auto"/>
+                            <iconPacks:PackIconMaterialDesign     Kind="Send"
+                                                                  Width="18"
+                                                                  HorizontalContentAlignment="Center"
+                                                                  HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"
+                                                                  VerticalContentAlignment="Center"
+                                                                  Height="18"
+                                                                  Foreground="White" />
+
+                        </Button>
+                    </Grid>
+                </Border>
             </Grid>
         </Grid>
     </Grid>

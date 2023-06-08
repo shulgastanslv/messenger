@@ -7,72 +7,63 @@
       xmlns:loadingSpinnerControl="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
       xmlns:converters="clr-namespace:Client.Converters"
       mc:Ignorable="d" 
-      d:DesignHeight="620" 
-      d:DesignWidth="1085"
-      Title="AuthenticationView">
+      d:DesignHeight="630" 
+      d:DesignWidth="1100">
 
     <Page.Resources>
         <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
     </Page.Resources>
 
-    <ScrollViewer>
-
-        <Grid SnapsToDevicePixels="True" 
-                  HorizontalAlignment="Center"
-                  VerticalAlignment="Center"
-                  Background="{StaticResource WrapperColorBrush}" 
-                  Width="420" 
-                  Height="570">
-
-
-            <loadingSpinnerControl:LoadingSpinner
+        <Border  Style="{StaticResource BorderWrap}">
+            <Grid>
+                <loadingSpinnerControl:LoadingSpinner
                     Color="White"
                     Width="50"
                     Height="50"
                     Diameter="45"
                     IsLoading="{Binding IsLoading}"/>
 
-            <StackPanel HorizontalAlignment="Center" 
+                <StackPanel HorizontalAlignment="Center" 
                             VerticalAlignment="Center" 
                             Width="250" 
                             Visibility="{Binding IsLoading, 
                 Converter={StaticResource InverseBooleanToVisibilityConverter}}">
 
 
-                <TextBlock Text="Sign In" FontSize="20"
+                    <TextBlock Text="Sign In" FontSize="20"
                            FontWeight="SemiBold"
                            Margin="0, 0, 0, 10"/>
 
-                <TextBlock Text="Enter your credentials to log in to your account." 
+                    <TextBlock Text="Enter your credentials to log in to your account." 
                            FontSize="13" 
                            FontWeight="Normal" 
                            TextWrapping="Wrap"
                            Margin="0, 0, 0, 10"
                 />
 
-                <TextBlock Text="Enter your Email" 
+                    <TextBlock Text="Enter your Email" 
                            FontSize="13"
                            Opacity="0.5"
                            Margin="0, 0, 0, 10"/>
 
-                <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
                          Tag="Enter Email"
                          Margin="0, 0, 0, 15"/>
 
-                <TextBlock Text="Enter your Password"
+                    <TextBlock Text="Enter your Password"
                            FontSize="13" 
                            Opacity="0.5" 
                            Margin="0, 0, 0, 10"/>
 
-                <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          Tag="Enter Password"
                          Margin="0, 0, 0, 30"/>
 
-                <Button Command="{Binding AuthenticationCommand}"
+                    <Button Command="{Binding AuthenticationCommand}"
                         Content="Sign In"
                         Margin="0, 0, 0, 15"/>
 
-                <Button Command="{Binding NavigateBackCommand}"
+                    <Button Command="{Binding NavigateBackCommand}"
                         BorderThickness="1"
                         BorderBrush="#5E6175"
                         Width="89"
@@ -81,7 +72,7 @@
                         Margin="0, 0, 0, 15"
                         Content="&lt;Back"/>
 
-                <TextBlock
+                    <TextBlock
                     FontWeight="Medium"
                     FontSize="13"
                     TextDecorations="Underline"
@@ -94,9 +85,8 @@
                                Command="{Binding NavigateToRegistrationCommand}">
                         Sign Up
                     </Hyperlink>
-                </TextBlock>
-            </StackPanel>
-        </Grid>
-    </ScrollViewer>
-
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </Border>
 </Page>

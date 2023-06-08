@@ -12,6 +12,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/Colors.xaml"/>
+                <ResourceDictionary Source="Styles/Borders.xaml"/>
                 <ResourceDictionary Source="Styles/TextBlocks.xaml"/>
                 <ResourceDictionary Source="Styles/CheckBoxes.xaml"/>
                 <ResourceDictionary Source="Styles/TextBoxes.xaml"/>

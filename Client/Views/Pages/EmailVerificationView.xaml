@@ -7,8 +7,8 @@
       xmlns:loadingSpinnerControl="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
       xmlns:converters="clr-namespace:Client.Converters"
       mc:Ignorable="d" 
-      d:DesignHeight="620" d:DesignWidth="1085"
-      Title="EmailVerificationView">
+      d:DesignHeight="630" 
+      d:DesignWidth="1100">
 
     <Page.Resources>
         <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
@@ -16,7 +16,7 @@
 
     <Grid>
 
-        <Grid  Background="{StaticResource WrapperColorBrush}"
+        <Grid  Background="{StaticResource ColorWrapBrush}"
                Width="420" 
                Height="500">
 

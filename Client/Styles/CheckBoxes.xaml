@@ -4,7 +4,7 @@
 
     <Style TargetType="{x:Type CheckBox}">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BorderBrushColor}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonBorderBrushColor}"/>
         <Setter Property="Padding" Value="5, 0, 0, 0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="BorderThickness" Value="1"/>

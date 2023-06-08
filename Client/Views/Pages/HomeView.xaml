@@ -8,8 +8,8 @@
       xmlns:loadingSpinnerControl="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
       xmlns:modalControl="clr-namespace:ModalControl;assembly=ModalControl"
       mc:Ignorable="d"
-      d:DesignHeight="620"
-      d:DesignWidth="1085">
+      d:DesignHeight="630" 
+      d:DesignWidth="1100">
 
     <Grid>
 
@@ -17,53 +17,70 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"/>
                 <ColumnDefinition Width="280"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
+            <Grid Grid.Column="0"  Background="{StaticResource UsersListBackgroundColorBrush}" >
+
+                <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+
+                    <Button Width="48" Height="48"
+                            Background="Transparent">
+
+                        <iconPacks:PackIconMaterialDesign     Kind="NotificationsActive"
+                                                              Width="18"
+                                                              Height="18"
+                                                              Foreground="White" />
+
+                    </Button>
+
+                    <Button Width="48" Height="48"
+                            Background="Transparent">
+
+                        <iconPacks:PackIconMaterialDesign     Kind="Person"
+                                                              Width="18"
+                                                              Height="18"
+                                                              Foreground="White" />
+
+                    </Button>
+
+                    <Button Width="48" Height="48"
+                            VerticalAlignment="Bottom"
+                            Background="Transparent">
+
+                        <iconPacks:PackIconMaterialDesign     Kind="Settings"
+                                                              Width="18"
+                                                              Height="18"
+                                                              Foreground="White" />
+
+                    </Button>
+
+                </StackPanel>
+
+
+            </Grid>
 
             <Grid
                 Background="{StaticResource UsersListBackgroundColorBrush}" 
-                Grid.Column="0">
+                Grid.Column="1">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button 
-                        Width="30"
-                        Grid.Column="0"
-                        Height="30"
-                        Style="{x:Null}"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Command="{Binding OpenMenuCommand}"
-                            >
-
-                        <iconPacks:PackIconMaterialDesign     Kind="Menu"
-                                                              VerticalAlignment="Center"
-                                                              HorizontalAlignment="Center"
-                                                              Width="20"
-                                                              Opacity="0.8"
-                                                              Grid.Column="2"
-                                                              Height="20"
-                                                              Foreground="White" />
-
-
-
-                    </Button>
-
-                    <TextBox Width="230"
+                    <TextBox Width="220"
                              Height="38"
-                             Grid.Column="1"
+                             Grid.Column="0"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
                              Background="#313131"
                              BorderThickness="0"
                              Text="{Binding SearchText, 
@@ -114,14 +131,14 @@
             </Grid>
 
             <loadingSpinnerControl:LoadingSpinner
-                Grid.Column="1" 
+                Grid.Column="2" 
                 Color="White"
                 Width="50"
                 Height="50"
                 Diameter="45"
                 IsLoading="{Binding IsLoading}"/>
 
-            <Frame Grid.Column="1" Content="{Binding ChatViewModel}"/>
+            <Frame Grid.Column="2" Content="{Binding ChatViewModel}"/>
 
         </Grid>
     </Grid>

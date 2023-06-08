@@ -7,59 +7,58 @@
       xmlns:converters="clr-namespace:Client.Converters"
       xmlns:loadingSpinnerControl="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
       mc:Ignorable="d" 
-      d:DesignHeight="620" d:DesignWidth="1085"
-      Title="WelcomeView">
+      d:DesignHeight="630" 
+      d:DesignWidth="1100">
 
     <Page.Resources>
         <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
     </Page.Resources>
 
     <Grid>
+        <Border Style="{StaticResource BorderWrap}">
+            <Grid>
 
-        <Grid  Background="{StaticResource WrapperColorBrush}"
-        Width="420" 
-        Height="400">
+                <loadingSpinnerControl:LoadingSpinner
+                    Color="White"
+                    Width="50"
+                    Height="50"
+                    Diameter="45"
+                    IsLoading="{Binding IsLoading}"/>
 
-            <loadingSpinnerControl:LoadingSpinner
-            Color="White"
-            Width="50"
-            Height="50"
-            Diameter="45"
-            IsLoading="{Binding IsLoading}"/>
+                <StackPanel VerticalAlignment="Center"
+                            Visibility="{Binding IsLoading, 
+                        Converter={StaticResource InverseBooleanToVisibilityConverter}}">
 
-            <StackPanel VerticalAlignment="Center"
-                    Visibility="{Binding IsLoading, 
-                Converter={StaticResource InverseBooleanToVisibilityConverter}}"
-                    Width="300">
+                    <TextBlock Foreground="White"
+                               FontSize="15"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Text="Messenger Service"
+                               FontWeight="SemiBold"
+                               FontFamily="Poppins"/>
 
-                <TextBlock Foreground="White"
-                       FontSize="15"
-                       TextAlignment="Center"
-                       Text="Messenger Service"
-                       FontWeight="SemiBold"
-                       FontFamily="Poppins"/>
+                    <TextBlock Foreground="White"
+                               Margin="0, 10, 0, 0"
+                               FontSize="13"
+                               TextAlignment="Center"
+                               Text="Welcome to the official Messenger app."
+                               FontWeight="Regular"
+                               FontFamily="Poppins"/>
 
-                <TextBlock Foreground="White"
-                           Margin="0, 10, 0, 0"
-                           FontSize="13"
-                           TextAlignment="Center"
-                           Text="Welcome to the official Messenger app."
-                           FontWeight="Regular"
-                           FontFamily="Poppins"/>
+                    <TextBlock Foreground="White"
+                               FontSize="13"
+                               TextAlignment="Center"
+                               Text="It`s fast and secure."
+                               FontWeight="Regular"
+                               FontFamily="Poppins"/>
 
-                <TextBlock Foreground="White"
-                           FontSize="13"
-                           TextAlignment="Center"
-                           Text="It`s fast and secure."
-                           FontWeight="Regular"
-                           FontFamily="Poppins"/>
+                    <Button
+                        Margin="0, 10, 0, 0"
+                        Command="{Binding NavigateCommand}"
+                        Content="Start"/>
 
-                <Button
-                    Margin="0, 10, 0, 0"
-                    Command="{Binding NavigateCommand}"
-                    Content="Start"/>
-
-            </StackPanel>
-        </Grid>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Page>
