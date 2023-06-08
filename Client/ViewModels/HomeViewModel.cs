@@ -67,7 +67,7 @@ public class HomeViewModel : ViewModelBase
         {
             _selectedUser = value;
             OnPropertyChanged(nameof(SelectedUser));
-            ChatViewModel = new ChatViewModel(_selectedUser, _httpClient);
+            ChatViewModel = new ChatViewModel(_userStore, _selectedUser!, _httpClient);
         }
     }
     public ICommand GetAllUsersQuery { get; }

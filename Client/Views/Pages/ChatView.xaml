@@ -8,9 +8,15 @@
       xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:viewModels="clr-namespace:Client.ViewModels"
       xmlns:models="clr-namespace:Client.Models"
+      xmlns:converters="clr-namespace:Client.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="620" d:DesignWidth="1085"
       Title="ChatView">
+
+
+    <Page.Resources>
+        <converters:MessageAlignmentConverter x:Key="MessageAlignmentConverter" />
+    </Page.Resources>
 
     <Grid>
 
@@ -57,34 +63,50 @@
                 <ItemsControl Margin="15" ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}">
                     <ItemsControl.Resources>
                         <DataTemplate DataType="{x:Type models:MessageModel}">
-                            <Border Background="#323232"
-                                    Width="Auto"
-                                    Height="Auto"
-                                    MinWidth="170"
-                                    MinHeight="5"
-                                    MaxWidth="600"
-                                    MaxHeight="800"
+                            <Border Background="#333333"
                                     CornerRadius="25, 25, 25, 25"
                                     Margin="5"
-                                    Padding="2"
-                                    HorizontalAlignment="Left">
-                                <StackPanel>
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <TextBlock Padding="10" Grid.Row="0" Foreground="White" FontSize="13" FontFamily="Poppins" TextWrapping="Wrap" Text="{Binding Content}"/>
-                                        <Label Grid.Row="1" Foreground="White" Content="{Binding SendTime}" FontSize="12"  FontFamily="Poppins" FontWeight="Normal" HorizontalAlignment="Right" ContentStringFormat="{}{0:HH:mm}"/>
-                                    </Grid>
+                                    MaxWidth="500"
+                                    MaxHeight="400"
+                                    MinHeight="35"
+                                    MinWidth="180"
+                                    VerticalAlignment="Stretch">
+
+                                <Border.HorizontalAlignment>
+                                    <MultiBinding Converter="{StaticResource MessageAlignmentConverter}">
+                                        <Binding Path="Receiver" />
+                                        <Binding Path="DataContext.(viewModels:ChatViewModel.UserStore)"
+                                                 RelativeSource="{RelativeSource AncestorType=Page}" />
+                                    </MultiBinding>
+                                </Border.HorizontalAlignment>
+
+                                <StackPanel Margin="15, 5, 5, 0" VerticalAlignment="Stretch">
+                                    <TextBlock Foreground="White" FontSize="13" Text="{Binding Content}"/>
+                                    <Label Foreground="White" HorizontalAlignment="Right" FontSize="13" Margin="0 5 0 0"
+                                                Content="{Binding SendTime}" ContentStringFormat="HH:mm"/>
                                 </StackPanel>
                             </Border>
+
+
+                            <!--<StackPanel Margin="15 5, 5, 0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Content}" 
+                                               Foreground="White"
+                                               TextWrapping="Wrap"
+                                               TextAlignment="Center"
+                                               FontSize="13"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="Auto">
+                                    <Label Foreground="White" FontSize="13" Content="{Binding SendTime, StringFormat=HH:mm}"/>
+                                </StackPanel>
+                            </StackPanel>-->
+
                         </DataTemplate>
                     </ItemsControl.Resources>
                 </ItemsControl>
 
             </ScrollViewer>
-          
+
 
 
             <Grid Grid.Row="2" Margin="5" Background="{StaticResource BottomChatPanelColorBrush}" Width="Auto" Height="Auto">
