@@ -20,7 +20,8 @@ public class RegistrationCommand : ViewModelCommand
 
     private readonly UserStore _userStore;
 
-    public RegistrationCommand(UserStore userStore, HttpClient httpClient, NavigationService<HomeViewModel> navigationService, RegistrationViewModel registrationViewModel)
+    public RegistrationCommand(RegistrationViewModel registrationViewModel, UserStore userStore, 
+        HttpClient httpClient, NavigationService<HomeViewModel> navigationService)
     {
         _userStore = userStore;
         _httpClient = httpClient;
@@ -28,14 +29,13 @@ public class RegistrationCommand : ViewModelCommand
         _registrationViewModel = registrationViewModel;
 
         _registrationViewModel.PropertyChanged += OnPropertyChanged;
-
     }
 
     private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(RegistrationViewModel.UserName) ||
             e.PropertyName == nameof(RegistrationViewModel.Password) ||
-            e.PropertyName == nameof(RegistrationViewModel.Email))
+            e.PropertyName == nameof(RegistrationViewModel.IsAgree))
         {
             OnCanExecutedChanged();
         }
@@ -43,18 +43,14 @@ public class RegistrationCommand : ViewModelCommand
 
     public override bool CanExecute(object? parameter) =>
         !string.IsNullOrEmpty(_registrationViewModel.UserName) &&
-        !string.IsNullOrEmpty(_registrationViewModel.Email) &&
-        _registrationViewModel.IsAgree &&
-        !string.IsNullOrEmpty(_registrationViewModel.Password);
+        !string.IsNullOrEmpty(_registrationViewModel.Password) && 
+        _registrationViewModel.IsAgree;
 
     public override async void Execute(object? parameter)
     {
         _registrationViewModel.IsLoading = true;
 
-        _userStore.User = new UserModel(
-            Guid.NewGuid(),
-            _registrationViewModel.UserName,
-            _registrationViewModel.Email,
+        _userStore.User = new UserModel(Guid.NewGuid(), _registrationViewModel.UserName,
             _registrationViewModel.Password);
 
         var content = new StringContent(JsonConvert.SerializeObject(_userStore.User),
@@ -73,6 +69,11 @@ public class RegistrationCommand : ViewModelCommand
 
             _navigationService.Navigate();
         }
+
+        Properties.Settings.Default.UserName = _userStore.User.UserName;
+        Properties.Settings.Default.Password = _userStore.User.Password;
+        Properties.Settings.Default.Token = _userStore.Token;
+        Properties.Settings.Default.Save();
 
         _registrationViewModel.IsLoading = false;
 

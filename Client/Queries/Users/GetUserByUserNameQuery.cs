@@ -1,15 +1,13 @@
-﻿using Client.Commands;
+﻿using System.Net.Http;
+using System.Net.Http.Headers;
+using Client.Commands;
 using Client.Models;
 using Client.Stores;
 using Client.ViewModels;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using Domain.Entities.Users;
 
-namespace Client.Queries;
+namespace Client.Queries.Users;
 
-public sealed class GetUserByEmailQuery : ViewModelCommand
+public sealed class GetUserByUserNameQuery : ViewModelCommand
 {
     private readonly HomeViewModel _homeViewModel;
 
@@ -17,13 +15,11 @@ public sealed class GetUserByEmailQuery : ViewModelCommand
 
     private readonly HttpClient _httpClient;
 
-    public GetUserByEmailQuery(HomeViewModel homeViewModel, UserStore userStore, HttpClient httpClient)
+    public GetUserByUserNameQuery(HomeViewModel homeViewModel, UserStore userStore, HttpClient httpClient)
     {
         _userStore = userStore;
         _httpClient = httpClient;
         _homeViewModel = homeViewModel;
-
-        Execute(null);
     }
 
     public override async void Execute(object? parameter)
@@ -33,7 +29,7 @@ public sealed class GetUserByEmailQuery : ViewModelCommand
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
            _userStore.Token);
 
-        var response = await _httpClient.GetAsync($"https://localhost:7289/users/getUserByEmail?email={_userStore.User.Email}");
+        var response = await _httpClient.GetAsync($"https://localhost:7289/users/getUserByUserName?UserName={_userStore.User.UserName}");
 
         if (response.IsSuccessStatusCode)
         {

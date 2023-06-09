@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
-using Client.Stores;
+﻿using Client.Stores;
 using System.Net.Http;
 using System.Windows.Input;
 using Client.Models;
 using Client.Queries;
-using System.Linq;
-using Client.Commands;
-using Client.Services;
 using System.Collections.ObjectModel;
+using Client.Queries.Users;
 
 namespace Client.ViewModels;
 
@@ -71,7 +68,7 @@ public class HomeViewModel : ViewModelBase
         }
     }
     public ICommand GetAllUsersQuery { get; }
-    public ICommand GetUserByEmailQuery { get; }
+    public ICommand GetUserByUserNameQuery { get; }
 
     public HomeViewModel(UserStore userStore, HttpClient httpClient)
     {
@@ -79,6 +76,8 @@ public class HomeViewModel : ViewModelBase
         _httpClient = httpClient;
 
         GetAllUsersQuery = new GetAllUsersQuery(this, _userStore, httpClient);
-        GetUserByEmailQuery = new GetUserByEmailQuery(this, _userStore, httpClient);
+        GetAllUsersQuery.Execute(null);
+        GetUserByUserNameQuery = new GetUserByUserNameQuery(this, _userStore, httpClient);
+        GetUserByUserNameQuery.Execute(null);
     }
 }

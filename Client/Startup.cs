@@ -18,10 +18,6 @@ public class Startup
         services.AddSingleton<RegistrationViewModel>();
         services.AddSingleton<HomeViewModel>();
         services.AddSingleton<ChatViewModel>();
-        services.AddSingleton<MenuViewModel>();
-        services.AddSingleton<WelcomeViewModel>();
-        services.AddSingleton<EmailVerificationViewModel>();
-
 
         services.AddSingleton(provider => new MainWindow
         {
@@ -41,9 +37,10 @@ public class Startup
         {
             User = new UserModel
             {
-                Email = "akiroqw@gmail.com",
-                Password = "qwerty"
-            }
+                Id = Guid.NewGuid(),
+                UserName = Properties.Settings.Default.UserName,
+                Password = Properties.Settings.Default.Password},
+                Token = Properties.Settings.Default.Token
         });
 
         return services.BuildServiceProvider();

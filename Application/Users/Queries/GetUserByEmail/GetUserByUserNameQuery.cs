@@ -2,4 +2,4 @@
 
 namespace Application.Users.Queries.GetUserByEmail;
 
-public sealed record GetUserByEmailQuery(string email) : IQuery<UserResponse>;
+public sealed record GetUserByUserNameQuery(string email) : IQuery<UserResponse>;

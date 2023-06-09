@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using Client.Commands.Messages;
 using Client.Queries;
+using Client.Queries.Messages;
 using MediatR;
 
 namespace Client.ViewModels;
@@ -59,7 +60,7 @@ public class ChatViewModel : ViewModelBase
         _currentContact = currentContact;
         _userStore = userStore;
 
-        SendMessageCommand = new SendMessageCommand(httpClient, this, CurrentContact);
+        SendMessageCommand = new SendMessageCommand(this, CurrentContact, httpClient);
         GetMessagesQuery = new GetMessagesQuery(this, httpClient);
         GetMessagesQuery.Execute(null);
     }

@@ -1,5 +1,4 @@
 ﻿using Application.Common.Abstractions;
-using Application.Common.Interfaces;
 using Application.Messages.Commands.SaveMessageCommand;
 using Application.Users.Commands.UserAuthentication;
 using Application.Users.Commands.UserRegistration;
@@ -28,11 +27,7 @@ public static class DependencyInjection
         services.AddTransient<IMessageRepository, MessageRepository>();
         services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<IChatRepository, ChatRepository>();
-        services.AddTransient<IEmailService, EmailService>();
         services.AddTransient<IJwtProvider, JwtProvider>();
-
-        services.AddScoped<UserRegistrationCommandHandler>();
-        services.AddScoped<UserAuthenticationCommandHandler>();
 
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),

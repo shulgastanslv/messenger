@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace Application.Users.Commands.UserRegistration;
+namespace Application.Users.Commands.UserAuthentication;
 
-public class UserRegistrationCommandValidator : AbstractValidator<UserRegistrationCommand>
+public class UserAuthenticationCommandValidator : AbstractValidator<UserAuthenticationCommand>
 {
-    public UserRegistrationCommandValidator()
+    public UserAuthenticationCommandValidator()
     {
         RuleFor(i => i.Password)
             .NotEmpty().WithMessage("Password cannot be empty.");

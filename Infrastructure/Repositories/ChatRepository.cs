@@ -1,5 +1,7 @@
-﻿using Application.Common.Interfaces;
+﻿using Application.Common.Abstractions;
 using Domain.Entities.Chats;
+using Domain.Primitives.Errors;
+using Domain.Primitives.Maybe;
 using Domain.Primitives.Result;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -28,18 +30,13 @@ public class ChatRepository : IChatRepository
         return Result.Success(chat);
     }
 
-    public async Task<Result<Chat>> GetChatAsync(Guid sender, Guid receiver, CancellationToken cancellationToken)
+    public async Task<Maybe<Chat>> GetChatAsync(Guid sender, Guid receiver, CancellationToken cancellationToken)
     {
-        var chat = await _applicationDbContext.Chats
+        var maybeChat = await _applicationDbContext.Chats
             .FirstOrDefaultAsync(c =>
                     c.Sender!.Id == sender && c.Receiver!.Id == receiver,
                 cancellationToken);
 
-        if (chat == null)
-        {
-            return await CreateChatAsync(sender, receiver, cancellationToken);
-        }
-
-        return Result.Success(chat);
+        return maybeChat;
     }
 }

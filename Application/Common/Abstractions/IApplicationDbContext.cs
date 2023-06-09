@@ -2,7 +2,7 @@
 using Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Common.Interfaces;
+namespace Application.Common.Abstractions;
 
 public interface IApplicationDbContext
 {

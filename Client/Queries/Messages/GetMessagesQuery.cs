@@ -1,16 +1,14 @@
-﻿using Client.Commands;
-using Client.Stores;
-using Client.ViewModels;
-using System.Net.Http;
-using Client.Models;
-using System.Collections.Generic;
-using System;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Net.Http;
 using System.Text;
+using Client.Commands;
+using Client.Models;
+using Client.ViewModels;
+using Newtonsoft.Json;
 
-namespace Client.Queries;
+namespace Client.Queries.Messages;
 
 public sealed class GetMessagesQuery : ViewModelCommand
 {

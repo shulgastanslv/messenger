@@ -1,8 +1,8 @@
-﻿using Application.Common.Interfaces;
-using Domain.Entities.Users;
+﻿using Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Domain.Entities.Chats;
+using Application.Common.Abstractions;
 
 namespace Infrastructure.Persistence;
 

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Application.Users.Commands.UserAuthentication;
 
-namespace Presentation.Modules.Users;
+namespace Presentation.Modules;
 
 public class AuthenticationModule : CarterModule
 {
@@ -22,6 +22,10 @@ public class AuthenticationModule : CarterModule
 
             return result.IsSuccess ? Results.Ok(result.Value) : Results.BadRequest(result.Error);
         });
+
+        app.MapPost("/confirm", [Authorize] () => { });
     }
+
+
 }
 

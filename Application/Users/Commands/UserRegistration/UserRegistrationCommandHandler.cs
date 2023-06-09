@@ -1,10 +1,7 @@
 ﻿using Application.Common.Abstractions;
 using Application.Common.Abstractions.Messaging;
-using Application.Common.Behaviours;
-using Application.Common.Interfaces;
 using Domain.Entities.Users;
 using Domain.Primitives.Result;
-using Microsoft.Extensions.Logging;
 
 namespace Application.Users.Commands.UserRegistration;
 
@@ -28,7 +25,6 @@ public sealed class UserRegistrationCommandHandler : ICommandHandler<UserRegistr
         var user = new User(
             Guid.NewGuid(),
             request.UserName, 
-            request.Email,
             request.Password);
 
         var result = await _userRepository.CreateUserAsync(user, cancellationToken);

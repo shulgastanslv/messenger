@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace Presentation.Modules.Users;
+namespace Presentation.Modules;
 
 public class RegistrationModule : CarterModule
 {

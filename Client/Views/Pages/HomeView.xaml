@@ -22,44 +22,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0"  Background="{StaticResource UsersListBackgroundColorBrush}" >
-
-                <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
-
-                    <Button Width="48" Height="48"
-                            Background="Transparent">
-
-                        <iconPacks:PackIconMaterialDesign     Kind="NotificationsActive"
-                                                              Width="18"
-                                                              Height="18"
-                                                              Foreground="White" />
-
-                    </Button>
-
-                    <Button Width="48" Height="48"
-                            Background="Transparent">
-
-                        <iconPacks:PackIconMaterialDesign     Kind="Person"
-                                                              Width="18"
-                                                              Height="18"
-                                                              Foreground="White" />
-
-                    </Button>
-
-                    <Button Width="48" Height="48"
-                            VerticalAlignment="Bottom"
-                            Background="Transparent">
-
-                        <iconPacks:PackIconMaterialDesign     Kind="Settings"
-                                                              Width="18"
-                                                              Height="18"
-                                                              Foreground="White" />
-
-                    </Button>
-
-                </StackPanel>
-
-
+            <Grid Grid.Column="0" 
+                  Background="{StaticResource UsersListBackgroundColorBrush}" >
             </Grid>
 
             <Grid
@@ -88,7 +52,7 @@
                              Tag="Search"/>
                 </Grid>
 
-                <ListView    Background="Transparent"
+                <ListView Background="Transparent"
                          x:Name="UsersListView"
                          BorderThickness="0"
                          SelectedItem="{Binding SelectedUser}"
@@ -102,13 +66,13 @@
                     </ListView.ItemContainerStyle>
 
                     <ListView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate>  
                             <Border Background="Transparent"
                                 Height="65">
-
                                 <Grid>
                                     <StackPanel Orientation="Horizontal"
-                                            Margin="15, 0, 0, 0">
+                                                Height="Auto"
+                                                Margin="15, 0, 0, 0">
 
                                         <Border Width="40"  Height="40" CornerRadius="25" Background="White"/>
 
@@ -116,26 +80,20 @@
                                             <Label Content="{Binding UserName}" 
                                                Foreground="White"   
                                                FontSize="13"/>
+                                            <Label Content="Last Message" 
+                                                   Foreground="White"   
+                                                   FontSize="13"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
                             </Border>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                    <ListView.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Delete"/>
-                        </ContextMenu>
-                    </ListView.ContextMenu>
                 </ListView>
             </Grid>
 
             <loadingSpinnerControl:LoadingSpinner
                 Grid.Column="2" 
-                Color="White"
-                Width="50"
-                Height="50"
-                Diameter="45"
                 IsLoading="{Binding IsLoading}"/>
 
             <Frame Grid.Column="2" Content="{Binding ChatViewModel}"/>

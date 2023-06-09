@@ -31,17 +31,6 @@
                           Name="UserNameTextBox" 
                           Margin="0, 0, 0, 15"/>
 
-
-                <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
-                           Text="Enter Email" 
-                           Opacity="0.5" 
-                           Margin="0, 0, 0, 15"/>
-
-
-                <TextBox  Tag="Enter Email"
-                          Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
-                          Margin="0, 0, 0, 15"/>
-
                 <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
                            Text="Enter your Password" 
                            Opacity="0.5" 

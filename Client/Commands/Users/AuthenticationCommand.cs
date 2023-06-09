@@ -20,7 +20,7 @@ public sealed class AuthenticationCommand : ViewModelCommand
     private readonly UserStore _userStore;
 
     public AuthenticationCommand(AuthenticationViewModel authenticationViewModel,
-        HttpClient httpClient, UserStore userStore, NavigationService<HomeViewModel> navigationService)
+        UserStore userStore, HttpClient httpClient, NavigationService<HomeViewModel> navigationService)
     {
         _authenticationViewModel = authenticationViewModel;
         _httpClient = httpClient;
@@ -34,7 +34,7 @@ public sealed class AuthenticationCommand : ViewModelCommand
     private void OnPropertyChanged(object? sender,
         System.ComponentModel.PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(AuthenticationViewModel.Email) ||
+        if (e.PropertyName == nameof(AuthenticationViewModel.UserName) ||
             e.PropertyName == nameof(AuthenticationViewModel.Password))
         {
             OnCanExecutedChanged();
@@ -42,18 +42,17 @@ public sealed class AuthenticationCommand : ViewModelCommand
     }
 
     public override bool CanExecute(object? parameter) =>
-        !string.IsNullOrEmpty(_authenticationViewModel.Email) &&
+        !string.IsNullOrEmpty(_authenticationViewModel.UserName) &&
         !string.IsNullOrEmpty(_authenticationViewModel.Password);
 
     public override async void Execute(object? parameter)
     {
         _authenticationViewModel.IsLoading = true;
 
-        _userStore.User = new UserModel
-        {
-            Email = _authenticationViewModel.Email,
-            Password = _authenticationViewModel.Password
-        };
+        _userStore.User = new UserModel(
+            Guid.Empty,
+            _authenticationViewModel.UserName,
+            _authenticationViewModel.Password);
 
         var content = new StringContent(JsonConvert.SerializeObject(_userStore.User),
             Encoding.UTF8, "application/json");
@@ -70,6 +69,11 @@ public sealed class AuthenticationCommand : ViewModelCommand
 
             _navigationService.Navigate();
         }
+
+        Properties.Settings.Default.UserName = _userStore.User.UserName;
+        Properties.Settings.Default.Password = _userStore.User.Password;
+        Properties.Settings.Default.Token = _userStore.Token;
+        Properties.Settings.Default.Save();
 
         _authenticationViewModel.IsLoading = false;
     }

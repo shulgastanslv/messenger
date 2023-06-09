@@ -17,12 +17,28 @@ public partial class App
         _serviceProvider = Client.Startup.Configure();
     }
 
-    protected override void OnStartup(StartupEventArgs e)
+    protected override async void OnStartup(StartupEventArgs e)
     {
-        var startPage = _serviceProvider.GetRequiredService<WelcomeViewModel>();
+        ViewModelBase viewModel = _serviceProvider.GetRequiredService<HomeViewModel>(); ;
+
+        if (string.IsNullOrEmpty(Client.Properties.Settings.Default.Token))
+        {
+            viewModel = _serviceProvider.GetRequiredService<RegistrationViewModel>();
+        }
+        else
+        {
+            var httpClient = _serviceProvider.GetRequiredService<HttpClient>();
+            var response = await httpClient.PostAsync("/authentication/confirm", null);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                viewModel = _serviceProvider.GetRequiredService<HomeViewModel>();
+            }
+        }
+
 
         var navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
-        navigationStore.CurrentViewModel = startPage;
+        navigationStore.CurrentViewModel = viewModel;
 
         MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
         MainWindow.Show();

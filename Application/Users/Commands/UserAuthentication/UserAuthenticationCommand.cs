@@ -3,4 +3,4 @@ using Domain.Primitives.Result;
 
 namespace Application.Users.Commands.UserAuthentication;
 
-public record UserAuthenticationCommand(string Email, string Password) : ICommand<Result<string>>;
+public record UserAuthenticationCommand(string UserName, string Password) : ICommand<Result<string>>;

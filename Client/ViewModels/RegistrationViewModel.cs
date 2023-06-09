@@ -32,15 +32,6 @@ public class RegistrationViewModel : ViewModelBase
             OnPropertyChanged(nameof(UserName));
         }
     }
-    public string Email
-    {
-        get => _userStore.User.Email;
-        set
-        {
-            _userStore.User.Email = value;
-            OnPropertyChanged(nameof(Email));
-        }
-    }
     public string Password
     {
         get => _userStore.User.Password;
@@ -74,7 +65,7 @@ public class RegistrationViewModel : ViewModelBase
             navigationStore,
             () => new HomeViewModel(userStore, httpClient));
 
-        RegistrationCommand = new RegistrationCommand(userStore, httpClient, 
-            navigateService, this);
+        RegistrationCommand = new RegistrationCommand(this, userStore, httpClient, 
+            navigateService);
     }
 }

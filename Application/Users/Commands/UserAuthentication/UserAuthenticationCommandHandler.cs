@@ -19,7 +19,7 @@ public class UserAuthenticationCommandHandler : ICommandHandler<UserAuthenticati
 
     public async Task<Result<string>> Handle(UserAuthenticationCommand request, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetUserByEmailAsync(request.Email, cancellationToken);
+        var user = await _userRepository.GetUserByUserNameAsync(request.UserName, cancellationToken);
 
         if (user.HasNoValue)
         {

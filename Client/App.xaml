@@ -5,7 +5,6 @@
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:viewModels="clr-namespace:Client.ViewModels"
              xmlns:pages="clr-namespace:Client.Views.Pages"
-             xmlns:customControls="clr-namespace:Client.Views.CustomControls"
              xmlns:converters="clr-namespace:Client.Converters">
 
     <Application.Resources>
@@ -36,20 +35,8 @@
                 <pages:HomeView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModels:EmailVerificationViewModel}">
-                <pages:EmailVerificationView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModels:WelcomeViewModel}">
-                <pages:WelcomeView/>
-            </DataTemplate>
-
             <DataTemplate DataType="{x:Type viewModels:ChatViewModel}">
                 <pages:ChatView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModels:MenuViewModel}">
-                <customControls:MenuView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type TypeName=viewModels:MainViewModel}">

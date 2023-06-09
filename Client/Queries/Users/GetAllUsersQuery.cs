@@ -1,12 +1,12 @@
 ﻿using System.Collections.ObjectModel;
-using Client.Stores;
-using Client.ViewModels;
 using System.Net.Http;
-using Client.Models;
 using System.Net.Http.Headers;
 using Client.Commands;
+using Client.Models;
+using Client.Stores;
+using Client.ViewModels;
 
-namespace Client.Queries;
+namespace Client.Queries.Users;
 
 public sealed class GetAllUsersQuery : ViewModelCommand
 {
@@ -22,8 +22,6 @@ public sealed class GetAllUsersQuery : ViewModelCommand
         _homeViewModel = homeViewModel;
         _httpClient = httpClient;
         _userStore = userStore;
-
-        Execute(null);
     }
 
     public override async void Execute(object? parameter)

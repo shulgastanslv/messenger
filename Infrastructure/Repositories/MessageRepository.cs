@@ -1,15 +1,11 @@
-﻿using System.Text;
-using System.Text.Json;
-using Application.Common.Interfaces;
-using Domain.Entities;
+﻿using Application.Common.Abstractions;
 using Domain.Entities.Chats;
 using Domain.Entities.Messages;
-using Domain.Entities.Users;
 using Domain.Primitives.Errors;
 using Domain.Primitives.Result;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System.Text.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Infrastructure.Repositories;
@@ -43,7 +39,6 @@ public class MessageRepository : IMessageRepository
 
         return Result.Success();
     }
-
     public async Task<Result<IEnumerable<Message>>> GetMessagesAsync(Guid receiver, Guid sender, CancellationToken cancellationToken)
     {
         var chat = await _applicationDbContext.Chats

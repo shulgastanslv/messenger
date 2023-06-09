@@ -16,7 +16,7 @@ public class SendMessageCommand : ViewModelCommand
 
     private readonly ChatViewModel _chatViewModel;
 
-    public SendMessageCommand(HttpClient httpClient, ChatViewModel chatViewModel, ContactModel receiver)
+    public SendMessageCommand(ChatViewModel chatViewModel, ContactModel receiver, HttpClient httpClient)
     {
         _httpClient = httpClient;
         _chatViewModel = chatViewModel;
@@ -28,9 +28,7 @@ public class SendMessageCommand : ViewModelCommand
     private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(ChatViewModel.MessageText))
-        {
             OnCanExecutedChanged();
-        }
     }
 
     public override bool CanExecute(object? parameter) =>
@@ -46,7 +44,7 @@ public class SendMessageCommand : ViewModelCommand
         var content = new StringContent(JsonConvert.SerializeObject(message),
             Encoding.UTF8, "application/json");
 
-        var response = await _httpClient.PostAsync("/receiver", content);
+        var response = await _httpClient.PostAsync("/message/send", content);
 
         response.EnsureSuccessStatusCode();
     }

@@ -44,11 +44,6 @@
                         Content="Sign In"
                         Margin="0, 0, 0, 15"/>
 
-                <Button Style="{StaticResource BackButtonStyle}"
-                        Command="{Binding NavigateBackCommand}"
-                        Margin="0, 0, 0, 15"
-                        />
-
                 <TextBlock
                     Style="{StaticResource DefaultTextBlockStyle}"
                     FontWeight="Medium"

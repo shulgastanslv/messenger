@@ -19,9 +19,9 @@ public class Chat
 
     public Guid ReceiverId { get; set; }
 
-    public User? Sender { get; set; }
+    public virtual User? Sender { get; set; }
 
-    public User? Receiver { get; set; }
+    public virtual User? Receiver { get; set; }
 
     public Chat InversedChat => new(ChatId, ReceiverId, SenderId);
 }

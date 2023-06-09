@@ -23,13 +23,13 @@ public sealed class AuthenticationViewModel : ViewModelBase
             OnPropertyChanged(nameof(IsLoading));
         }
     }
-    public string Email
+    public string UserName
     {
-        get => _userStore.User.Email!;
+        get => _userStore.User.UserName!;
         set
         {
-            _userStore.User.Email = value;
-            OnPropertyChanged(nameof(Email));
+            _userStore.User.UserName = value;
+            OnPropertyChanged(nameof(UserName));
         }
     }
     public string Password
@@ -43,7 +43,6 @@ public sealed class AuthenticationViewModel : ViewModelBase
     }
     public ICommand AuthenticationCommand { get; }
     public ICommand NavigateToRegistrationCommand { get; }
-    public ICommand NavigateBackCommand { get; }
     public AuthenticationViewModel(UserStore userStore, HttpClient httpClient, NavigationStore navigationStore)
     {
         _userStore = userStore;
@@ -52,14 +51,10 @@ public sealed class AuthenticationViewModel : ViewModelBase
             new NavigationService<RegistrationViewModel>(navigationStore,
                 () => new RegistrationViewModel(userStore, httpClient, navigationStore)));
 
-        NavigateBackCommand = new NavigateCommand<WelcomeViewModel>(
-            new NavigationService<WelcomeViewModel>(navigationStore,
-                () => new WelcomeViewModel(userStore, httpClient, navigationStore)));
-
         var navigationService = new NavigationService<HomeViewModel>(
             navigationStore,
             () => new HomeViewModel(userStore, httpClient));
 
-        AuthenticationCommand = new AuthenticationCommand(this, httpClient, userStore, navigationService);
+        AuthenticationCommand = new AuthenticationCommand(this, userStore, httpClient, navigationService);
     }
 }
