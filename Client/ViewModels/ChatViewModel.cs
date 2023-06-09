@@ -12,6 +12,8 @@ using Client.Commands.Messages;
 using Client.Queries;
 using Client.Queries.Messages;
 using MediatR;
+using System.Windows.Threading;
+using Client.Queries.Users;
 
 namespace Client.ViewModels;
 
@@ -53,6 +55,7 @@ public class ChatViewModel : ViewModelBase
         }
     }
     public ICommand GetMessagesQuery { get; }
+    public ICommand GetLastMessageQuery { get; }
     public ICommand SendMessageCommand { get; }
 
     public ChatViewModel(UserStore userStore, ContactModel currentContact, HttpClient httpClient)
@@ -63,6 +66,7 @@ public class ChatViewModel : ViewModelBase
         SendMessageCommand = new SendMessageCommand(this, CurrentContact, httpClient);
         GetMessagesQuery = new GetMessagesQuery(this, httpClient);
         GetMessagesQuery.Execute(null);
-    }
 
+        GetLastMessageQuery = new GetLastMessagesQuery(this, httpClient);
+    }
 }

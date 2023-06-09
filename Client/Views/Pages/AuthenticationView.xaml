@@ -26,7 +26,7 @@
                            Opacity="0.5"
                            Margin="0, 0, 0, 15"/>
 
-                <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
                          Tag="Enter Email"
                          Margin="0, 0, 0, 15"/>
 

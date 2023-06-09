@@ -1,4 +1,5 @@
 ﻿using Application.Messages.Commands.SaveMessageCommand;
+using Application.Messages.Queries.GetLastMessagesAsync;
 using Application.Messages.Queries.GetMessages;
 using Carter;
 using Domain.Entities.Contacts;
@@ -31,6 +32,17 @@ public class MessageModule : CarterModule
                 Results.BadRequest(result.Messages.Error);
         });
 
+        app.MapPost("/getlast", async (Contact request, ISender sender,
+            HttpContext Context, CancellationToken cancellationToken) =>
+        {
+            var result = await sender.Send(new GetLastMessagesQuery(request, Context),
+                cancellationToken);
+
+            return result.Messages.IsSuccess ?
+                Results.Ok(result.Messages.Value) :
+                Results.BadRequest(result.Messages.Error);
+        });
+
         app.MapPost("/send", [Authorize] async (Message request, ISender sender,
             HttpContext context, CancellationToken cancellationToken) =>
         {
@@ -39,6 +51,8 @@ public class MessageModule : CarterModule
 
             return result.IsSuccess ? Results.Ok() : Results.BadRequest(result.Error);
         });
+
+
 
     }
 }

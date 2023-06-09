@@ -66,6 +66,44 @@ public class MessageRepository : IMessageRepository
             messages.Add(message!);
         }
 
+        chat!.LastUpdatedTime = DateTime.Now;
+
+        await _applicationDbContext.SaveChangesAsync(cancellationToken);
+
+        return Result.Success<IEnumerable<Message>>(messages);
+    }
+
+    public async Task<Result<IEnumerable<Message>>> GetLastMessagesAsync(Guid receiver, Guid sender, CancellationToken cancellationToken)
+    {
+        var chat = await _applicationDbContext.Chats
+            .FirstOrDefaultAsync(i => i.Sender!.Id == sender && i.Receiver!.Id == receiver, cancellationToken);
+
+        var dictionaryPath = Path.Combine(_filePath, chat.ChatId.ToString());
+
+        var fileNames = await Task.Run(() =>
+            Directory.GetFiles(dictionaryPath), cancellationToken);
+
+        var messages = new List<Message>();
+
+        foreach (var file in fileNames)
+        {
+            var fileInfo = new FileInfo(file);
+
+            DateTime lastWriteTime = fileInfo.LastWriteTime;
+            string formattedTime = lastWriteTime.ToString("yyyy-MM-dd HH:mm:ss");
+
+            if (DateTime.Parse(formattedTime) > chat.LastUpdatedTime)
+            {
+                string json = await File.ReadAllTextAsync(file, cancellationToken);
+                var message = JsonConvert.DeserializeObject<Message>(json);
+                messages.Add(message!);
+            }
+        }
+
+        chat!.LastUpdatedTime = DateTime.Now;
+
+        await _applicationDbContext.SaveChangesAsync(cancellationToken);
+
         return Result.Success<IEnumerable<Message>>(messages);
     }
 }

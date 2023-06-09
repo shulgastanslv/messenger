@@ -19,22 +19,22 @@ public partial class App
 
     protected override async void OnStartup(StartupEventArgs e)
     {
-        ViewModelBase viewModel = _serviceProvider.GetRequiredService<HomeViewModel>(); ;
+        ViewModelBase viewModel = _serviceProvider.GetRequiredService<AuthenticationViewModel>(); ;
 
-        if (string.IsNullOrEmpty(Client.Properties.Settings.Default.Token))
-        {
-            viewModel = _serviceProvider.GetRequiredService<RegistrationViewModel>();
-        }
-        else
-        {
-            var httpClient = _serviceProvider.GetRequiredService<HttpClient>();
-            var response = await httpClient.PostAsync("/authentication/confirm", null);
+        //if (string.IsNullOrEmpty(Client.Properties.Settings.Default.Token))
+        //{
+        //    viewModel = _serviceProvider.GetRequiredService<RegistrationViewModel>();
+        //}
+        //else
+        //{
+        //    var httpClient = _serviceProvider.GetRequiredService<HttpClient>();
+        //    var response = await httpClient.PostAsync("/authentication/confirm", null);
 
-            if (!response.IsSuccessStatusCode)
-            {
-                viewModel = _serviceProvider.GetRequiredService<HomeViewModel>();
-            }
-        }
+        //    if (!response.IsSuccessStatusCode)
+        //    {
+        //        viewModel = _serviceProvider.GetRequiredService<HomeViewModel>();
+        //    }
+        //}
 
 
         var navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();

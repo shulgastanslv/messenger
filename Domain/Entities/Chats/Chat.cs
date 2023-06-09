@@ -9,6 +9,7 @@ public class Chat
         ChatId = chatId;
         SenderId = senderId;
         ReceiverId = receiverId;
+        LastUpdatedTime = DateTime.Now;
     }
 
     public int Id { get; set; }
@@ -18,6 +19,8 @@ public class Chat
     public Guid SenderId { get; set; }
 
     public Guid ReceiverId { get; set; }
+
+    public DateTime LastUpdatedTime { get; set; }
 
     public virtual User? Sender { get; set; }
 

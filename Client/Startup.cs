@@ -38,9 +38,11 @@ public class Startup
             User = new UserModel
             {
                 Id = Guid.NewGuid(),
-                UserName = Properties.Settings.Default.UserName,
-                Password = Properties.Settings.Default.Password},
-                Token = Properties.Settings.Default.Token
+                //UserName = Properties.Settings.Default.UserName,
+                //Password = Properties.Settings.Default.Password},
+                UserName = "",
+                Password = ""},
+                Token = ""
         });
 
         return services.BuildServiceProvider();

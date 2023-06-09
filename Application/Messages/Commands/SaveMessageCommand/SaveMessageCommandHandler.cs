@@ -42,7 +42,7 @@ public class SaveMessageCommandHandler : ICommandHandler<SaveMessageCommand, Res
         if (chatResult.HasNoValue)
         {
             _logger.LogInformation("Chat with the user {user1} and {user2} not found",
-                maybeSenderId, request.Message.Receiver);
+                maybeSenderId.Value, request.Message.Receiver);
 
             chatResult = (await _chatRepository.CreateChatAsync(maybeSenderId.Value, request.Message.Receiver,
                 cancellationToken)).Value;
