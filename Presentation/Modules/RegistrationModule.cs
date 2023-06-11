@@ -14,6 +14,7 @@ public class RegistrationModule : CarterModule
         : base("/registration")
     {
     }
+
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapPost("/reg", [AllowAnonymous] async (UserRegistrationCommand request,
@@ -24,6 +25,4 @@ public class RegistrationModule : CarterModule
             return result.IsSuccess ? Results.Ok(result.Value) : Results.BadRequest(result.Error);
         });
     }
-
 }
-

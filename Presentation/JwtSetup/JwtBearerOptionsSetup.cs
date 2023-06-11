@@ -7,7 +7,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Presentation.JwtSetup;
 
-
 public sealed class JwtBearerOptionsSetup : IPostConfigureOptions<JwtBearerOptions>
 {
     private const string ConfigurationSectionName = "Authentication";

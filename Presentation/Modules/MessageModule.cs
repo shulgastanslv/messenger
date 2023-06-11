@@ -27,9 +27,9 @@ public class MessageModule : CarterModule
             var result = await sender.Send(new GetMessagesQuery(request, Context),
                 cancellationToken);
 
-            return result.Messages.IsSuccess ?
-                Results.Ok(result.Messages.Value) :
-                Results.BadRequest(result.Messages.Error);
+            return result.Messages.IsSuccess
+                ? Results.Ok(result.Messages.Value)
+                : Results.BadRequest(result.Messages.Error);
         });
 
         app.MapPost("/getlast", async (Contact request, ISender sender,
@@ -38,9 +38,9 @@ public class MessageModule : CarterModule
             var result = await sender.Send(new GetLastMessagesQuery(request, Context),
                 cancellationToken);
 
-            return result.Messages.IsSuccess ?
-                Results.Ok(result.Messages.Value) :
-                Results.BadRequest(result.Messages.Error);
+            return result.Messages.IsSuccess
+                ? Results.Ok(result.Messages.Value)
+                : Results.BadRequest(result.Messages.Error);
         });
 
         app.MapPost("/send", [Authorize] async (Message request, ISender sender,
@@ -51,8 +51,5 @@ public class MessageModule : CarterModule
 
             return result.IsSuccess ? Results.Ok() : Results.BadRequest(result.Error);
         });
-
-
-
     }
 }

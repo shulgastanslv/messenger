@@ -1,5 +1,5 @@
-﻿using Client.ViewModels;
-using System;
+﻿using System;
+using Client.ViewModels;
 
 namespace Client.Stores;
 
@@ -16,6 +16,8 @@ public class NavigationStore
             OnCurrentViewModelChanged();
         }
     }
+
+    public bool IsOpen => CurrentViewModel != null;
 
     public event Action? CurrentViewModelChanged;
 

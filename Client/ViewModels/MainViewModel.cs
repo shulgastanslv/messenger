@@ -13,10 +13,10 @@ public class MainViewModel : ViewModelBase
         _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
     }
 
+    public ViewModelBase? CurrentViewModel => _navigationStore.CurrentViewModel;
+
     private void OnCurrentViewModelChanged()
     {
         OnPropertyChanged(nameof(CurrentViewModel));
     }
-
-    public ViewModelBase? CurrentViewModel => _navigationStore.CurrentViewModel;
 }

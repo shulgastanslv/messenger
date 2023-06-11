@@ -22,8 +22,8 @@ internal sealed class JwtProvider : IJwtProvider
     {
         var claims = new Claim[]
         {
-            new (JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-            new (JwtRegisteredClaimNames.Name, user.UserName!),
+            new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new(JwtRegisteredClaimNames.Name, user.UserName!)
         };
 
         var signingCredentials = new SigningCredentials(
@@ -35,21 +35,20 @@ internal sealed class JwtProvider : IJwtProvider
             _jwtOptions.Issuer,
             _jwtOptions.Audience,
             claims,
-            null,  
+            null,
             DateTime.Now.AddDays(7),
             signingCredentials);
 
         var tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
 
         return tokenValue;
-
     }
 
     public Maybe<Guid> GetUserIdAsync(ClaimsPrincipal principal)
     {
         var userIdClaim = principal.FindFirst(ClaimTypes.NameIdentifier);
 
-        if (userIdClaim == null) { return Maybe<Guid>.None; }
+        if (userIdClaim == null) return Maybe<Guid>.None;
 
         return Maybe<Guid>.From(Guid.Parse(userIdClaim.Value));
     }

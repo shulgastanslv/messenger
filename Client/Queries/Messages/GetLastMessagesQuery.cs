@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using Client.Commands;
@@ -29,17 +27,11 @@ public class GetLastMessagesQuery : ViewModelCommand
 
         var response = await _httpClient.PostAsync("/message/getlast", content);
 
-        if (!response.IsSuccessStatusCode)
-        {
-            return;
-        }
+        if (!response.IsSuccessStatusCode) return;
 
         var messages = await response.Content
             .ReadAsAsync<IEnumerable<MessageModel>>();
 
-        foreach (var message in messages)
-        {
-            _chatViewModel.Messages.Add(message);
-        }
+        foreach (var message in messages) _chatViewModel.Messages.Add(message);
     }
 }

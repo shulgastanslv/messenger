@@ -1,8 +1,8 @@
-using Carter;
 using Application;
+using Carter;
 using Infrastructure;
-using Presentation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Presentation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +14,7 @@ builder
 
 builder.Services.AddAuthorization();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).
-    AddJwtBearer();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
 
 builder.Services.AddCarter();
 

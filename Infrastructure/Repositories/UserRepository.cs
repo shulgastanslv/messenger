@@ -1,8 +1,8 @@
-﻿using Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
-using Domain.Primitives.Result;
+﻿using Domain.Entities.Users;
 using Domain.Primitives.Maybe;
-using Domain.Entities.Users;
+using Domain.Primitives.Result;
+using Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 

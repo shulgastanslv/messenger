@@ -3,28 +3,28 @@
 
 
     <Color x:Key="WindowBackgroundColor">#D9D9D9</Color>
-    <SolidColorBrush x:Key="WindowBackgroundColorBrush" Color="{StaticResource WindowBackgroundColor}"/>
+    <SolidColorBrush x:Key="WindowBackgroundColorBrush" Color="{StaticResource WindowBackgroundColor}" />
 
     <Color x:Key="WindowTitleBarBackgroundColor">#FFFFFF</Color>
-    <SolidColorBrush x:Key="WindowTitleBarBackgroundColorBrush" Color="{StaticResource WindowTitleBarBackgroundColor}"/>
+    <SolidColorBrush x:Key="WindowTitleBarBackgroundColorBrush" Color="{StaticResource WindowTitleBarBackgroundColor}" />
 
     <Color x:Key="ColorWrap">#F1F5F1</Color>
-    <SolidColorBrush x:Key="ColorWrapBrush" Color="{StaticResource ColorWrap}"/>
+    <SolidColorBrush x:Key="ColorWrapBrush" Color="{StaticResource ColorWrap}" />
 
     <Color x:Key="HeaderChatColor">#EEEEEE</Color>
-    <SolidColorBrush x:Key="HeaderChatColorBrush" Color="{StaticResource HeaderChatColor}"/>
+    <SolidColorBrush x:Key="HeaderChatColorBrush" Color="{StaticResource HeaderChatColor}" />
 
     <Color x:Key="BottomChatPanelColor">#EEEEEE</Color>
-    <SolidColorBrush x:Key="BottomChatPanelColorBrush" Color="{StaticResource BottomChatPanelColor}"/>
+    <SolidColorBrush x:Key="BottomChatPanelColorBrush" Color="{StaticResource BottomChatPanelColor}" />
 
     <Color x:Key="ChatTextBoxColor">#F5F5F5</Color>
-    <SolidColorBrush x:Key="ChatTextBoxColorBrush" Color="{StaticResource ChatTextBoxColor}"/>
+    <SolidColorBrush x:Key="ChatTextBoxColorBrush" Color="{StaticResource ChatTextBoxColor}" />
 
     <Color x:Key="UsersListBackgroundColor">#EEEEEE</Color>
-    <SolidColorBrush x:Key="UsersListBackgroundColorBrush" Color="{StaticResource UsersListBackgroundColor}"/>
+    <SolidColorBrush x:Key="UsersListBackgroundColorBrush" Color="{StaticResource UsersListBackgroundColor}" />
 
     <Color x:Key="MenuBackgroundColor">#EEEEEE</Color>
-    <SolidColorBrush x:Key="MenuBackgroundColorColorBrush" Color="{StaticResource MenuBackgroundColor}"/>
+    <SolidColorBrush x:Key="MenuBackgroundColorColorBrush" Color="{StaticResource MenuBackgroundColor}" />
 
     <Color x:Key="HoverPanelButtonColor">#EEEEEE</Color>
     <SolidColorBrush x:Key="HoverControlPanelButtonColorBrush" Color="{StaticResource HoverPanelButtonColor}" />

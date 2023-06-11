@@ -1,47 +1,47 @@
 ﻿<mah:MetroWindow x:Class="Client.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Client"
-        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-        mc:Ignorable="d"
-        Width="1100"
-        Height="630"
-        ShowTitleBar="False"
-        ShowCloseButton="False"
-        ShowMinButton="False"
-        ShowMaxRestoreButton="False"
-        WindowStyle="None"
-        MinHeight="500"
-        MinWidth="600"
-        WindowTitleBrush="{StaticResource WindowTitleBarBackgroundColorBrush}"
-        Background="{StaticResource WindowBackgroundColorBrush}"
-        TitleForeground="White"
-        WindowStartupLocation="CenterScreen">
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 mc:Ignorable="d"
+                 Width="1100"
+                 Height="630"
+                 ShowTitleBar="False"
+                 ShowCloseButton="False"
+                 ShowMinButton="False"
+                 ShowMaxRestoreButton="False"
+                 WindowStyle="None"
+                 MinHeight="500"
+                 MinWidth="600"
+                 WindowTitleBrush="{StaticResource WindowTitleBarBackgroundColorBrush}"
+                 Background="{StaticResource WindowBackgroundColorBrush}"
+                 TitleForeground="White"
+                 WindowStartupLocation="CenterScreen">
 
     <mah:MetroWindow.Resources>
         <Style TargetType="Button" x:Key="ControlPanelButtonBase">
-            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
-            <Setter Property="Width" Value="30"/>
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Background" Value="{StaticResource WindowTitleBarBackgroundColorBrush}"/>
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+            <Setter Property="Width" Value="30" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Background" Value="{StaticResource WindowTitleBarBackgroundColorBrush}" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" 
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}"
                                 Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
 
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource HoverControlPanelButtonColorBrush}"/>
+                                <Setter Property="Background"
+                                        Value="{StaticResource HoverControlPanelButtonColorBrush}" />
                             </Trigger>
 
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="{StaticResource PressedControlPanelButtonColorBrush}"/>
+                                <Setter Property="Background"
+                                        Value="{StaticResource PressedControlPanelButtonColorBrush}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -49,25 +49,25 @@
             </Setter>
         </Style>
         <Style TargetType="Button" x:Key="ControlPanelCloseButton">
-            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
-            <Setter Property="Width" Value="30"/>
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Background" Value="{StaticResource WindowTitleBarBackgroundColorBrush}"/>
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+            <Setter Property="Width" Value="30" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Background" Value="{StaticResource WindowTitleBarBackgroundColorBrush}" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="ControlPanelCloseButtonBorder" BorderBrush="{TemplateBinding BorderBrush}" 
+                        <Border x:Name="ControlPanelCloseButtonBorder" BorderBrush="{TemplateBinding BorderBrush}"
                                 Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
 
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource HoverCloseButtonColorBrush}"/>
+                                <Setter Property="Background" Value="{StaticResource HoverCloseButtonColorBrush}" />
                             </Trigger>
 
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="{StaticResource PressedCloseButtonColorBrush}"/>
+                                <Setter Property="Background" Value="{StaticResource PressedCloseButtonColorBrush}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -79,53 +79,53 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition/>
+            <RowDefinition Height="30" />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" 
-                Background="{StaticResource WindowTitleBarBackgroundColorBrush}" 
-                MouseDown="Window_MouseDown"/>
+        <Border Grid.Row="0"
+                Background="{StaticResource WindowTitleBarBackgroundColorBrush}"
+                MouseDown="Window_MouseDown" />
 
-        <StackPanel 
-                        x:Name="ControlPanel" 
-                        Grid.Row="0" 
-                        Width="Auto"
-                        Height="Auto"
-                        Orientation="Horizontal"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Right">
+        <StackPanel
+            x:Name="ControlPanel"
+            Grid.Row="0"
+            Width="Auto"
+            Height="Auto"
+            Orientation="Horizontal"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Right">
 
             <Button
-                            x:Name="MinimizeButton" 
-                            Width="50" 
-                            Content="—"
-                            FontSize="9"
-                            Foreground="White"
-                            Style="{StaticResource ControlPanelButtonBase}" 
-                            Click="MinimizeButton_OnClick"/>
+                x:Name="MinimizeButton"
+                Width="50"
+                Content="—"
+                FontSize="9"
+                Foreground="White"
+                Style="{StaticResource ControlPanelButtonBase}"
+                Click="MinimizeButton_OnClick" />
 
-            <Button 
-                            x:Name="MaximizeButton" 
-                            Width="50" 
-                            FontFamily="Segoe MDL2 Assets" 
-                            Content="&#xE739;"
-                            Foreground="White"
-                            FontSize="9"
-                            Style="{StaticResource ControlPanelButtonBase}" 
-                            Click="MaximizeRestoreButton_OnClick"/>
+            <Button
+                x:Name="MaximizeButton"
+                Width="50"
+                FontFamily="Segoe MDL2 Assets"
+                Content="&#xE739;"
+                Foreground="White"
+                FontSize="9"
+                Style="{StaticResource ControlPanelButtonBase}"
+                Click="MaximizeRestoreButton_OnClick" />
 
-            <Button 
-                            x:Name="CloseButton" 
-                            Width="50" 
-                            FontFamily="Segoe MDL2 Assets" 
-                            Content="&#xE711;"
-                            Foreground="White"
-                            Style="{StaticResource ControlPanelCloseButton}" 
-                            Click="CloseButton_OnClick"/>
+            <Button
+                x:Name="CloseButton"
+                Width="50"
+                FontFamily="Segoe MDL2 Assets"
+                Content="&#xE711;"
+                Foreground="White"
+                Style="{StaticResource ControlPanelCloseButton}"
+                Click="CloseButton_OnClick" />
 
         </StackPanel>
-        <Frame Grid.Row="1" Content="{Binding CurrentViewModel}" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Row="1" Content="{Binding CurrentViewModel}" NavigationUIVisibility="Hidden" />
     </Grid>
 
 </mah:MetroWindow>

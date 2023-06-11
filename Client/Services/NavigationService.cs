@@ -6,8 +6,8 @@ namespace Client.Services;
 
 public class NavigationService<TViewModel> where TViewModel : ViewModelBase
 {
-    private readonly NavigationStore _navigationStore;
     private readonly Func<TViewModel> _createViewModel;
+    private readonly NavigationStore _navigationStore;
 
     public NavigationService(NavigationStore navigationStore, Func<TViewModel> createViewModel)
     {

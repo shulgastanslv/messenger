@@ -1,5 +1,4 @@
-﻿using Domain.Entities.Users;
-using Domain.Primitives;
+﻿using Domain.Primitives;
 
 namespace Domain.Entities.Messages;
 
@@ -13,6 +12,7 @@ public class Message : Entity
         Receiver = receiver;
         SendTime = DateTime.Now;
     }
+
     public Guid Receiver { get; set; }
     public DateTime SendTime { get; set; }
     public string Content { get; set; }

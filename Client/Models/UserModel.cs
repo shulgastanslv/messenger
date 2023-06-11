@@ -11,7 +11,10 @@ public class UserModel
         Password = password;
         CreationTime = DateTime.Now;
     }
-    public UserModel(){}
+
+    public UserModel()
+    {
+    }
 
     public Guid Id { get; set; }
     public string UserName { get; set; }

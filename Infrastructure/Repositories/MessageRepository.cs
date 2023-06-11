@@ -1,20 +1,19 @@
-﻿using Application.Common.Abstractions;
+﻿using System.Text.Json;
+using Application.Common.Abstractions;
 using Domain.Entities.Chats;
 using Domain.Entities.Messages;
 using Domain.Primitives.Errors;
 using Domain.Primitives.Result;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using System.Text.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Infrastructure.Repositories;
 
 public class MessageRepository : IMessageRepository
 {
-    private readonly string _filePath;
-
     private readonly IApplicationDbContext _applicationDbContext;
+    private readonly string _filePath;
 
     public MessageRepository(string filePath, IApplicationDbContext applicationDbContext)
     {
@@ -24,7 +23,7 @@ public class MessageRepository : IMessageRepository
 
     public async Task<Result> SaveMessageAsync(Chat chat, Message message, CancellationToken cancellationToken)
     {
-        string directoryPath = _filePath + $"{chat.ChatId}\\";
+        var directoryPath = _filePath + $"{chat.ChatId}\\";
 
         Directory.CreateDirectory(directoryPath);
 
@@ -39,7 +38,9 @@ public class MessageRepository : IMessageRepository
 
         return Result.Success();
     }
-    public async Task<Result<IEnumerable<Message>>> GetMessagesAsync(Guid receiver, Guid sender, CancellationToken cancellationToken)
+
+    public async Task<Result<IEnumerable<Message>>> GetMessagesAsync(Guid receiver, Guid sender,
+        CancellationToken cancellationToken)
     {
         var chat = await _applicationDbContext.Chats
             .FirstOrDefaultAsync(i => i.Sender!.Id == sender && i.Receiver!.Id == receiver, cancellationToken);
@@ -59,7 +60,7 @@ public class MessageRepository : IMessageRepository
 
         foreach (var file in fileNames)
         {
-            string json = await File.ReadAllTextAsync(file, cancellationToken);
+            var json = await File.ReadAllTextAsync(file, cancellationToken);
 
             var message = JsonConvert.DeserializeObject<Message>(json);
 
@@ -73,7 +74,8 @@ public class MessageRepository : IMessageRepository
         return Result.Success<IEnumerable<Message>>(messages);
     }
 
-    public async Task<Result<IEnumerable<Message>>> GetLastMessagesAsync(Guid receiver, Guid sender, CancellationToken cancellationToken)
+    public async Task<Result<IEnumerable<Message>>> GetLastMessagesAsync(Guid receiver, Guid sender,
+        CancellationToken cancellationToken)
     {
         var chat = await _applicationDbContext.Chats
             .FirstOrDefaultAsync(i => i.Sender!.Id == sender && i.Receiver!.Id == receiver, cancellationToken);
@@ -87,13 +89,10 @@ public class MessageRepository : IMessageRepository
 
         foreach (var file in fileNames)
         {
-            string json = await File.ReadAllTextAsync(file, cancellationToken);
+            var json = await File.ReadAllTextAsync(file, cancellationToken);
             var message = JsonConvert.DeserializeObject<Message>(json);
 
-            if (message!.SendTime > chat.LastUpdatedTime)
-            {
-                messages.Add(message!);
-            }
+            if (message!.SendTime > chat.LastUpdatedTime) messages.Add(message!);
         }
 
         chat!.LastUpdatedTime = DateTime.Now;

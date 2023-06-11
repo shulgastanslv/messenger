@@ -7,13 +7,13 @@ namespace Application.Users.Commands.UserRegistration;
 
 public sealed class UserRegistrationCommandHandler : ICommandHandler<UserRegistrationCommand, Result<string>>
 {
-    private readonly IUserRepository _userRepository;
-
     private readonly IApplicationDbContext _applicationDbContext;
 
     private readonly IJwtProvider _jwtProvider;
+    private readonly IUserRepository _userRepository;
 
-    public UserRegistrationCommandHandler(IUserRepository userRepository, IApplicationDbContext applicationDbContext, IJwtProvider jwtProvider)
+    public UserRegistrationCommandHandler(IUserRepository userRepository, IApplicationDbContext applicationDbContext,
+        IJwtProvider jwtProvider)
     {
         _userRepository = userRepository;
         _applicationDbContext = applicationDbContext;
@@ -24,15 +24,12 @@ public sealed class UserRegistrationCommandHandler : ICommandHandler<UserRegistr
     {
         var user = new User(
             Guid.NewGuid(),
-            request.UserName, 
+            request.UserName,
             request.Password);
 
         var result = await _userRepository.CreateUserAsync(user, cancellationToken);
 
-        if (result.IsFailure)
-        {
-            return Result.Failure<string>(result.Error);
-        }   
+        if (result.IsFailure) return Result.Failure<string>(result.Error);
 
         await _applicationDbContext.SaveChangesAsync(cancellationToken);
 

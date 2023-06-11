@@ -10,11 +10,10 @@ namespace Client.Commands.Messages;
 
 public class SendMessageCommand : ViewModelCommand
 {
-    private readonly ContactModel _receiver;
+    private readonly ChatViewModel _chatViewModel;
 
     private readonly HttpClient _httpClient;
-
-    private readonly ChatViewModel _chatViewModel;
+    private readonly ContactModel _receiver;
 
     public SendMessageCommand(ChatViewModel chatViewModel, ContactModel receiver, HttpClient httpClient)
     {
@@ -31,8 +30,10 @@ public class SendMessageCommand : ViewModelCommand
             OnCanExecutedChanged();
     }
 
-    public override bool CanExecute(object? parameter) =>
-        !string.IsNullOrEmpty(_chatViewModel.MessageText);
+    public override bool CanExecute(object? parameter)
+    {
+        return !string.IsNullOrEmpty(_chatViewModel.MessageText);
+    }
 
     public override async void Execute(object? parameter)
     {
@@ -48,6 +49,7 @@ public class SendMessageCommand : ViewModelCommand
 
         response.EnsureSuccessStatusCode();
 
-        _chatViewModel.MessageText = string.Empty;;
+        _chatViewModel.MessageText = string.Empty;
+        ;
     }
 }

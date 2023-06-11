@@ -1,6 +1,7 @@
 ﻿using System;
 
 namespace Client.Models;
+
 public class ContactModel
 {
     public ContactModel(Guid id, string userName)

@@ -4,7 +4,10 @@ public sealed class Maybe<T>
 {
     private readonly T? _value;
 
-    private Maybe(T? value) => _value = value;
+    private Maybe(T? value)
+    {
+        _value = value;
+    }
 
     public static Maybe<T> None => new(default);
 
@@ -16,7 +19,13 @@ public sealed class Maybe<T>
         ? _value!
         : throw new InvalidOperationException("The value can not be accessed because it does not exist.");
 
-    public static implicit operator Maybe<T>(T? value) => From(value);
+    public static implicit operator Maybe<T>(T? value)
+    {
+        return From(value);
+    }
 
-    public static Maybe<T> From(T? value) => new(value);
+    public static Maybe<T> From(T? value)
+    {
+        return new Maybe<T>(value);
+    }
 }

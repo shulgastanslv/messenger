@@ -1,58 +1,56 @@
 ﻿<Page x:Class="Client.Views.Pages.RegistrationView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Client.Views.Pages"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:loadingSpinnerControl="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
-      mc:Ignorable="d" 
-      d:DesignHeight="630" 
+      mc:Ignorable="d"
+      d:DesignHeight="630"
       d:DesignWidth="1100">
 
     <Border Style="{StaticResource BorderWrapStyle}">
         <Grid>
 
             <loadingSpinnerControl:LoadingSpinner
-                IsLoading="{Binding IsLoading}"/>
+                IsLoading="{Binding IsLoading}" />
 
-            <StackPanel HorizontalAlignment="Center" 
-                        VerticalAlignment="Center" 
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
                         Visibility="{Binding IsLoading, 
                 Converter={StaticResource InverseBooleanToVisibilityConverter}}">
 
                 <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
-                           Text="Enter UserName" 
-                           Opacity="0.5" 
-                           Margin="0, 0, 0, 15"/>
+                           Text="Enter UserName"
+                           Opacity="0.5"
+                           Margin="0, 0, 0, 15" />
 
 
-                <TextBox  Tag="Enter UserName"
-                          Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
-                          Name="UserNameTextBox" 
-                          Margin="0, 0, 0, 15"/>
+                <TextBox Tag="Enter UserName"
+                         Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                         Name="UserNameTextBox"
+                         Margin="0, 0, 0, 15" />
 
                 <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
-                           Text="Enter your Password" 
-                           Opacity="0.5" 
-                           Margin="0, 0, 0, 15"/>
+                           Text="Enter your Password"
+                           Opacity="0.5"
+                           Margin="0, 0, 0, 15" />
 
-                <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
+                <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          Margin="0, 0, 0,15"
-                         Tag="Enter Password"/>
+                         Tag="Enter Password" />
 
                 <CheckBox
                     IsChecked="{Binding IsAgree}"
                     Command="{Binding }"
                     Margin="0, 0, 0, 15"
-                    Content="I accept the user agreement"/>
+                    Content="I accept the user agreement" />
 
-                <Button Command="{Binding RegistrationCommand}" 
-                        Content="Sign Up"
-                        />
+                <Button Command="{Binding RegistrationCommand}"
+                        Content="Sign Up" />
 
                 <Button Style="{StaticResource BackButtonStyle}"
                         Command="{Binding NavigateToAuthenticationCommand}"
-                        Margin="0, 15, 0, 0"/>
+                        Margin="0, 15, 0, 0" />
 
             </StackPanel>
         </Grid>

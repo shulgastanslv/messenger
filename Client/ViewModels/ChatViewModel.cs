@@ -1,30 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using Client.Models;
-using Client.Stores;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Windows.Input;
-using Client.Commands;
-using Client.Services;
-using System.Collections.ObjectModel;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using Client.Commands.Messages;
-using Client.Queries;
-using Client.Queries.Messages;
-using MediatR;
 using System.Windows.Threading;
-using Client.Queries.Users;
+using Client.Commands.Messages;
+using Client.Models;
+using Client.Queries.Messages;
+using Client.Stores;
 
 namespace Client.ViewModels;
 
 public class ChatViewModel : ViewModelBase
 {
-    private readonly UserStore _userStore;
-    public UserStore UserStore => _userStore;
-
     private ContactModel _currentContact;
+
+    private ObservableCollection<MessageModel> _messages = new();
+
+    private string _messageText;
+
+    public ChatViewModel(UserStore userStore, ContactModel currentContact, HttpClient httpClient)
+    {
+        _currentContact = currentContact;
+        UserStore = userStore;
+
+        SendMessageCommand = new SendMessageCommand(this, CurrentContact, httpClient);
+        GetMessagesQuery = new GetMessagesQuery(this, httpClient);
+        GetMessagesQuery.Execute(null);
+
+        GetLastMessageQuery = new GetLastMessagesQuery(this, httpClient);
+
+        var messagesTimer = new DispatcherTimer();
+        messagesTimer.Interval = TimeSpan.FromSeconds(1);
+        messagesTimer.Tick += (sender, e) => { GetLastMessageQuery.Execute(null); };
+        messagesTimer.Start();
+    }
+
+    public UserStore UserStore { get; }
+
     public ContactModel CurrentContact
     {
         get => _currentContact;
@@ -35,7 +47,6 @@ public class ChatViewModel : ViewModelBase
         }
     }
 
-    private ObservableCollection<MessageModel> _messages = new();
     public ObservableCollection<MessageModel> Messages
     {
         get => _messages;
@@ -46,7 +57,6 @@ public class ChatViewModel : ViewModelBase
         }
     }
 
-    private string _messageText;
     public string MessageText
     {
         get => _messageText;
@@ -56,27 +66,8 @@ public class ChatViewModel : ViewModelBase
             OnPropertyChanged(nameof(MessageText));
         }
     }
+
     public ICommand GetMessagesQuery { get; }
     public ICommand GetLastMessageQuery { get; }
     public ICommand SendMessageCommand { get; }
-
-    public ChatViewModel(UserStore userStore, ContactModel currentContact, HttpClient httpClient)
-    {
-        _currentContact = currentContact;
-        _userStore = userStore;
-
-        SendMessageCommand = new SendMessageCommand(this, CurrentContact, httpClient);
-        GetMessagesQuery = new GetMessagesQuery(this, httpClient);
-        GetMessagesQuery.Execute(null);
-
-        GetLastMessageQuery = new GetLastMessagesQuery(this, httpClient);
-
-        var messagesTimer = new DispatcherTimer();
-        messagesTimer.Interval = TimeSpan.FromSeconds(1);
-        messagesTimer.Tick += (sender, e) =>
-        {
-            GetLastMessageQuery.Execute(null);
-        };
-        messagesTimer.Start();
-    }
 }

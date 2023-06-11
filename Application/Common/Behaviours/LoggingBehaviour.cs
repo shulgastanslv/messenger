@@ -10,9 +10,12 @@ public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest,
     private readonly ILogger<LoggingBehaviour<TRequest, TResponse>> _logger;
 
     public LoggingBehaviour(ILogger<LoggingBehaviour<TRequest, TResponse>> logger)
-       => _logger = logger;
+    {
+        _logger = logger;
+    }
 
-    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
+        CancellationToken cancellationToken)
     {
         _logger.LogInformation(
             $"Starting request {typeof(TRequest).Name}, {DateTime.Now}");
@@ -20,10 +23,8 @@ public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest,
         var result = await next();
 
         if (!result.IsSuccess)
-        {
             _logger.LogError(
                 $"Request failure {typeof(TRequest).Name}, {result.Error} {DateTime.Now}");
-        }
 
         _logger.LogInformation(
             $"Completed request {typeof(TRequest).Name}, {DateTime.Now}");

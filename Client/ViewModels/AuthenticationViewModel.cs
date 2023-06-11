@@ -1,11 +1,9 @@
 ﻿using System.Net.Http;
-using System.Windows;
 using System.Windows.Input;
 using Client.Commands;
 using Client.Commands.Users;
 using Client.Services;
 using Client.Stores;
-using Domain.Entities.Users;
 
 namespace Client.ViewModels;
 
@@ -14,35 +12,7 @@ public sealed class AuthenticationViewModel : ViewModelBase
     private readonly UserStore _userStore;
 
     private bool _isLoading;
-    public bool IsLoading
-    {
-        get => _isLoading;
-        set
-        {
-            _isLoading = value;
-            OnPropertyChanged(nameof(IsLoading));
-        }
-    }
-    public string UserName
-    {
-        get => _userStore.User.UserName!;
-        set
-        {
-            _userStore.User.UserName = value;
-            OnPropertyChanged(nameof(UserName));
-        }
-    }
-    public string Password
-    {
-        get => _userStore.User.Password!;
-        set
-        {
-            _userStore.User.Password = value;
-            OnPropertyChanged(nameof(Password));
-        }
-    }
-    public ICommand AuthenticationCommand { get; }
-    public ICommand NavigateToRegistrationCommand { get; }
+
     public AuthenticationViewModel(UserStore userStore, HttpClient httpClient, NavigationStore navigationStore)
     {
         _userStore = userStore;
@@ -57,4 +27,37 @@ public sealed class AuthenticationViewModel : ViewModelBase
 
         AuthenticationCommand = new AuthenticationCommand(this, userStore, httpClient, navigationService);
     }
+
+    public bool IsLoading
+    {
+        get => _isLoading;
+        set
+        {
+            _isLoading = value;
+            OnPropertyChanged(nameof(IsLoading));
+        }
+    }
+
+    public string UserName
+    {
+        get => _userStore.User.UserName!;
+        set
+        {
+            _userStore.User.UserName = value;
+            OnPropertyChanged(nameof(UserName));
+        }
+    }
+
+    public string Password
+    {
+        get => _userStore.User.Password!;
+        set
+        {
+            _userStore.User.Password = value;
+            OnPropertyChanged(nameof(Password));
+        }
+    }
+
+    public ICommand AuthenticationCommand { get; }
+    public ICommand NavigateToRegistrationCommand { get; }
 }

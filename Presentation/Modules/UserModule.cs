@@ -12,7 +12,9 @@ namespace Presentation.Modules;
 
 public class UserModule : CarterModule
 {
-    public UserModule() : base("/users") { }
+    public UserModule() : base("/users")
+    {
+    }
 
 
     public override void AddRoutes(IEndpointRouteBuilder app)
@@ -29,7 +31,6 @@ public class UserModule : CarterModule
             var result = await sender.Send(new GetAllUsersQuery());
 
             return Results.Ok(result.Users);
-
         });
 
         app.MapGet("/getUserById", [Authorize] async (Guid id, ISender sender) =>
@@ -38,6 +39,5 @@ public class UserModule : CarterModule
 
             return Results.Ok(result);
         });
-
     }
 }

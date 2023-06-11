@@ -12,7 +12,6 @@ namespace Client.Queries.Messages;
 
 public sealed class GetMessagesQuery : ViewModelCommand
 {
-
     private readonly ChatViewModel _chatViewModel;
     private readonly HttpClient _httpClient;
 
@@ -30,10 +29,7 @@ public sealed class GetMessagesQuery : ViewModelCommand
 
         var response = await _httpClient.PostAsync("/message/get", content);
 
-        if (!response.IsSuccessStatusCode)
-        {
-            return;
-        }
+        if (!response.IsSuccessStatusCode) return;
 
         var messages = await response.Content
             .ReadAsAsync<List<MessageModel>>();

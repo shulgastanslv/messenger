@@ -3,6 +3,7 @@ using System.Windows.Input;
 using MahApps.Metro.Controls;
 
 namespace Client;
+
 public partial class MainWindow : MetroWindow
 {
     public MainWindow()

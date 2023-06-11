@@ -1,5 +1,4 @@
-﻿using Domain.Entities.Chats;
-using Domain.Primitives;
+﻿using Domain.Primitives;
 
 namespace Domain.Entities.Users;
 
@@ -13,12 +12,13 @@ public class User : Entity
         CreationTime = DateTime.Now;
     }
 
-    public User() { }
+    public User()
+    {
+    }
 
     public string? UserName { get; set; }
 
     public string? Password { get; set; }
 
     public DateTime CreationTime { get; set; }
-
 }

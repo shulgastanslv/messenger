@@ -1,7 +1,5 @@
 ﻿using Application.Common.Abstractions.Messaging;
 using Domain.Entities.Users;
-using Domain.Primitives.Errors;
-using Domain.Primitives.Result;
 
 namespace Application.Users.Queries.GetUserByEmail;
 

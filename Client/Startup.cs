@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading;
 using Client.Models;
+using Client.Properties;
 using Client.Stores;
 using Client.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +20,9 @@ public class Startup
         services.AddSingleton<RegistrationViewModel>();
         services.AddSingleton<HomeViewModel>();
         services.AddSingleton<ChatViewModel>();
+        services.AddSingleton<SettingsViewModel>();
+        services.AddSingleton<EditProfileViewModel>();
+        services.AddSingleton<EditUserNameViewModel>();
 
         services.AddSingleton(provider => new MainWindow
         {
@@ -27,7 +32,7 @@ public class Startup
 
         services.AddSingleton(new HttpClient
         {
-            Timeout = TimeSpan.FromMilliseconds(System.Threading.Timeout.Infinite),
+            Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite),
             BaseAddress = new Uri("https://localhost:7289")
         });
 
@@ -38,10 +43,10 @@ public class Startup
             User = new UserModel
             {
                 Id = Guid.NewGuid(),
-                UserName = Properties.Settings.Default.UserName,
-                Password = Properties.Settings.Default.Password
+                UserName = Settings.Default.UserName,
+                Password = Settings.Default.Password
             },
-            Token = Properties.Settings.Default.Token
+            Token = Settings.Default.Token
         });
 
         return services.BuildServiceProvider();

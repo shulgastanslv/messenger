@@ -1,11 +1,13 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Net.Http;
+using System.Text;
 using Client.Models;
+using Client.Properties;
 using Client.Services;
 using Client.Stores;
 using Client.ViewModels;
 using Newtonsoft.Json;
-using System.Net.Http;
-using System.Text;
 
 namespace Client.Commands.Users;
 
@@ -32,18 +34,18 @@ public sealed class AuthenticationCommand : ViewModelCommand
     }
 
     private void OnPropertyChanged(object? sender,
-        System.ComponentModel.PropertyChangedEventArgs e)
+        PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(AuthenticationViewModel.UserName) ||
             e.PropertyName == nameof(AuthenticationViewModel.Password))
-        {
             OnCanExecutedChanged();
-        }
     }
 
-    public override bool CanExecute(object? parameter) =>
-        !string.IsNullOrEmpty(_authenticationViewModel.UserName) &&
-        !string.IsNullOrEmpty(_authenticationViewModel.Password);
+    public override bool CanExecute(object? parameter)
+    {
+        return !string.IsNullOrEmpty(_authenticationViewModel.UserName) &&
+               !string.IsNullOrEmpty(_authenticationViewModel.Password);
+    }
 
     public override async void Execute(object? parameter)
     {
@@ -70,10 +72,10 @@ public sealed class AuthenticationCommand : ViewModelCommand
             _navigationService.Navigate();
         }
 
-        Properties.Settings.Default.UserName = _userStore.User.UserName;
-        Properties.Settings.Default.Password = _userStore.User.Password;
-        Properties.Settings.Default.Token = _userStore.Token;
-        Properties.Settings.Default.Save();
+        Settings.Default.UserName = _userStore.User.UserName;
+        Settings.Default.Password = _userStore.User.Password;
+        Settings.Default.Token = _userStore.Token;
+        Settings.Default.Save();
 
         _authenticationViewModel.IsLoading = false;
     }

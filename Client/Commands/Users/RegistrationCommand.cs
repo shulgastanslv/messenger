@@ -1,26 +1,26 @@
 ﻿using System;
 using System.ComponentModel;
-using Client.Services;
-using Client.Stores;
-using Client.ViewModels;
 using System.Net.Http;
 using System.Text;
 using Client.Models;
+using Client.Properties;
+using Client.Services;
+using Client.Stores;
+using Client.ViewModels;
 using Newtonsoft.Json;
 
 namespace Client.Commands.Users;
 
 public class RegistrationCommand : ViewModelCommand
 {
-    private readonly RegistrationViewModel _registrationViewModel;
-
     private readonly HttpClient _httpClient;
 
     private readonly NavigationService<HomeViewModel> _navigationService;
+    private readonly RegistrationViewModel _registrationViewModel;
 
     private readonly UserStore _userStore;
 
-    public RegistrationCommand(RegistrationViewModel registrationViewModel, UserStore userStore, 
+    public RegistrationCommand(RegistrationViewModel registrationViewModel, UserStore userStore,
         HttpClient httpClient, NavigationService<HomeViewModel> navigationService)
     {
         _userStore = userStore;
@@ -36,15 +36,15 @@ public class RegistrationCommand : ViewModelCommand
         if (e.PropertyName == nameof(RegistrationViewModel.UserName) ||
             e.PropertyName == nameof(RegistrationViewModel.Password) ||
             e.PropertyName == nameof(RegistrationViewModel.IsAgree))
-        {
             OnCanExecutedChanged();
-        }
     }
 
-    public override bool CanExecute(object? parameter) =>
-        !string.IsNullOrEmpty(_registrationViewModel.UserName) &&
-        !string.IsNullOrEmpty(_registrationViewModel.Password) && 
-        _registrationViewModel.IsAgree;
+    public override bool CanExecute(object? parameter)
+    {
+        return !string.IsNullOrEmpty(_registrationViewModel.UserName) &&
+               !string.IsNullOrEmpty(_registrationViewModel.Password) &&
+               _registrationViewModel.IsAgree;
+    }
 
     public override async void Execute(object? parameter)
     {
@@ -70,12 +70,11 @@ public class RegistrationCommand : ViewModelCommand
             _navigationService.Navigate();
         }
 
-        Properties.Settings.Default.UserName = _userStore.User.UserName;
-        Properties.Settings.Default.Password = _userStore.User.Password;
-        Properties.Settings.Default.Token = _userStore.Token;
-        Properties.Settings.Default.Save();
+        Settings.Default.UserName = _userStore.User.UserName;
+        Settings.Default.Password = _userStore.User.Password;
+        Settings.Default.Token = _userStore.Token;
+        Settings.Default.Save();
 
         _registrationViewModel.IsLoading = false;
-
     }
 }

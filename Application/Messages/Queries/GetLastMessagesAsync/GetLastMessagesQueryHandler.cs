@@ -6,9 +6,8 @@ namespace Application.Messages.Queries.GetLastMessagesAsync;
 
 public class GetLastMessagesQueryHandler : IQueryHandler<GetLastMessagesQuery, MessagesResponse>
 {
-    private readonly IMessageRepository _messageRepository;
-
     private readonly IJwtProvider _jwtProvider;
+    private readonly IMessageRepository _messageRepository;
 
     public GetLastMessagesQueryHandler(IMessageRepository messageRepository, IJwtProvider jwtProvider)
     {

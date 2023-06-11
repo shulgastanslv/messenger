@@ -11,9 +11,9 @@ public sealed class GetUserByUserNameQuery : ViewModelCommand
 {
     private readonly HomeViewModel _homeViewModel;
 
-    private readonly UserStore _userStore;
-
     private readonly HttpClient _httpClient;
+
+    private readonly UserStore _userStore;
 
     public GetUserByUserNameQuery(HomeViewModel homeViewModel, UserStore userStore, HttpClient httpClient)
     {
@@ -27,9 +27,11 @@ public sealed class GetUserByUserNameQuery : ViewModelCommand
         _homeViewModel.IsLoading = true;
 
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-           _userStore.Token);
+            _userStore.Token);
 
-        var response = await _httpClient.GetAsync($"https://localhost:7289/users/getUserByUserName?UserName={_userStore.User.UserName}");
+        var response =
+            await _httpClient.GetAsync(
+                $"https://localhost:7289/users/getUserByUserName?UserName={_userStore.User.UserName}");
 
         if (response.IsSuccessStatusCode)
         {
