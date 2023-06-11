@@ -21,7 +21,6 @@ public class HomeViewModel : ViewModelBase
     private bool _isLoading;
 
     private bool _isSelectedUser;
-    public bool IsModalViewModelOpen => _menuNavigationStore.IsOpen;
 
     private ContactModel? _selectedUser;
 
@@ -43,6 +42,8 @@ public class HomeViewModel : ViewModelBase
 
         _menuNavigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
     }
+
+    public bool IsModalViewModelOpen => _menuNavigationStore.IsOpen;
 
     public UserStore UserStore
     {

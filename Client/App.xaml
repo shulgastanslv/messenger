@@ -13,6 +13,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/Colors.xaml" />
                 <ResourceDictionary Source="Styles/LoadingSpinner.xaml" />
+                <ResourceDictionary Source="Styles/ModalControl.xaml" />
                 <ResourceDictionary Source="Styles/Themes/Dark.xaml" />
                 <ResourceDictionary Source="Styles/Buttons/ButtonColors.xaml" />
                 <ResourceDictionary Source="Styles/Buttons/Button.xaml" />

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:modalControl="clr-namespace:ModalControl;assembly=ModalControl"
+             xmlns:styles="clr-namespace:Client.Styles"
              mc:Ignorable="d">
 
     <Grid>
@@ -78,10 +78,10 @@
 
         </Grid>
 
-        <modalControl:Modal IsOpen="{Binding IsEditProfileModalOpen}">
+        <styles:Modal IsOpen="{Binding IsEditProfileModalOpen}">
             <ContentPresenter Content="{Binding EditProfileModal}"
                               Panel.ZIndex="2" />
-        </modalControl:Modal>
+        </styles:Modal>
 
     </Grid>
 

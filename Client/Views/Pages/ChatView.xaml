@@ -19,7 +19,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="0" />
         </Grid.ColumnDefinitions>
 
         <Grid Column="0">

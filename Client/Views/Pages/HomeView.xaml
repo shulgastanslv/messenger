@@ -4,23 +4,35 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:loadingSpinnerControl="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
-      xmlns:modalControl="clr-namespace:ModalControl;assembly=ModalControl"
+      xmlns:styles="clr-namespace:Client.Styles"
       mc:Ignorable="d"
       d:DesignHeight="630"
       d:DesignWidth="1100">
 
 
     <Grid>
-
-  
-
-
+        
         <Grid>
+
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="MouseDown">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="Menu" Storyboard.TargetProperty="Width" To="0" Duration="0:0:0.1" />
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ToggleMenuButton" Storyboard.TargetProperty="IsChecked">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False" />
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Grid.Triggers>
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
+
+
 
             <Grid
                 x:Name="MainGrid"
@@ -39,13 +51,14 @@
                     </Grid.ColumnDefinitions>
 
                     <ToggleButton
+                        x:Name="ToggleMenuButton"
                         Grid.Column="0"
                         Style="{StaticResource ToggleButtonStyle}">
                         <ToggleButton.Triggers>
                             <EventTrigger RoutedEvent="ToggleButton.Checked">
                                 <BeginStoryboard>
                                     <Storyboard x:Name="ShowStackPanel">
-                                        <DoubleAnimation To="250" Duration="0:0:0.3"
+                                        <DoubleAnimation From="0" To="280" Duration="0:0:0.3"
                                                          Storyboard.TargetName="Menu"
                                                          Storyboard.TargetProperty="Width" />
                                     </Storyboard>
@@ -125,9 +138,10 @@
                     Style="{StaticResource DefaultTextBlockStyle}" />
             </Border>
 
-            <Frame Grid.Column="1" Content="{Binding ChatViewModel}" />
+            <Frame Grid.Column="1" Content="{Binding ChatViewModel}"/>
 
         </Grid>
+
 
         <Grid>
 
@@ -139,6 +153,8 @@
                     x:Name="Menu"
                     Width="0"
                     HorizontalAlignment="Left">
+
+
 
                 <Grid Background="{StaticResource MenuBackgroundColorColorBrush}">
 
@@ -189,15 +205,16 @@
                             </MenuItem>
                         </StackPanel>
                     </Grid>
-
                 </Grid>
             </Border>
         </Grid>
 
-        <modalControl:Modal IsOpen="{Binding IsModalViewModelOpen}">
+        <styles:Modal IsOpen="{Binding IsModalViewModelOpen}">
             <ContentPresenter Content="{Binding ModalViewModel}"
                               Panel.ZIndex="2" />
-        </modalControl:Modal>
+        </styles:Modal>
+
+
 
     </Grid>
 </Page>
