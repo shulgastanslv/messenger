@@ -19,8 +19,13 @@
     </Page.Resources>
 
     <Grid>
-        <Grid>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="65"/>
                 <RowDefinition/>
@@ -28,7 +33,7 @@
             </Grid.RowDefinitions>
 
 
-            <Border Grid.Row="0" Background="{StaticResource HeaderChatColorBrush}">
+            <Border Grid.Row="0" Grid.Column="0" Background="{StaticResource HeaderChatColorBrush}">
 
                 <Grid HorizontalAlignment="Stretch">
 
@@ -57,6 +62,7 @@
 
                     <Button Grid.Column="2"
                             Width="30"
+                            Style="{x:Null}"
                             Background="Transparent"
                             BorderThickness="0"
                             Height="30">
@@ -68,6 +74,7 @@
 
                     <Button Grid.Column="3"
                                 Width="30"
+                                Style="{x:Null}"
                                 Background="Transparent"
                                 BorderThickness="0"
                                 Height="30">
@@ -79,6 +86,7 @@
 
                     <Button Grid.Column="4"
                             Width="30"
+                            Style="{x:Null}"
                             Background="Transparent"
                             BorderThickness="0"
                             Height="30">
@@ -158,5 +166,11 @@
                 </Border>
             </Border>
         </Grid>
+
+    
+        <Grid x:Name="UserInfo" Column="1" Width="275">
+
+        </Grid>
+
     </Grid>
 </Page>

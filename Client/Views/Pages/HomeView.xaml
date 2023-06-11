@@ -12,94 +12,55 @@
       d:DesignHeight="630" 
       d:DesignWidth="1100">
 
+
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+      
+        <Grid>
 
-        <Border  x:Name="Menu"
-                 Grid.Column="0"
-                 CornerRadius="0, 0, 0, 10"
-                 Width="0"
-                 Background="{StaticResource MenuBackgroundColorColorBrush}" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <StackPanel VerticalAlignment="Bottom">
-                    <Button x:Name="BtnNotifications" Style="{DynamicResource PopupButtonStyle}">
-                        <customControls:MenuItem
-                            GroupName="MenuItem"
-                            IconWidth="18"
-                            Icon="{StaticResource NotificationsOn}"
-                            HorizontalAlignment="Center"
-                            IndicatorBrush="{StaticResource ButtonColorBrush}"/>
-                    </Button>
-
-                    <Button x:Name="BtnProfile" Style="{DynamicResource PopupButtonStyle}">
-                        <customControls:MenuItem
-                            GroupName="MenuItem"
-                            IconWidth="18"
-                            Icon="{StaticResource Profile}"
-                            HorizontalAlignment="Center"
-                            IndicatorBrush="{StaticResource ButtonColorBrush}"/>
-                    </Button>
-                    <Button x:Name="BtnSettings" Style="{DynamicResource PopupButtonStyle}">
-                        <customControls:MenuItem
-                            GroupName="MenuItem"
-                            IconWidth="18"
-                            Icon="{StaticResource Settings}"
-                            HorizontalAlignment="Center"
-                            IndicatorBrush="{StaticResource ButtonColorBrush}"/>
-                    </Button>
-                </StackPanel>
-            </Grid>
-        </Border>
-
-        
-
-        <Grid   x:Name="MainGrid"
+            <Grid   x:Name="MainGrid"
                 Background="{StaticResource UsersListBackgroundColorBrush}" 
-                Grid.Column="1">
+                Grid.Column="0">
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
-                <RowDefinition />
-            </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                <ToggleButton
+                    <ToggleButton
                             Grid.Column="0"
                             Style="{StaticResource ToggleButtonStyle}">
-                    <ToggleButton.Triggers>
-                        <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                            <BeginStoryboard>
-                                <Storyboard x:Name="HideStackPanel">
-                                    <DoubleAnimation Storyboard.TargetName="Menu" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="60" To="0" Duration="0:0:0.4">
-                                    </DoubleAnimation>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="ToggleButton.Checked">
-                            <BeginStoryboard>
-                                <Storyboard x:Name="ShowStackPanel">
-                                    <DoubleAnimation Storyboard.TargetName="Menu" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="0" To="60" Duration="0:0:0.4">
-                                    </DoubleAnimation>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </ToggleButton.Triggers>
-                </ToggleButton>
+                        <ToggleButton.Triggers>
+                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="HideStackPanel">
+                                        <DoubleAnimation Storyboard.TargetName="Menu" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="250" To="0" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="ShowStackPanel">
+                                        <DoubleAnimation Storyboard.TargetName="Menu" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="0" To="250" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ToggleButton.Triggers>
+                    </ToggleButton>
 
-                <TextBox Width="220"
+                    <TextBox Width="220"
                              Height="38"
                              Grid.Column="1"
                              HorizontalAlignment="Center"
@@ -109,53 +70,53 @@
                              Text="{Binding SearchText, 
                     UpdateSourceTrigger=PropertyChanged}"
                              Tag="Search"/>
-            </Grid>
+                </Grid>
 
-            <ListView Background="Transparent"
+                <ListView Background="Transparent"
                          x:Name="UsersListView"
                          BorderThickness="0"
                          SelectedItem="{Binding SelectedUser}"
                          ItemsSource="{Binding Contacts}"
                          Grid.Row="1">
 
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    </Style>
-                </ListView.ItemContainerStyle>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
 
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border Background="Transparent"
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="Transparent"
                                 Height="65">
-                            <Grid>
-                                <StackPanel Orientation="Horizontal"
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal"
                                                 Height="Auto"
                                                 Margin="15, 0, 0, 0">
 
-                                    <Border Width="40"  Height="40" CornerRadius="25" Background="White"/>
+                                        <Border Width="40"  Height="40" CornerRadius="25" Background="White"/>
 
-                                    <StackPanel Margin="5, 5, 0, 0">
-                                        <Label Content="{Binding UserName}" 
+                                        <StackPanel Margin="5, 5, 0, 0">
+                                            <Label Content="{Binding UserName}" 
                                                Foreground="White"   
                                                FontSize="13"/>
-                                        <Label Content="Last Message" 
+                                            <Label Content="Last Message" 
                                                    Foreground="White"   
                                                    FontSize="13"/>
+                                        </StackPanel>
                                     </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
 
-        <loadingSpinnerControl:LoadingSpinner
-                Grid.Column="2" 
+            <loadingSpinnerControl:LoadingSpinner
+                Grid.Column="1" 
                 IsLoading="{Binding IsLoading}"/>
 
-        <Border Grid.Column="2"
+            <Border Grid.Column="1"
                 Width="210"
                 Background="{StaticResource ColorWrapBrush}"
                 CornerRadius="17"
@@ -163,17 +124,45 @@
                 Visibility="{Binding IsSelectedUser, 
                             Converter={StaticResource InverseBooleanToVisibilityConverter}}">
 
-            <TextBlock
+                <TextBlock
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Text="Select a chat to start messaging"
                        Style="{StaticResource DefaultTextBlockStyle}"/>
+            </Border>
+
+            <Frame Grid.Column="1" Content="{Binding ChatViewModel}"/>
+
+        </Grid>
+
+        <Border  x:Name="Menu"
+                 Grid.Column="0"
+                 Width="250"
+                 CornerRadius="0, 0, 0, 10"
+                 HorizontalAlignment="Left"
+                 Background="{StaticResource MenuBackgroundColorColorBrush}" >
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+
+
+                <StackPanel Grid.Row="1" VerticalAlignment="Top">
+                    <Button x:Name="BtnSettings" Style="{DynamicResource PopupButtonStyle}">
+                        <customControls:MenuItem
+                            GroupName="MenuItem"
+                            IconWidth="18"
+                            Text="Settings"
+                            Icon="{StaticResource Settings}"
+                            HorizontalAlignment="Center"
+                            IndicatorBrush="{StaticResource ButtonColorBrush}"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
         </Border>
-
-
-
-
-        <Frame Grid.Column="2" Content="{Binding ChatViewModel}"/>
 
     </Grid>
 
