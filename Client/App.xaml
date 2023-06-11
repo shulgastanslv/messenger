@@ -19,6 +19,7 @@
                 <ResourceDictionary Source="Styles/CheckBoxes.xaml"/>
                 <ResourceDictionary Source="Styles/TextBoxes.xaml"/>
                 <ResourceDictionary Source="Styles/Buttons.xaml"/>
+                <ResourceDictionary Source="Styles/Icons.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>

@@ -35,11 +35,11 @@ public class GetLastMessagesQuery : ViewModelCommand
         }
 
         var messages = await response.Content
-            .ReadAsAsync<List<MessageModel>>();
+            .ReadAsAsync<IEnumerable<MessageModel>>();
 
-        foreach (var item in messages)
+        foreach (var message in messages)
         {
-            _chatViewModel.Messages.Add(item);
+            _chatViewModel.Messages.Add(message);
         }
     }
 }

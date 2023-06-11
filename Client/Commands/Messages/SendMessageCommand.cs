@@ -47,5 +47,7 @@ public class SendMessageCommand : ViewModelCommand
         var response = await _httpClient.PostAsync("/message/send", content);
 
         response.EnsureSuccessStatusCode();
+
+        _chatViewModel.MessageText = string.Empty;;
     }
 }

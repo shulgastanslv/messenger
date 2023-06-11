@@ -87,15 +87,11 @@ public class MessageRepository : IMessageRepository
 
         foreach (var file in fileNames)
         {
-            var fileInfo = new FileInfo(file);
+            string json = await File.ReadAllTextAsync(file, cancellationToken);
+            var message = JsonConvert.DeserializeObject<Message>(json);
 
-            DateTime lastWriteTime = fileInfo.LastWriteTime;
-            string formattedTime = lastWriteTime.ToString("yyyy-MM-dd HH:mm:ss");
-
-            if (DateTime.Parse(formattedTime) > chat.LastUpdatedTime)
+            if (message!.SendTime > chat.LastUpdatedTime)
             {
-                string json = await File.ReadAllTextAsync(file, cancellationToken);
-                var message = JsonConvert.DeserializeObject<Message>(json);
                 messages.Add(message!);
             }
         }

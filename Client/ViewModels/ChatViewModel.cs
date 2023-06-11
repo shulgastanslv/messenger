@@ -7,6 +7,8 @@ using System.Windows.Input;
 using Client.Commands;
 using Client.Services;
 using System.Collections.ObjectModel;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using Client.Commands.Messages;
 using Client.Queries;
@@ -68,5 +70,13 @@ public class ChatViewModel : ViewModelBase
         GetMessagesQuery.Execute(null);
 
         GetLastMessageQuery = new GetLastMessagesQuery(this, httpClient);
+
+        var messagesTimer = new DispatcherTimer();
+        messagesTimer.Interval = TimeSpan.FromSeconds(1);
+        messagesTimer.Tick += (sender, e) =>
+        {
+            GetLastMessageQuery.Execute(null);
+        };
+        messagesTimer.Start();
     }
 }

@@ -7,42 +7,101 @@
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:loadingSpinnerControl="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
       xmlns:modalControl="clr-namespace:ModalControl;assembly=ModalControl"
+      xmlns:customControls="clr-namespace:Client.CustomControls"
       mc:Ignorable="d"
       d:DesignHeight="630" 
       d:DesignWidth="1100">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
 
-        <ContentControl Content="{Binding MenuViewModel}" Panel.ZIndex="1"/>
+        <Border  x:Name="Menu"
+                 Grid.Column="0"
+                 CornerRadius="0, 0, 0, 10"
+                 Width="0"
+                 Background="{StaticResource MenuBackgroundColorColorBrush}" >
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70"/>
-                <ColumnDefinition Width="280"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel VerticalAlignment="Bottom">
+                    <Button x:Name="BtnNotifications" Style="{DynamicResource PopupButtonStyle}">
+                        <customControls:MenuItem
+                            GroupName="MenuItem"
+                            IconWidth="18"
+                            Icon="{StaticResource NotificationsOn}"
+                            HorizontalAlignment="Center"
+                            IndicatorBrush="{StaticResource ButtonColorBrush}"/>
+                    </Button>
 
-            <Grid Grid.Column="0" 
-                  Background="{StaticResource UsersListBackgroundColorBrush}" >
+                    <Button x:Name="BtnProfile" Style="{DynamicResource PopupButtonStyle}">
+                        <customControls:MenuItem
+                            GroupName="MenuItem"
+                            IconWidth="18"
+                            Icon="{StaticResource Profile}"
+                            HorizontalAlignment="Center"
+                            IndicatorBrush="{StaticResource ButtonColorBrush}"/>
+                    </Button>
+                    <Button x:Name="BtnSettings" Style="{DynamicResource PopupButtonStyle}">
+                        <customControls:MenuItem
+                            GroupName="MenuItem"
+                            IconWidth="18"
+                            Icon="{StaticResource Settings}"
+                            HorizontalAlignment="Center"
+                            IndicatorBrush="{StaticResource ButtonColorBrush}"/>
+                    </Button>
+                </StackPanel>
             </Grid>
+        </Border>
 
-            <Grid
+        
+
+        <Grid   x:Name="MainGrid"
                 Background="{StaticResource UsersListBackgroundColorBrush}" 
                 Grid.Column="1">
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="70"/>
-                    <RowDefinition />
-                </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-                    <TextBox Width="220"
+                <ToggleButton
+                            Grid.Column="0"
+                            Style="{StaticResource ToggleButtonStyle}">
+                    <ToggleButton.Triggers>
+                        <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                            <BeginStoryboard>
+                                <Storyboard x:Name="HideStackPanel">
+                                    <DoubleAnimation Storyboard.TargetName="Menu" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="60" To="0" Duration="0:0:0.4">
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="ToggleButton.Checked">
+                            <BeginStoryboard>
+                                <Storyboard x:Name="ShowStackPanel">
+                                    <DoubleAnimation Storyboard.TargetName="Menu" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="0" To="60" Duration="0:0:0.4">
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ToggleButton.Triggers>
+                </ToggleButton>
+
+                <TextBox Width="220"
                              Height="38"
-                             Grid.Column="0"
+                             Grid.Column="1"
                              HorizontalAlignment="Center"
                              VerticalAlignment="Center"
                              Background="#313131"
@@ -50,55 +109,72 @@
                              Text="{Binding SearchText, 
                     UpdateSourceTrigger=PropertyChanged}"
                              Tag="Search"/>
-                </Grid>
+            </Grid>
 
-                <ListView Background="Transparent"
+            <ListView Background="Transparent"
                          x:Name="UsersListView"
                          BorderThickness="0"
                          SelectedItem="{Binding SelectedUser}"
                          ItemsSource="{Binding Contacts}"
                          Grid.Row="1">
 
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        </Style>
-                    </ListView.ItemContainerStyle>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
 
-                    <ListView.ItemTemplate>
-                        <DataTemplate>  
-                            <Border Background="Transparent"
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="Transparent"
                                 Height="65">
-                                <Grid>
-                                    <StackPanel Orientation="Horizontal"
+                            <Grid>
+                                <StackPanel Orientation="Horizontal"
                                                 Height="Auto"
                                                 Margin="15, 0, 0, 0">
 
-                                        <Border Width="40"  Height="40" CornerRadius="25" Background="White"/>
+                                    <Border Width="40"  Height="40" CornerRadius="25" Background="White"/>
 
-                                        <StackPanel Margin="5, 5, 0, 0">
-                                            <Label Content="{Binding UserName}" 
+                                    <StackPanel Margin="5, 5, 0, 0">
+                                        <Label Content="{Binding UserName}" 
                                                Foreground="White"   
                                                FontSize="13"/>
-                                            <Label Content="Last Message" 
+                                        <Label Content="Last Message" 
                                                    Foreground="White"   
                                                    FontSize="13"/>
-                                        </StackPanel>
                                     </StackPanel>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </Grid>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
 
-            <loadingSpinnerControl:LoadingSpinner
+        <loadingSpinnerControl:LoadingSpinner
                 Grid.Column="2" 
                 IsLoading="{Binding IsLoading}"/>
 
-            <Frame Grid.Column="2" Content="{Binding ChatViewModel}"/>
+        <Border Grid.Column="2"
+                Width="210"
+                Background="{StaticResource ColorWrapBrush}"
+                CornerRadius="17"
+                Height="32"
+                Visibility="{Binding IsSelectedUser, 
+                            Converter={StaticResource InverseBooleanToVisibilityConverter}}">
 
-        </Grid>
+            <TextBlock
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Text="Select a chat to start messaging"
+                       Style="{StaticResource DefaultTextBlockStyle}"/>
+        </Border>
+
+
+
+
+        <Frame Grid.Column="2" Content="{Binding ChatViewModel}"/>
+
     </Grid>
 
 

@@ -63,10 +63,23 @@ public class HomeViewModel : ViewModelBase
         set
         {
             _selectedUser = value;
+            IsSelectedUser = true;
             OnPropertyChanged(nameof(SelectedUser));
             ChatViewModel = new ChatViewModel(_userStore, _selectedUser!, _httpClient);
         }
     }
+
+    private bool _isSelectedUser;
+    public bool IsSelectedUser
+    {
+        get => _isSelectedUser;
+        set
+        {
+            _isSelectedUser = value;
+            OnPropertyChanged(nameof(IsSelectedUser));
+        }
+    }
+
     public ICommand GetAllUsersQuery { get; }
     public ICommand GetUserByUserNameQuery { get; }
 

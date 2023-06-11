@@ -60,11 +60,10 @@
                             Background="Transparent"
                             BorderThickness="0"
                             Height="30">
+                            
+                        <Path Data="{StaticResource Call}"
+                              Fill="White"/>
 
-                        <iconPacks:PackIconMaterialDesign     Kind="Call"
-                                                              Width="18"
-                                                              Height="18"
-                                                              Foreground="White" />
                     </Button>
 
                     <Button Grid.Column="3"
@@ -73,10 +72,8 @@
                                 BorderThickness="0"
                                 Height="30">
 
-                        <iconPacks:PackIconMaterialDesign     Kind="Videocam"
-                                                              Width="18"
-                                                              Height="18"
-                                                                  Foreground="White" />
+                        <Path Data="{StaticResource VideoCall}"
+                              Fill="White"/>
 
                     </Button>
 
@@ -86,10 +83,8 @@
                             BorderThickness="0"
                             Height="30">
 
-                        <iconPacks:PackIconMaterialDesign     Kind="MoreVert"
-                                                              Width="18"
-                                                              Height="18"
-                                                              Foreground="White" />
+                        <Path Data="{StaticResource MoreVert}"
+                              Fill="White"/>
 
                     </Button>
                 </Grid>
@@ -122,12 +117,13 @@
             </ScrollViewer>
 
 
-            <Grid Grid.Row="2"
+            <Border Grid.Row="2"
+                    CornerRadius="0, 0, 10, 0"
                   Background="{StaticResource BottomChatPanelColorBrush}">
 
                 <Border
                     Margin="8"
-                    CornerRadius="2"
+                    CornerRadius="5"
                     Background="{StaticResource ChatTextBoxColorBrush}">
 
                     <Grid >
@@ -147,6 +143,7 @@
                             UpdateSourceTrigger=PropertyChanged}"
                         />
 
+
                         <Button Grid.Column="2"
                                 Width="30"
                                 Background="Transparent"
@@ -154,19 +151,12 @@
                                 Height="30"
                                 Command="{Binding SendMessageCommand}">
 
-                            <iconPacks:PackIconMaterialDesign     Kind="Send"
-                                                                  Width="18"
-                                                                  HorizontalContentAlignment="Center"
-                                                                  HorizontalAlignment="Center"
-                                                                  VerticalAlignment="Center"
-                                                                  VerticalContentAlignment="Center"
-                                                                  Height="18"
-                                                                  Foreground="White" />
-
+                            <Path Data="{StaticResource Send}"
+                                 Fill="White"/>
                         </Button>
                     </Grid>
                 </Border>
-            </Grid>
+            </Border>
         </Grid>
     </Grid>
 </Page>
