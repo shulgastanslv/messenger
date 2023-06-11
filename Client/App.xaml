@@ -9,15 +9,18 @@
 
     <Application.Resources>
 
-
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/Themes/Dark.xaml"/>
                 <ResourceDictionary Source="Styles/Colors.xaml"/>
                 <ResourceDictionary Source="Styles/LoadingSpinner.xaml"/>
+                <ResourceDictionary Source="Styles/Buttons/ButtonColors.xaml"/>
+                <ResourceDictionary Source="Styles/Buttons/Button.xaml"/>
+                <ResourceDictionary Source="Styles/TextBoxes/TextBoxColors.xaml"/>
+                <ResourceDictionary Source="Styles/TextBoxes/TextBox.xaml"/>
                 <ResourceDictionary Source="Styles/Borders.xaml"/>
                 <ResourceDictionary Source="Styles/TextBlocks.xaml"/>
                 <ResourceDictionary Source="Styles/CheckBoxes.xaml"/>
-                <ResourceDictionary Source="Styles/TextBoxes.xaml"/>
                 <ResourceDictionary Source="Styles/Buttons.xaml"/>
                 <ResourceDictionary Source="Styles/Icons.xaml"/>
             </ResourceDictionary.MergedDictionaries>

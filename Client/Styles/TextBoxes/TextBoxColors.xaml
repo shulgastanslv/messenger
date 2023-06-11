@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="TextBoxBorderColor">#5E6175</Color>
+    <SolidColorBrush x:Key="TextBoxBorderBrushColor" Color="{StaticResource TextBoxBorderColor}"/>
+
+    <Color x:Key="TextBoxBackgroundColor">Transparent</Color>
+    <SolidColorBrush x:Key="TextBoxBackgroundColorBrush" Color="{StaticResource TextBoxBackgroundColor}"/>
+
+    <Color x:Key="TextBoxForegroundColor">White</Color>
+    <SolidColorBrush x:Key="TextBoxForegroundColorBrush" Color="{StaticResource TextBoxForegroundColor}"/>
+
+    <Color x:Key="TextBoxCaretColor">White</Color>
+    <SolidColorBrush x:Key="TextBoxCaretColorBrush" Color="{StaticResource TextBoxCaretColor}"/>
+
+</ResourceDictionary>

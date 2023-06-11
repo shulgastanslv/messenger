@@ -1,13 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="#5E6175"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="CaretBrush" Value="White"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorderBrushColor}"/>
+        <Setter Property="Background" Value="{StaticResource TextBoxBackgroundColorBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextBoxForegroundColorBrush}"/>
+        <Setter Property="CaretBrush" Value="{StaticResource TextBoxCaretColorBrush}"/>
         <Setter Property="FontFamily" Value="Poppins"/>
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -30,7 +29,9 @@
 
                         <Grid Margin="{TemplateBinding Padding}">
 
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" 
+                                          HorizontalScrollBarVisibility="Hidden" 
+                                          VerticalScrollBarVisibility="Hidden"/>
 
                             <Label 
                                 Content="{TemplateBinding Tag}"
@@ -47,18 +48,38 @@
 
                     </Border>
 
-                    <ControlTemplate.Triggers>  
+                    <ControlTemplate.Triggers>
+
 
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="Text" Value=""></Condition>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Visibility" TargetName="WaterMarkerLabel" Value="Visible"></Setter>
+
+                            <Setter Property="Visibility" TargetName="WaterMarkerLabel" Value="Visible"/>
                         </MultiTrigger>
 
+
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="Height" Value="45"></Setter>
-                            <Setter Property="BorderBrush" Value="White"/>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Height" From="44" To="45" Duration="0:0:0.2"/>
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                        From="{StaticResource TextBoxBorderColor}"  To="White" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Height" From="45" To="44" Duration="0:0:0.2"/>
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                        From="White" To="{StaticResource TextBoxBorderColor}" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
                         </Trigger>
 
 
@@ -66,7 +87,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
     </Style>
 
 </ResourceDictionary>
