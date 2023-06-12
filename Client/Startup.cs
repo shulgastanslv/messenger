@@ -20,9 +20,11 @@ public class Startup
         services.AddSingleton<RegistrationViewModel>();
         services.AddSingleton<HomeViewModel>();
         services.AddSingleton<ChatViewModel>();
-        services.AddSingleton<SettingsViewModel>();
-        services.AddSingleton<EditProfileViewModel>();
-        services.AddSingleton<EditUserNameViewModel>();
+
+
+        services.AddScoped<SettingsViewModel>();
+        services.AddScoped<EditProfileViewModel>();
+        services.AddScoped<EditUserNameViewModel>();
 
         services.AddSingleton(provider => new MainWindow
         {

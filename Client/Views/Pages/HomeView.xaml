@@ -11,15 +11,15 @@
 
 
     <Grid>
-        
         <Grid>
-
             <Grid.Triggers>
                 <EventTrigger RoutedEvent="MouseDown">
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetName="Menu" Storyboard.TargetProperty="Width" To="0" Duration="0:0:0.1" />
-                            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ToggleMenuButton" Storyboard.TargetProperty="IsChecked">
+                            <DoubleAnimation Storyboard.TargetName="Menu" Storyboard.TargetProperty="Width" To="0"
+                                             Duration="0:0:0.1" />
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ToggleMenuButton"
+                                                            Storyboard.TargetProperty="IsChecked">
                                 <DiscreteBooleanKeyFrame KeyTime="0" Value="False" />
                             </BooleanAnimationUsingKeyFrames>
                         </Storyboard>
@@ -31,8 +31,6 @@
                 <ColumnDefinition Width="300" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-
-
 
             <Grid
                 x:Name="MainGrid"
@@ -138,7 +136,7 @@
                     Style="{StaticResource DefaultTextBlockStyle}" />
             </Border>
 
-            <Frame Grid.Column="1" Content="{Binding ChatViewModel}"/>
+            <Frame Grid.Column="1" Content="{Binding ChatViewModel}" />
 
         </Grid>
 
@@ -153,7 +151,6 @@
                     x:Name="Menu"
                     Width="0"
                     HorizontalAlignment="Left">
-
 
 
                 <Grid Background="{StaticResource MenuBackgroundColorColorBrush}">
@@ -213,7 +210,6 @@
             <ContentPresenter Content="{Binding ModalViewModel}"
                               Panel.ZIndex="2" />
         </styles:Modal>
-
 
 
     </Grid>

@@ -1,7 +1,7 @@
 ﻿using Application.Common.Abstractions.Messaging;
 using Domain.Entities.Users;
 
-namespace Application.Users.Queries.GetUserByEmail;
+namespace Application.Users.Queries.GetUserByUserName;
 
 public class GetUserByUserNameQueryHandler : IQueryHandler<GetUserByUserNameQuery, UserResponse>
 {
@@ -14,7 +14,7 @@ public class GetUserByUserNameQueryHandler : IQueryHandler<GetUserByUserNameQuer
 
     public async Task<UserResponse> Handle(GetUserByUserNameQuery request, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetUserByUserNameAsync(request.email, cancellationToken);
+        var user = await _userRepository.GetUserByUserNameAsync(request.UserName, cancellationToken);
 
         return new UserResponse(user.Value!);
     }

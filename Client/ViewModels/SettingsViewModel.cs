@@ -10,7 +10,7 @@ public class SettingsViewModel : ViewModelBase
 {
     private UserStore _userStore;
 
-    public SettingsViewModel(UserStore userStore, HttpClient httpClient,
+    public SettingsViewModel(HomeViewModel homeViewModel, UserStore userStore, HttpClient httpClient,
         NavigationStore navigationStore)
     {
         _userStore = userStore;
@@ -21,7 +21,7 @@ public class SettingsViewModel : ViewModelBase
         NavigateToEditProfileCommand = new NavigateCommand<EditProfileViewModel>(
             new NavigationService<EditProfileViewModel>(
                 navigationStore,
-                () => new EditProfileViewModel(userStore, httpClient, navigationStore)));
+                () => new EditProfileViewModel(homeViewModel, userStore, httpClient, navigationStore)));
     }
 
     public UserStore UserStore

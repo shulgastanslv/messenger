@@ -1,5 +1,5 @@
 ﻿using Application.Messages.Commands.SaveMessageCommand;
-using Application.Messages.Queries.GetLastMessagesAsync;
+using Application.Messages.Queries.GetLastMessages;
 using Application.Messages.Queries.GetMessages;
 using Carter;
 using Domain.Entities.Contacts;

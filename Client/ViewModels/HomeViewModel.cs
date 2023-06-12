@@ -33,11 +33,12 @@ public class HomeViewModel : ViewModelBase
 
         GetAllUsersQuery = new GetAllUsersQuery(this, _userStore, httpClient);
         GetAllUsersQuery.Execute(null);
+
         GetUserByUserNameQuery = new GetUserByUserNameQuery(this, _userStore, httpClient);
         GetUserByUserNameQuery.Execute(null);
 
         NavigateToSettingsCommand = new NavigateCommand<SettingsViewModel>(new NavigationService<SettingsViewModel>(
-            _menuNavigationStore, () => new SettingsViewModel(_userStore, httpClient,
+            _menuNavigationStore, () => new SettingsViewModel(this, _userStore, httpClient,
                 _menuNavigationStore)));
 
         _menuNavigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;

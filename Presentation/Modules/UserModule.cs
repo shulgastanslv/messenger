@@ -1,7 +1,9 @@
-﻿using Application.Users.Queries.GetAllUsers;
-using Application.Users.Queries.GetUserByEmail;
+﻿using Application.Users.Commands.UserUpdate;
+using Application.Users.Queries.GetAllUsers;
 using Application.Users.Queries.GetUserById;
+using Application.Users.Queries.GetUserByUserName;
 using Carter;
+using Domain.Entities.Users;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -24,6 +26,13 @@ public class UserModule : CarterModule
             var result = await sender.Send(new GetUserByUserNameQuery(username));
 
             return Results.Ok(result.user);
+        });
+
+        app.MapPost("/update", [Authorize] async (User user, ISender sender) =>
+        {
+            var result = await sender.Send(new UserUpdateCommand(user));
+
+            return Results.Ok(result);
         });
 
         app.MapGet("/getAllUsers", [AllowAnonymous] async (ISender sender) =>

@@ -2,15 +2,15 @@
 
 public abstract class Entity
 {
-    protected Entity(Guid id)
+    public Entity(Guid id)
         : this()
     {
         Id = id;
     }
 
-    protected Entity()
+    public Entity()
     {
     }
 
-    public Guid Id { get; protected set; }
+    public Guid Id { get; set; }
 }

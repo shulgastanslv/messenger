@@ -56,8 +56,6 @@
 
             <Button Grid.Row="2" Style="{StaticResource BackButtonStyle}"
                     Command="{Binding NavigateToHomeCommand}" />
-
-
         </Grid>
     </ScrollViewer>
 </UserControl>

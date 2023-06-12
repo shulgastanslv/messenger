@@ -8,12 +8,27 @@ namespace Client.ViewModels;
 
 public class EditUserNameViewModel : ViewModelBase
 {
-    public EditUserNameViewModel(UserStore userStore, HttpClient httpClient, NavigationStore editProfileNavigationStore)
+    private string _userName;
+
+    public EditUserNameViewModel(HomeViewModel homeViewModel, UserStore userStore, HttpClient httpClient,
+        NavigationStore editProfileNavigationStore)
     {
+        userStore.User.UserName = "хуй";
+
         NavigateToEditProfileCommand = new NavigateCommand<EditUserNameViewModel>(
             new NavigationService<EditUserNameViewModel>(
                 editProfileNavigationStore, () => null));
     }
 
     public ICommand NavigateToEditProfileCommand { get; }
+
+    public string UserName
+    {
+        get => _userName;
+        set
+        {
+            _userName = value;
+            OnPropertyChanged(nameof(UserName));
+        }
+    }
 }

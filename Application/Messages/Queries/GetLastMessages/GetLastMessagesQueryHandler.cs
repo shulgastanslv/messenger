@@ -2,7 +2,7 @@
 using Application.Common.Abstractions.Messaging;
 using Domain.Entities.Messages;
 
-namespace Application.Messages.Queries.GetLastMessagesAsync;
+namespace Application.Messages.Queries.GetLastMessages;
 
 public class GetLastMessagesQueryHandler : IQueryHandler<GetLastMessagesQuery, MessagesResponse>
 {

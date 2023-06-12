@@ -32,6 +32,15 @@ public class UserRepository : IUserRepository
         return user;
     }
 
+    public async Task<Result<User?>> UpdateUserAsync(User user, CancellationToken cancellationToken)
+    {
+        _context.Users.Update(user);
+
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return Result.Success(user)!;
+    }
+
     public async Task<IEnumerable<User>> GetAllUsersAsync()
     {
         var users = await _context.Users.ToListAsync();
