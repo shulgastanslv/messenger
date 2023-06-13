@@ -3,7 +3,6 @@ using Domain.Entities.Contacts;
 using Domain.Entities.Users;
 using Domain.Primitives.Errors;
 using Domain.Primitives.Result;
-using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
@@ -46,14 +45,15 @@ public class UserRepository : IUserRepository
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<Result<Contact>> ConvertToContactAsync(User user, Guid sender, CancellationToken cancellationToken)
+    public async Task<Result<Contact>> ConvertToContactAsync(User user, Guid sender,
+        CancellationToken cancellationToken)
     {
         var chat = await _context.Chats
             .FirstOrDefaultAsync(c =>
                     c.SenderId == sender && c.ReceiverId == user.Id,
                 cancellationToken);
 
-        if (chat == null) 
+        if (chat == null)
             return Result.Failure<Contact>(new Error($"Chat for contact {user.Id} doesn't exist"));
 
         return Result.Success(new Contact(

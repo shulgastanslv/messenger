@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Windows.Input;
-using System.Windows.Threading;
 using Client.Commands.Messages;
 using Client.Models;
 using Client.Queries.Messages;

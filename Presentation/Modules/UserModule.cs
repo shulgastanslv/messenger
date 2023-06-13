@@ -1,10 +1,4 @@
-﻿using Application.Users.Queries.GetUsers;
-using Carter;
-using Domain.Entities.Users;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
+﻿using Carter;
 using Microsoft.AspNetCore.Routing;
 
 namespace Presentation.Modules;

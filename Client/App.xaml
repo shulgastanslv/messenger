@@ -4,8 +4,7 @@
              xmlns:local="clr-namespace:Client"
              xmlns:viewModels="clr-namespace:Client.ViewModels"
              xmlns:pages="clr-namespace:Client.Views.Pages"
-             xmlns:converters="clr-namespace:Client.Converters"
-             xmlns:views="clr-namespace:Client.Views">
+             xmlns:converters="clr-namespace:Client.Converters">
 
     <Application.Resources>
 

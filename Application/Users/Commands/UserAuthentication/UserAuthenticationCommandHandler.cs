@@ -6,7 +6,8 @@ using Domain.Primitives.Result;
 
 namespace Application.Users.Commands.UserAuthentication;
 
-public class UserAuthenticationCommandHandler : ICommandHandler<UserAuthenticationCommand, Result<AuthenticationResponse>>
+public class
+    UserAuthenticationCommandHandler : ICommandHandler<UserAuthenticationCommand, Result<AuthenticationResponse>>
 {
     private readonly IJwtProvider _jwtProvider;
     private readonly IUserRepository _userRepository;
@@ -17,7 +18,8 @@ public class UserAuthenticationCommandHandler : ICommandHandler<UserAuthenticati
         _jwtProvider = jwtProvider;
     }
 
-    public async Task<Result<AuthenticationResponse>> Handle(UserAuthenticationCommand request, CancellationToken cancellationToken)
+    public async Task<Result<AuthenticationResponse>> Handle(UserAuthenticationCommand request,
+        CancellationToken cancellationToken)
     {
         var user = await _userRepository.GetByUsernameAsync(request.Username, cancellationToken)!;
 
@@ -25,7 +27,7 @@ public class UserAuthenticationCommandHandler : ICommandHandler<UserAuthenticati
             return Result.Failure<AuthenticationResponse>(
                 new Error("The user with the specified user name was not found."));
 
-        if (user.Password != request.Password) 
+        if (user.Password != request.Password)
             return Result.Failure<AuthenticationResponse>
                 (new Error("Password wasn't match"));
 

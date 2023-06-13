@@ -2,7 +2,6 @@
 using Application.Common.Abstractions.Messaging;
 using Domain.Entities.Chats;
 using Domain.Entities.Messages;
-using Domain.Primitives.Errors;
 using Domain.Primitives.Result;
 using Microsoft.Extensions.Logging;
 

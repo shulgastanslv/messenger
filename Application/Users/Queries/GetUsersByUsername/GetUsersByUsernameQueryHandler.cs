@@ -9,14 +9,15 @@ namespace Application.Users.Queries.GetUsersByUsername;
 
 public class GetUsersByUsernameQueryHandler : IQueryHandler<GetUsersByUsernameQuery, UsersResponse>
 {
-    private readonly IUserRepository _userRepository;
     private readonly IJwtProvider _jwtProvider;
+    private readonly IUserRepository _userRepository;
 
     public GetUsersByUsernameQueryHandler(IUserRepository userRepository, IJwtProvider jwtProvider)
     {
         _userRepository = userRepository;
         _jwtProvider = jwtProvider;
     }
+
     public async Task<UsersResponse> Handle(GetUsersByUsernameQuery request, CancellationToken cancellationToken)
     {
         var senderId = await _jwtProvider.GetUserId(request.HttpContext.User);

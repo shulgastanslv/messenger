@@ -5,7 +5,8 @@ using Domain.Primitives.Result;
 
 namespace Application.Users.Commands.UserRegistration;
 
-public sealed class UserRegistrationCommandHandler : ICommandHandler<UserRegistrationCommand, Result<RegistrationResponse>>
+public sealed class
+    UserRegistrationCommandHandler : ICommandHandler<UserRegistrationCommand, Result<RegistrationResponse>>
 {
     private readonly IApplicationDbContext _applicationDbContext;
     private readonly IJwtProvider _jwtProvider;
@@ -19,7 +20,8 @@ public sealed class UserRegistrationCommandHandler : ICommandHandler<UserRegistr
         _jwtProvider = jwtProvider;
     }
 
-    public async Task<Result<RegistrationResponse>> Handle(UserRegistrationCommand request, CancellationToken cancellationToken)
+    public async Task<Result<RegistrationResponse>> Handle(UserRegistrationCommand request,
+        CancellationToken cancellationToken)
     {
         var id = Guid.NewGuid();
 
@@ -27,7 +29,7 @@ public sealed class UserRegistrationCommandHandler : ICommandHandler<UserRegistr
 
         var result = await _userRepository.CreateAsync(user, cancellationToken);
 
-        if (result.IsFailure) 
+        if (result.IsFailure)
             return Result.Failure<RegistrationResponse>(result.Error);
 
         await _applicationDbContext.SaveChangesAsync(cancellationToken);

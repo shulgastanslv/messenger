@@ -9,9 +9,8 @@ namespace Application.Users.Queries.GetUsers;
 
 public sealed class GetUsersQueryHandler : IQueryHandler<GetUsersQuery, UsersResponse>
 {
-    private readonly IUserRepository _userRepository;
-
     private readonly IJwtProvider _jwtProvider;
+    private readonly IUserRepository _userRepository;
 
     public GetUsersQueryHandler(IUserRepository userRepository, IJwtProvider jwtProvider)
     {
@@ -41,6 +40,5 @@ public sealed class GetUsersQueryHandler : IQueryHandler<GetUsersQuery, UsersRes
             .ToList();
 
         return new UsersResponse(Result.Success<IEnumerable<Contact>?>(contacts));
-
     }
 }
