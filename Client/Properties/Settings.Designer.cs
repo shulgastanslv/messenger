@@ -26,12 +26,12 @@ namespace Client.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string UserName {
+        public string Username {
             get {
-                return ((string)(this["UserName"]));
+                return ((string)(this["Username"]));
             }
             set {
-                this["UserName"] = value;
+                this["Username"] = value;
             }
         }
         
@@ -61,10 +61,54 @@ namespace Client.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("D:\\\\ClientData\\\\")]
-        public string DataPath {
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\\\ClientData\\\\Users")]
+        public string UserDataPath {
             get {
-                return ((string)(this["DataPath"]));
+                return ((string)(this["UserDataPath"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\\\ClientData\\\\Messages")]
+        public string MessagesDataPath {
+            get {
+                return ((string)(this["MessagesDataPath"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:7289")]
+        public string HttpUriString {
+            get {
+                return ((string)(this["HttpUriString"]));
+            }
+            set {
+                this["HttpUriString"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime LastResponseTime {
+            get {
+                return ((global::System.DateTime)(this["LastResponseTime"]));
+            }
+            set {
+                this["LastResponseTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00000000-0000-0000-0000-000000000000")]
+        public global::System.Guid Id {
+            get {
+                return ((global::System.Guid)(this["Id"]));
+            }
+            set {
+                this["Id"] = value;
             }
         }
     }

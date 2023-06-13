@@ -22,7 +22,7 @@ public class GetUsersByUsernameQueryHandler : IQueryHandler<GetUsersByUsernameQu
     {
         var senderId = await _jwtProvider.GetUserId(request.HttpContext.User);
 
-        if (senderId.HasValue)
+        if (!senderId.HasValue)
             return new UsersResponse(
                 Result.Failure<IEnumerable<Contact>>(new Error("Used don't recognized")));
 

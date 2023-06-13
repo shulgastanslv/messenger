@@ -2,22 +2,18 @@
 
 namespace Client.Models;
 
-public class UserModel
+public class UserModel : EntityModel
 {
-    public UserModel(Guid id, string userName, string password)
+    public UserModel(Guid id, string username, string password) : base(id)
     {
-        Id = id;
-        UserName = userName;
+        Username = username;
         Password = password;
         CreationTime = DateTime.Now;
     }
 
-    public UserModel()
-    {
-    }
+    public UserModel(){}
 
-    public Guid Id { get; set; }
-    public string UserName { get; set; }
+    public string Username { get; set; }
     public string Password { get; set; }
     public DateTime CreationTime { get; set; }
 }

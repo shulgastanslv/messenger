@@ -5,4 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Application.Messages.Commands.SaveMessageCommand;
 
-public sealed record SaveMessageCommand(Message Message, HttpContext Context) : ICommand<Result>;
+public sealed record SaveMessageCommand(
+    Message Message,
+    HttpContext HttpContext) : ICommand<Result>;

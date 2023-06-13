@@ -4,16 +4,20 @@ namespace Domain.Entities.Messages;
 
 public class Message : Entity
 {
-    public Message(Guid id, string content, Guid receiver)
+    public Message(Guid id, string content, Guid sender, Guid receiverChatId)
         : base(id)
     {
-        Id = id;
         Content = content;
-        Receiver = receiver;
         SendTime = DateTime.Now;
+        Sender = sender;
+        ReceiverChatId = receiverChatId;
     }
 
-    public Guid Receiver { get; set; }
-    public DateTime SendTime { get; set; }
     public string Content { get; set; }
+
+    public DateTime SendTime { get; set; }
+
+    public Guid Sender { get; set; }
+
+    public Guid ReceiverChatId { get; set; }
 }

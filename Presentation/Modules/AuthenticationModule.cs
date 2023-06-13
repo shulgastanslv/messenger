@@ -11,20 +11,19 @@ namespace Presentation.Modules;
 
 public class AuthenticationModule : CarterModule
 {
-    public AuthenticationModule() : base("/authentication")
-    {
-    }
+    public AuthenticationModule() : base("/authentication"){}
 
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/auth", [AllowAnonymous] async ([FromBody] UserAuthenticationCommand request,
+        app.MapPost("/auth", async ([FromBody] UserAuthenticationCommand request,
             ISender sender, CancellationToken cancellationToken) =>
         {
             var result = await sender.Send(request, cancellationToken);
 
             return result.IsSuccess ? Results.Ok(result.Value) : Results.BadRequest(result.Error);
-        });
+        }).AllowAnonymous();
 
-        app.MapPost("/confirm", [Authorize]() => { });
+
+        app.MapPost("/confirm", () => { }).RequireAuthorization();
     }
 }

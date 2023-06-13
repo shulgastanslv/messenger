@@ -9,6 +9,7 @@
       mc:Ignorable="d"
       d:DesignHeight="630"
       d:DesignWidth="1100"
+      d:DataContext="{d:DesignInstance viewModels:ChatViewModel}"
       Title="ChatView">
 
     <Page.Resources>
@@ -47,7 +48,7 @@
                             CornerRadius="25" Background="White" />
 
                     <StackPanel VerticalAlignment="Center" Grid.Column="1">
-                        <Label Content="{Binding CurrentContact.UserName}"
+                        <Label Content="{Binding CurrentContact.Username}"
                                FontSize="16"
                                Padding="0, 0, 0,0" />
 
@@ -104,11 +105,12 @@
 
                                 <Border.HorizontalAlignment>
                                     <MultiBinding Converter="{StaticResource MessageAlignmentConverter}">
-                                        <Binding Path="Receiver" />
-                                        <Binding Path="DataContext.(viewModels:ChatViewModel.UserStore)"
+                                        <Binding Path="Sender" />
+                                        <Binding Path="DataContext.UserStore.User.Id"
                                                  RelativeSource="{RelativeSource AncestorType=Page}" />
                                     </MultiBinding>
                                 </Border.HorizontalAlignment>
+
 
                                 <StackPanel Margin="15, 5, 5, 0" VerticalAlignment="Stretch">
                                     <TextBlock Foreground="White" FontSize="13" Text="{Binding Content}" />

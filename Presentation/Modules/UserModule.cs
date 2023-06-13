@@ -1,4 +1,9 @@
-﻿using Carter;
+﻿using Application.Users.Queries.GetUsers;
+using Application.Users.Queries.GetUsersByUsername;
+using Carter;
+using MediatR;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
 namespace Presentation.Modules;
@@ -12,32 +17,22 @@ public class UserModule : CarterModule
 
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        //app.MapGet("/getUserByUserName", [AllowAnonymous] async (string username, ISender sender) =>
-        //{
-        //    var result = await sender.Send(new GetUserByUserNameQuery(username));
+        app.MapGet("/getUsersByUsername", async (string username, ISender sender, HttpContext httpContext,
+            CancellationToken cancellationToken) =>
+        {
+            var result = (await sender.Send(
+                new GetUsersByUsernameQuery(username, httpContext),
+                cancellationToken)).Users;
 
-        //    return Results.Ok(result.user);
-        //});
+            return result.IsSuccess ? Results.Ok(result.Value) : Results.BadRequest(result.Error);
+        }).AllowAnonymous();
 
-        //app.MapPost("/update", [Authorize] async (User user, ISender sender) =>
-        //{
-        //    var result = await sender.Send(new UserUpdateCommand(user));
+        app.MapGet("/get", async (ISender sender, HttpContext httpContext,
+            CancellationToken cancellationToken) =>
+        {
+            var result = (await sender.Send(new GetUsersQuery(httpContext), cancellationToken)).Contacts;
 
-        //    return Results.Ok(result);
-        //});
-
-        //app.MapGet("/getAllUsers", [AllowAnonymous] async (ISender sender) =>
-        //{
-        //    var result = await sender.Send(new GetUsersQuery());
-
-        //    return Results.Ok(result.Users);
-        //});
-
-        //app.MapGet("/getUserById", [Authorize] async (Guid id, ISender sender) =>
-        //{
-        //    var result = await sender.Send(new GetUserByIdQuery(id));
-
-        //    return Results.Ok(result);
-        //});
+            return result.IsSuccess ? Results.Ok(result.Value) : Results.BadRequest(result.Error);
+        }).AllowAnonymous();
     }
 }

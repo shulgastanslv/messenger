@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Text;
+using System.Text.Json;
 using Application.Common.Abstractions;
 using Domain.Entities.Chats;
 using Domain.Entities.Messages;
@@ -12,93 +13,71 @@ namespace Infrastructure.Repositories;
 
 public class MessageRepository : IMessageRepository
 {
-    private readonly IApplicationDbContext _applicationDbContext;
     private readonly string _filePath;
 
     public MessageRepository(string filePath, IApplicationDbContext applicationDbContext)
     {
         _filePath = filePath;
-        _applicationDbContext = applicationDbContext;
     }
 
-    public async Task<Result> SaveMessageAsync(Chat chat, Message message, CancellationToken cancellationToken)
+    public async Task<Result> SaveMessageAsync(Message message, CancellationToken cancellationToken)
     {
-        var directoryPath = _filePath + $"{chat.ChatId}\\";
-
+        var directoryPath = Path.Combine(_filePath, message.ReceiverChatId.ToString());
         Directory.CreateDirectory(directoryPath);
 
-        var jsonOptions = new JsonSerializerOptions
-        {
-            WriteIndented = true
-        };
+        var json = JsonConvert.SerializeObject(message);
 
-        var json = JsonSerializer.Serialize(message, jsonOptions);
+        var encoding = Encoding.UTF8;
 
-        await File.WriteAllTextAsync(_filePath + $"{chat.ChatId}\\{message.Id}.json", json, cancellationToken);
+        await File.WriteAllTextAsync(Path.Combine(directoryPath, $"{message.Id}.json"), json,
+            encoding, cancellationToken);
 
         return Result.Success();
     }
 
-    public async Task<Result<IEnumerable<Message>>> GetMessagesAsync(Guid receiver, Guid sender,
-        CancellationToken cancellationToken)
+    public async Task<Result<IEnumerable<Message>>> GetMessagesAsync(Guid chatId, CancellationToken cancellationToken)
     {
-        var chat = await _applicationDbContext.Chats
-            .FirstOrDefaultAsync(i => i.Sender!.Id == sender && i.Receiver!.Id == receiver, cancellationToken);
+        var directoryPath = Path.Combine(_filePath, chatId.ToString());
+        var fileNames = Directory.GetFiles(directoryPath);
 
-        if (chat == null)
-            return Result.Failure<IEnumerable<Message>>(new Error("Chat not found"));
+        List<Message> messages = new();
 
-        var dictionaryPath = Path.Combine(_filePath, chat.ChatId.ToString());
-
-        if (!Directory.Exists(dictionaryPath))
-            return Result.Failure<IEnumerable<Message>>(new Error("Directory not found"));
-
-        var fileNames = await Task.Run(() =>
-            Directory.GetFiles(dictionaryPath), cancellationToken);
-
-        var messages = new List<Message>();
-
-        foreach (var file in fileNames)
+        foreach (var fileName in fileNames)
         {
-            var json = await File.ReadAllTextAsync(file, cancellationToken);
-
+            var json = await File.ReadAllTextAsync(fileName, cancellationToken);
             var message = JsonConvert.DeserializeObject<Message>(json);
+            if (message == null) continue;
 
-            messages.Add(message!);
+            messages.Add(message);
         }
-
-        chat!.LastUpdatedTime = DateTime.Now;
-
-        await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
         return Result.Success<IEnumerable<Message>>(messages);
     }
 
-    public async Task<Result<IEnumerable<Message>>> GetLastMessagesAsync(Guid receiver, Guid sender,
-        CancellationToken cancellationToken)
+    public async Task<IEnumerable<Message>?> GetLastMessagesAsync(Guid chatId, DateTime lastMessageDate, CancellationToken cancellationToken)
     {
-        var chat = await _applicationDbContext.Chats
-            .FirstOrDefaultAsync(i => i.Sender!.Id == sender && i.Receiver!.Id == receiver, cancellationToken);
+        var directoryPath = Path.Combine(_filePath, chatId.ToString());
+        var lastModified = Directory.GetLastWriteTime(directoryPath);
 
-        var dictionaryPath = Path.Combine(_filePath, chat.ChatId.ToString());
+        if (lastModified <= lastMessageDate) return null;
 
-        var fileNames = await Task.Run(() =>
-            Directory.GetFiles(dictionaryPath), cancellationToken);
-
+        var files = Directory.GetFiles(directoryPath);
         var messages = new List<Message>();
 
-        foreach (var file in fileNames)
+        foreach (var file in files)
         {
-            var json = await File.ReadAllTextAsync(file, cancellationToken);
-            var message = JsonConvert.DeserializeObject<Message>(json);
+            var creationTime = File.GetCreationTime(file);
 
-            if (message!.SendTime > chat.LastUpdatedTime) messages.Add(message!);
+            if (creationTime > lastMessageDate)
+            {
+                var json = await File.ReadAllTextAsync(file, cancellationToken);
+                var message = JsonConvert.DeserializeObject<Message>(json);
+                if (message == null) continue;
+
+                messages.Add(message);
+            }
         }
 
-        chat!.LastUpdatedTime = DateTime.Now;
-
-        await _applicationDbContext.SaveChangesAsync(cancellationToken);
-
-        return Result.Success<IEnumerable<Message>>(messages);
+        return messages;
     }
 }

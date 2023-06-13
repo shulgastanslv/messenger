@@ -2,15 +2,16 @@
 
 namespace Client.Models;
 
-public class ContactModel
+public class ContactModel : EntityModel
 {
-    public ContactModel(Guid id, string userName)
+    public ContactModel(Guid id, string username, Guid? chatId)
+        : base(id)
     {
-        Id = id;
-        UserName = userName;
+        Username = username;
+        ChatId = chatId;
     }
 
-    public Guid Id { get; set; }
+    public string Username { get; set; }
 
-    public string UserName { get; set; }
+    public Guid? ChatId { get; set; }
 }

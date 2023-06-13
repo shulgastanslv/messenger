@@ -8,15 +8,12 @@ namespace Client.Converters;
 
 public class MessageAlignmentConverter : IMultiValueConverter
 {
-    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object[]? values, Type targetType, object parameter, CultureInfo culture)
     {
-        if (values != null && values.Length == 2 &&
-            values[0] is Guid receiver &&
-            values[1] is UserStore user)
-            if (receiver == user.User.Id)
-                return HorizontalAlignment.Left;
+        if (values is not [Guid senderId, Guid userId]) 
+            return HorizontalAlignment.Right;
 
-        return HorizontalAlignment.Right;
+        return senderId == userId ? HorizontalAlignment.Left : HorizontalAlignment.Right;
     }
 
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

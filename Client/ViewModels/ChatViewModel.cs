@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Windows.Input;
 using Client.Commands.Messages;
 using Client.Models;
-using Client.Queries.Messages;
+using Client.Services;
 using Client.Stores;
 
 namespace Client.ViewModels;
@@ -22,10 +22,13 @@ public class ChatViewModel : ViewModelBase
         UserStore = userStore;
 
         SendMessageCommand = new SendMessageCommand(this, CurrentContact, httpClient);
-        GetMessagesQuery = new GetMessagesQuery(this, httpClient);
+        GetMessagesQuery = new LoadMessagesCommand(this, httpClient);
         GetMessagesQuery.Execute(null);
 
-        GetLastMessageQuery = new GetLastMessagesQuery(this, httpClient);
+        SaveEntityModelService.MessagesSaved += ((sender, args) =>
+        {
+            GetMessagesQuery.Execute(null);
+        });
     }
 
     public UserStore UserStore { get; }
@@ -61,6 +64,5 @@ public class ChatViewModel : ViewModelBase
     }
 
     public ICommand GetMessagesQuery { get; }
-    public ICommand GetLastMessageQuery { get; }
     public ICommand SendMessageCommand { get; }
 }

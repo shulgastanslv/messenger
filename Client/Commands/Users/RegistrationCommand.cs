@@ -50,7 +50,7 @@ public class RegistrationCommand : ViewModelCommand
     {
         _registrationViewModel.IsLoading = true;
 
-        _userStore.User = new UserModel(Guid.NewGuid(), _registrationViewModel.UserName,
+        _userStore.User = new UserModel(Guid.Empty, _registrationViewModel.UserName,
             _registrationViewModel.Password);
 
         var content = new StringContent(JsonConvert.SerializeObject(_userStore.User),
@@ -62,18 +62,14 @@ public class RegistrationCommand : ViewModelCommand
 
         if (response.IsSuccessStatusCode)
         {
-            _userStore.Token = await response.Content.ReadAsStringAsync();
+            var receivedData = await response.Content.ReadAsAsync<ReceivedData>();
 
-            _userStore.Token = _userStore.Token.Trim('"');
-            _userStore.Token = _userStore.Token.Trim('\\');
+            _userStore.Token = receivedData.Token.Trim('"');
+
+            _userStore.User.Id = receivedData.Id;
 
             _navigationService.Navigate();
         }
-
-        Settings.Default.UserName = _userStore.User.UserName;
-        Settings.Default.Password = _userStore.User.Password;
-        Settings.Default.Token = _userStore.Token;
-        Settings.Default.Save();
 
         _registrationViewModel.IsLoading = false;
     }

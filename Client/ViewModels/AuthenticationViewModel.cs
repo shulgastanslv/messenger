@@ -40,10 +40,10 @@ public sealed class AuthenticationViewModel : ViewModelBase
 
     public string UserName
     {
-        get => _userStore.User.UserName!;
+        get => _userStore.User.Username!;
         set
         {
-            _userStore.User.UserName = value;
+            _userStore.User.Username = value;
             OnPropertyChanged(nameof(UserName));
         }
     }

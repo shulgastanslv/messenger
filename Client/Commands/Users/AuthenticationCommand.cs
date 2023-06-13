@@ -11,6 +11,8 @@ using Newtonsoft.Json;
 
 namespace Client.Commands.Users;
 
+public record ReceivedData(string Token, Guid Id);
+
 public sealed class AuthenticationCommand : ViewModelCommand
 {
     private readonly AuthenticationViewModel _authenticationViewModel;
@@ -65,17 +67,13 @@ public sealed class AuthenticationCommand : ViewModelCommand
 
         if (response.IsSuccessStatusCode)
         {
-            _userStore.Token = await response.Content.ReadAsStringAsync();
+            var receivedData = await response.Content.ReadAsAsync<ReceivedData>();
 
-            _userStore.Token = _userStore.Token.Trim('"');
+            _userStore.User.Id = receivedData.Id;
+            _userStore.Token = receivedData.Token.Trim('"');
 
             _navigationService.Navigate();
         }
-
-        Settings.Default.UserName = _userStore.User.UserName;
-        Settings.Default.Password = _userStore.User.Password;
-        Settings.Default.Token = _userStore.Token;
-        Settings.Default.Save();
 
         _authenticationViewModel.IsLoading = false;
     }

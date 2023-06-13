@@ -51,6 +51,7 @@
                     <ToggleButton
                         x:Name="ToggleMenuButton"
                         Grid.Column="0"
+                        Command="{Binding SearchUserQuery}"
                         Style="{StaticResource ToggleButtonStyle}">
                         <ToggleButton.Triggers>
                             <EventTrigger RoutedEvent="ToggleButton.Checked">
@@ -80,7 +81,7 @@
                 <ListView Background="Transparent"
                           x:Name="UsersListView"
                           BorderThickness="0"
-                          SelectedItem="{Binding SelectedUser}"
+                          SelectedItem="{Binding SelectedContact}"
                           ItemsSource="{Binding Contacts}"
                           Grid.Row="1">
 
@@ -102,7 +103,7 @@
                                         <Border Width="40" Height="40" CornerRadius="25" Background="White" />
 
                                         <StackPanel Margin="5, 5, 0, 0">
-                                            <Label Content="{Binding UserName}"
+                                            <Label Content="{Binding Username}"
                                                    Foreground="White"
                                                    FontSize="13" />
                                             <Label Content="Last Message"

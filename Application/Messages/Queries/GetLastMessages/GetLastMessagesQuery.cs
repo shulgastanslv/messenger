@@ -4,4 +4,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Application.Messages.Queries.GetLastMessages;
 
-public sealed record GetLastMessagesQuery(Contact Sender, HttpContext Context) : IQuery<MessagesResponse>;
+public sealed record class GetLastMessagesQuery(
+    DateTime LastResponseTime,
+    HttpContext HttpContext) : IQuery<LastMessagesResponse>;

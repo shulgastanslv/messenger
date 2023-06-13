@@ -40,7 +40,7 @@ public class Startup
             User = new UserModel
             {
                 Id = Guid.NewGuid(),
-                UserName = Settings.Default.UserName,
+                Username = Settings.Default.Username,
                 Password = Settings.Default.Password
             },
             Token = Settings.Default.Token

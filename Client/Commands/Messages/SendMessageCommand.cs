@@ -2,7 +2,9 @@
 using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using Client.Models;
+using Client.Services;
 using Client.ViewModels;
 using Newtonsoft.Json;
 
@@ -12,14 +14,16 @@ public class SendMessageCommand : ViewModelCommand
 {
     private readonly ChatViewModel _chatViewModel;
 
-    private readonly HttpClient _httpClient;
-    private readonly ContactModel _receiver;
+    private readonly ContactModel _contactReceiver;
 
-    public SendMessageCommand(ChatViewModel chatViewModel, ContactModel receiver, HttpClient httpClient)
+    private readonly HttpClient _httpClient;
+
+
+    public SendMessageCommand(ChatViewModel chatViewModel, ContactModel contactReceiver, HttpClient httpClient)
     {
-        _httpClient = httpClient;
         _chatViewModel = chatViewModel;
-        _receiver = receiver;
+        _contactReceiver = contactReceiver;
+        _httpClient = httpClient;
 
         _chatViewModel.PropertyChanged += OnPropertyChanged;
     }
@@ -37,10 +41,13 @@ public class SendMessageCommand : ViewModelCommand
 
     public override async void Execute(object? parameter)
     {
+        _contactReceiver.ChatId ??= await ChatService.CreateChatAsync(_httpClient, _contactReceiver, CancellationToken.None);
+
         var message = new MessageModel(
             Guid.NewGuid(),
             _chatViewModel.MessageText,
-            _receiver.Id);
+            Guid.Empty,
+            _contactReceiver.ChatId.Value);
 
         var content = new StringContent(JsonConvert.SerializeObject(message),
             Encoding.UTF8, "application/json");
@@ -48,7 +55,6 @@ public class SendMessageCommand : ViewModelCommand
         var response = await _httpClient.PostAsync("/message/send", content);
 
         response.EnsureSuccessStatusCode();
-
         _chatViewModel.MessageText = string.Empty;
         ;
     }

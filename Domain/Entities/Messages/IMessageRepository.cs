@@ -5,11 +5,10 @@ namespace Domain.Entities.Messages;
 
 public interface IMessageRepository
 {
-    Task<Result> SaveMessageAsync(Chat chat, Message message, CancellationToken cancellationToken);
+    Task<Result> SaveMessageAsync(Message message, CancellationToken cancellationToken);
 
-    Task<Result<IEnumerable<Message>>> GetMessagesAsync(Guid receiver, Guid sender,
-        CancellationToken cancellationToken);
+    Task<Result<IEnumerable<Message>>> GetMessagesAsync(Guid chatId, CancellationToken cancellationToken);
 
-    Task<Result<IEnumerable<Message>>> GetLastMessagesAsync(Guid receiver, Guid sender,
+    Task<IEnumerable<Message>?> GetLastMessagesAsync(Guid chatId, DateTime lastMessageDate,
         CancellationToken cancellationToken);
 }

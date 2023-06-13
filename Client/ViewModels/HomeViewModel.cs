@@ -1,8 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Client.Models;
-using Client.Queries.Users;
+using Client.Queries;
 using Client.Stores;
 
 namespace Client.ViewModels;
@@ -16,9 +18,11 @@ public class HomeViewModel : ViewModelBase
 
     private bool _isLoading;
 
+    private string? _searchText;
+
     private bool _isSelectedUser;
 
-    private ContactModel? _selectedUser;
+    private ContactModel _selectedContact;
 
     private UserStore _userStore;
 
@@ -26,12 +30,24 @@ public class HomeViewModel : ViewModelBase
     {
         _userStore = userStore;
         _httpClient = httpClient;
+        _selectedContact = new ContactModel(Guid.Empty, string.Empty, null);
 
-        GetAllUsersQuery = new GetAllUsersQuery(this, _userStore, httpClient);
-        GetAllUsersQuery.Execute(null);
+        GetLastMessagesQuery = new GetLastMessagesQuery(httpClient, userStore);
+        GetUsersQuery = new GetUsersQuery(this, httpClient, userStore);
+        SearchUserQuery = new GetUsersByUsernameQuery(this, httpClient);
 
-        GetUserByUserNameQuery = new GetUserByUserNameQuery(this, _userStore, httpClient);
-        GetUserByUserNameQuery.Execute(null);
+        GetUsersQuery.Execute(null);
+
+        Task.Run(GetLastMessages);
+    }
+
+    private async Task GetLastMessages()
+    {
+        while (true)
+        {
+            GetLastMessagesQuery.Execute(null);
+            await Task.Delay(1000);
+        }
     }
 
     public UserStore UserStore
@@ -53,7 +69,6 @@ public class HomeViewModel : ViewModelBase
             OnPropertyChanged(nameof(Contacts));
         }
     }
-
     public bool IsLoading
     {
         get => _isLoading;
@@ -63,7 +78,6 @@ public class HomeViewModel : ViewModelBase
             OnPropertyChanged(nameof(IsLoading));
         }
     }
-
     public ChatViewModel? ChatViewModel
     {
         get => _chatViewModel;
@@ -74,20 +88,25 @@ public class HomeViewModel : ViewModelBase
         }
     }
 
-    public ContactModel? SelectedUser
+    public ContactModel SelectedContact
     {
-        get => _selectedUser;
+        get => _selectedContact;
         set
         {
-            _selectedUser = value;
-            IsSelectedUser = true;
-
-            OnPropertyChanged(nameof(SelectedUser));
-
-            ChatViewModel = new ChatViewModel(_userStore, _selectedUser!, _httpClient);
+            _selectedContact = value;
+            OnPropertyChanged(nameof(SelectedContact));
+            ChatViewModel = new ChatViewModel(_userStore, _selectedContact, _httpClient);
         }
     }
-
+    public string? SearchText
+    {
+        get => _searchText;
+        set
+        {
+            _searchText = value;
+            OnPropertyChanged(nameof(SearchText));
+        }
+    }
     public bool IsSelectedUser
     {
         get => _isSelectedUser;
@@ -97,7 +116,7 @@ public class HomeViewModel : ViewModelBase
             OnPropertyChanged(nameof(IsSelectedUser));
         }
     }
-
-    public ICommand GetAllUsersQuery { get; }
-    public ICommand GetUserByUserNameQuery { get; }
+    public ICommand GetUsersQuery { get; }
+    public ICommand SearchUserQuery { get; }
+    public ICommand GetLastMessagesQuery { get; }
 }
