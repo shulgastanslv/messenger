@@ -28,29 +28,6 @@ public class SaveMessageCommandHandler : ICommandHandler<SaveMessageCommand, Res
 
     public async Task<Result> Handle(SaveMessageCommand request, CancellationToken cancellationToken)
     {
-        var maybeSenderId = _jwtProvider.GetUserIdAsync(request.Context.User);
-
-        if (maybeSenderId.HasNoValue) return Result.Failure(new Error("Can't find sender identifier"));
-
-        var chatResult = await _chatRepository.GetChatAsync(maybeSenderId.Value,
-            request.Message.Receiver, cancellationToken);
-
-        if (chatResult.HasNoValue)
-        {
-            _logger.LogInformation("Chat with the user {user1} and {user2} not found",
-                maybeSenderId.Value, request.Message.Receiver);
-
-            chatResult = (await _chatRepository.CreateChatAsync(maybeSenderId.Value, request.Message.Receiver,
-                cancellationToken)).Value;
-        }
-
-        var result = await _messageRepository.SaveMessageAsync(
-            chatResult.Value,
-            request.Message,
-            cancellationToken);
-
-        _logger.LogInformation("Message saved for chat {chatId}", chatResult.Value.Id);
-
-        return result;
+        return null;
     }
 }

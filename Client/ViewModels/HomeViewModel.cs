@@ -12,8 +12,6 @@ namespace Client.ViewModels;
 public class HomeViewModel : ViewModelBase
 {
     private readonly HttpClient _httpClient;
-    private readonly NavigationStore _menuNavigationStore = new();
-
     private ChatViewModel? _chatViewModel;
 
     private ObservableCollection<ContactModel> _contacts = new();
@@ -36,15 +34,7 @@ public class HomeViewModel : ViewModelBase
 
         GetUserByUserNameQuery = new GetUserByUserNameQuery(this, _userStore, httpClient);
         GetUserByUserNameQuery.Execute(null);
-
-        NavigateToSettingsCommand = new NavigateCommand<SettingsViewModel>(new NavigationService<SettingsViewModel>(
-            _menuNavigationStore, () => new SettingsViewModel(this, _userStore, httpClient,
-                _menuNavigationStore)));
-
-        _menuNavigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
     }
-
-    public bool IsModalViewModelOpen => _menuNavigationStore.IsOpen;
 
     public UserStore UserStore
     {
@@ -86,8 +76,6 @@ public class HomeViewModel : ViewModelBase
         }
     }
 
-    public ViewModelBase? ModalViewModel => _menuNavigationStore.CurrentViewModel;
-
     public ContactModel? SelectedUser
     {
         get => _selectedUser;
@@ -95,7 +83,9 @@ public class HomeViewModel : ViewModelBase
         {
             _selectedUser = value;
             IsSelectedUser = true;
+
             OnPropertyChanged(nameof(SelectedUser));
+
             ChatViewModel = new ChatViewModel(_userStore, _selectedUser!, _httpClient);
         }
     }
@@ -112,11 +102,4 @@ public class HomeViewModel : ViewModelBase
 
     public ICommand GetAllUsersQuery { get; }
     public ICommand GetUserByUserNameQuery { get; }
-    public ICommand NavigateToSettingsCommand { get; }
-
-    private void OnCurrentViewModelChanged()
-    {
-        OnPropertyChanged(nameof(ModalViewModel));
-        OnPropertyChanged(nameof(IsModalViewModelOpen));
-    }
 }

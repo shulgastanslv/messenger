@@ -6,7 +6,7 @@ using Domain.Primitives.Result;
 
 namespace Application.Users.Commands.UserAuthentication;
 
-public class UserAuthenticationCommandHandler : ICommandHandler<UserAuthenticationCommand, Result<string>>
+public class UserAuthenticationCommandHandler : ICommandHandler<UserAuthenticationCommand, Result<AuthenticationResponse>>
 {
     private readonly IJwtProvider _jwtProvider;
     private readonly IUserRepository _userRepository;
@@ -17,17 +17,20 @@ public class UserAuthenticationCommandHandler : ICommandHandler<UserAuthenticati
         _jwtProvider = jwtProvider;
     }
 
-    public async Task<Result<string>> Handle(UserAuthenticationCommand request, CancellationToken cancellationToken)
+    public async Task<Result<AuthenticationResponse>> Handle(UserAuthenticationCommand request, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetUserByUserNameAsync(request.UserName, cancellationToken);
+        var user = await _userRepository.GetByUsernameAsync(request.Username, cancellationToken)!;
 
-        if (user.HasNoValue)
-            return Result.Failure<string>(new Error("The user with the specified user name was not found."));
+        if (user == null)
+            return Result.Failure<AuthenticationResponse>(
+                new Error("The user with the specified user name was not found."));
 
-        if (user.Value!.Password != request.Password) return Result.Failure<string>(new Error("Password wasn't match"));
+        if (user.Password != request.Password) 
+            return Result.Failure<AuthenticationResponse>
+                (new Error("Password wasn't match"));
 
-        var token = _jwtProvider.GetJwtToken(user.Value!);
+        var token = _jwtProvider.GetJwtToken(user);
 
-        return Result.Success(token);
+        return Result.Success(new AuthenticationResponse(token, user.Id));
     }
 }

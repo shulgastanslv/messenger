@@ -21,11 +21,6 @@ public class Startup
         services.AddSingleton<HomeViewModel>();
         services.AddSingleton<ChatViewModel>();
 
-
-        services.AddScoped<SettingsViewModel>();
-        services.AddScoped<EditProfileViewModel>();
-        services.AddScoped<EditUserNameViewModel>();
-
         services.AddSingleton(provider => new MainWindow
         {
             DataContext = provider.GetRequiredService<MainViewModel>()

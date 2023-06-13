@@ -22,8 +22,7 @@
 
     <ItemGroup>
       <Folder Include="Common\Behaviours\" />
-      <Folder Include="Users\Queries\GetAllUsers\" />
-      <Folder Include="Users\Queries\GetUserById\" />
+      <Folder Include="Users\Queries\GetUsersByUsername\" />
     </ItemGroup>
 
 </Project>

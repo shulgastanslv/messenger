@@ -19,13 +19,13 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Persistence\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Reference Include="System.IO.Packaging">
         <HintPath>C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\7.0.5\ref\net7.0\System.IO.Packaging.dll</HintPath>
       </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Persistence\EntityTypeConfigurations\" />
     </ItemGroup>
 
 </Project>

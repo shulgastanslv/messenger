@@ -3,7 +3,6 @@ using System.Security.Claims;
 using System.Text;
 using Application.Common.Abstractions;
 using Domain.Entities.Users;
-using Domain.Primitives.Maybe;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -23,7 +22,7 @@ internal sealed class JwtProvider : IJwtProvider
         var claims = new Claim[]
         {
             new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-            new(JwtRegisteredClaimNames.Name, user.UserName!)
+            new(JwtRegisteredClaimNames.Name, user.Username!)
         };
 
         var signingCredentials = new SigningCredentials(
@@ -44,12 +43,10 @@ internal sealed class JwtProvider : IJwtProvider
         return tokenValue;
     }
 
-    public Maybe<Guid> GetUserIdAsync(ClaimsPrincipal principal)
+    public Task<Guid?> GetUserId(ClaimsPrincipal principal)
     {
         var userIdClaim = principal.FindFirst(ClaimTypes.NameIdentifier);
 
-        if (userIdClaim == null) return Maybe<Guid>.None;
-
-        return Maybe<Guid>.From(Guid.Parse(userIdClaim.Value));
+        return Task.FromResult<Guid?>(Guid.Parse(userIdClaim!.Value));
     }
 }

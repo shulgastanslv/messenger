@@ -9,7 +9,7 @@ public class UserRegistrationCommandValidator : AbstractValidator<UserRegistrati
         RuleFor(i => i.Password)
             .NotEmpty().WithMessage("Password cannot be empty.");
 
-        RuleFor(i => i.UserName)
+        RuleFor(i => i.Username)
             .NotEmpty().WithMessage("UserName cannot be empty.");
     }
 }

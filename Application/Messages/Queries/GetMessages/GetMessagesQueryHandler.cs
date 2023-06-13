@@ -17,9 +17,6 @@ public class GetMessagesQueryHandler : IQueryHandler<GetMessagesQuery, MessagesR
 
     public async Task<MessagesResponse> Handle(GetMessagesQuery request, CancellationToken cancellationToken)
     {
-        var maybeSenderId = _jwtProvider.GetUserIdAsync(request.Context.User);
-
-        return new MessagesResponse(await _messageRepository.GetMessagesAsync(maybeSenderId.Value,
-            request.Sender.Id, cancellationToken));
+        return null;
     }
 }

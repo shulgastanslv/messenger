@@ -5,10 +5,9 @@ using Domain.Primitives.Result;
 
 namespace Application.Users.Commands.UserRegistration;
 
-public sealed class UserRegistrationCommandHandler : ICommandHandler<UserRegistrationCommand, Result<string>>
+public sealed class UserRegistrationCommandHandler : ICommandHandler<UserRegistrationCommand, Result<RegistrationResponse>>
 {
     private readonly IApplicationDbContext _applicationDbContext;
-
     private readonly IJwtProvider _jwtProvider;
     private readonly IUserRepository _userRepository;
 
@@ -20,21 +19,21 @@ public sealed class UserRegistrationCommandHandler : ICommandHandler<UserRegistr
         _jwtProvider = jwtProvider;
     }
 
-    public async Task<Result<string>> Handle(UserRegistrationCommand request, CancellationToken cancellationToken)
+    public async Task<Result<RegistrationResponse>> Handle(UserRegistrationCommand request, CancellationToken cancellationToken)
     {
-        var user = new User(
-            Guid.NewGuid(),
-            request.UserName,
-            request.Password);
+        var id = Guid.NewGuid();
 
-        var result = await _userRepository.CreateUserAsync(user, cancellationToken);
+        var user = new User(id, request.Username, request.Password);
 
-        if (result.IsFailure) return Result.Failure<string>(result.Error);
+        var result = await _userRepository.CreateAsync(user, cancellationToken);
+
+        if (result.IsFailure) 
+            return Result.Failure<RegistrationResponse>(result.Error);
 
         await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
         var token = _jwtProvider.GetJwtToken(user);
 
-        return Result.Success(token);
+        return Result.Success(new RegistrationResponse(token, id));
     }
 }

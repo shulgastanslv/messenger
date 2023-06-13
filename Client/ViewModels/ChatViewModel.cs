@@ -28,11 +28,6 @@ public class ChatViewModel : ViewModelBase
         GetMessagesQuery.Execute(null);
 
         GetLastMessageQuery = new GetLastMessagesQuery(this, httpClient);
-
-        var messagesTimer = new DispatcherTimer();
-        messagesTimer.Interval = TimeSpan.FromSeconds(1);
-        messagesTimer.Tick += (sender, e) => { GetLastMessageQuery.Execute(null); };
-        messagesTimer.Start();
     }
 
     public UserStore UserStore { get; }

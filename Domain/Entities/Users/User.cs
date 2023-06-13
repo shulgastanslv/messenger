@@ -5,10 +5,10 @@ namespace Domain.Entities.Users;
 
 public class User : Entity
 {
-    public User(Guid id, string userName, string password)
+    public User(Guid id, string username, string password)
         : base(id)
     {
-        UserName = userName;
+        Username = username;
         Password = password;
         CreationTime = DateTime.Now;
     }
@@ -21,7 +21,7 @@ public class User : Entity
 
     public virtual List<Chat>? ReceivedChats { get; set; }
 
-    public string? UserName { get; set; }
+    public string? Username { get; set; }
 
     public string? Password { get; set; }
 

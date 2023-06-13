@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <Folder Include="Entities\Contacts\" />
-      <Folder Include="Primitives\Maybe\" />
       <Folder Include="Primitives\Errors\" />
       <Folder Include="Primitives\Result\" />
     </ItemGroup>

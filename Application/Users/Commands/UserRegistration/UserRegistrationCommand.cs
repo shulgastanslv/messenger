@@ -4,5 +4,5 @@ using Domain.Primitives.Result;
 namespace Application.Users.Commands.UserRegistration;
 
 public sealed record UserRegistrationCommand(
-    string UserName,
-    string Password) : ICommand<Result<string>>;
+    string Username,
+    string Password) : ICommand<Result<RegistrationResponse>>;

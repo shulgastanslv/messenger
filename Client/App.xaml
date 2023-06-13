@@ -44,19 +44,6 @@
                 <pages:ChatView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
-                <views:SettingsView />
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModels:EditProfileViewModel}">
-                <views:EditProfileView />
-            </DataTemplate>
-
-
-            <DataTemplate DataType="{x:Type viewModels:EditUserNameViewModel}">
-                <views:EditUserNameView />
-            </DataTemplate>
-
             <DataTemplate DataType="{x:Type TypeName=viewModels:MainViewModel}">
                 <local:MainWindow />
             </DataTemplate>
