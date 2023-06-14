@@ -4,7 +4,7 @@ using Client.ViewModels;
 
 namespace Client.Commands;
 
-public class LogoutCommand : ViewModelCommand
+public class LogoutCommand : CommandBase
 {
     private readonly UserStore _userStore;
 

@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace Client.Commands;
 
-public abstract class ViewModelCommand : ICommand
+public abstract class CommandBase : ICommand
 {
     public event EventHandler? CanExecuteChanged;
 

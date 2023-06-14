@@ -22,7 +22,7 @@ public class ChatViewModel : ViewModelBase
         _currentContact = currentContact;
         UserStore = userStore;
 
-        SendMessageCommand = new SendMessageCommand(this, CurrentContact, httpClient);
+        SendMessageCommand = new SendFileCommand(this, CurrentContact, httpClient);
         SendFileCommand = new SendFileCommand(this, CurrentContact, httpClient);
         GetMessagesQuery = new LoadMessagesCommand(this, httpClient);
         GetMessagesQuery.Execute(null);

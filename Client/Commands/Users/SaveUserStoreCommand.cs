@@ -3,7 +3,7 @@ using Client.Stores;
 
 namespace Client.Commands.Users;
 
-public class SaveUserStoreCommand : ViewModelCommand
+public class SaveUserStoreCommand : CommandBase
 {
     private readonly UserStore _userStore;
 

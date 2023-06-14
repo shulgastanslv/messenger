@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace Client.Commands.Messages;
 
-public class SendFileCommand : ViewModelCommand
+public class SendFileCommand : CommandBase
 {
     private readonly ChatViewModel _chatViewModel;
     private readonly ContactModel _contactReceiver;

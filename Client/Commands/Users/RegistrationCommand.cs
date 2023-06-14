@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace Client.Commands.Users;
 
-public class RegistrationCommand : ViewModelCommand
+public class RegistrationCommand : CommandBase
 {
     private readonly HttpClient _httpClient;
 

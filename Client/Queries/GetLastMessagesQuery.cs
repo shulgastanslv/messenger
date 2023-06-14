@@ -10,7 +10,7 @@ using Client.ViewModels;
 
 namespace Client.Queries;
 
-public class GetLastMessagesQuery : ViewModelCommand
+public class GetLastMessagesQuery : QueryBase
 {
     private readonly HttpClient _httpClient;
     private readonly UserStore _userStore;

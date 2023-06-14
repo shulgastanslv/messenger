@@ -13,7 +13,7 @@ namespace Client.Commands.Users;
 
 public record ReceivedData(string Token, Guid Id);
 
-public sealed class AuthenticationCommand : ViewModelCommand
+public sealed class AuthenticationCommand : CommandBase
 {
     private readonly AuthenticationViewModel _authenticationViewModel;
 

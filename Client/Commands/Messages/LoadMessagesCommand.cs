@@ -9,7 +9,7 @@ using Client.Services;
 
 namespace Client.Commands.Messages;
 
-public class LoadMessagesCommand : ViewModelCommand
+public class LoadMessagesCommand : CommandBase
 {
     private readonly ChatViewModel _chatViewModel;
     private readonly HttpClient _httpClient;

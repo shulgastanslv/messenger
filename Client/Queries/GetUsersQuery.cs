@@ -10,7 +10,7 @@ using Client.Commands;
 
 namespace Client.Queries;
 
-public class GetUsersQuery : ViewModelCommand
+public class GetUsersQuery : QueryBase
 {
     private readonly HomeViewModel _homeViewModel;
 

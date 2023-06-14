@@ -1,6 +1,6 @@
 ﻿namespace Client.Interfaces;
 
-public class INavigationService
+public interface INavigationService
 {
-    
+    void Navigate();
 }

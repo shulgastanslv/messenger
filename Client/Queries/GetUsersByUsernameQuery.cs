@@ -6,7 +6,7 @@ using Client.Commands;
 
 namespace Client.Queries;
 
-public class GetUsersByUsernameQuery : ViewModelCommand
+public class GetUsersByUsernameQuery : QueryBase
 {
     private readonly HomeViewModel _homeViewModel;
 

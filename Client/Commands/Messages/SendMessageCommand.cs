@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace Client.Commands.Messages;
 
-public class SendMessageCommand : ViewModelCommand
+public class SendMessageCommand : CommandBase
 {
     private readonly ChatViewModel _chatViewModel;
 
