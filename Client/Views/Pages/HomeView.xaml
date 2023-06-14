@@ -51,7 +51,6 @@
                     <ToggleButton
                         x:Name="ToggleMenuButton"
                         Grid.Column="0"
-                        Command="{Binding SearchUserQuery}"
                         Style="{StaticResource ToggleButtonStyle}">
                         <ToggleButton.Triggers>
                             <EventTrigger RoutedEvent="ToggleButton.Checked">

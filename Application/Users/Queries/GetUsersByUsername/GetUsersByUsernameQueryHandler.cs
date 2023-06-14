@@ -31,8 +31,7 @@ public class GetUsersByUsernameQueryHandler : IQueryHandler<GetUsersByUsernameQu
         var contacts = users.Select(u =>
             new Contact(
                 u.Id,
-                u.Username,
-                u.SentChats?.Find(
+                u.Username, u.SentChats?.Find(
                         c => c.ReceiverId == senderId!.Value)?
                     .ChatId));
 

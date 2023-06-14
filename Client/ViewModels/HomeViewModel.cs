@@ -49,7 +49,6 @@ public class HomeViewModel : ViewModelBase
             await Task.Delay(1000);
         }
     }
-
     public UserStore UserStore
     {
         get => _userStore;
@@ -59,7 +58,6 @@ public class HomeViewModel : ViewModelBase
             OnPropertyChanged(nameof(UserStore));
         }
     }
-
     public ObservableCollection<ContactModel> Contacts
     {
         get => _contacts;
@@ -87,13 +85,13 @@ public class HomeViewModel : ViewModelBase
             OnPropertyChanged(nameof(ChatViewModel));
         }
     }
-
     public ContactModel SelectedContact
     {
         get => _selectedContact;
         set
         {
             _selectedContact = value;
+            IsSelectedUser = true;
             OnPropertyChanged(nameof(SelectedContact));
             ChatViewModel = new ChatViewModel(_userStore, _selectedContact, _httpClient);
         }
@@ -104,7 +102,14 @@ public class HomeViewModel : ViewModelBase
         set
         {
             _searchText = value;
+
+            SearchUserQuery.Execute(null);
+
             OnPropertyChanged(nameof(SearchText));
+
+            if (_searchText == string.Empty)
+                GetUsersQuery.Execute(null);
+
         }
     }
     public bool IsSelectedUser

@@ -1,4 +1,5 @@
 ﻿using Application.Chats.Commands.CreateChat;
+using Application.Chats.Queries.GetChatByUsersId;
 using Carter;
 using Domain.Entities.Contacts;
 using MediatR;
@@ -15,7 +16,6 @@ public class ChatModule : CarterModule
     {
     }
 
-
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapPost("/create", async (Contact request, HttpContext httpContext,
@@ -26,5 +26,6 @@ public class ChatModule : CarterModule
 
             return result.IsSuccess ? Results.Ok(result.Value.ChatId) : Results.BadRequest(result.Error);
         }).RequireAuthorization();
+
     }
 }
