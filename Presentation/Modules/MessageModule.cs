@@ -48,5 +48,14 @@ public class MessageModule : CarterModule
             return result.IsSuccess ? Results.Ok() : Results.BadRequest(result.Error);
         }).RequireAuthorization();
 
+        app.MapPost("/sendfile", async (Media request, ISender sender,
+            HttpContext context, CancellationToken cancellationToken) =>
+        {
+            var result = await sender.Send(new SaveMessageCommand(request, context),
+                cancellationToken);
+
+            return result.IsSuccess ? Results.Ok() : Results.BadRequest(result.Error);
+        }).RequireAuthorization();
+
     }
 }

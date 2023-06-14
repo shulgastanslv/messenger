@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Windows.Input;
 using Client.Commands.Messages;
 using Client.Models;
+using Client.Queries;
 using Client.Services;
 using Client.Stores;
 
@@ -22,6 +23,7 @@ public class ChatViewModel : ViewModelBase
         UserStore = userStore;
 
         SendMessageCommand = new SendMessageCommand(this, CurrentContact, httpClient);
+        SendFileCommand = new SendFileCommand(this, CurrentContact, httpClient);
         GetMessagesQuery = new LoadMessagesCommand(this, httpClient);
         GetMessagesQuery.Execute(null);
 
@@ -32,7 +34,6 @@ public class ChatViewModel : ViewModelBase
     }
 
     public UserStore UserStore { get; }
-
     public ContactModel CurrentContact
     {
         get => _currentContact;
@@ -42,7 +43,6 @@ public class ChatViewModel : ViewModelBase
             OnPropertyChanged(nameof(CurrentContact));
         }
     }
-
     public ObservableCollection<MessageModel> Messages
     {
         get => _messages;
@@ -52,7 +52,6 @@ public class ChatViewModel : ViewModelBase
             OnPropertyChanged(nameof(Messages));
         }
     }
-
     public string MessageText
     {
         get => _messageText;
@@ -65,4 +64,5 @@ public class ChatViewModel : ViewModelBase
 
     public ICommand GetMessagesQuery { get; }
     public ICommand SendMessageCommand { get; }
+    public ICommand SendFileCommand { get; }
 }

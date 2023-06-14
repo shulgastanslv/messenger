@@ -25,7 +25,7 @@ public class RegistrationViewModel : ViewModelBase
 
         var navigateService = new NavigationService<HomeViewModel>(
             navigationStore,
-            () => new HomeViewModel(userStore, httpClient));
+            () => new HomeViewModel(userStore, httpClient, navigationStore));
 
         RegistrationCommand = new RegistrationCommand(this, userStore, httpClient,
             navigateService);

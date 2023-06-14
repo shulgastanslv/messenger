@@ -1,4 +1,5 @@
-﻿using Client.Models;
+﻿using System;
+using Client.Models;
 using Client.Properties;
 using Client.Stores;
 
@@ -24,6 +25,16 @@ public static class UserStoreSettingsService
         Settings.Default.Password = userStore.User.Password;
         Settings.Default.Token = userStore.Token;
         Settings.Default.LastResponseTime = userStore.LastResponseTime;
+        Settings.Default.Save();
+    }
+
+    public static void DeleteUserStore(UserStore userStore)
+    {
+        Settings.Default.Id = Guid.Empty;
+        Settings.Default.Username = null;
+        Settings.Default.Password = null;
+        Settings.Default.Token = null;
+        Settings.Default.LastResponseTime = DateTime.MinValue;
         Settings.Default.Save();
     }
 }

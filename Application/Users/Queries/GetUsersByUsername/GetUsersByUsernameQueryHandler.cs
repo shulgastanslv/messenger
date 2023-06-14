@@ -28,11 +28,13 @@ public class GetUsersByUsernameQueryHandler : IQueryHandler<GetUsersByUsernameQu
 
         var users = await _userRepository.GetUsersByUsernameAsync(request.Username, cancellationToken);
 
+
         var contacts = users.Select(u =>
             new Contact(
                 u.Id,
-                u.Username, u.SentChats?.Find(
-                        c => c.ReceiverId == senderId!.Value)?
+                u.Username,
+                u.SentChats?.Find(
+                        c => c.ReceiverId == senderId)?
                     .ChatId));
 
         return new UsersResponse(Result.Success(contacts));

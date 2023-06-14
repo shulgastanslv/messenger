@@ -24,13 +24,21 @@
             <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
             <Setter Property="Width" Value="30" />
             <Setter Property="Height" Value="30" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="12" />
             <Setter Property="Background" Value="{StaticResource WindowTitleBarBackgroundColorBrush}" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}"
                                 Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <TextBlock Text="{TemplateBinding Content}"
+                                       FontFamily="{TemplateBinding FontFamily}"
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                       Margin="{TemplateBinding Padding}" 
+                                       FontSize="{TemplateBinding FontSize}"/>
                         </Border>
 
                         <ControlTemplate.Triggers>
@@ -52,13 +60,21 @@
             <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
             <Setter Property="Width" Value="30" />
             <Setter Property="Height" Value="30" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="12" />
             <Setter Property="Background" Value="{StaticResource WindowTitleBarBackgroundColorBrush}" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border x:Name="ControlPanelCloseButtonBorder" BorderBrush="{TemplateBinding BorderBrush}"
                                 Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <TextBlock Text="{TemplateBinding Content}"
+                                       FontFamily="{TemplateBinding FontFamily}"
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                       Margin="{TemplateBinding Padding}" 
+                                       FontSize="{TemplateBinding FontSize}"/>
                         </Border>
 
                         <ControlTemplate.Triggers>

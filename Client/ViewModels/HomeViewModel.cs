@@ -3,8 +3,10 @@ using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Client.Commands;
 using Client.Models;
 using Client.Queries;
+using Client.Services;
 using Client.Stores;
 
 namespace Client.ViewModels;
@@ -26,11 +28,15 @@ public class HomeViewModel : ViewModelBase
 
     private UserStore _userStore;
 
-    public HomeViewModel(UserStore userStore, HttpClient httpClient)
+    public HomeViewModel(UserStore userStore, HttpClient httpClient, NavigationStore navigationStore)
     {
         _userStore = userStore;
         _httpClient = httpClient;
         _selectedContact = new ContactModel(Guid.Empty, string.Empty, null);
+        _isSelectedUser = false;
+
+        LogoutCommand = new LogoutCommand(_userStore, new NavigationService<AuthenticationViewModel>(
+            navigationStore, (() => new AuthenticationViewModel(new UserStore(), httpClient, navigationStore))));
 
         GetLastMessagesQuery = new GetLastMessagesQuery(httpClient, userStore);
         GetUsersQuery = new GetUsersQuery(this, httpClient, userStore);
@@ -93,7 +99,7 @@ public class HomeViewModel : ViewModelBase
             _selectedContact = value;
             IsSelectedUser = true;
             OnPropertyChanged(nameof(SelectedContact));
-            ChatViewModel = new ChatViewModel(_userStore, _selectedContact, _httpClient);
+            ChatViewModel = new ChatViewModel( _userStore, _selectedContact, _httpClient);
         }
     }
     public string? SearchText
@@ -107,7 +113,7 @@ public class HomeViewModel : ViewModelBase
 
             OnPropertyChanged(nameof(SearchText));
 
-            if (_searchText == string.Empty)
+            if (value == "")
                 GetUsersQuery.Execute(null);
 
         }
@@ -123,5 +129,6 @@ public class HomeViewModel : ViewModelBase
     }
     public ICommand GetUsersQuery { get; }
     public ICommand SearchUserQuery { get; }
+    public ICommand LogoutCommand { get; }
     public ICommand GetLastMessagesQuery { get; }
 }

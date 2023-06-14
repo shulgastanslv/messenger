@@ -4,6 +4,9 @@
     <Color x:Key="TextBoxBorderColor">#5E6175</Color>
     <SolidColorBrush x:Key="TextBoxBorderBrushColor" Color="{StaticResource TextBoxBorderColor}" />
 
+    <Color x:Key="HoverTextBoxBorderColor">White</Color>
+    <SolidColorBrush x:Key="HoverTextBoxBorderBrushColor" Color="{StaticResource HoverTextBoxBorderColor}" />
+
     <Color x:Key="TextBoxBackgroundColor">Transparent</Color>
     <SolidColorBrush x:Key="TextBoxBackgroundColorBrush" Color="{StaticResource TextBoxBackgroundColor}" />
 

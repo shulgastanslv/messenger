@@ -32,11 +32,8 @@ public sealed class GetUsersQueryHandler : IQueryHandler<GetUsersQuery, UsersRes
             return new UsersResponse(
                 Result.Failure<IEnumerable<Contact>?>(new Error("Used doesn't exist")));
 
-        var contacts = sender.SentChats
-            ?.Select(c => new Contact(
-                c.Receiver.Id,
-                c.Receiver.Username,
-                c.ChatId))
+
+        var contacts = sender.SentChats?.Select(c => new Contact(c.Receiver.Id, c.Receiver.Username, c.ChatId))
             .ToList();
 
         return new UsersResponse(Result.Success<IEnumerable<Contact>?>(contacts));

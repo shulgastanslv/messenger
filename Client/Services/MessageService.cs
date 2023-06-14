@@ -50,6 +50,7 @@ public static class MessageService
         var response = await httpClient.PostAsync("/message/get", content, cancellationToken);
 
         if (!response.IsSuccessStatusCode) return null;
+
         var messages = await response.Content
             .ReadAsAsync<ObservableCollection<MessageModel>>(cancellationToken);
 

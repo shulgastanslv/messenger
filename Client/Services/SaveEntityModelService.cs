@@ -55,7 +55,6 @@ public class SaveEntityModelService
         }
 
     }
-
     public static async Task SaveEntityAsync(MessageModel message, CancellationToken cancellationToken)
     {
         var directoryPath = Path.Combine(

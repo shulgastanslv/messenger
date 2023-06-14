@@ -68,7 +68,7 @@
                                                          Duration="0:0:0.2" />
                                         <ColorAnimation
                                             Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                                            From="{StaticResource TextBoxBorderColor}" To="White" Duration="0:0:0.2" />
+                                            From="{StaticResource TextBoxBorderColor}" To="{StaticResource HoverTextBoxBorderColor}" Duration="0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -80,7 +80,7 @@
                                                          Duration="0:0:0.2" />
                                         <ColorAnimation
                                             Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                                            From="White" To="{StaticResource TextBoxBorderColor}" Duration="0:0:0.2" />
+                                            From="{StaticResource HoverTextBoxBorderColor}" To="{StaticResource TextBoxBorderColor}" Duration="0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>

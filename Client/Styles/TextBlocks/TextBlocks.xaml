@@ -3,14 +3,11 @@
 
     <Style TargetType="{x:Type TextBlock}">
         <Setter Property="Foreground" Value="White" />
-    </Style>
-
-    <Style x:Key="DefaultTextBlockStyle" TargetType="{x:Type TextBlock}"
-           BasedOn="{StaticResource {x:Type TextBlock}}">
-        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="FontWeight" Value="Regular" />
         <Setter Property="FontFamily" Value="Poppins" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="TextWrapping" Value="Wrap" />
+
     </Style>
 
 </ResourceDictionary>

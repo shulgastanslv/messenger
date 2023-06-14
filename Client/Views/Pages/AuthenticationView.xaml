@@ -17,22 +17,21 @@
 
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Visibility="{Binding IsLoading, 
-                            Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                        Visibility="{Binding IsLoading, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
 
-                <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
+                <TextBlock
                            Text="Enter your Email"
                            Opacity="0.5"
-                           Margin="0, 0, 0, 15" />
+                           Margin="0, 0, 0, 10" />
 
                 <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
                          Tag="Enter Email"
-                         Margin="0, 0, 0, 15" />
+                         Margin="0, 0, 0, 10" />
 
-                <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
+                <TextBlock
                            Text="Enter your Password"
                            Opacity="0.5"
-                           Margin="0, 0, 0, 15" />
+                           Margin="0, 0, 0, 10" />
 
                 <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          Tag="Enter Password"
@@ -44,7 +43,6 @@
                     Margin="0, 0, 0, 15" />
 
                 <TextBlock
-                    Style="{StaticResource DefaultTextBlockStyle}"
                     FontWeight="Medium"
                     TextDecorations="Underline"
                     HorizontalAlignment="Center">

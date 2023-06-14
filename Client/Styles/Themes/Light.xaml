@@ -2,13 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
-    <Color x:Key="WindowBackgroundColor">#D9D9D9</Color>
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Styles/Buttons/Theme/ButtonLightThemeColors.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Color x:Key="WindowBackgroundColor">White</Color>
     <SolidColorBrush x:Key="WindowBackgroundColorBrush" Color="{StaticResource WindowBackgroundColor}" />
 
-    <Color x:Key="WindowTitleBarBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="WindowTitleBarBackgroundColor">White</Color>
     <SolidColorBrush x:Key="WindowTitleBarBackgroundColorBrush" Color="{StaticResource WindowTitleBarBackgroundColor}" />
 
-    <Color x:Key="ColorWrap">#F1F5F1</Color>
+    <Color x:Key="ColorWrap">#FCFCFC</Color>
     <SolidColorBrush x:Key="ColorWrapBrush" Color="{StaticResource ColorWrap}" />
 
     <Color x:Key="HeaderChatColor">#EEEEEE</Color>

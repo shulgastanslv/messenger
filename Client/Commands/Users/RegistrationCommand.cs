@@ -69,6 +69,7 @@ public class RegistrationCommand : ViewModelCommand
             _userStore.User.Id = receivedData.Id;
 
             _navigationService.Navigate();
+
         }
 
         _registrationViewModel.IsLoading = false;

@@ -137,6 +137,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="15" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="30" />
                             <ColumnDefinition Width="50" />
                         </Grid.ColumnDefinitions>
 
@@ -150,7 +151,7 @@
                             UpdateSourceTrigger=PropertyChanged}" />
 
 
-                        <Button Grid.Column="2"
+                        <Button Grid.Column="3"
                                 Width="30"
                                 Background="Transparent"
                                 BorderThickness="0"
@@ -158,6 +159,18 @@
                                 Command="{Binding SendMessageCommand}">
 
                             <Path Data="{StaticResource Send}"
+                                  Fill="White" />
+                        </Button>
+
+                        <Button Grid.Column="2"
+                                Width="30"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Height="30"
+                                Style="{x:Null}"
+                                Command="{Binding SendFileCommand}">
+
+                            <Path Data="{StaticResource SendFile}"
                                   Fill="White" />
                         </Button>
                     </Grid>

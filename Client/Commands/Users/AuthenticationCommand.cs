@@ -73,6 +73,7 @@ public sealed class AuthenticationCommand : ViewModelCommand
             _userStore.Token = receivedData.Token.Trim('"');
 
             _navigationService.Navigate();
+
         }
 
         _authenticationViewModel.IsLoading = false;
