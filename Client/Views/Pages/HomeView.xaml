@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:loadingSpinnerControl="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
       xmlns:styles="clr-namespace:Client.Styles"
+      xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d"
       d:DesignHeight="630"
       d:DesignWidth="1100">
@@ -110,7 +111,11 @@
                                                 Height="Auto"
                                                 Margin="15, 0, 0, 0">
 
-                                        <Border Width="40" Height="40" CornerRadius="25" Background="White" />
+                                        <Border Width="40" Height="40" CornerRadius="25">
+                                            <Border.Background>
+                                                <ImageBrush ImageSource="{Binding AvatarPath}"/>
+                                            </Border.Background>
+                                        </Border>
 
                                         <StackPanel Margin="5, 5, 0, 0">
                                             <Label Content="{Binding Username}"
@@ -174,11 +179,21 @@
 
                     <StackPanel>
 
-                        <Border Width="50" Height="50"
+                        <Border     Width="50" Height="50"
+                                    x:Name="Avatar"
                                     CornerRadius="25"
                                     HorizontalAlignment="Center"
-                                    Margin="0, 20, 0, 0"
-                                    Background="White">
+                                    Margin="0, 20, 0, 0">
+
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding Avatar}"/>
+                            </Border.Background>
+
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="MouseLeftButtonDown">
+                                    <b:InvokeCommandAction Command="{Binding ChangeAvatarCommand}" />
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
 
                         </Border>
 

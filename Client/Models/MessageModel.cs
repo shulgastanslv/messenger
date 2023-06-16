@@ -14,6 +14,11 @@ public class MessageModel : EntityModel
         SendTime = DateTime.Now;
     }
 
+    public MessageModel()
+    {
+        
+    }
+
     public string Content { get; set; }
 
     public Guid Sender { get; set; }

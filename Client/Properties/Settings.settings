@@ -26,5 +26,11 @@
     <Setting Name="Id" Type="System.Guid" Scope="User">
       <Value Profile="(Default)">00000000-0000-0000-0000-000000000000</Value>
     </Setting>
+    <Setting Name="AvatarsDataPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">D:\\ClientData\\Avatars</Value>
+    </Setting>
+    <Setting Name="FilesDataPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">D:\\ClientData\\Files</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

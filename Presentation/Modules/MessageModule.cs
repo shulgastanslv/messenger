@@ -1,4 +1,5 @@
 ﻿using Application.Messages.Commands.SaveMessageCommand;
+using Application.Messages.Queries.GetFiles;
 using Application.Messages.Queries.GetLastMessages;
 using Application.Messages.Queries.GetMessages;
 using Carter;
@@ -29,6 +30,16 @@ public class MessageModule : CarterModule
 
             return result.IsSuccess ? Results.Ok(result.Value) : Results.BadRequest(result.Error);
         });
+
+        app.MapPost("/getFiles", async (Contact request,
+            ISender sender, CancellationToken cancellationToken) =>
+        {
+            var result = (await sender.Send(new GetFilesQuery(request),
+                cancellationToken)).Files;
+
+            return result.IsSuccess ? Results.Ok(result.Value) : Results.BadRequest(result.Error);
+        });
+
 
         app.MapGet("/getlast", async (DateTime lastResponseTime, ISender sender,
             HttpContext context, CancellationToken cancellationToken) =>

@@ -111,5 +111,23 @@ namespace Client.Properties {
                 this["Id"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\\\ClientData\\\\Avatars")]
+        public string AvatarsDataPath {
+            get {
+                return ((string)(this["AvatarsDataPath"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\\\ClientData\\\\Files")]
+        public string FilesDataPath {
+            get {
+                return ((string)(this["FilesDataPath"]));
+            }
+        }
     }
 }

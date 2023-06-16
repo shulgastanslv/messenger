@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using Application.Messages.Queries.GetFiles;
 using Client.Commands;
+using Client.Commands.Messages;
+using Client.Commands.Users;
 using Client.Models;
 using Client.Queries;
 using Client.Services;
@@ -16,7 +21,7 @@ public class HomeViewModel : ViewModelBase
     private readonly HttpClient _httpClient;
     private ChatViewModel? _chatViewModel;
 
-    private ObservableCollection<ContactModel> _contacts = new();
+    private ObservableCollection<ContactModel> _contacts = new ();
 
     private bool _isLoading;
 
@@ -38,9 +43,17 @@ public class HomeViewModel : ViewModelBase
         LogoutCommand = new LogoutCommand(_userStore, new NavigationService<AuthenticationViewModel>(
             navigationStore, (() => new AuthenticationViewModel(new UserStore(), httpClient, navigationStore))));
 
+        SaveUserStoreCommand = new SaveUserStoreCommand(_userStore);
+
+        SaveUserStoreCommand.Execute(null);
+
         GetLastMessagesQuery = new GetLastMessagesQuery(httpClient, userStore);
+
         GetUsersQuery = new GetUsersQuery(this, httpClient, userStore);
+
         SearchUserQuery = new GetUsersByUsernameQuery(this, httpClient);
+
+        ChangeAvatarCommand = new ChangeAvatarCommand(httpClient, _userStore, navigationStore);
 
         GetUsersQuery.Execute(null);
 
@@ -52,9 +65,10 @@ public class HomeViewModel : ViewModelBase
         while (true)
         {
             GetLastMessagesQuery.Execute(null);
-            await Task.Delay(1000);
+            await Task.Delay(5000);
         }
     }
+
     public UserStore UserStore
     {
         get => _userStore;
@@ -62,6 +76,15 @@ public class HomeViewModel : ViewModelBase
         {
             _userStore = value;
             OnPropertyChanged(nameof(UserStore));
+        }
+    }
+    public string Avatar
+    {
+        get => _userStore.User.AvatarPath;
+        set
+        {
+            _userStore.User.AvatarPath = value;
+            OnPropertyChanged(nameof(Avatar));
         }
     }
     public ObservableCollection<ContactModel> Contacts
@@ -73,6 +96,7 @@ public class HomeViewModel : ViewModelBase
             OnPropertyChanged(nameof(Contacts));
         }
     }
+
     public bool IsLoading
     {
         get => _isLoading;
@@ -131,4 +155,7 @@ public class HomeViewModel : ViewModelBase
     public ICommand SearchUserQuery { get; }
     public ICommand LogoutCommand { get; }
     public ICommand GetLastMessagesQuery { get; }
+    public ICommand GetFilesQuery { get; }
+    public ICommand ChangeAvatarCommand { get; }
+    public ICommand SaveUserStoreCommand { get; }
 }

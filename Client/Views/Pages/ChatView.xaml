@@ -45,7 +45,11 @@
 
 
                     <Border Grid.Column="0" Height="38" Width="38"
-                            CornerRadius="25" Background="White" />
+                            CornerRadius="25">
+                        <Border.Background>
+                            <ImageBrush ImageSource="{Binding CurrentContact.AvatarPath}"/>
+                        </Border.Background>
+                    </Border>
 
                     <StackPanel VerticalAlignment="Center" Grid.Column="1">
                         <Label Content="{Binding CurrentContact.Username}"
@@ -99,8 +103,22 @@
             <ScrollViewer Grid.Row="1">
                 <ItemsControl Margin="10" ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}">
                     <ItemsControl.Resources>
+                        <DataTemplate DataType="{x:Type models:MediaModel}">
+                            <Border Background="#292929"
+                                    CornerRadius="8"
+                                    HorizontalAlignment="Right"
+                                    Width="130"
+                                    Margin="0, 10, 5, 0"
+                                    Height="35"
+                                    VerticalAlignment="Stretch">
+                                <TextBlock Foreground="White" FontSize="13" Text="Файл" VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+                            </Border>
+                        </DataTemplate>
                         <DataTemplate DataType="{x:Type models:MessageModel}">
-                            <Border Background="Transparent"
+                            <Border Background="#292929"
+                                    CornerRadius="8"
+                                    Margin="0, 10, 5, 0"
                                     VerticalAlignment="Stretch">
 
                                 <Border.HorizontalAlignment>
@@ -171,7 +189,9 @@
                                 Command="{Binding SendFileCommand}">
 
                             <Path Data="{StaticResource SendFile}"
-                                  Fill="White" />
+                                  Fill="White" 
+                                  Height="18" 
+                                  Stretch="Fill" Width="18"/>
                         </Button>
                     </Grid>
                 </Border>

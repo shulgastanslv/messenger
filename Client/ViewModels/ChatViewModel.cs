@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Application.Messages.Queries.GetFiles;
 using Client.Commands.Messages;
 using Client.Models;
 using Client.Queries;
@@ -22,17 +24,20 @@ public class ChatViewModel : ViewModelBase
         _currentContact = currentContact;
         UserStore = userStore;
 
-        SendMessageCommand = new SendFileCommand(this, CurrentContact, httpClient);
+        SendMessageCommand = new SendMessageCommand(this, CurrentContact, httpClient);
         SendFileCommand = new SendFileCommand(this, CurrentContact, httpClient);
         GetMessagesQuery = new LoadMessagesCommand(this, httpClient);
+        GetFilesQuery = new LoadFilesCommand(this, httpClient);
+
         GetMessagesQuery.Execute(null);
+        GetFilesQuery.Execute(null);
 
         SaveEntityModelService.MessagesSaved += ((sender, args) =>
         {
             GetMessagesQuery.Execute(null);
         });
-    }
 
+    }
     public UserStore UserStore { get; }
     public ContactModel CurrentContact
     {
@@ -63,6 +68,7 @@ public class ChatViewModel : ViewModelBase
     }
 
     public ICommand GetMessagesQuery { get; }
+    public ICommand GetFilesQuery { get; }
     public ICommand SendMessageCommand { get; }
     public ICommand SendFileCommand { get; }
 }

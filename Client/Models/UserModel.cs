@@ -15,5 +15,6 @@ public class UserModel : EntityModel
 
     public string Username { get; set; }
     public string Password { get; set; }
+    public string AvatarPath { get; set; }
     public DateTime CreationTime { get; set; }
 }

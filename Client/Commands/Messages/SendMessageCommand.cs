@@ -56,6 +56,5 @@ public class SendMessageCommand : CommandBase
 
         response.EnsureSuccessStatusCode();
         _chatViewModel.MessageText = string.Empty;
-        ;
     }
 }

@@ -24,7 +24,6 @@ public class SendFileCommand : CommandBase
         _chatViewModel = chatViewModel;
     }
 
-
     public override async void Execute(object? parameter)
     {
         var openFileDialog = new OpenFileDialog

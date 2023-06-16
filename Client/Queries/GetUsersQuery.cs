@@ -3,6 +3,7 @@ using Client.Services;
 using Client.Stores;
 using Client.ViewModels;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Threading;
@@ -18,8 +19,7 @@ public class GetUsersQuery : QueryBase
 
     private readonly UserStore _userStore;
 
-    public GetUsersQuery(HomeViewModel homeViewModel,
-        HttpClient httpClient, UserStore userStore)
+    public GetUsersQuery(HomeViewModel homeViewModel, HttpClient httpClient, UserStore userStore)
     {
         _homeViewModel = homeViewModel;
         _httpClient = httpClient;
@@ -46,8 +46,10 @@ public class GetUsersQuery : QueryBase
         if(contacts == null)
             return;
 
-        foreach (var contact in contacts) 
+        foreach (var contact in contacts)
+        {
             await SaveEntityModelService.SaveEntityAsync(contact, CancellationToken.None);
+        }
 
         _homeViewModel.IsLoading = false;
     }

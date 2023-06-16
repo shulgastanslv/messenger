@@ -12,6 +12,6 @@ public class ContactModel : EntityModel
     }
 
     public string Username { get; set; }
-
+    public string AvatarPath { get; set; }
     public Guid? ChatId { get; set; }
 }
