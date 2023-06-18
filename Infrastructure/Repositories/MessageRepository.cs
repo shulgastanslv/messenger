@@ -1,13 +1,8 @@
 ﻿using System.Text;
-using System.Text.Json;
 using Application.Common.Abstractions;
-using Domain.Entities.Chats;
 using Domain.Entities.Messages;
-using Domain.Primitives.Errors;
 using Domain.Primitives.Result;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Infrastructure.Repositories;
 
@@ -54,28 +49,8 @@ public class MessageRepository : IMessageRepository
         return Result.Success<IEnumerable<Message>>(messages);
     }
 
-    public async Task<Result<IEnumerable<Media>>> GetFilesAsync(Guid chatId, CancellationToken cancellationToken)
-    {
-        var directoryPath = Path.Combine(_filePath, chatId.ToString());
-        var fileNames = Directory.GetFiles(directoryPath);
-
-        List<Media> files = new();
-
-        foreach (var fileName in fileNames)
-        {
-            var json = await File.ReadAllTextAsync(fileName, cancellationToken);
-            var file = JsonConvert.DeserializeObject<Media>(json);
-
-            if (file == null || file.FileData == null 
-                             || file.FileName == null) continue;
-
-            files.Add(file);
-        }
-
-        return Result.Success<IEnumerable<Media>>(files);
-    }
-
-    public async Task<IEnumerable<Message>?> GetLastMessagesAsync(Guid chatId, DateTime lastMessageDate, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Message>?> GetLastMessagesAsync(Guid chatId, DateTime lastMessageDate,
+        CancellationToken cancellationToken)
     {
         var directoryPath = Path.Combine(_filePath, chatId.ToString());
         var lastModified = Directory.GetLastWriteTime(directoryPath);
@@ -100,5 +75,26 @@ public class MessageRepository : IMessageRepository
         }
 
         return messages;
+    }
+
+    public async Task<Result<IEnumerable<Media>>> GetFilesAsync(Guid chatId, CancellationToken cancellationToken)
+    {
+        var directoryPath = Path.Combine(_filePath, chatId.ToString());
+        var fileNames = Directory.GetFiles(directoryPath);
+
+        List<Media> files = new();
+
+        foreach (var fileName in fileNames)
+        {
+            var json = await File.ReadAllTextAsync(fileName, cancellationToken);
+            var file = JsonConvert.DeserializeObject<Media>(json);
+
+            if (file == null || file.FileData == null
+                             || file.FileName == null) continue;
+
+            files.Add(file);
+        }
+
+        return Result.Success<IEnumerable<Media>>(files);
     }
 }

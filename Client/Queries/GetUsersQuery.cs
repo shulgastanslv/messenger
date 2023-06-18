@@ -1,13 +1,11 @@
-﻿using Client.Models;
+﻿using System.Collections.ObjectModel;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading;
+using Client.Models;
 using Client.Services;
 using Client.Stores;
 using Client.ViewModels;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Net.Http;
-using System.Threading;
-using Client.Commands;
 
 namespace Client.Queries;
 
@@ -35,7 +33,7 @@ public class GetUsersQuery : QueryBase
 
         var response = await _httpClient.GetAsync("/users/get");
 
-        if (!response.IsSuccessStatusCode) 
+        if (!response.IsSuccessStatusCode)
             return;
 
         var contacts = await response.Content
@@ -43,13 +41,10 @@ public class GetUsersQuery : QueryBase
 
         _homeViewModel.Contacts = contacts;
 
-        if(contacts == null)
+        if (contacts == null)
             return;
 
-        foreach (var contact in contacts)
-        {
-            await SaveEntityModelService.SaveEntityAsync(contact, CancellationToken.None);
-        }
+        foreach (var contact in contacts) await SaveEntityModelService.SaveEntityAsync(contact, CancellationToken.None);
 
         _homeViewModel.IsLoading = false;
     }

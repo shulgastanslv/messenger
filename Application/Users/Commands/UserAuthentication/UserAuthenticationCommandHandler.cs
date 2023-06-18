@@ -6,7 +6,8 @@ using Domain.Primitives.Result;
 
 namespace Application.Users.Commands.UserAuthentication;
 
-public class UserAuthenticationCommandHandler : ICommandHandler<UserAuthenticationCommand, Result<AuthenticationResponse>>
+public class
+    UserAuthenticationCommandHandler : ICommandHandler<UserAuthenticationCommand, Result<AuthenticationResponse>>
 {
     private readonly IJwtProvider _jwtProvider;
     private readonly IUserRepository _userRepository;

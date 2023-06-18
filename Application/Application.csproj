@@ -24,7 +24,8 @@
       <Folder Include="Chats\Commands\CreateChat\" />
       <Folder Include="Chats\Queries\GetChatByUsersId\" />
       <Folder Include="Common\Behaviours\" />
-      <Folder Include="Messages\Queries\GetFiles\" />
+      <Folder Include="Groups\Commands\CreateGroup\" />
+      <Folder Include="UserGroups\Commands\CreateUserGroup\" />
       <Folder Include="Users\Queries\GetUsersByUsername\" />
     </ItemGroup>
 

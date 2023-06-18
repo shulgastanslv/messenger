@@ -37,8 +37,8 @@
                                        FontWeight="{TemplateBinding FontWeight}"
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                       Margin="{TemplateBinding Padding}" 
-                                       FontSize="{TemplateBinding FontSize}"/>
+                                       Margin="{TemplateBinding Padding}"
+                                       FontSize="{TemplateBinding FontSize}" />
                         </Border>
 
                         <ControlTemplate.Triggers>
@@ -73,8 +73,8 @@
                                        FontWeight="{TemplateBinding FontWeight}"
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                       Margin="{TemplateBinding Padding}" 
-                                       FontSize="{TemplateBinding FontSize}"/>
+                                       Margin="{TemplateBinding Padding}"
+                                       FontSize="{TemplateBinding FontSize}" />
                         </Border>
 
                         <ControlTemplate.Triggers>

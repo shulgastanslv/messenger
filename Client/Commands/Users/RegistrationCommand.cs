@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
 using Client.Models;
-using Client.Properties;
 using Client.Services;
 using Client.Stores;
 using Client.ViewModels;
@@ -69,7 +68,6 @@ public class RegistrationCommand : CommandBase
             _userStore.User.Id = receivedData.Id;
 
             _navigationService.Navigate();
-
         }
 
         _registrationViewModel.IsLoading = false;

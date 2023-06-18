@@ -20,7 +20,7 @@ public sealed class GetUsersQueryHandler : IQueryHandler<GetUsersQuery, UsersRes
 
     public async Task<UsersResponse> Handle(GetUsersQuery request, CancellationToken cancellationToken)
     {
-        var senderId = await _jwtProvider.GetUserId(request.HttpContext.User);
+        var senderId = await _jwtProvider.GetUserIdAsync(request.HttpContext.User);
 
         if (!senderId.HasValue)
             return new UsersResponse(

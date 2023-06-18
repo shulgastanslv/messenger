@@ -27,10 +27,12 @@ public class ChatRepository : IChatRepository
 
         return Result.Success(chat);
     }
+
     public async Task<Chat?> GetChatByUsersIdAsync(Guid user1, Guid user2, CancellationToken cancellationToken)
     {
-        var chat = await _applicationDbContext.Chats.FirstOrDefaultAsync(c => c.Sender.Id == user1 && c.Receiver.Id == user2,
-                cancellationToken); 
+        var chat = await _applicationDbContext.Chats.FirstOrDefaultAsync(
+            c => c.Sender.Id == user1 && c.Receiver.Id == user2,
+            cancellationToken);
 
         return chat;
     }

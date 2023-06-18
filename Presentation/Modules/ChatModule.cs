@@ -27,5 +27,13 @@ public class ChatModule : CarterModule
             return result.IsSuccess ? Results.Ok(result.Value.ChatId) : Results.BadRequest(result.Error);
         }).RequireAuthorization();
 
+        app.MapPost("/get", async (Contact request, HttpContext httpContext,
+            ISender sender, CancellationToken cancellationToken) =>
+        {
+            var result = await sender.Send(
+                new GetChatByUsersIdQuery(request, httpContext), cancellationToken);
+
+            return result.IsSuccess ? Results.Ok(result.Value.Chat) : Results.BadRequest(result.Error);
+        }).RequireAuthorization();
     }
 }

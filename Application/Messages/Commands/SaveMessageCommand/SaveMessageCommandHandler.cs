@@ -1,10 +1,8 @@
 ﻿using Application.Common.Abstractions;
 using Application.Common.Abstractions.Messaging;
-using Domain.Entities.Chats;
 using Domain.Entities.Messages;
 using Domain.Primitives.Errors;
 using Domain.Primitives.Result;
-using Microsoft.Extensions.Logging;
 
 namespace Application.Messages.Commands.SaveMessageCommand;
 
@@ -21,9 +19,9 @@ public class SaveMessageCommandHandler : ICommandHandler<SaveMessageCommand, Res
 
     public async Task<Result> Handle(SaveMessageCommand request, CancellationToken cancellationToken)
     {
-        var senderId = await _jwtProvider.GetUserId(request.HttpContext.User);
+        var senderId = await _jwtProvider.GetUserIdAsync(request.HttpContext.User);
 
-        if (!senderId.HasValue) 
+        if (!senderId.HasValue)
             return Result.Failure(new Error("Can't find sender identifier"));
 
         request.Message.Sender = senderId.Value;

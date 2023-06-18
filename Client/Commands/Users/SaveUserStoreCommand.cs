@@ -11,6 +11,7 @@ public class SaveUserStoreCommand : CommandBase
     {
         _userStore = userStore;
     }
+
     public override void Execute(object? parameter)
     {
         UserStoreSettingsService.SaveUserStore(_userStore);

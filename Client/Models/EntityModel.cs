@@ -13,5 +13,6 @@ public class EntityModel
     {
         Id = Guid.Empty;
     }
+
     public Guid Id { get; set; }
 }

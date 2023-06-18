@@ -1,8 +1,7 @@
-﻿using Client.Models;
-using Client.ViewModels;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Net.Http;
-using Client.Commands;
+using Client.Models;
+using Client.ViewModels;
 
 namespace Client.Queries;
 

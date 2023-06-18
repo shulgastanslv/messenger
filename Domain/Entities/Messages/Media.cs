@@ -1,16 +1,14 @@
 ﻿namespace Domain.Entities.Messages;
 
-public class Media : Message
+public class Media
 {
-    public Media(Guid id, string content, Guid sender,
-        Guid receiverChatId, byte[] fileData, string fileName)
-        : base(id, content, sender, receiverChatId)
+    public Media(byte[]? fileData = null, string? fileName = null)
     {
         FileData = fileData;
         FileName = fileName;
     }
 
-    public string FileName { get; set; }
+    public string? FileName { get; set; }
 
-    public byte[] FileData { get; set; }
+    public byte[]? FileData { get; set; }
 }

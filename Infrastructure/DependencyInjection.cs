@@ -1,6 +1,8 @@
 ﻿using Application.Common.Abstractions;
 using Domain.Entities.Chats;
+using Domain.Entities.Groups;
 using Domain.Entities.Messages;
+using Domain.Entities.UserGroups;
 using Domain.Entities.Users;
 using FluentValidation;
 using Infrastructure.Authentication;
@@ -24,6 +26,8 @@ public static class DependencyInjection
         services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<IChatRepository, ChatRepository>();
         services.AddTransient<IJwtProvider, JwtProvider>();
+        services.AddTransient<IGroupRepository, GroupRepository>();
+        services.AddTransient<IUserGroupRepository, UserGroupRepository>();
 
         services.AddDbContext<ApplicationDbContext>(options =>
         {

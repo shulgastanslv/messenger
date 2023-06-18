@@ -1,5 +1,5 @@
-﻿using Client.Models;
-using System;
+﻿using System;
+using Client.Models;
 
 namespace Client.Stores;
 

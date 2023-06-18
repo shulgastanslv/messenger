@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
 using Client.Models;
-using Client.Properties;
 using Client.Services;
 using Client.Stores;
 using Client.ViewModels;
@@ -73,7 +72,6 @@ public sealed class AuthenticationCommand : CommandBase
             _userStore.Token = receivedData.Token.Trim('"');
 
             _navigationService.Navigate();
-
         }
 
         _authenticationViewModel.IsLoading = false;

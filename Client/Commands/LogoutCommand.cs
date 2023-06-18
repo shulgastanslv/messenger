@@ -6,9 +6,9 @@ namespace Client.Commands;
 
 public class LogoutCommand : CommandBase
 {
+    private readonly NavigationService<AuthenticationViewModel> _navigationService;
     private readonly UserStore _userStore;
 
-    private readonly NavigationService<AuthenticationViewModel> _navigationService;
     public LogoutCommand(UserStore userStore, NavigationService<AuthenticationViewModel> navigationService)
     {
         _userStore = userStore;

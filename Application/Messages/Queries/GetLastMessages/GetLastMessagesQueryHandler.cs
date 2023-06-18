@@ -23,7 +23,7 @@ public class GetLastMessagesQueryHandler : IQueryHandler<GetLastMessagesQuery, L
 
     public async Task<LastMessagesResponse> Handle(GetLastMessagesQuery request, CancellationToken cancellationToken)
     {
-        var userId = await _jwtProvider.GetUserId(request.HttpContext.User);
+        var userId = await _jwtProvider.GetUserIdAsync(request.HttpContext.User);
 
         if (!userId.HasValue)
             return new LastMessagesResponse(Result.Failure<IEnumerable<Message>>
@@ -54,6 +54,5 @@ public class GetLastMessagesQueryHandler : IQueryHandler<GetLastMessagesQuery, L
         }
 
         return new LastMessagesResponse(Result.Success<IEnumerable<Message>>(messages));
-
     }
 }

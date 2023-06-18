@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using Client.Models;
+using Client.Queries;
 using Client.Services;
 using Client.ViewModels;
 using Newtonsoft.Json;
@@ -17,7 +18,6 @@ public class SendMessageCommand : CommandBase
     private readonly ContactModel _contactReceiver;
 
     private readonly HttpClient _httpClient;
-
 
     public SendMessageCommand(ChatViewModel chatViewModel, ContactModel contactReceiver, HttpClient httpClient)
     {
@@ -41,11 +41,13 @@ public class SendMessageCommand : CommandBase
 
     public override async void Execute(object? parameter)
     {
-        _contactReceiver.ChatId ??= await ChatService.CreateChatAsync(_httpClient, _contactReceiver, CancellationToken.None);
+        _contactReceiver.ChatId ??=
+            await ChatService.CreateChatAsync(_httpClient, _contactReceiver, CancellationToken.None);
 
         var message = new MessageModel(
             Guid.NewGuid(),
             _chatViewModel.MessageText,
+            null,
             Guid.Empty,
             _contactReceiver.ChatId.Value);
 
@@ -55,6 +57,7 @@ public class SendMessageCommand : CommandBase
         var response = await _httpClient.PostAsync("/message/send", content);
 
         response.EnsureSuccessStatusCode();
+
         _chatViewModel.MessageText = string.Empty;
     }
 }

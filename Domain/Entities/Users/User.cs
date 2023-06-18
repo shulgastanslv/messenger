@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.Chats;
+using Domain.Entities.UserGroups;
 using Domain.Primitives;
 
 namespace Domain.Entities.Users;
@@ -18,8 +19,8 @@ public class User : Entity
     }
 
     public virtual List<Chat>? SentChats { get; set; }
-
     public virtual List<Chat>? ReceivedChats { get; set; }
+    public virtual List<UserGroup>? UserGroups { get; set; }
 
     public string? Username { get; set; }
 

@@ -7,5 +7,5 @@ public interface IJwtProvider
 {
     string GetJwtToken(User user);
 
-    Task<Guid?> GetUserId(ClaimsPrincipal principal);
+    Task<Guid?> GetUserIdAsync(ClaimsPrincipal principal);
 }

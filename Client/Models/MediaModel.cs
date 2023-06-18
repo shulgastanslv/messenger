@@ -1,20 +1,11 @@
-﻿using System;
+﻿namespace Client.Models;
 
-namespace Client.Models;
-
-public class MediaModel : MessageModel
+public class MediaModel
 {
-    public MediaModel(Guid id, string content, Guid sender,
-        Guid receiverChatId, byte[] fileData, string fileName)
-        : base(id, content, sender, receiverChatId)
+    public MediaModel(byte[] fileData, string fileName)
     {
         FileData = fileData;
         FileName = fileName;
-    }
-
-    public MediaModel() : base()
-    {
-        
     }
 
     public string FileName { get; set; }

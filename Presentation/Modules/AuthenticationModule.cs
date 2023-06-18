@@ -1,7 +1,6 @@
 ﻿using Application.Users.Commands.UserAuthentication;
 using Carter;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +10,9 @@ namespace Presentation.Modules;
 
 public class AuthenticationModule : CarterModule
 {
-    public AuthenticationModule() : base("/authentication"){}
+    public AuthenticationModule() : base("/authentication")
+    {
+    }
 
     public override void AddRoutes(IEndpointRouteBuilder app)
     {

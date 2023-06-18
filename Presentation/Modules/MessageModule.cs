@@ -1,12 +1,10 @@
 ﻿using Application.Messages.Commands.SaveMessageCommand;
-using Application.Messages.Queries.GetFiles;
 using Application.Messages.Queries.GetLastMessages;
 using Application.Messages.Queries.GetMessages;
 using Carter;
 using Domain.Entities.Contacts;
 using Domain.Entities.Messages;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
@@ -31,16 +29,6 @@ public class MessageModule : CarterModule
             return result.IsSuccess ? Results.Ok(result.Value) : Results.BadRequest(result.Error);
         });
 
-        app.MapPost("/getFiles", async (Contact request,
-            ISender sender, CancellationToken cancellationToken) =>
-        {
-            var result = (await sender.Send(new GetFilesQuery(request),
-                cancellationToken)).Files;
-
-            return result.IsSuccess ? Results.Ok(result.Value) : Results.BadRequest(result.Error);
-        });
-
-
         app.MapGet("/getlast", async (DateTime lastResponseTime, ISender sender,
             HttpContext context, CancellationToken cancellationToken) =>
         {
@@ -58,15 +46,5 @@ public class MessageModule : CarterModule
 
             return result.IsSuccess ? Results.Ok() : Results.BadRequest(result.Error);
         }).RequireAuthorization();
-
-        app.MapPost("/sendfile", async (Media request, ISender sender,
-            HttpContext context, CancellationToken cancellationToken) =>
-        {
-            var result = await sender.Send(new SaveMessageCommand(request, context),
-                cancellationToken);
-
-            return result.IsSuccess ? Results.Ok() : Results.BadRequest(result.Error);
-        }).RequireAuthorization();
-
     }
 }

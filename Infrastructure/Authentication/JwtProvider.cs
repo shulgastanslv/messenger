@@ -43,10 +43,10 @@ internal sealed class JwtProvider : IJwtProvider
         return tokenValue;
     }
 
-    public Task<Guid?> GetUserId(ClaimsPrincipal principal)
+    public async Task<Guid?> GetUserIdAsync(ClaimsPrincipal principal)
     {
         var userIdClaim = principal.FindFirst(ClaimTypes.NameIdentifier);
 
-        return Task.FromResult<Guid?>(Guid.Parse(userIdClaim!.Value));
+        return Guid.Parse(userIdClaim!.Value);
     }
 }

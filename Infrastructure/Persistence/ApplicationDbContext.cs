@@ -1,5 +1,7 @@
 ﻿using Application.Common.Abstractions;
 using Domain.Entities.Chats;
+using Domain.Entities.Groups;
+using Domain.Entities.UserGroups;
 using Domain.Entities.Users;
 using Infrastructure.Persistence.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +17,8 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<Chat> Chats { get; set; }
+    public DbSet<Group> Groups { get; set; }
+    public DbSet<UserGroup> UserGroups { get; set; }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
     {
@@ -25,6 +29,8 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         modelBuilder.ApplyConfiguration(new ChatConfiguration());
+        modelBuilder.ApplyConfiguration(new GroupConfiguration());
+        modelBuilder.ApplyConfiguration(new UserGroupConfiguration());
 
         base.OnModelCreating(modelBuilder);
     }

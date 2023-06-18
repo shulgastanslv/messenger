@@ -1,5 +1,4 @@
-﻿using Application.Common.Abstractions;
-using Application.Common.Abstractions.Messaging;
+﻿using Application.Common.Abstractions.Messaging;
 using Domain.Entities.Messages;
 using Domain.Primitives.Errors;
 using Domain.Primitives.Result;

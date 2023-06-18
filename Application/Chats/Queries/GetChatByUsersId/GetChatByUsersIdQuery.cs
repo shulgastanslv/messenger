@@ -1,5 +1,4 @@
 ﻿using Application.Common.Abstractions.Messaging;
-using Domain.Entities.Chats;
 using Domain.Entities.Contacts;
 using Domain.Primitives.Result;
 using Microsoft.AspNetCore.Http;

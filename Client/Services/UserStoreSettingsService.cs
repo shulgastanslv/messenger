@@ -7,8 +7,9 @@ namespace Client.Services;
 
 public static class UserStoreSettingsService
 {
-    public static UserStore GetUserStore() =>
-        new()
+    public static UserStore GetUserStore()
+    {
+        return new UserStore
         {
             User = new UserModel(
                 Settings.Default.Id,
@@ -17,6 +18,7 @@ public static class UserStoreSettingsService
             Token = Settings.Default.Token,
             LastResponseTime = Settings.Default.LastResponseTime
         };
+    }
 
     public static void SaveUserStore(UserStore userStore)
     {

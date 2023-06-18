@@ -3,7 +3,7 @@
 
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Styles/Buttons/Theme/ButtonLightThemeColors.xaml"/>
+        <ResourceDictionary Source="/Styles/Buttons/Theme/ButtonLightThemeColors.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Color x:Key="WindowBackgroundColor">White</Color>

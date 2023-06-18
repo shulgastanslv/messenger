@@ -31,6 +31,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasForeignKey(c => c.ReceiverId)
             .OnDelete(DeleteBehavior.Restrict);
 
+        builder.HasMany(u => u.UserGroups)
+            .WithOne(ug => ug.User)
+            .HasForeignKey(ug => ug.UserId);
+
         builder.Property(user => user.CreationTime).IsRequired();
     }
 }

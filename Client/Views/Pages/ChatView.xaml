@@ -18,11 +18,6 @@
 
     <Grid>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="0" />
-        </Grid.ColumnDefinitions>
-
         <Grid Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="65" />
@@ -44,14 +39,16 @@
                     </Grid.ColumnDefinitions>
 
 
-                    <Border Grid.Column="0" Height="38" Width="38"
-                            CornerRadius="25">
-                        <Border.Background>
-                            <ImageBrush ImageSource="{Binding CurrentContact.AvatarPath}"/>
-                        </Border.Background>
+                    <Border Grid.Column="0" Height="40" Width="40"
+                            CornerRadius="25"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Background="White">
                     </Border>
 
-                    <StackPanel VerticalAlignment="Center" Grid.Column="1">
+                    <StackPanel VerticalAlignment="Center" 
+                                Grid.Column="1" 
+                                HorizontalAlignment="Left">
                         <Label Content="{Binding CurrentContact.Username}"
                                FontSize="16"
                                Padding="0, 0, 0,0" />
@@ -100,46 +97,46 @@
                 </Grid>
             </Border>
 
-            <ScrollViewer Grid.Row="1">
-                <ItemsControl Margin="10" ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}">
-                    <ItemsControl.Resources>
-                        <DataTemplate DataType="{x:Type models:MediaModel}">
-                            <Border Background="#292929"
-                                    CornerRadius="8"
-                                    HorizontalAlignment="Right"
-                                    Width="130"
-                                    Margin="0, 10, 5, 0"
-                                    Height="35"
-                                    VerticalAlignment="Stretch">
-                                <TextBlock Foreground="White" FontSize="13" Text="Файл" VerticalAlignment="Center"
-                                           HorizontalAlignment="Center"/>
-                            </Border>
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type models:MessageModel}">
-                            <Border Background="#292929"
-                                    CornerRadius="8"
-                                    Margin="0, 10, 5, 0"
-                                    VerticalAlignment="Stretch">
+            <ListView     Grid.Row="1"
+                          Margin="10" 
+                          SelectedItem="{Binding SelectedMessage}" 
+                          Background="Transparent"
+                          BorderThickness="0"
+                          ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}">
 
-                                <Border.HorizontalAlignment>
-                                    <MultiBinding Converter="{StaticResource MessageAlignmentConverter}">
-                                        <Binding Path="Sender" />
-                                        <Binding Path="DataContext.UserStore.User.Id"
-                                                 RelativeSource="{RelativeSource AncestorType=Page}" />
-                                    </MultiBinding>
-                                </Border.HorizontalAlignment>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <Border Background="#292929"
+                                            CornerRadius="10"
+                                            MinHeight="38"
+                                            MinWidth="138"
+                                            Margin="5, 10, 5, 0"
+                                            VerticalAlignment="Stretch">
 
+                                        <Border.HorizontalAlignment>
+                                            <MultiBinding Converter="{StaticResource MessageAlignmentConverter}">
+                                                <Binding Path="Sender" />
+                                                <Binding Path="DataContext.UserStore.User.Id"
+                                                         RelativeSource="{RelativeSource AncestorType=Page}" />
+                                            </MultiBinding>
+                                        </Border.HorizontalAlignment>
 
-                                <StackPanel Margin="15, 5, 5, 0" VerticalAlignment="Stretch">
-                                    <TextBlock Foreground="White" FontSize="13" Text="{Binding Content}" />
-                                    <Label Foreground="White" HorizontalAlignment="Right" FontSize="13"
-                                           Content="{Binding SendTime}" ContentStringFormat="HH:mm" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.Resources>
-                </ItemsControl>
-            </ScrollViewer>
+                                        <StackPanel Margin="15, 5, 5, 0" VerticalAlignment="Stretch">
+                                            <TextBlock Foreground="White" FontSize="13" Text="{Binding Content}" />
+                                            <Label Foreground="White" HorizontalAlignment="Right" FontSize="13"
+                                                   Content="{Binding SendTime}" ContentStringFormat="HH:mm" />
+                                        </StackPanel>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                </ListView.ItemContainerStyle>
+            </ListView>
 
 
             <Border Grid.Row="2"
@@ -148,7 +145,7 @@
 
                 <Border
                     Margin="8"
-                    CornerRadius="5"
+                    CornerRadius="7"
                     Background="{StaticResource ChatTextBoxColorBrush}">
 
                     <Grid>
@@ -186,20 +183,17 @@
                                 BorderThickness="0"
                                 Height="30"
                                 Style="{x:Null}"
-                                Command="{Binding SendFileCommand}">
+                                Command="{Binding SendMediaCommand}">
 
                             <Path Data="{StaticResource SendFile}"
-                                  Fill="White" 
-                                  Height="18" 
-                                  Stretch="Fill" Width="18"/>
+                                  Fill="White"
+                                  Height="18"
+                                  Stretch="Fill" Width="18" />
                         </Button>
                     </Grid>
                 </Border>
             </Border>
         </Grid>
-
-
-        <Grid x:Name="UserInfo" Column="1" Width="275" />
 
     </Grid>
 </Page>

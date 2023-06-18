@@ -1,5 +1,5 @@
-﻿using Application.Common.Abstractions.Messaging;
-using Application.Common.Abstractions;
+﻿using Application.Common.Abstractions;
+using Application.Common.Abstractions.Messaging;
 using Domain.Entities.Chats;
 using Domain.Primitives.Errors;
 using Domain.Primitives.Result;
@@ -8,8 +8,8 @@ namespace Application.Chats.Commands.CreateChat;
 
 public sealed class CreateChatCommandHandler : ICommandHandler<CreateChatCommand, Result<Chat>>
 {
-    private readonly IJwtProvider _jwtProvider;
     private readonly IChatRepository _chatRepository;
+    private readonly IJwtProvider _jwtProvider;
 
     public CreateChatCommandHandler(IJwtProvider jwtProvider, IChatRepository chatRepository)
     {
@@ -19,9 +19,9 @@ public sealed class CreateChatCommandHandler : ICommandHandler<CreateChatCommand
 
     public async Task<Result<Chat>> Handle(CreateChatCommand request, CancellationToken cancellationToken)
     {
-        var maybeUserId = await _jwtProvider.GetUserId(request.HttpContext.User);
+        var maybeUserId = await _jwtProvider.GetUserIdAsync(request.HttpContext.User);
 
-        if (!maybeUserId.HasValue) 
+        if (!maybeUserId.HasValue)
             return Result.Failure<Chat>(new Error("Can't find sender identifier"));
 
         var maybeChat = await _chatRepository.CreateChatAsync(

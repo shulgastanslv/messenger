@@ -1,11 +1,11 @@
-﻿using Client.Models;
-using Client.ViewModels;
+﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
-using System;
-using System.Linq;
+using Client.Models;
 using Client.Services;
+using Client.ViewModels;
 
 namespace Client.Commands.Messages;
 
@@ -26,10 +26,8 @@ public class LoadMessagesCommand : CommandBase
             await MessageService.LoadLocalMessagesAsync(_chatViewModel.CurrentContact, CancellationToken.None);
 
         if (messages == null || messages.Count == 0)
-        {
             messages = await MessageService.SaveMessagesAsync(
                 _chatViewModel.CurrentContact, _httpClient, CancellationToken.None);
-        }
 
         if (messages != null)
             _chatViewModel.Messages = new ObservableCollection<MessageModel>(messages.OrderBy(m => m.SendTime));

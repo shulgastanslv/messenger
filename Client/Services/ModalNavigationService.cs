@@ -8,8 +8,8 @@ namespace Client.Services;
 public class ModalNavigationService<TViewModel> : INavigationService
     where TViewModel : ViewModelBase
 {
-    private readonly ModalNavigationStore _navigationStore;
     private readonly Func<TViewModel> _createViewModel;
+    private readonly ModalNavigationStore _navigationStore;
 
     public ModalNavigationService(ModalNavigationStore navigationStore, Func<TViewModel> createViewModel)
     {
