@@ -58,6 +58,8 @@ public class SendMessageCommand : CommandBase
 
         response.EnsureSuccessStatusCode();
 
+        _chatViewModel.GetLastMessagesQuery.Execute(null);
+
         _chatViewModel.MessageText = string.Empty;
     }
 }

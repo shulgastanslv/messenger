@@ -110,11 +110,7 @@
                                                 Height="Auto"
                                                 Margin="15, 0, 0, 0">
 
-                                        <Border Width="40" Height="40" CornerRadius="25">
-                                            <Border.Background>
-                                                <ImageBrush ImageSource="{Binding AvatarPath}" />
-                                            </Border.Background>
-                                        </Border>
+                                        <Border Width="40" Background="White" Height="40" CornerRadius="25"/>
 
                                         <StackPanel Margin="5, 5, 0, 0">
                                             <Label Content="{Binding Username}"
@@ -163,7 +159,7 @@
         <Border
             x:Name="Menu"
             Grid.Column="0"
-            Width="280"
+            Width="0"
             HorizontalAlignment="Left"
             VerticalAlignment="Stretch">
 

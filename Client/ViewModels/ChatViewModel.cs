@@ -20,22 +20,25 @@ public class ChatViewModel : ViewModelBase
     public ChatViewModel(UserStore userStore, ContactModel currentContact, HttpClient httpClient)
     {
         _currentContact = currentContact;
+
         UserStore = userStore;
 
         SendMessageCommand = new SendMessageCommand(this, CurrentContact, httpClient);
+
         GetMessagesQuery = new LoadMessagesCommand(this, httpClient);
+
         GetLastMessagesQuery = new GetLastMessagesQuery(httpClient, UserStore);
 
         GetMessagesQuery.Execute(null);
 
         SendMediaCommand = new SendMediaCommand(httpClient, _currentContact, this);
+
         SaveMediaCommand = new SaveMediaCommand(this);
 
         SaveEntityModelService.MessagesSaved += (sender, args) => { GetMessagesQuery.Execute(null); };
     }
 
     public UserStore UserStore { get; }
-
     public ContactModel CurrentContact
     {
         get => _currentContact;

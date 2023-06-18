@@ -37,6 +37,7 @@ public class GetLastMessagesQueryHandler : IQueryHandler<GetLastMessagesQuery, L
 
 
         var receivedChats = user.ReceivedChats;
+
         var messages = new List<Message>();
 
         if (receivedChats == null)

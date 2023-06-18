@@ -40,8 +40,6 @@ public class HomeViewModel : ViewModelBase
         LogoutCommand = new LogoutCommand(_userStore, new NavigationService<AuthenticationViewModel>(
             navigationStore, () => new AuthenticationViewModel(new UserStore(), httpClient, navigationStore)));
 
-        GetLastMessagesCommand = new GetLastMessagesQuery(httpClient, userStore);
-
         SaveUserStoreCommand = new SaveUserStoreCommand(_userStore);
 
         SaveUserStoreCommand.Execute(null);
@@ -51,17 +49,6 @@ public class HomeViewModel : ViewModelBase
         SearchUserQuery = new GetUsersByUsernameQuery(this, httpClient);
 
         GetUsersQuery.Execute(null);
-
-        Task.Run(GetLastMessages);
-    }
-
-    private async Task GetLastMessages()
-    {
-        while (true)
-        {
-            GetLastMessagesCommand.Execute(null);
-            await Task.Delay(1000);
-        }
     }
 
     public UserStore UserStore
@@ -143,7 +130,6 @@ public class HomeViewModel : ViewModelBase
     }
 
     public ICommand GetUsersQuery { get; }
-    public ICommand GetLastMessagesCommand { get; }
     public ICommand SearchUserQuery { get; }
     public ICommand LogoutCommand { get; }
     public ICommand SaveUserStoreCommand { get; }
