@@ -1,6 +1,7 @@
 ﻿using Application.Common.Abstractions;
 using Application.Common.Abstractions.Messaging;
 using Domain.Entities.Contacts;
+using Domain.Entities.Groups;
 using Domain.Entities.Users;
 using Domain.Primitives.Errors;
 using Domain.Primitives.Result;
@@ -11,11 +12,13 @@ public class GetUsersByUsernameQueryHandler : IQueryHandler<GetUsersByUsernameQu
 {
     private readonly IJwtProvider _jwtProvider;
     private readonly IUserRepository _userRepository;
+    private readonly IGroupRepository _groupRepository;
 
-    public GetUsersByUsernameQueryHandler(IUserRepository userRepository, IJwtProvider jwtProvider)
+    public GetUsersByUsernameQueryHandler(IUserRepository userRepository, IJwtProvider jwtProvider, IGroupRepository groupRepository)
     {
         _userRepository = userRepository;
         _jwtProvider = jwtProvider;
+        _groupRepository = groupRepository;
     }
 
     public async Task<UsersResponse> Handle(GetUsersByUsernameQuery request, CancellationToken cancellationToken)
@@ -30,13 +33,33 @@ public class GetUsersByUsernameQueryHandler : IQueryHandler<GetUsersByUsernameQu
 
 
         var contacts = users.Select(u =>
-            new Contact(
-                u.Id,
-                u.Username,
-                u.SentChats?.Find(
-                        c => c.ReceiverId == senderId)?
-                    .ChatId));
+                new Contact(
+                    u.Id,
+                    u.Username,
+                    u.SentChats?.Find(
+                            c => c.ReceiverId == senderId.Value)?
+                        .ChatId))
+            .ToList();
 
-        return new UsersResponse(Result.Success(contacts));
+        var groups = await _groupRepository.GetGroupsByUsernameAsync(request.Username, cancellationToken);
+
+        var groupContacts = groups.Select(g =>
+                {
+                    var isGroupId = g.UserGroups?.Any(ug =>
+                        ug.UserId.Equals(senderId.Value)) ?? false;
+
+                    var groupId = isGroupId ? g.Id : Guid.Empty;
+
+                    return new Contact(
+                        groupId,
+                        g.Name,
+                        g.Id);
+                }
+            )
+            .ToList();
+
+        contacts.AddRange(groupContacts);
+
+        return new UsersResponse(Result.Success<IEnumerable<Contact>>(contacts));
     }
 }

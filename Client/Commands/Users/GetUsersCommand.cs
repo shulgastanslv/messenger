@@ -7,9 +7,9 @@ using Client.Services;
 using Client.Stores;
 using Client.ViewModels;
 
-namespace Client.Queries;
+namespace Client.Commands.Users;
 
-public class GetUsersQuery : QueryBase
+public class GetUsersQuery : CommandBase
 {
     private readonly HomeViewModel _homeViewModel;
 
@@ -44,7 +44,8 @@ public class GetUsersQuery : QueryBase
         if (contacts == null)
             return;
 
-        foreach (var contact in contacts) await SaveEntityModelService.SaveEntityAsync(contact, CancellationToken.None);
+        foreach (var contact in contacts)
+            SaveEntityModelService.SaveEntity(contact);
 
         _homeViewModel.IsLoading = false;
     }

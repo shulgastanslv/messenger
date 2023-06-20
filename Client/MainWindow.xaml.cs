@@ -1,14 +1,20 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
+using Client.ViewModels;
 using MahApps.Metro.Controls;
 
 namespace Client;
 
 public partial class MainWindow : MetroWindow
 {
-    public MainWindow()
+    private readonly MainViewModel _viewModel;
+
+    public MainWindow(MainViewModel viewModel)
     {
         InitializeComponent();
+        _viewModel = viewModel;
+        DataContext = viewModel;
     }
 
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -29,5 +35,10 @@ public partial class MainWindow : MetroWindow
     private void CloseButton_OnClick(object sender, RoutedEventArgs e)
     {
         Close();
+    }
+
+    private void MetroWindow_Closing(object sender, CancelEventArgs e)
+    {
+        _viewModel.OnWindowClosing();
     }
 }

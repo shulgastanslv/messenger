@@ -3,10 +3,13 @@ using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Application.Users.Queries.GetUsersByUsername;
 using Client.Commands;
+using Client.Commands.Messages;
+using Client.Commands.Navigation;
 using Client.Commands.Users;
+using Client.Interfaces;
 using Client.Models;
-using Client.Queries;
 using Client.Services;
 using Client.Stores;
 
@@ -30,25 +33,23 @@ public class HomeViewModel : ViewModelBase
 
     private UserStore _userStore;
 
-    public HomeViewModel(UserStore userStore, HttpClient httpClient, NavigationStore navigationStore)
+    public HomeViewModel(UserStore userStore, HttpClient httpClient,
+        INavigationService createGroupNavigationService,
+        INavigationService authenticationNavigationService)
     {
         _userStore = userStore;
         _httpClient = httpClient;
-        _selectedContact = new ContactModel(Guid.Empty, string.Empty, null);
-        _isSelectedUser = false;
 
-        LogoutCommand = new LogoutCommand(_userStore, new NavigationService<AuthenticationViewModel>(
-            navigationStore, () => new AuthenticationViewModel(new UserStore(), httpClient, navigationStore)));
-
-        SaveUserStoreCommand = new SaveUserStoreCommand(_userStore);
-
-        SaveUserStoreCommand.Execute(null);
-
+        GetLastMessagesCommand = new GetLastMessagesCommand(httpClient, userStore);
+        LogoutCommand = new LogoutCommand(userStore, authenticationNavigationService);
         GetUsersQuery = new GetUsersQuery(this, httpClient, userStore);
-
-        SearchUserQuery = new GetUsersByUsernameQuery(this, httpClient);
-
         GetUsersQuery.Execute(null);
+        SearchUserQuery = new GetUsersByUsernameCommand(this, httpClient);
+        CreateGroupCommand = new NavigateCommand(createGroupNavigationService);
+
+
+        Task.Run(GetLastMessages);
+        Task.Run(UpdateUsers);
     }
 
     public UserStore UserStore
@@ -60,7 +61,28 @@ public class HomeViewModel : ViewModelBase
             OnPropertyChanged(nameof(UserStore));
         }
     }
-   
+
+    private async Task UpdateUsers()
+    {
+        while (true)
+        {
+            if (SearchText == null && IsSelectedUser == false)
+            {
+                GetUsersQuery.Execute(null);
+                await Task.Delay(5000);
+            }
+        }
+    }
+
+    private async Task GetLastMessages()
+    {
+        while (true)
+        {
+            GetLastMessagesCommand.Execute(null);
+            await Task.Delay(1000);
+        }
+    }
+
     public ObservableCollection<ContactModel> Contacts
     {
         get => _contacts;
@@ -131,6 +153,7 @@ public class HomeViewModel : ViewModelBase
 
     public ICommand GetUsersQuery { get; }
     public ICommand SearchUserQuery { get; }
+    public ICommand CreateGroupCommand { get; }
     public ICommand LogoutCommand { get; }
-    public ICommand SaveUserStoreCommand { get; }
+    public ICommand GetLastMessagesCommand { get; }
 }

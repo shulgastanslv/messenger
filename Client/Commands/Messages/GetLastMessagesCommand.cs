@@ -6,14 +6,14 @@ using Client.Models;
 using Client.Services;
 using Client.Stores;
 
-namespace Client.Queries;
+namespace Client.Commands.Messages;
 
-public class GetLastMessagesQuery : QueryBase
+public class GetLastMessagesCommand : CommandBase
 {
     private readonly HttpClient _httpClient;
     private readonly UserStore _userStore;
 
-    public GetLastMessagesQuery(HttpClient httpClient, UserStore userStore)
+    public GetLastMessagesCommand(HttpClient httpClient, UserStore userStore)
     {
         _httpClient = httpClient;
         _userStore = userStore;

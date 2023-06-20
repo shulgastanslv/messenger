@@ -1,10 +1,12 @@
 ﻿using System;
+using Client.Interfaces;
 using Client.Stores;
 using Client.ViewModels;
 
 namespace Client.Services;
 
-public class NavigationService<TViewModel> where TViewModel : ViewModelBase
+public class NavigationService<TViewModel> : INavigationService
+    where TViewModel : ViewModelBase
 {
     private readonly Func<TViewModel> _createViewModel;
     private readonly NavigationStore _navigationStore;

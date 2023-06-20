@@ -1,15 +1,16 @@
-﻿using Client.Services;
+﻿using Client.Interfaces;
+using Client.Services;
 using Client.Stores;
 using Client.ViewModels;
 
-namespace Client.Commands;
+namespace Client.Commands.Navigation;
 
 public class LogoutCommand : CommandBase
 {
-    private readonly NavigationService<AuthenticationViewModel> _navigationService;
+    private readonly INavigationService _navigationService;
     private readonly UserStore _userStore;
 
-    public LogoutCommand(UserStore userStore, NavigationService<AuthenticationViewModel> navigationService)
+    public LogoutCommand(UserStore userStore, INavigationService navigationService)
     {
         _userStore = userStore;
         _navigationService = navigationService;

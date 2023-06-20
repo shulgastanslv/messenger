@@ -3,15 +3,15 @@ using System.Net.Http;
 using Client.Models;
 using Client.ViewModels;
 
-namespace Client.Queries;
+namespace Client.Commands.Users;
 
-public class GetUsersByUsernameQuery : QueryBase
+public class GetUsersByUsernameCommand : CommandBase
 {
     private readonly HomeViewModel _homeViewModel;
 
     private readonly HttpClient _httpClient;
 
-    public GetUsersByUsernameQuery(HomeViewModel homeViewModel,
+    public GetUsersByUsernameCommand(HomeViewModel homeViewModel,
         HttpClient httpClient)
     {
         _homeViewModel = homeViewModel;

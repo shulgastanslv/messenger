@@ -1,7 +1,8 @@
 ﻿using System.Net.Http;
 using System.Windows.Input;
-using Client.Commands;
+using Client.Commands.Navigation;
 using Client.Commands.Users;
+using Client.Interfaces;
 using Client.Services;
 using Client.Stores;
 
@@ -13,19 +14,14 @@ public sealed class AuthenticationViewModel : ViewModelBase
 
     private bool _isLoading;
 
-    public AuthenticationViewModel(UserStore userStore, HttpClient httpClient, NavigationStore navigationStore)
+    public AuthenticationViewModel(UserStore userStore, HttpClient httpClient, INavigationService registrationNavigationService, 
+        INavigationService homeNavigationService)
     {
         _userStore = userStore;
 
-        NavigateToRegistrationCommand = new NavigateCommand<RegistrationViewModel>(
-            new NavigationService<RegistrationViewModel>(navigationStore,
-                () => new RegistrationViewModel(userStore, httpClient, navigationStore)));
+        NavigateToRegistrationCommand = new NavigateCommand(registrationNavigationService);
 
-        var navigationService = new NavigationService<HomeViewModel>(
-            navigationStore,
-            () => new HomeViewModel(userStore, httpClient, navigationStore));
-
-        AuthenticationCommand = new AuthenticationCommand(this, userStore, httpClient, navigationService);
+        AuthenticationCommand = new AuthenticationCommand(this, userStore, httpClient, homeNavigationService);
     }
 
     public bool IsLoading

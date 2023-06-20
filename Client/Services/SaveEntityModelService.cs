@@ -12,10 +12,9 @@ namespace Client.Services;
 
 public class SaveEntityModelService
 {
+    public static event EventHandler? MessagesSaved;
     private static readonly object _messageLock = new();
     private static readonly object _contactLock = new();
-    public static event EventHandler? MessagesSaved;
-
 
     public static void SaveEntity(MessageModel message)
     {
@@ -52,10 +51,11 @@ public class SaveEntityModelService
 
         lock (_contactLock)
         {
-            File.WriteAllText(filePath, json, encoding);
+            using var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
+            using var writer = new StreamWriter(fileStream, encoding);
+            writer.Write(json);
         }
     }
-
 
     public static async Task SaveEntityAsync(MessageModel message, CancellationToken cancellationToken)
     {
@@ -105,7 +105,8 @@ public class SaveEntityModelService
         OnMessagesSaved(EventArgs.Empty);
     }
 
-    public static void OnMessagesSaved(EventArgs e)
+
+    protected static void OnMessagesSaved(EventArgs e)
     {
         MessagesSaved?.Invoke(null, e);
     }

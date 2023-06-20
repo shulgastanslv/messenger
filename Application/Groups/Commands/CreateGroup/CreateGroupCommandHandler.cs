@@ -27,6 +27,7 @@ public class CreateGroupCommandHandler : ICommandHandler<CreateGroupCommand, Res
     public async Task<Result<Group>> Handle(CreateGroupCommand request, CancellationToken cancellationToken)
     {
         var maybeUserId = await _jwtProvider.GetUserIdAsync(request.HttpContext.User);
+
         if (!maybeUserId.HasValue)
             return Result.Failure<Group>(
                 new Error("Can't find sender identifier"));

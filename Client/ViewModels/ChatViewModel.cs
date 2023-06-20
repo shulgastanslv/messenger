@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Windows.Input;
 using Client.Commands.Messages;
 using Client.Models;
-using Client.Queries;
 using Client.Services;
 using Client.Stores;
 
@@ -27,7 +26,7 @@ public class ChatViewModel : ViewModelBase
 
         GetMessagesQuery = new LoadMessagesCommand(this, httpClient);
 
-        GetLastMessagesQuery = new GetLastMessagesQuery(httpClient, UserStore);
+        GetLastMessagesQuery = new GetLastMessagesCommand(httpClient, UserStore);
 
         GetMessagesQuery.Execute(null);
 

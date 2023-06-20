@@ -32,11 +32,10 @@ public static class UserStoreSettingsService
 
     public static void DeleteUserStore(UserStore userStore)
     {
-        Settings.Default.Id = Guid.Empty;
-        Settings.Default.Username = null;
-        Settings.Default.Password = null;
-        Settings.Default.Token = null;
-        Settings.Default.LastResponseTime = DateTime.MinValue;
-        Settings.Default.Save();
+        userStore.User.Id = Guid.Empty;
+        userStore.User.Username = null;
+        userStore.User.Password = null;
+        userStore.Token = null;
+        userStore.LastResponseTime = DateTime.MinValue;
     }
 }

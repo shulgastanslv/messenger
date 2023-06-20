@@ -17,7 +17,6 @@
     </Page.Resources>
 
     <Grid>
-
         <Grid Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="65" />

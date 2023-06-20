@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
+using Client.Interfaces;
 using Client.Models;
 using Client.Services;
 using Client.Stores;
@@ -14,13 +15,14 @@ public class RegistrationCommand : CommandBase
 {
     private readonly HttpClient _httpClient;
 
-    private readonly NavigationService<HomeViewModel> _navigationService;
     private readonly RegistrationViewModel _registrationViewModel;
+
+    private readonly INavigationService _navigationService;
 
     private readonly UserStore _userStore;
 
     public RegistrationCommand(RegistrationViewModel registrationViewModel, UserStore userStore,
-        HttpClient httpClient, NavigationService<HomeViewModel> navigationService)
+        HttpClient httpClient, INavigationService navigationService)
     {
         _userStore = userStore;
         _httpClient = httpClient;

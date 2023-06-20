@@ -4,7 +4,8 @@
              xmlns:local="clr-namespace:Client"
              xmlns:viewModels="clr-namespace:Client.ViewModels"
              xmlns:pages="clr-namespace:Client.Views.Pages"
-             xmlns:converters="clr-namespace:Client.Converters">
+             xmlns:converters="clr-namespace:Client.Converters"
+             xmlns:userControls="clr-namespace:Client.Views.UserControls">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -37,12 +38,16 @@
                 <pages:HomeView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModels:ChatViewModel}">
-                <pages:ChatView />
+            <DataTemplate DataType="{x:Type viewModels:WelcomeViewModel}">
+                <pages:WelcomeView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type TypeName=viewModels:MainViewModel}">
-                <local:MainWindow />
+            <DataTemplate DataType="{x:Type viewModels:CreateGroupViewModel}">
+                <userControls:CreateGroupView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:ChatViewModel}">
+                <pages:ChatView />
             </DataTemplate>
 
         </ResourceDictionary>

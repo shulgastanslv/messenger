@@ -4,6 +4,7 @@
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 xmlns:styles="clr-namespace:Client.Styles"
                  mc:Ignorable="d"
                  Width="1100"
                  Height="630"
@@ -17,7 +18,7 @@
                  WindowTitleBrush="{StaticResource WindowTitleBarBackgroundColorBrush}"
                  Background="{StaticResource WindowBackgroundColorBrush}"
                  TitleForeground="White"
-                 WindowStartupLocation="CenterScreen">
+                 WindowStartupLocation="CenterScreen" Closing="MetroWindow_Closing">
 
     <mah:MetroWindow.Resources>
         <Style TargetType="Button" x:Key="ControlPanelButtonBase">
@@ -141,7 +142,15 @@
                 Click="CloseButton_OnClick" />
 
         </StackPanel>
-        <Frame Grid.Row="1" Content="{Binding CurrentViewModel}" NavigationUIVisibility="Hidden" />
+
+        <Grid Grid.Row="1">
+
+            <styles:Modal Panel.ZIndex="1" IsOpen="{Binding IsOpen}">
+                <ContentControl Content="{Binding CurrentModalViewModel}" />
+            </styles:Modal>
+
+            <Frame Content="{Binding CurrentViewModel}" NavigationUIVisibility="Hidden" />
+            </Grid>
     </Grid>
 
 </mah:MetroWindow>

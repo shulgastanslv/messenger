@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
+using Client.Interfaces;
 using Client.Models;
 using Client.Services;
 using Client.Stores;
@@ -18,17 +19,16 @@ public sealed class AuthenticationCommand : CommandBase
 
     private readonly HttpClient _httpClient;
 
-    private readonly NavigationService<HomeViewModel> _navigationService;
+    private readonly INavigationService _navigationService;
 
     private readonly UserStore _userStore;
 
     public AuthenticationCommand(AuthenticationViewModel authenticationViewModel,
-        UserStore userStore, HttpClient httpClient, NavigationService<HomeViewModel> navigationService)
+        UserStore userStore, HttpClient httpClient, INavigationService navigationService)
     {
         _authenticationViewModel = authenticationViewModel;
         _httpClient = httpClient;
         _userStore = userStore;
-
         _navigationService = navigationService;
 
         authenticationViewModel.PropertyChanged += OnPropertyChanged;

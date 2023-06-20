@@ -1,7 +1,9 @@
 ﻿using System.Net.Http;
 using System.Windows.Input;
 using Client.Commands;
+using Client.Commands.Navigation;
 using Client.Commands.Users;
+using Client.Interfaces;
 using Client.Services;
 using Client.Stores;
 
@@ -15,20 +17,15 @@ public class RegistrationViewModel : ViewModelBase
 
     private bool _isLoading;
 
-    public RegistrationViewModel(UserStore userStore, HttpClient httpClient, NavigationStore navigationStore)
+    public RegistrationViewModel(UserStore userStore, HttpClient httpClient, INavigationService authenticationNavigationService, 
+        INavigationService homeNavigationService)
     {
         _userStore = userStore;
 
-        NavigateToAuthenticationCommand = new NavigateCommand<AuthenticationViewModel>(
-            new NavigationService<AuthenticationViewModel>(navigationStore,
-                () => new AuthenticationViewModel(userStore, httpClient, navigationStore)));
-
-        var navigateService = new NavigationService<HomeViewModel>(
-            navigationStore,
-            () => new HomeViewModel(userStore, httpClient, navigationStore));
+        NavigateToAuthenticationCommand = new NavigateCommand(authenticationNavigationService);
 
         RegistrationCommand = new RegistrationCommand(this, userStore, httpClient,
-            navigateService);
+            homeNavigationService);
     }
 
     public bool IsAgree
@@ -40,7 +37,6 @@ public class RegistrationViewModel : ViewModelBase
             OnPropertyChanged(nameof(IsAgree));
         }
     }
-
     public string UserName
     {
         get => _userStore.User.Username;
@@ -50,7 +46,6 @@ public class RegistrationViewModel : ViewModelBase
             OnPropertyChanged(nameof(UserName));
         }
     }
-
     public string Password
     {
         get => _userStore.User.Password;
@@ -60,7 +55,6 @@ public class RegistrationViewModel : ViewModelBase
             OnPropertyChanged(nameof(Password));
         }
     }
-
     public bool IsLoading
     {
         get => _isLoading;

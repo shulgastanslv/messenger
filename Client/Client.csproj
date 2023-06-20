@@ -17,10 +17,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Commands\Groups\" />
       <Folder Include="Models\" />
       <Folder Include="Converters\" />
       <Folder Include="Interfaces\" />
-      <Folder Include="Common\" />
       <Folder Include="Services\" />
     </ItemGroup>
 
