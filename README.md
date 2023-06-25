@@ -1,6 +1,5 @@
 # MessengerService
 
-
 ![Introduction](https://i.pinimg.com/originals/3f/04/fb/3f04fb08cc38f888197b65fb99eb1824.gif)
 ## Introduction
 Small service (Chat) with Web Api.Net Core server and WPF .Net Core client using many technologies and features.
@@ -115,7 +114,11 @@ public string GetJwtToken(User user)
 * User correspondence, using text messages and files;
 * Searching for other users.
 
+## Restrictions
+
+Messenger can be extended with new features, logic, etc. But if you change the underlying features, you should expect that you have to change the interaction logic of the underlying business logic to implement the new one.
+
+In addition, the speed of this messenger is not fast by choosing the wrong database. MS SQL Server is not the best choice for this.
 
 ## License
 This project is licensed with the [MIT license](LICENSE.txt).
-
