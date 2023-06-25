@@ -34,7 +34,7 @@ If you want to use your Server, you need to update the WebUI/appsettings.json as
   },
 ```
 
-###Database Migrations
+### Database Migrations
 To use dotnet-ef for migrations, first make sure that your database is connecting to the application and there are no connection errors, then add the following flags to the command (the values assume that you are running the command from the storage root)
 
 * `--project src/Infrastructure` (optional if in this folder)
