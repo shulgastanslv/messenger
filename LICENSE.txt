@@ -1,18 +1,21 @@
-Non-Software Licenses
-Open source software licenses can be also used for non-software works and are often the best choice, especially when the works in question can be edited and versioned as source. Choose an open source license.
+MIT License
 
-Data, media, etc.
-CC0-1.0, CC-BY-4.0, and CC-BY-SA-4.0 are open licenses used for non-software material ranging from datasets to videos. Note that Creative Commons does not recommend its licenses be used for software or hardware.
+Copyright (c) 2023 akiroqw
 
-Documentation
-Any open source software license or open license for media (see above) also applies to software documentation. If you use different licenses for your software and its documentation, be sure to specify that source code examples in the documentation are also licensed under the software license.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Fonts
-The SIL Open Font License 1.1 keeps fonts open, allowing them to be freely used in other works.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-Hardware
-Designs for open source hardware ranging from furniture to FPGAs are covered by CERN Open Hardware licenses: CERN-OHL-P-2.0 (permissive), CERN-OHL-W-2.0 (weakly reciprocal), and CERN-OHL-S-2.0 (strongly reciprocal).
-
-Mixed projects
-If your project contains a mix of different types of material, you can include multiple licenses, as long as you are explicit about which license applies to each part of the project. See the license notice for this site as an example.
-
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
