@@ -105,6 +105,16 @@ public string GetJwtToken(User user)
 }
 ```
 
+## Main functions of the messenger:
+* Maintaining a local repository of messages, data about users on the client;
+* Maintaining a database on the server, where all information will be stored;
+* Maintenance of the storage on the server, where messages and user data will be stored;
+* Maintaining a repository on the server, in which messages and user data will be stored;
+* User authorization;
+* User registration;
+* User correspondence, using text messages and files;
+* Searching for other users.
+
 
 ## License
 This project is licensed with the [MIT license](LICENSE.txt).
