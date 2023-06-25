@@ -9,7 +9,7 @@ Provides a nice and clear interface on the client for the user.
 In addition, it is possible to integrate API.
 
 ## Overview
-<img src="assets/image_2023-06-25_15-48-25.png" width="650" height="380">
+<img src=".template.config/image_2023-06-25_15-48-25.png" width="650" height="380">
 
 ## Technologies, Patterns were used in this project
 * [Minimal API](https://docs.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core)
