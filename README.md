@@ -9,7 +9,7 @@ Provides a nice and clear interface on the client for the user.
 In addition, it is possible to integrate API.
 
 ## Overview
-<img src="<https://github.com/akiroqw/MessengerService/assets/image_2023-06-25_15-41-33.png>" width="1000" height="500">
+<img src="assets/image_2023-06-25_15-41-33.png" width="700" height="400">
 
 
 
