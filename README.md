@@ -9,8 +9,7 @@ Provides a nice and clear interface on the client for the user.
 In addition, it is possible to integrate API.
 
 ## Overview
-<img src="assets/image_2023-06-25_15-41-33.png" width="700" height="400">
-
+<img src="assets/image_2023-06-25_15-41-33.png" width="690" height="410">
 
 
 
