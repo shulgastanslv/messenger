@@ -9,10 +9,10 @@ Provides a nice and clear interface on the client for the user.
 In addition, it is possible to integrate API.
 
 ## Overview
-<img src="assets/image_2023-06-25_15-41-33.png" width="690" height="410">
-
-
-
+<img src="assets/image_2023-06-25_15-41-33.png" width="700" height="400">
+<img src="assets/image_2023-06-25_15-47-39.png" width="700" height="400">
+<img src="assets/image_2023-06-25_15-49-08.png" width="700" height="400">
+<img src="assets/image_2023-06-25_15-48-25.png" width="700" height="400">
 
 ## Technologies were used in this project
 
