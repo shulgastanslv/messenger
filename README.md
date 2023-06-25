@@ -14,13 +14,16 @@ In addition, it is possible to integrate API.
 <img src="assets/image_2023-06-25_15-49-08.png" width="700" height="400">
 <img src="assets/image_2023-06-25_15-48-25.png" width="700" height="400">
 
-## Technologies were used in this project
-
-* [Python] (https://www.python.org): a simple syntactic programming language;
-* [SQLite] (https://sqlite.org/index.html): SQLite is a software library that provides a relational database management system. It is a serverless, self-contained SQL database engine with zero configuration and transactions. SQLite is widely used in various applications due to its compact size, low maintenance costs and ease of use;
-* [Discord Developer Portal] (https://discord.com/developers/applications): website for registering your application;
-* [Discord.py ] (https://discord py.readthedocs.io/en/latest): library for integration with discord;
-
+## Technologies, Patterns were used in this project
+* [Minimal API](https://docs.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core)
+* [Entity Framework Core 8](https://docs.microsoft.com/en-us/ef/core/)
+* [MediatR](https://github.com/jbogard/MediatR)
+* [FluentValidation](https://fluentvalidation.net/)
+* [Dependency injection](https://www.dotnettricks.com/learn/designpatterns/solid-design-principles-explained-using-csharp)
+* [Clean Architecture](https://github.com/jasontaylordev/CleanArchitecture)
+* [CQRS](https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs)
+* [SOLID](https://www.dotnettricks.com/learn/designpatterns/solid-design-principles-explained-using-csharp)
+  
 ## Requirement
 * To have Python version 3.11.3 installed (during development we started with version 3.11.3, so we cannot guarantee that earlier versions will work);
 
