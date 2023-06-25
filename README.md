@@ -107,5 +107,5 @@ public string GetJwtToken(User user)
 
 
 ## License
-This project is licensed with the [MIT license](LICENSE).
+This project is licensed with the [MIT license](LICENSE.txt).
 
