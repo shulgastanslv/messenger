@@ -41,8 +41,14 @@
                     <Border Grid.Column="0" Height="40" Width="40"
                             CornerRadius="25"
                             VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            Background="White">
+                            HorizontalAlignment="Center">
+
+                        <Border.Background>
+                            <ImageBrush
+                                ImageSource="{Binding CurrentContact.Avatar,
+                                    Converter={StaticResource StringToImageConverter},
+                                    UpdateSourceTrigger=PropertyChanged}" />
+                        </Border.Background>
                     </Border>
 
                     <StackPanel VerticalAlignment="Center" 

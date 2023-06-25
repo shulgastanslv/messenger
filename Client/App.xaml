@@ -25,6 +25,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
+            <converters:StringToImageConverter x:Key="StringToImageConverter"/>
 
             <DataTemplate DataType="{x:Type viewModels:AuthenticationViewModel}">
                 <pages:AuthenticationView />

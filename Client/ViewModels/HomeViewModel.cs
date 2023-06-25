@@ -40,13 +40,13 @@ public class HomeViewModel : ViewModelBase
         _userStore = userStore;
         _httpClient = httpClient;
 
+        ChangeAvatarCommand = new ChangeAvatarCommand(userStore, this);
         GetLastMessagesCommand = new GetLastMessagesCommand(httpClient, userStore);
         LogoutCommand = new LogoutCommand(userStore, authenticationNavigationService);
         GetUsersQuery = new GetUsersQuery(this, httpClient, userStore);
         GetUsersQuery.Execute(null);
         SearchUserQuery = new GetUsersByUsernameCommand(this, httpClient);
         CreateGroupCommand = new NavigateCommand(createGroupNavigationService);
-
 
         Task.Run(GetLastMessages);
         Task.Run(UpdateUsers);
@@ -61,6 +61,8 @@ public class HomeViewModel : ViewModelBase
             OnPropertyChanged(nameof(UserStore));
         }
     }
+
+
 
     private async Task UpdateUsers()
     {
@@ -141,6 +143,12 @@ public class HomeViewModel : ViewModelBase
         }
     }
 
+    public string Avatar
+    {
+        get => _userStore.User.Avatar;
+        set => OnPropertyChanged(nameof(Avatar));
+    }
+
     public bool IsSelectedUser
     {
         get => _isSelectedUser;
@@ -156,4 +164,5 @@ public class HomeViewModel : ViewModelBase
     public ICommand CreateGroupCommand { get; }
     public ICommand LogoutCommand { get; }
     public ICommand GetLastMessagesCommand { get; }
+    public ICommand ChangeAvatarCommand { get; }
 }

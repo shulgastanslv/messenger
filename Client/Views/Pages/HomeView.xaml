@@ -12,7 +12,6 @@
 
     <Grid>
         <Grid>
-
             <Grid.Triggers>
                 <EventTrigger RoutedEvent="MouseDown">
                     <BeginStoryboard>
@@ -110,7 +109,14 @@
                                                 Height="Auto"
                                                 Margin="15, 0, 0, 0">
 
-                                        <Border Width="40" Background="White" Height="40" CornerRadius="25"/>
+                                        <Border Width="40" Height="40" CornerRadius="25">
+                                            <Border.Background>
+                                                <ImageBrush
+                                                    ImageSource="{Binding Avatar,
+                                                        Converter={StaticResource StringToImageConverter},
+                                                        UpdateSourceTrigger=PropertyChanged}" />
+                                            </Border.Background>
+                                        </Border>
 
                                         <StackPanel Margin="5, 5, 0, 0">
                                             <Label Content="{Binding Username}"
@@ -175,12 +181,18 @@
 
                     <StackPanel>
 
-                        <Border Width="50" Height="50"
+                        <Border Width="65" Height="65"
                                 x:Name="Avatar"
                                 CornerRadius="25"
-                                Background="White"
                                 HorizontalAlignment="Center"
-                                Margin="0, 20, 0, 0">
+                                Margin="0, 20, 0, 10">
+
+                            <Border.Background>
+                                <ImageBrush
+                                    ImageSource="{Binding Avatar,
+                                                        Converter={StaticResource StringToImageConverter},
+                                                        UpdateSourceTrigger=PropertyChanged}" />
+                            </Border.Background>
 
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="MouseLeftButtonDown">
