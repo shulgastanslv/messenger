@@ -16,6 +16,8 @@ public class ChatViewModel : ViewModelBase
 
     private string _messageText;
 
+    private MessageModel? _selectedMessage;
+
     public ChatViewModel(UserStore userStore, ContactModel currentContact, HttpClient httpClient)
     {
         _currentContact = currentContact;
@@ -38,6 +40,7 @@ public class ChatViewModel : ViewModelBase
     }
 
     public UserStore UserStore { get; }
+
     public ContactModel CurrentContact
     {
         get => _currentContact;
@@ -47,8 +50,6 @@ public class ChatViewModel : ViewModelBase
             OnPropertyChanged(nameof(CurrentContact));
         }
     }
-
-    private MessageModel? _selectedMessage;
 
     public MessageModel? SelectedMessage
     {

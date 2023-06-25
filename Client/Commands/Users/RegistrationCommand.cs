@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Text;
 using Client.Interfaces;
 using Client.Models;
-using Client.Services;
 using Client.Stores;
 using Client.ViewModels;
 using Newtonsoft.Json;
@@ -15,9 +14,9 @@ public class RegistrationCommand : CommandBase
 {
     private readonly HttpClient _httpClient;
 
-    private readonly RegistrationViewModel _registrationViewModel;
-
     private readonly INavigationService _navigationService;
+
+    private readonly RegistrationViewModel _registrationViewModel;
 
     private readonly UserStore _userStore;
 

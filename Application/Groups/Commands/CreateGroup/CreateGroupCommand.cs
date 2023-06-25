@@ -6,5 +6,5 @@ using Microsoft.AspNetCore.Http;
 namespace Application.Groups.Commands.CreateGroup;
 
 public sealed record CreateGroupCommand(
-    String Name,
+    string Name,
     HttpContext HttpContext) : ICommand<Result<Group>>;

@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Text;
 using Client.Interfaces;
 using Client.Models;
-using Client.Services;
 using Client.Stores;
 using Client.ViewModels;
 using Newtonsoft.Json;

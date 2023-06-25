@@ -22,7 +22,6 @@ public class SaveMessageCommandHandler : ICommandHandler<SaveMessageCommand, Res
         var senderId = await _jwtProvider.GetUserIdAsync(request.HttpContext.User);
 
 
-
         if (!senderId.HasValue)
             return Result.Failure(new Error("Can't find sender identifier"));
 

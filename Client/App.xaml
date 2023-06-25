@@ -1,7 +1,6 @@
 ﻿<Application x:Class="Client.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Client"
              xmlns:viewModels="clr-namespace:Client.ViewModels"
              xmlns:pages="clr-namespace:Client.Views.Pages"
              xmlns:converters="clr-namespace:Client.Converters"
@@ -25,7 +24,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
-            <converters:StringToImageConverter x:Key="StringToImageConverter"/>
+            <converters:StringToImageConverter x:Key="StringToImageConverter" />
 
             <DataTemplate DataType="{x:Type viewModels:AuthenticationViewModel}">
                 <pages:AuthenticationView />

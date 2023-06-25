@@ -16,7 +16,6 @@ public class MessageAlignmentConverter : IMultiValueConverter
         Trace.WriteLine(userId);
 
         return senderId == userId ? HorizontalAlignment.Right : HorizontalAlignment.Left;
-
     }
 
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

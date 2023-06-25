@@ -1,6 +1,4 @@
 ﻿using Client.Interfaces;
-using Client.Services;
-using Client.ViewModels;
 
 namespace Client.Commands.Navigation;
 

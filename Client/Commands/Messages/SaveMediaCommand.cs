@@ -1,10 +1,11 @@
-﻿using Client.ViewModels;
+﻿using System;
 using System.Diagnostics;
-using System.Threading;
-using System;
 using System.IO;
+using System.Threading;
+using Client.ViewModels;
 
 namespace Client.Commands.Messages;
+
 public class SaveMediaCommand : CommandBase
 {
     private readonly ChatViewModel _chatViewModel;
@@ -29,10 +30,8 @@ public class SaveMediaCommand : CommandBase
         var filePath = Path.Combine(downloadsPath, _chatViewModel.SelectedMessage.Media.FileName);
 
         if (!File.Exists(filePath))
-        {
-            await File.WriteAllBytesAsync(filePath, _chatViewModel.SelectedMessage.Media.FileData, CancellationToken.None);
-
-        }
+            await File.WriteAllBytesAsync(filePath, _chatViewModel.SelectedMessage.Media.FileData,
+                CancellationToken.None);
 
         var startInfo = new ProcessStartInfo
         {

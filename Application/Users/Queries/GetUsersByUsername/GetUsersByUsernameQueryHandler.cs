@@ -10,11 +10,12 @@ namespace Application.Users.Queries.GetUsersByUsername;
 
 public class GetUsersByUsernameQueryHandler : IQueryHandler<GetUsersByUsernameQuery, UsersResponse>
 {
+    private readonly IGroupRepository _groupRepository;
     private readonly IJwtProvider _jwtProvider;
     private readonly IUserRepository _userRepository;
-    private readonly IGroupRepository _groupRepository;
 
-    public GetUsersByUsernameQueryHandler(IUserRepository userRepository, IJwtProvider jwtProvider, IGroupRepository groupRepository)
+    public GetUsersByUsernameQueryHandler(IUserRepository userRepository, IJwtProvider jwtProvider,
+        IGroupRepository groupRepository)
     {
         _userRepository = userRepository;
         _jwtProvider = jwtProvider;

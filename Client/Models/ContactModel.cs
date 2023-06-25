@@ -1,6 +1,6 @@
-﻿using Client.Properties;
-using System;
+﻿using System;
 using System.IO;
+using Client.Properties;
 
 namespace Client.Models;
 

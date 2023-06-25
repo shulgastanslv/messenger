@@ -3,7 +3,6 @@ using System.Windows.Input;
 using Client.Commands.Navigation;
 using Client.Commands.Users;
 using Client.Interfaces;
-using Client.Services;
 using Client.Stores;
 
 namespace Client.ViewModels;
@@ -14,7 +13,8 @@ public sealed class AuthenticationViewModel : ViewModelBase
 
     private bool _isLoading;
 
-    public AuthenticationViewModel(UserStore userStore, HttpClient httpClient, INavigationService registrationNavigationService, 
+    public AuthenticationViewModel(UserStore userStore, HttpClient httpClient,
+        INavigationService registrationNavigationService,
         INavigationService homeNavigationService)
     {
         _userStore = userStore;

@@ -207,13 +207,13 @@
                                    HorizontalAlignment="Center"
                                    Margin="0, 10, 0, 0" />
 
-                        <TextBox   Tag="Enter bio"
-                                   FontSize="13"
-                                   BorderThickness="0"
-                                   HorizontalAlignment="Center"
-                                   HorizontalContentAlignment="Center"
-                                   Opacity="1"
-                                   Margin="0, 10, 0, 10" />
+                        <TextBox Tag="Enter bio"
+                                 FontSize="13"
+                                 BorderThickness="0"
+                                 HorizontalAlignment="Center"
+                                 HorizontalContentAlignment="Center"
+                                 Opacity="1"
+                                 Margin="0, 10, 0, 10" />
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" VerticalAlignment="Top">

@@ -1,9 +1,8 @@
-﻿using Client.Interfaces;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Windows.Input;
 using Client.Commands.Groups;
 using Client.Commands.Navigation;
-using Client.Services;
+using Client.Interfaces;
 
 namespace Client.ViewModels;
 

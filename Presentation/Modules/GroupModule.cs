@@ -11,7 +11,6 @@ namespace Presentation.Modules;
 
 public record GroupName(string Name);
 
-
 public class GroupModule : CarterModule
 {
     public GroupModule()

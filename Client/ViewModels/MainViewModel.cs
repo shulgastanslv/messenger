@@ -5,8 +5,8 @@ namespace Client.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    private readonly NavigationStore _navigationStore;
     private readonly ModalNavigationStore _modalNavigationStore;
+    private readonly NavigationStore _navigationStore;
     private readonly UserStore _userStore;
 
     public MainViewModel(NavigationStore navigationStore, ModalNavigationStore modalNavigationStore,

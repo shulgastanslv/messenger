@@ -4,7 +4,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:viewModels="clr-namespace:Client.ViewModels"
-      xmlns:models="clr-namespace:Client.Models"
       xmlns:converters="clr-namespace:Client.Converters"
       mc:Ignorable="d"
       d:DesignHeight="630"
@@ -51,8 +50,8 @@
                         </Border.Background>
                     </Border>
 
-                    <StackPanel VerticalAlignment="Center" 
-                                Grid.Column="1" 
+                    <StackPanel VerticalAlignment="Center"
+                                Grid.Column="1"
                                 HorizontalAlignment="Left">
                         <Label Content="{Binding CurrentContact.Username}"
                                FontSize="16"
@@ -102,12 +101,12 @@
                 </Grid>
             </Border>
 
-            <ListView     Grid.Row="1"
-                          Margin="10" 
-                          SelectedItem="{Binding SelectedMessage}" 
-                          Background="Transparent"
-                          BorderThickness="0"
-                          ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}">
+            <ListView Grid.Row="1"
+                      Margin="10"
+                      SelectedItem="{Binding SelectedMessage}"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}">
 
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">

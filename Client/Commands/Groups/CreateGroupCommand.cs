@@ -4,10 +4,11 @@ using Client.Services;
 using Client.ViewModels;
 
 namespace Client.Commands.Groups;
+
 public class CreateGroupCommand : CommandBase
 {
-    private readonly HttpClient _httpClient;
     private readonly CreateGroupViewModel _createGroupViewModel;
+    private readonly HttpClient _httpClient;
     private readonly INavigationService _navigationService;
 
 

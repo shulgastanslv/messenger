@@ -4,7 +4,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Client.ViewModels;
-using Domain.Entities.Groups;
 using Newtonsoft.Json;
 
 namespace Client.Services;

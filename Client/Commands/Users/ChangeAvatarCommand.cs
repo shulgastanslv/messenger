@@ -1,9 +1,8 @@
-﻿using System;
+﻿using System.IO;
 using Client.Properties;
 using Client.Stores;
 using Client.ViewModels;
 using Microsoft.Win32;
-using System.IO;
 
 namespace Client.Commands.Users;
 
@@ -34,10 +33,7 @@ public class ChangeAvatarCommand : CommandBase
         var destinationFolderPath = Settings.Default.AvatarsDataPath;
         var userId = _userStore.User.Id.ToString();
 
-        if (!Directory.Exists(destinationFolderPath))
-        {
-            Directory.CreateDirectory(destinationFolderPath);
-        }
+        if (!Directory.Exists(destinationFolderPath)) Directory.CreateDirectory(destinationFolderPath);
 
         var destinationFilePath = Path.Combine(destinationFolderPath, userId + ".png");
 

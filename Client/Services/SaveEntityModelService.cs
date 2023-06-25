@@ -12,9 +12,9 @@ namespace Client.Services;
 
 public class SaveEntityModelService
 {
-    public static event EventHandler? MessagesSaved;
     private static readonly object _messageLock = new();
     private static readonly object _contactLock = new();
+    public static event EventHandler? MessagesSaved;
 
     public static void SaveEntity(MessageModel message)
     {

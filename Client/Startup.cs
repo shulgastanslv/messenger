@@ -2,8 +2,6 @@
 using System.Net.Http;
 using System.Threading;
 using Client.Interfaces;
-using Client.Models;
-using Client.Properties;
 using Client.Services;
 using Client.Stores;
 using Client.ViewModels;
@@ -31,7 +29,7 @@ public class Startup
 
         services.AddSingleton<NavigationStore>();
         services.AddSingleton<ModalNavigationStore>();
-        services.AddSingleton<UserStore>(UserStoreSettingsService.GetUserStore());
+        services.AddSingleton(UserStoreSettingsService.GetUserStore());
 
         services.AddSingleton(CreateWelcomeNavigationService);
         services.AddSingleton<CloseModalNavigationService>();
@@ -63,7 +61,7 @@ public class Startup
             CreateRegistrationNavigationService(s),
             CreateAuthenticationNavigationService(s)));
 
-        services.AddTransient<CreateGroupViewModel>(CreateCreateGroupViewModel);
+        services.AddTransient(CreateCreateGroupViewModel);
 
         services.AddSingleton<MainViewModel>(s => new MainViewModel(
             s.GetRequiredService<NavigationStore>(),
@@ -103,6 +101,7 @@ public class Startup
             serviceProvider.GetRequiredService<NavigationStore>(),
             serviceProvider.GetRequiredService<HomeViewModel>);
     }
+
     private static INavigationService CreateWelcomeNavigationService(IServiceProvider serviceProvider)
     {
         return new NavigationService<WelcomeViewModel>(
@@ -128,6 +127,4 @@ public class Startup
             serviceProvider.GetRequiredService<HttpClient>(),
             navigationService);
     }
-
-
 }

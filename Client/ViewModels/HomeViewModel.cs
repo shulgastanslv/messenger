@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Application.Users.Queries.GetUsersByUsername;
-using Client.Commands;
 using Client.Commands.Messages;
 using Client.Commands.Navigation;
 using Client.Commands.Users;
 using Client.Interfaces;
 using Client.Models;
-using Client.Services;
 using Client.Stores;
 
 namespace Client.ViewModels;
@@ -59,29 +55,6 @@ public class HomeViewModel : ViewModelBase
         {
             _userStore = value;
             OnPropertyChanged(nameof(UserStore));
-        }
-    }
-
-
-
-    private async Task UpdateUsers()
-    {
-        while (true)
-        {
-            if (SearchText == null && IsSelectedUser == false)
-            {
-                GetUsersQuery.Execute(null);
-                await Task.Delay(5000);
-            }
-        }
-    }
-
-    private async Task GetLastMessages()
-    {
-        while (true)
-        {
-            GetLastMessagesCommand.Execute(null);
-            await Task.Delay(1000);
         }
     }
 
@@ -165,4 +138,24 @@ public class HomeViewModel : ViewModelBase
     public ICommand LogoutCommand { get; }
     public ICommand GetLastMessagesCommand { get; }
     public ICommand ChangeAvatarCommand { get; }
+
+
+    private async Task UpdateUsers()
+    {
+        while (true)
+            if (SearchText == null && IsSelectedUser == false)
+            {
+                GetUsersQuery.Execute(null);
+                await Task.Delay(5000);
+            }
+    }
+
+    private async Task GetLastMessages()
+    {
+        while (true)
+        {
+            GetLastMessagesCommand.Execute(null);
+            await Task.Delay(1000);
+        }
+    }
 }

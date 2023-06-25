@@ -1,22 +1,23 @@
-﻿using Client.Interfaces;
+﻿using System.Net.Http;
+using System.Net.Http.Headers;
+using Client.Interfaces;
 using Client.Stores;
 using Client.ViewModels;
-using System.Net.Http.Headers;
-using System.Net.Http;
 
 namespace Client.Commands.Navigation;
 
 public class WelcomeCommand : CommandBase
 {
-    private readonly INavigationService _homeNavigationService;
-    private readonly INavigationService _registrationNavigationService;
     private readonly INavigationService _authenticationNavigationService;
+    private readonly INavigationService _homeNavigationService;
     private readonly HttpClient _httpClient;
+    private readonly INavigationService _registrationNavigationService;
     private readonly UserStore _userStore;
     private readonly WelcomeViewModel _welcomeViewModel;
 
     public WelcomeCommand(HttpClient httpClient, UserStore userStore, INavigationService homeNavigationService,
-        INavigationService registrationNavigationService, INavigationService authenticationNavigationService, WelcomeViewModel welcomeViewModel)
+        INavigationService registrationNavigationService, INavigationService authenticationNavigationService,
+        WelcomeViewModel welcomeViewModel)
     {
         _httpClient = httpClient;
         _userStore = userStore;

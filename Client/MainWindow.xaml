@@ -150,7 +150,7 @@
             </styles:Modal>
 
             <Frame Content="{Binding CurrentViewModel}" NavigationUIVisibility="Hidden" />
-            </Grid>
+        </Grid>
     </Grid>
 
 </mah:MetroWindow>
