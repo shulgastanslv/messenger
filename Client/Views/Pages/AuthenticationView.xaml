@@ -20,12 +20,12 @@
                         Visibility="{Binding IsLoading, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
 
                 <TextBlock
-                    Text="Enter your Email"
+                    Text="Enter your UserName"
                     Opacity="0.5"
                     Margin="0, 0, 0, 10" />
 
                 <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
-                         Tag="Enter Email"
+                         Tag="Enter UserName"
                          Margin="0, 0, 0, 10" />
 
                 <TextBlock
