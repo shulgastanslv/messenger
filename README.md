@@ -2,10 +2,8 @@
 
 ![Introduction](https://i.pinimg.com/originals/3f/04/fb/3f04fb08cc38f888197b65fb99eb1824.gif)
 ## Introduction
-Small service (Chat) with Web Api.Net Core server and WPF .Net Core client using many technologies and features.
-This service consists of layers that provide the ability to scale the application, any logic and features. 
-Provides a nice and clear interface on the client for the user.
-In addition, it is possible to integrate API.
+This project creates a modern messenger service with a scalable and efficient architecture. The server, implemented on the ASP .NET Core Web API, can handle multiple clients through multithreading. The WPF(MVVM) .NET Core client-side includes features like messaging, friend management, and group creation/communication. Overall, the service provides a feature-rich communication platform.
+The messenger service is designed with a layered architecture for scalability and maintainability, with key functions like sending/receiving messages and profile management. The multithreaded server and ASP .NET Core Web API enable easy integration with other technologies and ensure that the service can accommodate a large number of clients. The client-side offers a robust user interface with various features, including notifications.
 
 ## Overview
 <img src=".template.config/image_2023-06-25_15-48-25.png" width="700" height="400">
