@@ -6,7 +6,11 @@ This project creates a modern messenger service with a scalable and efficient ar
 The messenger service is designed with a layered architecture for scalability and maintainability, with key functions like sending/receiving messages and profile management. The multithreaded server and ASP .NET Core Web API enable easy integration with other technologies and ensure that the service can accommodate a large number of clients. The client-side offers a robust user interface with various features, including notifications.
 
 ## Overview
-<img src=".template.config/image_2023-06-25_15-48-25.png" width="700" height="400">
+<img src=".template.config/image_2023-06-25_15-41-33.png">
+<img src=".template.config/image_2023-06-25_15-47-39.png">
+<img src=".template.config/image_2023-06-25_15-49-08.png">
+<img src=".template.config/image_2023-06-25_15-48-25.png">
+
 
 ## Technologies, Patterns were used in this project
 * [Minimal API](https://docs.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core)
